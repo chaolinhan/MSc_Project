@@ -63,7 +63,7 @@ for key in expData:
 def distance(dataNormalised, simulation):
     dis = 0.
     for key in dataNormalised:
-        dis += (scipy.absolute(dataNormalised[key] - simulation[key]) ** 2).sum()
+        dis += (numpy.absolute(dataNormalised[key] - simulation[key]) ** 2).sum()
 
     return numpy.sqrt(dis)
 
