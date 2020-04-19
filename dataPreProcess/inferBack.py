@@ -1,12 +1,8 @@
-from pyabc import (ABCSMC,
-                   RV, Distribution,
-                   MedianEpsilon,
-                   LocalTransition)
-from pyabc.visualization import plot_kde_2d, plot_data_callback
-import matplotlib.pyplot as plt
+import copy
 import os
 import tempfile
-import numpy as np
+
+import numpy
 import scipy
 
 db_path = ("sqlite:///" +
@@ -39,10 +35,10 @@ def ODEmodel(para):
               para["sBN"], para["iBM"], para["muB"],
               para["sAM"], para["muA"])
     )
-    return {"N": sol[:,0],
-            "M": sol[:,1],
-            "A": sol[:,2],
-            "B": sol[:,3]}
+    return {"N": sol[:, 0],
+            "M": sol[:, 1],
+            "B": sol[:, 2],
+            "A": sol[:, 3]}
 
 
 # Test ODE solver
@@ -54,6 +50,23 @@ paraInit = {"lambdaN": 13.753031, "kNB": 1.581684, "muN": -0.155420, "vNM": 0.26
 
 print(ODEmodel(paraInit))
 
+# Define distance
+# Normalise the N dimensional data for INPUT
+expData = ODEmodel(paraInit)
+for key in expData:
+    expData[key] = (expData[key] - expData[key].mean()) / expData[key].std()
 
 
+def distance(dataNormalised, simulation):
+    dis = 0.
+    for key in dataNormalised:
+        dis += (scipy.absolute(dataNormalised[key] - simulation[key]) ** 2).sum()
 
+    return numpy.sqrt(dis)
+
+
+# Test distance function
+
+newData = copy.deepcopy(expData)
+newData["N"][2] = 100
+print(distance(newData, expData))
