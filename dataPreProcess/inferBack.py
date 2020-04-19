@@ -13,6 +13,8 @@ db_path = ("sqlite:///" +
            os.path.join(tempfile.gettempdir(), "test.db"))
 
 
+# Define ODES
+
 def eqns(var, t0, lambdaN, kNB, muN, vNM, lambdaM, kMB, muM, sBN, iBM, muB, sAM, muA):
     N, M, B, A = var
     dN = lambdaN + kNB * B + muN * N - vNM * N * M
@@ -21,21 +23,37 @@ def eqns(var, t0, lambdaN, kNB, muN, vNM, lambdaM, kMB, muM, sBN, iBM, muB, sAM,
     dA = sAM * M - muA * A
     return dN, dM, dB, dA
 
+# Define ODE solver
 
-paraInit = scipy.array([1.8500000, 0.3333333, 1.995670, 0.665976])
+varInit = scipy.array([1.8500000, 0.3333333, 1.995670, 0.665976])
 
 timePoint = scipy.array([0.5, 1, 2, 4, 6, 12, 24, 48, 72])
 
 def ODEmodel(para):
     sol = scipy.integrate.odeint(
         eqns,
-        paraInit,
+        varInit,
         timePoint,
-        args = (para["lambdaN"], para["kNB"], para["mumN"], para["vNM"],
-                para["lambdaM"], para["kMB"], para["muM"],
-                para["sBN"],para["iBM"],para["muB"],
-                para["sAM"],para["muA"])
+        args=(para["lambdaN"], para["kNB"], para["muN"], para["vNM"],
+              para["lambdaM"], para["kMB"], para["muM"],
+              para["sBN"], para["iBM"], para["muB"],
+              para["sAM"], para["muA"])
     )
-    return sol
+    return {"N": sol[:,0],
+            "M": sol[:,1],
+            "A": sol[:,2],
+            "B": sol[:,3]}
+
+
+# Test ODE solver
+
+paraInit = {"lambdaN": 13.753031, "kNB": 1.581684, "muN": -0.155420, "vNM": 0.262360,
+            "lambdaM": 2.993589, "kMB": 0.041040, "muM": 0.201963,
+            "sBN": 1.553020, "iBM": -0.046259, "muB": 1.905163,
+            "sAM": 11.001731, "muA": 23.022678}
+
+print(ODEmodel(paraInit))
+
+
 
 
