@@ -1,8 +1,8 @@
-import copy
 import os
 import tempfile
 
 import numpy
+import pyabc
 import scipy
 
 db_path = ("sqlite:///" +
@@ -19,11 +19,13 @@ def eqns(var, t0, lambdaN, kNB, muN, vNM, lambdaM, kMB, muM, sBN, iBM, muB, sAM,
     dA = sAM * M - muA * A
     return dN, dM, dB, dA
 
+
 # Define ODE solver
 
 varInit = scipy.array([1.8500000, 0.3333333, 1.995670, 0.665976])
 
 timePoint = scipy.array([0.5, 1, 2, 4, 6, 12, 24, 48, 72])
+
 
 def ODEmodel(para):
     sol = scipy.integrate.odeint(
@@ -50,13 +52,14 @@ paraInit = {"lambdaN": 13.753031, "kNB": 1.581684, "muN": -0.155420, "vNM": 0.26
 
 print(ODEmodel(paraInit))
 
-# Define distance
 # Normalise the N dimensional data for INPUT
 expData = ODEmodel(paraInit)
 for key in expData:
     expData[key] = (expData[key] - expData[key].mean()) / expData[key].std()
 
 
+# Define distance function
+# Euclidean distance
 def distance(dataNormalised, simulation):
     dis = 0.
     for key in dataNormalised:
@@ -67,6 +70,38 @@ def distance(dataNormalised, simulation):
 
 # Test distance function
 
-newData = copy.deepcopy(expData)
-newData["N"][2] = 100
-print(distance(newData, expData))
+# newData = copy.deepcopy(expData)
+# newData["N"][2] = 100
+# print(distance(newData, expData))
+
+
+# Define prior distribution od parameters
+
+paraPrior = pyabc.Distribution(
+    lambdaN=pyabc.RV("uniform", 10, 15),
+    kNB=pyabc.RV("uniform", 0, 3),
+    muN=pyabc.RV("uniform", -1, 1),
+    vNM=pyabc.RV("uniform", -1, 1),
+    lambdaM=pyabc.RV("uniform", 0, 5),
+    kMB=pyabc.RV("uniform", -1, 1),
+    muM=pyabc.RV("uniform", -1, 1),
+    sBN=pyabc.RV("uniform", 0, 3),
+    iBM=pyabc.RV("uniform", -1, 1),
+    muB=pyabc.RV("uniform", -1, 5),
+    sAM=pyabc.RV("uniform", 8, 15),
+    muA=pyabc.RV("uniform", 20, 25)
+)
+
+# Define ABC-SMC model
+
+abc = pyabc.ABCSMC(models=ODEmodel,
+                   parameter_priors=paraPrior,
+                   distance_function=distance,
+                   population_size=50,
+                   transitions=pyabc.LocalTransition(k_fraction=.3),
+                   eps=pyabc.MedianEpsilon(500, median_multiplier=0.7)
+                   )
+
+abc.new(db_path, expData)
+
+history = abc.run(minimum_epsilon=1, max_nr_populations=5)
