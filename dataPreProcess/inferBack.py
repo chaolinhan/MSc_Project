@@ -109,3 +109,4 @@ abc.new(db_path, expData)
 history = abc.run(minimum_epsilon=1, max_nr_populations=4)
 
 # print(history.get_distribution(t=2))
+history.get_distribution(t=3)[0].to_csv(r"/Users/chaolinhan/OneDrive/PostgraduateProject/dataPreProcess/pop3outRaw.csv")
