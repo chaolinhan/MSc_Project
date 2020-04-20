@@ -35,7 +35,7 @@ def ODEmodel(para):
         args=(para["lambdaN"], para["kNB"], para["muN"], para["vNM"],
               para["lambdaM"], para["kMB"], para["muM"],
               para["sBN"], para["iBM"], para["muB"],
-              para["sAM"], para["muA"])
+              para["sAM"], para["muA"]),
     )
     return {"N": sol[:, 0],
             "M": sol[:, 1],
@@ -63,7 +63,7 @@ for key in expData:
 def distance(dataNormalised, simulation):
     dis = 0.
     for key in dataNormalised:
-        dis += (numpy.absolute(dataNormalised[key] - simulation[key]) ** 2).sum()
+        dis += numpy.absolute(pow((dataNormalised[key] - simulation[key]), 2.0)).sum()
 
     return numpy.sqrt(dis)
 
@@ -98,10 +98,10 @@ abc = pyabc.ABCSMC(models=ODEmodel,
                    parameter_priors=paraPrior,
                    distance_function=distance,
                    population_size=50,
-                   transitions=pyabc.LocalTransition(k_fraction=.3),
+                   # transitions=pyabc.LocalTransition(k_fraction=.3)
                    eps=pyabc.MedianEpsilon(500, median_multiplier=0.7)
                    )
 
 abc.new(db_path, expData)
 
-history = abc.run(minimum_epsilon=1, max_nr_populations=5)
+history = abc.run(minimum_epsilon=1, max_nr_populations=4)
