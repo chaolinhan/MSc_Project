@@ -97,11 +97,13 @@ paraPrior = pyabc.Distribution(
 abc = pyabc.ABCSMC(models=ODEmodel,
                    parameter_priors=paraPrior,
                    distance_function=distance,
-                   population_size=50,
+                   population_size=20,
                    # transitions=pyabc.LocalTransition(k_fraction=.3)
                    eps=pyabc.MedianEpsilon(500, median_multiplier=0.7)
                    )
 
 abc.new(db_path, expData)
 
-history = abc.run(minimum_epsilon=1, max_nr_populations=4)
+history = abc.run(minimum_epsilon=1, max_nr_populations=3)
+
+# print(history.get_distribution(t=2))
