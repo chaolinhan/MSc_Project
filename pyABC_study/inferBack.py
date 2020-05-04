@@ -53,6 +53,7 @@ paraInit = {"lambdaN": 13.753031, "kNB": 1.581684, "muN": -0.155420, "vNM": 0.26
 print(ODEmodel(paraInit))
 
 # Normalise the N dimensional data for INPUT
+
 expData = ODEmodel(paraInit)
 for key in expData:
     expData[key] = (expData[key] - expData[key].mean()) / expData[key].std()
@@ -61,6 +62,8 @@ for key in expData:
 # Define distance function
 # Euclidean distance
 def distance(dataNormalised, simulation):
+
+    #
     for key in simulation:
         simulation[key] = (simulation[key] - simulation[key].mean()) / simulation[key].std()
     dis = 0.
@@ -109,4 +112,4 @@ abc.new(db_path, expData)
 history = abc.run(minimum_epsilon=1, max_nr_populations=4)
 
 # print(history.get_distribution(t=2))
-history.get_distribution(t=3)[0].to_csv(r"/Users/chaolinhan/OneDrive/PostgraduateProject/dataPreProcess/pop3outRaw.csv")
+history.get_distribution(t=3)[0].to_csv(r"/Users/chaolinhan/OneDrive/PostgraduateProject/pyABC_study/pop3outRaw.csv")

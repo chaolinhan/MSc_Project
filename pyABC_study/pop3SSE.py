@@ -1,6 +1,6 @@
 import pandas
 
-pop3data = pandas.read_csv(r'/Users/chaolinhan/OneDrive/PostgraduateProject/dataPreProcess/pop3outRaw.csv')
+pop3data = pandas.read_csv(r'/pyABC_study/pop3outRaw.csv')
 
 pop3data = pop3data.drop('id', axis=1)
 
