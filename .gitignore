@@ -1,4 +1,3 @@
 data/*
 /.idea/
-pyABC_study/.RData
-pyABC_study/.Rhistory
+pyABC_study/__pycache__/
