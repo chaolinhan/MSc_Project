@@ -1,8 +1,15 @@
 import scipy
+from scipy import integrate
 import numpy as np
 
 
 def eqns(var, t0, lambdaN, kNB, muN, vNM, lambdaM, kMB, muM, sBN, iBM, muB, sAM, muA):
+    """
+The ODE of dynamical system
+    :param var: variables to model with
+    :param the rest all are model parameters
+    :return: ODE status
+    """
     N, M, B, A = var
     dN = lambdaN + kNB * B + muN * N - vNM * N * M
     dM = lambdaM + kMB * B - muM * M
@@ -11,17 +18,32 @@ def eqns(var, t0, lambdaN, kNB, muN, vNM, lambdaM, kMB, muM, sBN, iBM, muB, sAM,
     return dN, dM, dB, dA
 
 
-# Define distance function
-# Euclidean distance
-def euclidean_distance(dataNormalised, simulation, normalised=False, na_included=True, time_length = 9):
+def normalise_data(data):
+    """
+    Normalise the data dictionary
+    :param data:
+    :return:
+    """
+    for key in data:
+        data[key] = (data[key] - data[key].mean()) / data[key].std()
+
+
+def euclidean_distance(dataNormalised, simulation, normalise=True, time_length=9):
+    """
+    Calculate the Euclidean distance of two data
+    :param dataNormalised: normalised data to be compared with
+    :param simulation: simulation data generated from ODE solver
+    :param normalise: BOOL, indicate to normalise simulation data or not
+    :param time_length: number of time points to model with
+    :return: the Euclidean distance
+    """
     if dataNormalised.__len__() != simulation.__len__():
         print("Input length Error")
         return
 
-    if not normalised:
-        for key in simulation:
-            simulation[key] = (simulation[key] - simulation[key].mean()) / simulation[key].std()
-    #print(simulation)
+    if normalise:
+        normalise_data(simulation)
+
     dis = 0.
 
     for key in dataNormalised:
@@ -37,11 +59,6 @@ def euclidean_distance(dataNormalised, simulation, normalised=False, na_included
 
 
 class ODESolver:
-    # def __init__(self):
-        # # Initial states: N, M, B, A
-        # self.varInit = v
-        # # Time points to solve
-        # self.timePoint = t
 
     varInit = scipy.array([1.8500000, 0.3333333, 1.995670, 0.665976])
     timePoint = scipy.array([0.5, 1, 2, 4, 6, 12, 24, 48, 72])

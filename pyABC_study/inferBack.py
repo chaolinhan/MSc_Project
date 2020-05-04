@@ -16,7 +16,7 @@ paraInit = {"lambdaN": 13.753031, "kNB": 1.581684, "muN": -0.155420, "vNM": 0.26
             "lambdaM": 2.993589, "kMB": 0.041040, "muM": 0.201963,
             "sBN": 1.553020, "iBM": -0.046259, "muB": 1.905163,
             "sAM": 11.001731, "muA": 23.022678}
-
+#
 # solver = ODESolver()
 # ode_test = solver.ode_model(paraInit)
 # ode_test
@@ -35,7 +35,7 @@ for key in expData:
 # Test distance function
 
 newData = copy.deepcopy(expData)
-euclidean_distance(expData, newData, normalised=True)
+euclidean_distance(expData, newData, normalise=True)
 # newData["N"][2] = 100
 # print(distance(newData, expData))
 
