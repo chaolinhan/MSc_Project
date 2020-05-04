@@ -5,39 +5,23 @@ import numpy as np
 import pyabc
 import copy
 
-from pyABC_study.ODE import ODESolver, euclidean_distance
+from pyABC_study.ODE import ODESolver, euclidean_distance, normalise_data
 
 db_path = ("sqlite:///" +
            os.path.join(tempfile.gettempdir(), "test.db"))
 
 
-# Test ODE solver
+# Generate synthetic data (normalised)
+
 paraInit = {"lambdaN": 13.753031, "kNB": 1.581684, "muN": -0.155420, "vNM": 0.262360,
             "lambdaM": 2.993589, "kMB": 0.041040, "muM": 0.201963,
             "sBN": 1.553020, "iBM": -0.046259, "muB": 1.905163,
             "sAM": 11.001731, "muA": 23.022678}
-#
-# solver = ODESolver()
-# ode_test = solver.ode_model(paraInit)
-# ode_test
-
-
-# Generate synthetic data (normalised)
 
 solver = ODESolver()
 
 expData = solver.ode_model(paraInit)
-for key in expData:
-    expData[key] = (expData[key] - expData[key].mean()) / expData[key].std()
-
-
-
-# Test distance function
-
-newData = copy.deepcopy(expData)
-euclidean_distance(expData, newData, normalise=True)
-# newData["N"][2] = 100
-# print(distance(newData, expData))
+normalise_data(expData)
 
 
 # Define prior distribution od parameters
