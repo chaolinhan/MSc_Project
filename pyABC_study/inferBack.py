@@ -26,17 +26,17 @@ normalise_data(expData)
 # Define prior distribution of parameters
 
 paraPrior = pyabc.Distribution(
-    lambdaN=pyabc.RV("uniform", 10, 15),
-    kNB=pyabc.RV("uniform", 0, 3),
+    lambdaN=pyabc.RV("uniform", 13, 15),
+    kNB=pyabc.RV("uniform", 1, 2),
     muN=pyabc.RV("uniform", -1, 1),
     vNM=pyabc.RV("uniform", -1, 1),
-    lambdaM=pyabc.RV("uniform", 0, 5),
+    lambdaM=pyabc.RV("uniform", 2, 4),
     kMB=pyabc.RV("uniform", -1, 1),
     muM=pyabc.RV("uniform", -1, 1),
-    sBN=pyabc.RV("uniform", 0, 3),
+    sBN=pyabc.RV("uniform", 0.2, 3),
     iBM=pyabc.RV("uniform", -1, 1),
-    muB=pyabc.RV("uniform", -1, 5),
-    sAM=pyabc.RV("uniform", 8, 15),
+    muB=pyabc.RV("uniform", 1, 3),
+    sAM=pyabc.RV("uniform", 10, 13),
     muA=pyabc.RV("uniform", 20, 25)
 )
 
@@ -45,7 +45,7 @@ paraPrior = pyabc.Distribution(
 abc = pyabc.ABCSMC(models=solver.ode_model,
                    parameter_priors=paraPrior,
                    distance_function=euclidean_distance,
-                   population_size=100,
+                   population_size=500,
                    eps=pyabc.MedianEpsilon(500, median_multiplier=1)
                    )
 

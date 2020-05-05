@@ -50,7 +50,7 @@ def euclidean_distance(dataNormalised, simulation, normalise=True, time_length=9
     for key in dataNormalised:
         for i in range(time_length):
             if not np.isnan(dataNormalised[key][i]):
-                dis += np.absolute(pow(dataNormalised[key][i] - simulation[key][i], 2.0))
+                dis += pow(dataNormalised[key][i] - simulation[key][i], 2.0)
             # NaN dealing: assume zero discrepancy
             else:
                 dis += 0.
@@ -72,7 +72,7 @@ class ODESolver:
             args=(para["lambdaN"], para["kNB"], para["muN"], para["vNM"],
                   para["lambdaM"], para["kMB"], para["muM"],
                   para["sBN"], para["iBM"], para["muB"],
-                  para["sAM"], para["muA"]),
+                  para["sAM"], para["muA"])
         )
         return {"N": sol[:, 0],
                 "M": sol[:, 1],
