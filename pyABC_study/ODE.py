@@ -31,6 +31,7 @@ def normalise_data(data):
 def euclidean_distance(dataNormalised, simulation, normalise=True, time_length=9):
     """
     Calculate the Euclidean distance of two data
+    Note that un-normalised data must be put as simulation
     :param dataNormalised: normalised data to be compared with
     :param simulation: simulation data generated from ODE solver
     :param normalise: BOOL, indicate to normalise simulation data or not

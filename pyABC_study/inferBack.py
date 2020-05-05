@@ -11,7 +11,7 @@ db_path = ("sqlite:///" +
            os.path.join(tempfile.gettempdir(), "test.db"))
 
 
-# Generate synthetic data (normalised)
+# Generate synthetic normalised data
 
 paraInit = {"lambdaN": 13.753031, "kNB": 1.581684, "muN": -0.155420, "vNM": 0.262360,
             "lambdaM": 2.993589, "kMB": 0.041040, "muM": 0.201963,
@@ -19,12 +19,11 @@ paraInit = {"lambdaN": 13.753031, "kNB": 1.581684, "muN": -0.155420, "vNM": 0.26
             "sAM": 11.001731, "muA": 23.022678}
 
 solver = ODESolver()
-
 expData = solver.ode_model(paraInit)
 normalise_data(expData)
 
 
-# Define prior distribution od parameters
+# Define prior distribution of parameters
 
 paraPrior = pyabc.Distribution(
     lambdaN=pyabc.RV("uniform", 10, 15),
@@ -43,17 +42,16 @@ paraPrior = pyabc.Distribution(
 
 # Define ABC-SMC model
 
-abc = pyabc.ABCSMC(models=ODEmodel,
+abc = pyabc.ABCSMC(models=solver.ode_model,
                    parameter_priors=paraPrior,
-                   distance_function=distance,
-                   population_size=50,
-                   # transitions=pyabc.LocalTransition(k_fraction=.3)
-                   eps=pyabc.MedianEpsilon(500, median_multiplier=0.7)
+                   distance_function=euclidean_distance,
+                   population_size=100,
+                   eps=pyabc.MedianEpsilon(500, median_multiplier=1)
                    )
 
 abc.new(db_path, expData)
 
-history = abc.run(minimum_epsilon=1, max_nr_populations=4)
+history = abc.run(minimum_epsilon=10, max_nr_populations=20)
 
 # print(history.get_distribution(t=2))
-history.get_distribution(t=3)[0].to_csv(r"/Users/chaolinhan/OneDrive/PostgraduateProject/pyABC_study/pop3outRaw.csv")
+#history.get_distribution(t=20)[0].to_csv(r"/Users/chaolinhan/OneDrive/PostgraduateProject/pyABC_study/outRaw.csv")
