@@ -3,6 +3,7 @@ import tempfile
 from numpy import nan as NaN
 import numpy as np
 import pyabc
+import matplotlib.pyplot as plt
 import copy
 
 from pyABC_study.ODE import ODESolver, euclidean_distance, normalise_data
@@ -21,6 +22,8 @@ paraInit = {"lambdaN": 13.753031, "kNB": 1.581684, "muN": -0.155420, "vNM": 0.26
 solver = ODESolver()
 expData = solver.ode_model(paraInit)
 normalise_data(expData)
+
+print(expData)
 
 
 # Define prior distribution of parameters
@@ -42,16 +45,24 @@ paraPrior = pyabc.Distribution(
 
 # Define ABC-SMC model
 
+distance_adaptive = pyabc.AdaptivePNormDistance(p=2)
+
 abc = pyabc.ABCSMC(models=solver.ode_model,
                    parameter_priors=paraPrior,
                    distance_function=euclidean_distance,
-                   population_size=500,
-                   eps=pyabc.MedianEpsilon(500, median_multiplier=1)
+                   #distance_function=distance_adaptive,
+                   population_size=100,
+                   eps=pyabc.MedianEpsilon(100, median_multiplier=1)
                    )
 
 abc.new(db_path, expData)
 
 history = abc.run(minimum_epsilon=10, max_nr_populations=20)
 
+df, w = history.get_distribution(t=19)
+pyabc.visualization.plot_kde_matrix(df, w)
+
+plt.show()
+
 # print(history.get_distribution(t=2))
-#history.get_distribution(t=20)[0].to_csv(r"/Users/chaolinhan/OneDrive/PostgraduateProject/pyABC_study/outRaw.csv")
+#history.get_distribution(t=20)[0].to_csv(r"/home/yuan/wdnmd/MSc_Project/pyABC_study/outRaw.csv")
