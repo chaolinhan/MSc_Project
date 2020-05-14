@@ -1,4 +1,4 @@
-# pyABC Notes
+# `pyABC`  Study Notes
 
 [Paper Here](https://academic.oup.com/bioinformatics/article/34/20/3591/4995841)
 
@@ -20,6 +20,79 @@ Two scheduling options
 
 - Input: `dict`. Keys of the dict are the parameters of the model, in this case they are the parameters in the ODEs.
 - Output: `dict`. In this case it is the simulated data from ODEs
+
+### Notes on the runs
+
+A drop in acceptance rate is usually used as termination criterion [more info needed]
+
+Facing higher number of parameters, the number of particles in each population could be in=creased to avoid local minima
+
+## Database
+
+[Query the database](https://pyabc.readthedocs.io/en/latest/api_datastore.html#querying-the-database)
+
+```python
+df, w = history.get_distribution(m, t=19)
+```
+- df: DataFrame of particles in the population t
+- w: weight of these particels
+
+
+## Distance
+
+### Static Euclidean distance that tolerates NAs(in `ODE.py`)
+
+```python
+def euclidean_distance(dataNormalised, simulation, normalise=True, time_length=9):
+    if dataNormalised.__len__() != simulation.__len__():
+        print("Input length Error")
+        return
+
+    if normalise:
+        normalise_data(simulation)
+
+    dis = 0.
+
+    for key in dataNormalised:
+        for i in range(time_length):
+            if not np.isnan(dataNormalised[key][i]):
+                dis += pow(dataNormalised[key][i] - simulation[key][i], 2.0)
+            # NaN dealing: assume zero discrepancy
+            else:
+                dis += 0.
+        # dis += np.absolute(pow((dataNormalised[key] - simulation[key]), 2.0)).sum()
+
+    return np.sqrt(dis)
+```
+
+### Adaptive distance TBC
+
+pyABC provide adaptive distance functions but compatibility with our ODEs should be studied, which are
+
+- Multiple metrics of the data to be compared: N, M, A and B.
+- Normalisation is used in static distance, in adaptive distance the solution should be taken care of
+
+## A similar case
+
+Several parameters and several target data objects (trajectories):
+[Multi-scale model: Tumor spheroid growth](https://pyabc.readthedocs.io/en/latest/examples/multiscale_agent_based.html)
+
+```python
+from tumor2d import log_model, distance, load_default
+from pyabc import ABCSMC
+from pyabc.sampler import ConcurrentFutureSampler
+from concurrent.futures import ThreadPoolExecutor
+
+data_mean = load_default()[1]  # (raw, mean, var)
+
+pool = ThreadPoolExecutor(max_workers=2)
+sampler = ConcurrentFutureSampler(pool)
+
+abc = ABCSMC(log_model, prior, distance,
+             population_size=3,
+             sampler=sampler)
+```
+
 
 ## Web-based visualisation
 
