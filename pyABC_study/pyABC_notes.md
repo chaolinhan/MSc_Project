@@ -37,6 +37,7 @@ df, w = history.get_distribution(m, t=19)
 - df: DataFrame of particles in the population t
 - w: weight of these particels
 
+## Prior distribution
 
 ## Distance
 
