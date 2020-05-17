@@ -29,20 +29,21 @@ print(expData)
 
 
 # Define prior distribution of parameters
+# Be careful that RV("uniform", -10, 15) means uniform distribution in [-10, 5], '15' here is the interval length
 
 paraPrior = pyabc.Distribution(
-    lambdaN=pyabc.RV("uniform", 0, 15),
-    kNB=pyabc.RV("uniform", -10, 2),
-    muN=pyabc.RV("uniform", -10, 2),
-    vNM=pyabc.RV("uniform", -15, 2),
-    lambdaM=pyabc.RV("uniform", -3, 7),
-    kMB=pyabc.RV("uniform", -10, 2),
-    muM=pyabc.RV("uniform", -3, 4),
-    sBN=pyabc.RV("uniform", -10, 2),
-    iBM=pyabc.RV("uniform", -7, 2),
-    muB=pyabc.RV("uniform", 0, 7),
-    sAM=pyabc.RV("uniform", -5, 20),
-    muA=pyabc.RV("uniform", 0, 60)
+    lambdaN=pyabc.RV("uniform", 0, 30),
+    kNB=pyabc.RV("uniform", -10, 20),
+    muN=pyabc.RV("uniform", -10, 20),
+    vNM=pyabc.RV("uniform", -10, 20),
+    lambdaM=pyabc.RV("uniform", -7, 20),
+    kMB=pyabc.RV("uniform", -10, 20),
+    muM=pyabc.RV("uniform", -10, 30),
+    sBN=pyabc.RV("uniform", -10, 20),
+    iBM=pyabc.RV("uniform", -30, 50),
+    muB=pyabc.RV("uniform", -10, 20),
+    sAM=pyabc.RV("uniform", 1, 20),
+    muA=pyabc.RV("uniform", 13, 20)
 )
 
 # Define ABC-SMC model
@@ -53,15 +54,17 @@ abc = pyabc.ABCSMC(models=solver.ode_model,
                    parameter_priors=paraPrior,
                    distance_function=euclidean_distance,
                    #distance_function=distance_adaptive,
-                   population_size=500,
-                   eps=pyabc.MedianEpsilon(50, median_multiplier=1)
+                   population_size=300,
+                   eps=pyabc.MedianEpsilon(30, median_multiplier=1)
                    )
 
 abc.new(db_path, expData)
 
-history = abc.run(minimum_epsilon=0.1, max_nr_populations=25)
+max_population = 25
 
-df, w = history.get_distribution(t=24)
+history = abc.run(minimum_epsilon=0.1, max_nr_populations=max_population)
+
+df, w = history.get_distribution(t=max_population-1)
 pyabc.visualization.plot_kde_matrix(df, w)
 
 plt.show()
@@ -77,28 +80,26 @@ plt.show()
 
 # Make a gif
 
-limits = dict(
-    lambdaN=(0, 15),
-    kNB=(-10, 2),
-    muN=(-10, 2),
-    vNM=(-15, 2),
-    lambdaM=(-3, 7),
-    kMB=(-10, 2),
-    muM=(-3, 4),
-    sBN=(-10, 2),
-    iBM=(-7, 2),
-    muB=(0, 7),
-    sAM=(-5, 20),
-    muA=(0, 60)
-              )
-
-df, w = history.get_distribution(t=24)
-pyabc.visualization.plot_kde_matrix(df, w, limits=limits)
-
-# TODO make file name dynamic
-
-for tt in range(1,24):
-    filename = ROOT_DIR+"/pyABC_study/plot/p500e50t25/"+str(tt)+".png"
-    df, w = history.get_distribution(t=tt)
-    pyabc.visualization.plot_kde_matrix(df, w, limits=limits)
-    plt.savefig(filename)
+# limits = dict(
+#     lambdaN=(-10, 15),
+#     kNB=(-15, 2),
+#     muN=(-15, 2),
+#     vNM=(-23, 2),
+#     lambdaM=(-3, 7),
+#     kMB=(-15, 2),
+#     muM=(-3, 4),
+#     sBN=(-15, 2),
+#     iBM=(-15, 2),
+#     muB=(0, 12),
+#     sAM=(-10, 30),
+#     muA=(-20, 80)
+#               )
+#
+#
+# # TODO make file name dynamic
+#
+# for tt in range(1,max_population-1):
+#     filename = ROOT_DIR+"/pyABC_study/plot/p500e50t25/"+str(tt)+".png"
+#     df, w = history.get_distribution(t=tt)
+#     pyabc.visualization.plot_kde_matrix(df, w, limits=limits)
+#     plt.savefig(filename)
