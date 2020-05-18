@@ -32,18 +32,18 @@ print(expData)
 # Be careful that RV("uniform", -10, 15) means uniform distribution in [-10, 5], '15' here is the interval length
 
 paraPrior = pyabc.Distribution(
-    lambdaN=pyabc.RV("uniform", 0, 30),
-    kNB=pyabc.RV("uniform", -10, 20),
-    muN=pyabc.RV("uniform", -10, 20),
-    vNM=pyabc.RV("uniform", -10, 20),
-    lambdaM=pyabc.RV("uniform", -7, 20),
-    kMB=pyabc.RV("uniform", -10, 20),
-    muM=pyabc.RV("uniform", -10, 30),
-    sBN=pyabc.RV("uniform", -10, 20),
-    iBM=pyabc.RV("uniform", -30, 50),
-    muB=pyabc.RV("uniform", -10, 20),
-    sAM=pyabc.RV("uniform", 1, 20),
-    muA=pyabc.RV("uniform", 13, 20)
+    lambdaN=pyabc.RV("uniform", 10, 6),
+    kNB=pyabc.RV("uniform", 1, 1),
+    muN=pyabc.RV("uniform", -1, 2),
+    vNM=pyabc.RV("uniform", -1, 2),
+    lambdaM=pyabc.RV("uniform", 2, 2),
+    kMB=pyabc.RV("uniform", -1, 2),
+    muM=pyabc.RV("uniform", -1, 2),
+    sBN=pyabc.RV("uniform", 1, 1),
+    iBM=pyabc.RV("uniform", -1, 2),
+    muB=pyabc.RV("uniform", 1, 1.5),
+    sAM=pyabc.RV("uniform", 10, 3),
+    muA=pyabc.RV("uniform", 20, 6)
 )
 
 # Define ABC-SMC model
@@ -54,13 +54,13 @@ abc = pyabc.ABCSMC(models=solver.ode_model,
                    parameter_priors=paraPrior,
                    distance_function=euclidean_distance,
                    #distance_function=distance_adaptive,
-                   population_size=300,
+                   population_size=1000,
                    eps=pyabc.MedianEpsilon(30, median_multiplier=1)
                    )
 
 abc.new(db_path, expData)
 
-max_population = 25
+max_population = 20
 
 history = abc.run(minimum_epsilon=0.1, max_nr_populations=max_population)
 
@@ -75,6 +75,8 @@ plt.show()
 pyabc.visualization.plot_epsilons(history)
 plt.show()
 
+df.mean().to_csv( ROOT_DIR+"/pyABC_study/outSummary.csv")
+df.std().to_csv( ROOT_DIR+"/pyABC_study/outSummStd.csv")
 # print(history.get_distribution(t=2))
 #history.get_distribution(t=20)[0].to_csv(r"/home/yuan/wdnmd/MSc_Project/pyABC_study/outRaw.csv")
 
@@ -103,3 +105,16 @@ plt.show()
 #     df, w = history.get_distribution(t=tt)
 #     pyabc.visualization.plot_kde_matrix(df, w, limits=limits)
 #     plt.savefig(filename)
+
+
+# Resume
+
+# abc_continue = pyabc.ABCSMC(models=solver.ode_model,
+#                    parameter_priors=paraPrior,
+#                    distance_function=euclidean_distance,
+#                    #distance_function=distance_adaptive,
+#                    population_size=1000,
+#                    eps=pyabc.MedianEpsilon(30, median_multiplier=1)
+#                    )
+#
+# abc_continue.load(db_path, 3)
