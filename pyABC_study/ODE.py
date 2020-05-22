@@ -21,14 +21,14 @@ The ODE of dynamical system
 def normalise_data(data):
     """
     Normalise the data dictionary
-    :param data:
+    :param data: numpy array to be normalised
     :return:
     """
     for key in data:
-        data[key] = (data[key] - data[key].mean()) / data[key].std()
+        data[key] = (data[key] - np.nanmean(data[key])) / np.nanstd(data[key])
 
 
-def euclidean_distance(dataNormalised, simulation, normalise=True, time_length=9):
+def euclidean_distance(dataNormalised, simulation, normalise=False, time_length=9):
     """
     Calculate the Euclidean distance of two data
     Note that un-normalised data must be put as simulation
@@ -48,13 +48,16 @@ def euclidean_distance(dataNormalised, simulation, normalise=True, time_length=9
     dis = 0.
 
     for key in dataNormalised:
-        for i in range(time_length):
-            if not np.isnan(dataNormalised[key][i]):
-                dis += pow(dataNormalised[key][i] - simulation[key][i], 2.0)
-            # NaN dealing: assume zero discrepancy
-            else:
-                dis += 0.
-        # dis += np.absolute(pow((dataNormalised[key] - simulation[key]), 2.0)).sum()
+        tmp= (dataNormalised[key]-simulation[key])**2
+        dis += np.nansum(tmp)
+    # for key in dataNormalised:
+    #     for i in range(time_length):
+    #         if not np.isnan(dataNormalised[key][i]):
+    #             dis += pow(dataNormalised[key][i] - simulation[key][i], 2.0)
+    #         # NaN dealing: assume zero discrepancy
+    #         else:
+    #             dis += 0.
+    #     # dis += np.absolute(pow((dataNormalised[key] - simulation[key]), 2.0)).sum()
 
     return np.sqrt(dis)
 

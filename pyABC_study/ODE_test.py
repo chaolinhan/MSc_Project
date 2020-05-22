@@ -6,10 +6,10 @@ from copy import deepcopy
 from pyABC_study.ODE import ODESolver, euclidean_distance, normalise_data
 
 
-paraInit = {"lambdaN": 13.753031, "kNB": 1.581684, "muN": -0.155420, "vNM": 0.262360,
-            "lambdaM": 2.993589, "kMB": 0.041040, "muM": 0.201963,
-            "sBN": 1.553020, "iBM": -0.046259, "muB": 1.905163,
-            "sAM": 11.001731, "muA": 23.022678}
+paraInit = {"lambdaN": 13.753031, "kNB": 1.581684, "muN": 2.155420, "vNM": 0.262360,
+            "lambdaM": 2.993589, "kMB": 2041040, "muM": 2.201963,
+            "sBN": 1.553020, "iBM": 2046259, "muB": 1.905163,
+            "sAM": 11.001731, "muA": 22.022678}
 
 solver = ODESolver()
 expData = solver.ode_model(paraInit)
@@ -22,10 +22,11 @@ class MyTestCase(unittest.TestCase):
 
 
     def test_solver(self):
-        self.assertAlmostEqual(expData["N"].sum(), 79.77811684729392)
-        self.assertAlmostEqual(expData["M"].sum(), 89.24608344560379)
-        self.assertAlmostEqual(expData["B"].sum(), 63.48068864888955)
-        self.assertAlmostEqual(expData["A"].sum(), 42.97632361303949)
+        # TODO update tests
+        self.assertAlmostEqual(expData["N"].sum(), 647.2816068192601)
+        self.assertAlmostEqual(expData["M"].sum(), 257.1200482853476)
+        self.assertAlmostEqual(expData["B"].sum(), 0.00024688305112401495)
+        self.assertAlmostEqual(expData["A"].sum(), 128.0277839730605)
 
     def test_normalise(self):
         for key in tmp:

@@ -128,4 +128,33 @@ Command: `abc-server /tmp/test.db`
 -   Reset the initial parameters
 
     -   Fit the data to get a least square parameters?
-    -   
+        -   Some lm fit not support multi variables LS
+    -   Turn to AMC-SMC for initial rough inference
+        -   Initial population seems to take forever
+        -   Code in `InitPara.py`
+    
+    ```python
+    name
+    iBM        21.158021
+    kMB        33.334623
+    kNB        36.124380
+    lambdaM    34.842738
+    lambdaN    17.013443
+    muA        35.837526
+    muB         2.059064
+    muM        35.262282
+    muN         4.740578
+    sAM        27.802149
+    sBN        32.040063
+    vNM         4.524078
+    ```
+
+>   Issue spotted
+>
+>   -   Python 3.8.2 with pyABC will produce an error on the `model` parameter. Further attention should be paid.
+>   -   Solution: use the old environment python 3.7
+>
+>   Bug spotted
+>
+>   -   Euclidean distance function return `NaN` in the test, which might bring the above problem “Initial population seems to take forever”
+>   -   Solution: check the distance function. Unit test should also be modified to accommodated this

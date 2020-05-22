@@ -14,26 +14,24 @@ db_path = ("sqlite:///" +
            os.path.join(tempfile.gettempdir(), "test.db"))
 
 
-# Generate synthetic normalised data
+# Generate synthetic data
 
-paraInit = {"lambdaN": 13.753031, "kNB": 1.581684, "muN": -0.155420, "vNM": 0.262360,
-            "lambdaM": 2.993589, "kMB": 0.041040, "muM": 0.201963,
-            "sBN": 1.553020, "iBM": -0.046259, "muB": 1.905163,
-            "sAM": 11.001731, "muA": 23.022678}
+paraInit = {
+    "lambdaN": 17.013443,
+    "kNB": 36.124380,
+    "muN": 4.740578,
+    "vNM": 4.524078,
+    "lambdaM": 34.842738,
+    "kMB": 33.334623,
+    "muM":  35.262282,
+    "sBN": 32.040063,
+    "iBM":  21.158021,
+    "muB": 2.059064,
+    "sAM": 27.802149,
+    "muA": 35.837526}
 
 solver = ODESolver()
 expData = solver.ode_model(paraInit)
-
-###
-rawData_path = ROOT_DIR + "/data/rawData.csv"
-rawData = pd.read_csv(rawData_path, header=None)
-timePoints = rawData.iloc[:,0].to_numpy()
-rawDataArray = rawData.iloc[:,1:].transpose().to_numpy()
-rawData = rawData.rename(columns={0:"time", 1:"N", 2:"M", 3:"B", 4:"A"})
-rawDataDict = rawData.iloc[:,1:].to_dict(orient = 'list')
-
-expData = rawDataDict
-###
 
 normalise_data(expData)
 
@@ -45,29 +43,29 @@ print(expData)
 # Be careful that RV("uniform", -10, 15) means uniform distribution in [-10, 5], '15' here is the interval length
 
 paraPrior = pyabc.Distribution(
-    lambdaN=pyabc.RV("uniform", 10, 6),
-    kNB=pyabc.RV("uniform", 1, 1),
-    muN=pyabc.RV("uniform", -1, 2),
-    vNM=pyabc.RV("uniform", -1, 2),
-    lambdaM=pyabc.RV("uniform", 2, 2),
-    kMB=pyabc.RV("uniform", -1, 2),
-    muM=pyabc.RV("uniform", -1, 2),
-    sBN=pyabc.RV("uniform", 1, 1),
-    iBM=pyabc.RV("uniform", -1, 2),
-    muB=pyabc.RV("uniform", 1, 1.5),
-    sAM=pyabc.RV("uniform", 10, 3),
-    muA=pyabc.RV("uniform", 20, 6)
+    lambdaN=pyabc.RV("uniform", 0, 50),
+    kNB=pyabc.RV("uniform", 0, 50),
+    muN=pyabc.RV("uniform", 0, 50),
+    vNM=pyabc.RV("uniform", 0, 50),
+    lambdaM=pyabc.RV("uniform", 0, 50),
+    kMB=pyabc.RV("uniform", 0, 50),
+    muM=pyabc.RV("uniform", 0, 50),
+    sBN=pyabc.RV("uniform", 0, 50),
+    iBM=pyabc.RV("uniform", 0, 50),
+    muB=pyabc.RV("uniform", 0, 50),
+    sAM=pyabc.RV("uniform", 0, 50),
+    muA=pyabc.RV("uniform", 0, 50)
 )
 
 # Define ABC-SMC model
 
-distance_adaptive = pyabc.AdaptivePNormDistance(p=2)
+#distance_adaptive = pyabc.AdaptivePNormDistance(p=2)
 
 abc = pyabc.ABCSMC(models=solver.ode_model,
                    parameter_priors=paraPrior,
-                   distance_function=euclidean_distance,
-                   #distance_function=distance_adaptive,
                    population_size=1000,
+                   #distance_function=distance_adaptive,
+                   distance_function=euclidean_distance,
                    eps=pyabc.MedianEpsilon(30, median_multiplier=1)
                    )
 
