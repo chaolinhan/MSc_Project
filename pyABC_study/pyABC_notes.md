@@ -114,3 +114,18 @@ Reason: bokeh 2.0.0+ removed `plotting.helpers` entirely.
 Solution: boken 1.4
 
 Command: `abc-server /tmp/test.db`
+
+
+
+## Weekly notes from 20 May
+
+-   Try more data points
+    -   Design
+        -   Default `0.5 1 2 4 6 8 ... 72` times 4
+    
+    **DONE**
+    
+-   Reset the initial parameters
+
+    -   Fit the data to get a least square parameters?
+    -   

@@ -1,4 +1,5 @@
 import os
+import pandas as pd
 import tempfile
 from numpy import nan as NaN
 import numpy as np
@@ -22,6 +23,18 @@ paraInit = {"lambdaN": 13.753031, "kNB": 1.581684, "muN": -0.155420, "vNM": 0.26
 
 solver = ODESolver()
 expData = solver.ode_model(paraInit)
+
+###
+rawData_path = ROOT_DIR + "/data/rawData.csv"
+rawData = pd.read_csv(rawData_path, header=None)
+timePoints = rawData.iloc[:,0].to_numpy()
+rawDataArray = rawData.iloc[:,1:].transpose().to_numpy()
+rawData = rawData.rename(columns={0:"time", 1:"N", 2:"M", 3:"B", 4:"A"})
+rawDataDict = rawData.iloc[:,1:].to_dict(orient = 'list')
+
+expData = rawDataDict
+###
+
 normalise_data(expData)
 
 print("Target data")

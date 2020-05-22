@@ -6,11 +6,11 @@ library(reshape2) # library for reshaping data (tall-narrow <-> short-wide)
 library(deSolve) # library for solving differential equations
 library(minpack.lm) 
 
-setwd("~/OneDrive/PostgraduateProject/dataPreProcess")
+setwd("~/OneDrive/PostProject")
 
 # Import data
 
-odeDF = read.csv("../data/iData.csv",header = F)
+odeDF = read.csv("data/iData.csv",header = F)
 colnames(odeDF) = c("t","N","M","B","A")
 
 temp = melt(odeDF, id.vars=c("t"))
@@ -67,7 +67,7 @@ para = list(lambdaN = 1, kNB = 1, muN = 1, vNM = 1,
             sBN = 1, iBM = 1, muB = 1,
             sAM = 1, muA = 1)
 
-ODEfit = nls.lm(par = para, fn = ODEssq)
+ODEfit = nls.lm(par = para, fn = ODEssq, lower = c(0,0,0,0,0,0,0,0,0,0,0,0))
 summary(ODEfit)
 ODEfit[["par"]]
 vcov(ODEfit)

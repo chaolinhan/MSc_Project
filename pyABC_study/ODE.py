@@ -61,8 +61,10 @@ def euclidean_distance(dataNormalised, simulation, normalise=True, time_length=9
 
 class ODESolver:
 
-    varInit = scipy.array([1.8500000, 0.3333333, 1.995670, 0.665976])
-    timePoint = scipy.array([0.5, 1, 2, 4, 6, 12, 24, 48, 72])
+    timepoint_default = np.concatenate((np.array([0., 0.25, 0.5, 1]), np.arange(2, 24, 2), np.arange(24, 74, 4)), axis=0)
+    varInit = np.array([0, 0, 0, 0])
+
+    timePoint = timepoint_default
 
     def ode_model(self, para):
         sol = scipy.integrate.odeint(
