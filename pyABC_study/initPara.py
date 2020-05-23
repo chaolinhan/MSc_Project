@@ -1,31 +1,34 @@
-import numpy as np
 import os
 import tempfile
+
+import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
 import pyabc
-import matplotlib.pyplot as plt
-from pyABC_study.ODE import ODESolver, euclidean_distance, normalise_data
+
+from pyABC_study.ODE import ODESolver, euclidean_distance
+
 
 # Read  and prepare raw data
-ROOT_DIR = os.path.abspath(os.curdir)
-rawData_path = ROOT_DIR + "/data/rawData.csv"
-rawData = pd.read_csv(rawData_path)
-rawData = rawData.astype("float32")
-timePoints = rawData.iloc[:, 0].to_numpy()
-rawDataDict = rawData.iloc[:, 1:].to_dict(orient='list')
 
-expData = rawDataDict
+rawData_path = os.path.abspath(os.curdir) + "/data/rawData.csv"
+rawData = pd.read_csv(rawData_path).astype("float32")
+
+timePoints = rawData.iloc[:, 0].to_numpy()
+
+expData = rawData.iloc[:, 1:].to_dict(orient='list')
 for k in expData:
     expData[k] = np.array(expData[k])
-
 # normalise_data(expData)
 
 print("Target data")
 print(expData)
 
+
 # Run a rough inference on the raw data
 
 solver = ODESolver()
+# Reload the timepoints to be calculated in ODE solver
 solver.timePoint = timePoints
 
 paraPrior = pyabc.Distribution(
@@ -46,18 +49,21 @@ paraPrior = pyabc.Distribution(
 abc = pyabc.ABCSMC(models=solver.ode_model,
                    parameter_priors=paraPrior,
                    distance_function=euclidean_distance,
-                   #distance_function=distance_adaptive,
+                   # distance_function=distance_adaptive,
                    population_size=300,
                    eps=pyabc.MedianEpsilon(100, median_multiplier=1)
                    )
+
 db_path = ("sqlite:///" +
            os.path.join(tempfile.gettempdir(), "test.db"))
 abc.new(db_path, expData)
 
 max_population = 21
 
-
 history = abc.run(minimum_epsilon=0.1, max_nr_populations=max_population)
+
+
+# Plot the results
 
 pyabc.visualization.plot_acceptance_rates_trajectory(history)
 plt.show()
@@ -65,16 +71,21 @@ plt.show()
 pyabc.visualization.plot_epsilons(history)
 plt.show()
 
-df, w = history.get_distribution(t=max_population-1)
+df, w = history.get_distribution(t=max_population - 1)
 
 pyabc.visualization.plot_kde_matrix(df, w)
 plt.show()
 
+print(df.mean())
+
 for i in range(12):
-    print(df.iloc[:,i].name+'\t\t%.6f' % (df.iloc[:,i]*w).sum())
+    print(df.iloc[:, i].name + '\t\t%.6f' % (df.iloc[:, i] * w).sum())
 
 """
-mean():
+Output from one run:
+
+
+mean() method: 
 
 iBM         9.737715
 kMB        47.458632
@@ -88,10 +99,10 @@ muN        79.994190
 sAM        38.563204
 sBN        37.618288
 vNM        13.229111
-"""
 
-"""
-df*w sum():
+
+df*w sum() method:
+
 iBM		9.051270
 kMB		40.881926
 kNB		9.618762

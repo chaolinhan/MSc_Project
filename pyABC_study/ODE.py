@@ -28,14 +28,13 @@ def normalise_data(data):
         data[key] = (data[key] - np.nanmean(data[key])) / np.nanstd(data[key])
 
 
-def euclidean_distance(dataNormalised, simulation, normalise=False, time_length=9):
+def euclidean_distance(dataNormalised, simulation, normalise=False):
     """
     Calculate the Euclidean distance of two data
     Note that un-normalised data must be put as simulation
     :param dataNormalised: normalised data to be compared with
     :param simulation: simulation data generated from ODE solver
     :param normalise: BOOL, indicate to normalise simulation data or not
-    :param time_length: number of time points to model with
     :return: the Euclidean distance
     """
     if dataNormalised.__len__() != simulation.__len__():
