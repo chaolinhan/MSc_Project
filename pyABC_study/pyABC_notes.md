@@ -183,4 +183,27 @@ sBN       41.486109
 vNM       13.005909
 ```
 
+Result of maximal weighted particle:
+
+```
+iBM         6.706790
+kMB        37.790301
+kNB        13.288773
+lambdaM    40.238402
+lambdaN    45.633238
+muA        39.136272
+muB        15.821665
+muM        34.883162
+muN        77.583389
+sAM        40.198178
+sBN        32.110228
+vNM        12.689222
+```
+
+Plot: not well fitted
+
+![image-20200523123743370](https://i.imgur.com/41MzrA2.png)
+
 ![distribution](https://i.imgur.com/xihZ39S.png)
+
+-   Back to gradient decent LM LS fitting again

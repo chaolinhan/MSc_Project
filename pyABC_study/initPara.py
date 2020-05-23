@@ -73,13 +73,23 @@ plt.show()
 
 df, w = history.get_distribution(t=max_population - 1)
 
+np.argmax()
+
 pyabc.visualization.plot_kde_matrix(df, w)
 plt.show()
 
+
+# Print results
+
+# Mean of last population
 print(df.mean())
 
+# Sum of weight * particles
 for i in range(12):
     print(df.iloc[:, i].name + '\t\t%.6f' % (df.iloc[:, i] * w).sum())
+
+# Particle with maximal weight
+print(df.iloc[w.argmax(),:])
 
 """
 Output from one run:
@@ -115,4 +125,25 @@ muN		78.150011
 sAM		33.580249
 sBN		41.486109
 vNM		13.005909
+
+maximal weight method:
+iBM         6.706790
+kMB        37.790301
+kNB        13.288773
+lambdaM    40.238402
+lambdaN    45.633238
+muA        39.136272
+muB        15.821665
+muM        34.883162
+muN        77.583389
+sAM        40.198178
+sBN        32.110228
+vNM        12.689222
 """
+
+
+# Least squares using LM
+
+def residual(para, ydata):
+    simulationData = solver.ode_model(para)
+    return euclidean_distance(ydata, simulationData)

@@ -10,10 +10,10 @@ setwd("~/OneDrive/PostProject")
 
 # Import data
 
-odeDF = read.csv("data/iData.csv",header = F)
-colnames(odeDF) = c("t","N","M","B","A")
+odeDF = read.csv("data/rawData.csv",header = T)
+#colnames(odeDF) = c("t","N","M","B","A")
 
-temp = melt(odeDF, id.vars=c("t"))
+temp = melt(odeDF, id.vars=c("time"))
 
 ggplot(data = temp,aes(x=t, y=value, color=variable))+
   geom_line()+

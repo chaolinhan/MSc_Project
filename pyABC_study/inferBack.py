@@ -1,13 +1,13 @@
 import os
-import pandas as pd
 import tempfile
-from numpy import nan as NaN
-import numpy as np
-import pyabc
-import matplotlib.pyplot as plt
-import copy
 
-from pyABC_study.ODE import ODESolver, euclidean_distance, normalise_data
+import matplotlib.pyplot as plt
+import pandas as pd
+import pyabc
+
+from pyABC_study.ODE import ODESolver, euclidean_distance
+
+# Get path
 
 ROOT_DIR = os.path.abspath(os.curdir)
 db_path = ("sqlite:///" +
@@ -16,21 +16,26 @@ db_path = ("sqlite:///" +
 
 # Generate synthetic data
 
-paraInit = {
-    'iBM': 9.051270,
-    'kMB': 40.881926,
-    'kNB': 9.618762,
-    'lambdaM': 41.405661,
-    'lambdaN': 29.360990,
-    'muA': 44.426018,
-    'muB': 16.450285,
-    'muM': 37.356256,
-    'muN': 78.150011,
-    'sAM': 33.580249,
-    'sBN': 41.486109,
-    'vNM': 13.005909
-}
+# paraInit = {
+#     'iBM': 6.706790,
+#     'kMB': 37.790301,
+#     'kNB': 13.288773,
+#     'lambdaM': 40.238402,
+#     'lambdaN': 45.633238,
+#     'muA': 39.136272,
+#     'muB': 15.821665,
+#     'muM': 34.883162,
+#     'muN': 77.583389,
+#     'sAM': 40.198178,
+#     'sBN': 32.110228,
+#     'vNM': 12.689222
+# }
+paraInit = {"lambdaN": 13.753031, "kNB": 1.581684, "muN": -0.155420, "vNM": 0.262360,
+            "lambdaM": 2.993589, "kMB": 0.041040, "muM": 0.201963,
+            "sBN": 1.553020, "iBM": -0.046259, "muB": 1.905163,
+            "sAM": 11.001731, "muA": 23.022678}
 
+# Using default time points
 solver = ODESolver()
 expData = solver.ode_model(paraInit)
 
@@ -38,6 +43,17 @@ expData = solver.ode_model(paraInit)
 
 print("Target data")
 print(expData)
+
+
+# Plot
+
+rawData_path = os.path.abspath(os.curdir) + "/data/rawData.csv"
+rawData = pd.read_csv(rawData_path).astype("float32")
+
+plt.plot(solver.timePoint, expData['N'], solver.timePoint, expData['M'])
+plt.scatter(rawData['time'], rawData['N'])
+plt.scatter(rawData['time'], rawData['M'])
+plt.show()
 
 
 # Define prior distribution of parameters
