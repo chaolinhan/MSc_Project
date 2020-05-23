@@ -119,35 +119,25 @@ Command: `abc-server /tmp/test.db`
 
 ## Weekly notes from 20 May
 
--   Try more data points
-    -   Design
-        -   Default `0.5 1 2 4 6 8 ... 72` times 4
-    
-    **DONE**
-    
--   Reset the initial parameters
+### Try more data points
 
-    -   Fit the data to get a least square parameters?
-        -   Some lm fit not support multi variables LS
-    -   Turn to AMC-SMC for initial rough inference
-        -   Initial population seems to take forever
-        -   Code in `InitPara.py`
-    
-    ```python
-    name
-    iBM        21.158021
-    kMB        33.334623
-    kNB        36.124380
-    lambdaM    34.842738
-    lambdaN    17.013443
-    muA        35.837526
-    muB         2.059064
-    muM        35.262282
-    muN         4.740578
-    sAM        27.802149
-    sBN        32.040063
-    vNM         4.524078
-    ```
+-   Design
+    -   Default
+    -   `array([ 0.  ,  0.25,  0.5 ,  1.  ,  2.  ,  4.  ,  6.  ,  8.  , 10.  ,12.  , 14.  , 16.  , 18.  , 20.  , 22.  , 24.  , 28.  , 32.  , 36.  , 40.  , 44.  , 48.  , 52.  , 56.  , 60.  , 64.  , 68.  , 72.  ])`
+    -   28 time points, 28*4=112 values in data
+
+**DONE**
+
+### Reset the initial parameters
+
+-   Fit the data to get a least square parameters?
+    -   Some lm fit not support multi variables LS
+-   Turn to AMC-SMC for initial rough inference
+    -   Initial population seems to take forever
+    -   Code in `InitPara.py`
+    -   The mean value of last population is quiet different from the peak value
+        -   Use peak value?
+        -   Use sum of value*weight **<- now chosen**
 
 >   Issue spotted
 >
@@ -158,3 +148,39 @@ Command: `abc-server /tmp/test.db`
 >
 >   -   Euclidean distance function return `NaN` in the test, which might bring the above problem “Initial population seems to take forever”
 >   -   Solution: check the distance function. Unit test should also be modified to accommodated this
+
+Result of `mean()`
+
+```
+iBM         9.737715
+kMB        47.458632
+kNB         9.973562
+lambdaM    39.107247
+lambdaN    25.262527
+muA        47.041885
+muB        15.762823
+muM        39.539603
+muN        79.994190
+sAM        38.563204
+sBN        37.618288
+vNM        13.229111
+```
+
+Result of `df*w.sum()`:
+
+```
+iBM				9.051270
+kMB       40.881926
+kNB       9.618762
+lambdaM   41.405661
+lambdaN   29.360990
+muA       44.426018
+muB       16.450285
+muM       37.356256
+muN       78.150011
+sAM       33.580249
+sBN       41.486109
+vNM       13.005909
+```
+
+![distribution](https://i.imgur.com/xihZ39S.png)

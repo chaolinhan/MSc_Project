@@ -17,23 +17,24 @@ db_path = ("sqlite:///" +
 # Generate synthetic data
 
 paraInit = {
-    "lambdaN": 17.013443,
-    "kNB": 36.124380,
-    "muN": 4.740578,
-    "vNM": 4.524078,
-    "lambdaM": 34.842738,
-    "kMB": 33.334623,
-    "muM":  35.262282,
-    "sBN": 32.040063,
-    "iBM":  21.158021,
-    "muB": 2.059064,
-    "sAM": 27.802149,
-    "muA": 35.837526}
+    'iBM': 9.051270,
+    'kMB': 40.881926,
+    'kNB': 9.618762,
+    'lambdaM': 41.405661,
+    'lambdaN': 29.360990,
+    'muA': 44.426018,
+    'muB': 16.450285,
+    'muM': 37.356256,
+    'muN': 78.150011,
+    'sAM': 33.580249,
+    'sBN': 41.486109,
+    'vNM': 13.005909
+}
 
 solver = ODESolver()
 expData = solver.ode_model(paraInit)
 
-normalise_data(expData)
+#normalise_data(expData)
 
 print("Target data")
 print(expData)
