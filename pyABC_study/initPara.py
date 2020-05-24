@@ -248,6 +248,7 @@ paraEST = optimize.least_squares(residualLS, paraGuess)
 print(paraEST.x)
 
 paraDict = genData(paraEST.x)
+solver.timePoint = solver.timepoint_default
 simulationData = solver.ode_model(paraDict)
 
 plt.plot(solver.timePoint, simulationData['N'], solver.timePoint, simulationData['M'])

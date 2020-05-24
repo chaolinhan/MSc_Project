@@ -226,6 +226,6 @@ Plot: not well fitted
 'vNM': 0.5119068430635925
 ```
 
-<img src="https://i.imgur.com/cuvcXUD.png" alt="image-20200524214639881" style="zoom:50%;" />
+![image-20200524215253258](https://i.imgur.com/4Ud0WJ9.png)
 
-<img src="https://i.imgur.com/PrxujzI.png" alt="image-20200524214651031" style="zoom:50%;" />
+![image-20200524215304608](https://i.imgur.com/JeOHDhp.png)
