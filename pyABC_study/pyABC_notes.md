@@ -209,7 +209,23 @@ Plot: not well fitted
 -   Back to scipy LS fitting again
     -   Two LS function `curve_fit` and `least_squares` were tried, with different boundary conditions and initial guesses 
     -   Visualisation used to select a parameter set that generates data that are close to real data
+-   `paraGuess = [2]*12`，
 
-One of the parameter set generates:
+```
+'iBM': 2.4041603100488587,
+'kMB': 0.14239564228380108,
+'kNB': 2.3405757296708396,
+'lambdaM': 1.9508302861494105,
+'lambdaN': 2.5284489000168113,
+'muA': 2.715326160638292,
+'muB': 0.35008723255144486,
+'muM': 0.1603505707251119,
+'muN': 2.2016772634585147,
+'sAM': 1.387525971337514,
+'sBN': 1.202190024316036,
+'vNM': 0.5119068430635925
+```
 
-![image-20200524180203381](https://i.imgur.com/AAxaqtx.png)
+<img src="https://i.imgur.com/cuvcXUD.png" alt="image-20200524214639881" style="zoom:50%;" />
+
+<img src="https://i.imgur.com/PrxujzI.png" alt="image-20200524214651031" style="zoom:50%;" />

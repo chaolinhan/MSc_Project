@@ -138,8 +138,10 @@ sBN        32.110228
 vNM        12.689222
 """
 
+# Least squares
 
-# Least squares using LM
+rawData_path = os.path.abspath(os.curdir) + "/data/rawData.csv"
+rawData = pd.read_csv(rawData_path).astype("float32")
 
 
 def residual(x, iBM, kMB, kNB, lambdaM, lambdaN, muA, muB, muM, muN, sAM, sBN, vNM):
@@ -176,15 +178,16 @@ def residual(x, iBM, kMB, kNB, lambdaM, lambdaN, muA, muB, muM, muN, sAM, sBN, v
 
 
 xdata = np.array(range(12))
-residual(xdata, 10,10,10,10,10,10,10,10,10,10,10,10)
+residual(xdata, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10)
 ydata = np.zeros(12)
 
-paraGuess = [10]*12
+paraGuess = [10] * 12
 
 popt, pcov = optimize.curve_fit(residual, xdata, ydata, p0=paraGuess, bounds=(0, 100))
 
 plt.plot(xdata, residual(xdata, *popt), 'r-')
 plt.show()
+
 
 def residualLS(para):
     paraDict = {
@@ -218,9 +221,6 @@ def residualLS(para):
         ans = np.append(ans, euclidean_distance(ydata, sim))
     return ans
 
-paraGuess = [2]*12
-
-res_1 = optimize.least_squares(residualLS, paraGuess, bounds=(0, 10))
 
 def genData(para):
     paraDict = {
@@ -239,13 +239,23 @@ def genData(para):
     }
     return paraDict
 
-paraDict = genData(res_1.x)
-simulationData = solver.ode_model(paraDict)
 
-rawData_path = os.path.abspath(os.curdir) + "/data/rawData.csv"
-rawData = pd.read_csv(rawData_path).astype("float32")
+# paraGuess = [5, 37, 13, 40, 45, 40, 15, 35, 77, 40, 32, 12]
+paraGuess = [2]*12
+
+paraEST = optimize.least_squares(residualLS, paraGuess)
+
+print(paraEST.x)
+
+paraDict = genData(paraEST.x)
+simulationData = solver.ode_model(paraDict)
 
 plt.plot(solver.timePoint, simulationData['N'], solver.timePoint, simulationData['M'])
 plt.scatter(rawData['time'], rawData['N'])
 plt.scatter(rawData['time'], rawData['M'])
+plt.show()
+
+plt.plot(solver.timePoint, simulationData['B'], solver.timePoint, simulationData['A'])
+plt.scatter(rawData['time'], rawData['B'])
+plt.scatter(rawData['time'], rawData['A'])
 plt.show()
