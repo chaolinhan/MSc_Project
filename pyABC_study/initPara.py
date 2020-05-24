@@ -5,9 +5,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import pyabc
+from scipy import optimize
 
 from pyABC_study.ODE import ODESolver, euclidean_distance
-
 
 # Read  and prepare raw data
 
@@ -23,7 +23,6 @@ for k in expData:
 
 print("Target data")
 print(expData)
-
 
 # Run a rough inference on the raw data
 
@@ -62,7 +61,6 @@ max_population = 21
 
 history = abc.run(minimum_epsilon=0.1, max_nr_populations=max_population)
 
-
 # Plot the results
 
 pyabc.visualization.plot_acceptance_rates_trajectory(history)
@@ -78,7 +76,6 @@ np.argmax()
 pyabc.visualization.plot_kde_matrix(df, w)
 plt.show()
 
-
 # Print results
 
 # Mean of last population
@@ -89,7 +86,7 @@ for i in range(12):
     print(df.iloc[:, i].name + '\t\t%.6f' % (df.iloc[:, i] * w).sum())
 
 # Particle with maximal weight
-print(df.iloc[w.argmax(),:])
+print(df.iloc[w.argmax(), :])
 
 """
 Output from one run:
@@ -144,6 +141,111 @@ vNM        12.689222
 
 # Least squares using LM
 
-def residual(para, ydata):
-    simulationData = solver.ode_model(para)
-    return euclidean_distance(ydata, simulationData)
+
+def residual(x, iBM, kMB, kNB, lambdaM, lambdaN, muA, muB, muM, muN, sAM, sBN, vNM):
+    paraDict = {
+        'iBM': iBM,
+        'kMB': kMB,
+        'kNB': kNB,
+        'lambdaM': lambdaM,
+        'lambdaN': lambdaN,
+        'muA': muA,
+        'muB': muB,
+        'muM': muM,
+        'muN': muN,
+        'sAM': sAM,
+        'sBN': sBN,
+        'vNM': vNM
+    }
+    simulationData = solver.ode_model(paraDict)
+    # print(x)
+    # print(simulationData)
+    ans = np.array([])
+    for ii in range(12):
+        sim = {"N": simulationData["N"][ii],
+               "M": simulationData["M"][ii],
+               "B": simulationData["B"][ii],
+               "A": simulationData["A"][ii]}
+        ydata = {"N": expData["N"][ii],
+                 "M": expData["M"][ii],
+                 "B": expData["B"][ii],
+                 "A": expData["A"][ii]}
+        # print(euclidean_distance(ydata, sim))
+        ans = np.append(ans, euclidean_distance(ydata, sim))
+    return ans
+
+
+xdata = np.array(range(12))
+residual(xdata, 10,10,10,10,10,10,10,10,10,10,10,10)
+ydata = np.zeros(12)
+
+paraGuess = [10]*12
+
+popt, pcov = optimize.curve_fit(residual, xdata, ydata, p0=paraGuess, bounds=(0, 100))
+
+plt.plot(xdata, residual(xdata, *popt), 'r-')
+plt.show()
+
+def residualLS(para):
+    paraDict = {
+        'iBM': para[0],
+        'kMB': para[1],
+        'kNB': para[2],
+        'lambdaM': para[3],
+        'lambdaN': para[4],
+        'muA': para[5],
+        'muB': para[6],
+        'muM': para[7],
+        'muN': para[8],
+        'sAM': para[9],
+        'sBN': para[10],
+        'vNM': para[11]
+    }
+    simulationData = solver.ode_model(paraDict)
+    # print(x)
+    # print(simulationData)
+    ans = np.array([])
+    for ii in range(12):
+        sim = {"N": simulationData["N"][ii],
+               "M": simulationData["M"][ii],
+               "B": simulationData["B"][ii],
+               "A": simulationData["A"][ii]}
+        ydata = {"N": expData["N"][ii],
+                 "M": expData["M"][ii],
+                 "B": expData["B"][ii],
+                 "A": expData["A"][ii]}
+        # print(euclidean_distance(ydata, sim))
+        ans = np.append(ans, euclidean_distance(ydata, sim))
+    return ans
+
+paraGuess = [2]*12
+
+res_1 = optimize.least_squares(residualLS, paraGuess, bounds=(0, 10))
+
+def genData(para):
+    paraDict = {
+        'iBM': para[0],
+        'kMB': para[1],
+        'kNB': para[2],
+        'lambdaM': para[3],
+        'lambdaN': para[4],
+        'muA': para[5],
+        'muB': para[6],
+        'muM': para[7],
+        'muN': para[8],
+        'sAM': para[9],
+        'sBN': para[10],
+        'vNM': para[11]
+    }
+    return paraDict
+
+paraDict = genData(res_1.x)
+simulationData = solver.ode_model(paraDict)
+
+rawData_path = os.path.abspath(os.curdir) + "/data/rawData.csv"
+rawData = pd.read_csv(rawData_path).astype("float32")
+
+plt.plot(solver.timePoint, simulationData['N'], solver.timePoint, simulationData['M'])
+plt.scatter(rawData['time'], rawData['N'])
+plt.scatter(rawData['time'], rawData['M'])
+plt.show()

@@ -206,4 +206,10 @@ Plot: not well fitted
 
 ![distribution](https://i.imgur.com/xihZ39S.png)
 
--   Back to gradient decent LM LS fitting again
+-   Back to gradient decent scipy LS fitting again
+    -   Two LS function `curve_fit` and `least_squares` were tried, with different boundary conditions and initial guesses 
+    -   Visualisation used to select a parameter set that generates data that are close to real data
+
+One of the parameter set generates:
+
+![image-20200524180203381](https://i.imgur.com/AAxaqtx.png)
