@@ -47,7 +47,7 @@ def euclidean_distance(dataNormalised, simulation, normalise=False):
     dis = 0.
 
     for key in dataNormalised:
-        tmp= (dataNormalised[key]-simulation[key])**2
+        tmp = (dataNormalised[key] - simulation[key]) ** 2
         dis += np.nansum(tmp)
     # for key in dataNormalised:
     #     for i in range(time_length):
@@ -62,8 +62,8 @@ def euclidean_distance(dataNormalised, simulation, normalise=False):
 
 
 class ODESolver:
-
-    timepoint_default = np.concatenate((np.array([0., 0.25, 0.5, 1]), np.arange(2, 24, 2), np.arange(24, 74, 4)), axis=0)
+    timepoint_default = np.concatenate((np.array([0., 0.25, 0.5, 1]), np.arange(2, 24, 2), np.arange(24, 74, 4)),
+                                       axis=0)
     varInit = np.array([0, 0, 0, 0])
 
     timePoint = timepoint_default
@@ -82,3 +82,10 @@ class ODESolver:
                 "M": sol[:, 1],
                 "B": sol[:, 2],
                 "A": sol[:, 3]}
+
+
+class PriorLimits:
+    def __init__(self, lb, ub):
+        self.lb = lb
+        self.ub = ub
+        self.interval_length = ub-lb

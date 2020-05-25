@@ -241,7 +241,7 @@ def genData(para):
 
 
 # paraGuess = [5, 37, 13, 40, 45, 40, 15, 35, 77, 40, 32, 12]
-paraGuess = [2]*12
+paraGuess = [25]*12
 
 paraEST = optimize.least_squares(residualLS, paraGuess)
 

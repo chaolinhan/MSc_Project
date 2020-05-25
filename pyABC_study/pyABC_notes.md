@@ -229,3 +229,10 @@ Plot: not well fitted
 ![image-20200524215253258](https://i.imgur.com/4Ud0WJ9.png)
 
 ![image-20200524215304608](https://i.imgur.com/JeOHDhp.png)
+
+# Weekly notes from 20 May
+
+-   Studied the ABC-SysBio package again `../paper.md`
+
+-   
+-   Make some code separate functions in separate files

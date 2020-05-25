@@ -5,7 +5,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import pyabc
 
-from pyABC_study.ODE import ODESolver, euclidean_distance
+from pyABC_study.ODE import ODESolver, euclidean_distance, PriorLimits
+from pyABC_study.dataPlot import sim_data_plot, result_plot
 
 # Get path
 
@@ -16,62 +17,68 @@ db_path = ("sqlite:///" +
 
 # Generate synthetic data
 
-paraInit = {
-    'iBM': 6.706790,
-    'kMB': 37.790301,
-    'kNB': 13.288773,
-    'lambdaM': 40.238402,
-    'lambdaN': 45.633238,
-    'muA': 39.136272,
-    'muB': 15.821665,
-    'muM': 34.883162,
-    'muN': 77.583389,
-    'sAM': 40.198178,
-    'sBN': 32.110228,
-    'vNM': 12.689222
-}
-paraInit = {"lambdaN": 13.753031, "kNB": 1.581684, "muN": -0.155420, "vNM": 0.262360,
-            "lambdaM": 2.993589, "kMB": 0.041040, "muM": 0.201963,
-            "sBN": 1.553020, "iBM": -0.046259, "muB": 1.905163,
-            "sAM": 11.001731, "muA": 23.022678}
+# True parameters
+
+# paraInit = {
+#     'iBM': 6.706790,
+#     'kMB': 37.790301,
+#     'kNB': 13.288773,
+#     'lambdaM': 40.238402,
+#     'lambdaN': 45.633238,
+#     'muA': 39.136272,
+#     'muB': 15.821665,
+#     'muM': 34.883162,
+#     'muN': 77.583389,
+#     'sAM': 40.198178,
+#     'sBN': 32.110228,
+#     'vNM': 12.689222
+# }
+
+paraInit = {'iBM': 2.4041603100488587,
+            'kMB': 0.14239564228380108,
+            'kNB': 2.3405757296708396,
+            'lambdaM': 1.9508302861494105,
+            'lambdaN': 2.5284489000168113,
+            'muA': 2.715326160638292,
+            'muB': 0.35008723255144486,
+            'muM': 0.1603505707251119,
+            'muN': 2.2016772634585147,
+            'sAM': 1.387525971337514,
+            'sBN': 1.202190024316036,
+            'vNM': 0.5119068430635925}
 
 # Using default time points
 solver = ODESolver()
 expData = solver.ode_model(paraInit)
 
 #normalise_data(expData)
-
 print("Target data")
 print(expData)
 
 
 # Plot
 
-rawData_path = os.path.abspath(os.curdir) + "/data/rawData.csv"
-rawData = pd.read_csv(rawData_path).astype("float32")
-
-plt.plot(solver.timePoint, expData['N'], solver.timePoint, expData['M'])
-plt.scatter(rawData['time'], rawData['N'])
-plt.scatter(rawData['time'], rawData['M'])
-plt.show()
+sim_data_plot(solver.timePoint, expData)
 
 
 # Define prior distribution of parameters
 # Be careful that RV("uniform", -10, 15) means uniform distribution in [-10, 5], '15' here is the interval length
 
+lim = PriorLimits(0, 50)
+
 paraPrior = pyabc.Distribution(
-    lambdaN=pyabc.RV("uniform", 0, 50),
-    kNB=pyabc.RV("uniform", 0, 50),
-    muN=pyabc.RV("uniform", 0, 50),
-    vNM=pyabc.RV("uniform", 0, 50),
-    lambdaM=pyabc.RV("uniform", 0, 50),
-    kMB=pyabc.RV("uniform", 0, 50),
-    muM=pyabc.RV("uniform", 0, 50),
-    sBN=pyabc.RV("uniform", 0, 50),
-    iBM=pyabc.RV("uniform", 0, 50),
-    muB=pyabc.RV("uniform", 0, 50),
-    sAM=pyabc.RV("uniform", 0, 50),
-    muA=pyabc.RV("uniform", 0, 50)
+    lambdaN=pyabc.RV("uniform", lim.lb, lim.interval_length),
+    kNB=pyabc.RV("uniform", lim.lb, lim.interval_length),
+    muN=pyabc.RV("uniform", lim.lb, lim.interval_length),
+    vNM=pyabc.RV("uniform", lim.lb, lim.interval_length),
+    lambdaM=pyabc.RV("uniform", lim.lb, lim.interval_length),
+    kMB=pyabc.RV("uniform", lim.lb, lim.interval_length),
+    muM=pyabc.RV("uniform", lim.lb, lim.interval_length),
+    sBN=pyabc.RV("uniform", lim.lb, lim.interval_length),
+    iBM=pyabc.RV("uniform", lim.lb, lim.interval_length),
+    muB=pyabc.RV("uniform", lim.lb, lim.interval_length),
+    sAM=pyabc.RV("uniform", lim.lb, lim.interval_length),
+    muA=pyabc.RV("uniform", lim.lb, lim.interval_length)
 )
 
 # Define ABC-SMC model
@@ -83,66 +90,14 @@ abc = pyabc.ABCSMC(models=solver.ode_model,
                    population_size=1000,
                    #distance_function=distance_adaptive,
                    distance_function=euclidean_distance,
-                   eps=pyabc.MedianEpsilon(30, median_multiplier=1)
+                   eps=pyabc.MedianEpsilon(100, median_multiplier=1)
                    )
 
 abc.new(db_path, expData)
 
-max_population = 20
+max_population = 15
 
 history = abc.run(minimum_epsilon=0.1, max_nr_populations=max_population)
 
-df, w = history.get_distribution(t=max_population-1)
-pyabc.visualization.plot_kde_matrix(df, w)
+result_plot(history, max_population)
 
-plt.show()
-
-pyabc.visualization.plot_acceptance_rates_trajectory(history)
-plt.show()
-
-pyabc.visualization.plot_epsilons(history)
-plt.show()
-
-df.mean().to_csv( ROOT_DIR+"/pyABC_study/outSummary.csv")
-df.std().to_csv( ROOT_DIR+"/pyABC_study/outSummStd.csv")
-# print(history.get_distribution(t=2))
-#history.get_distribution(t=20)[0].to_csv(r"/home/yuan/wdnmd/MSc_Project/pyABC_study/outRaw.csv")
-
-# Make a gif
-
-# limits = dict(
-#     lambdaN=(-10, 15),
-#     kNB=(-15, 2),
-#     muN=(-15, 2),
-#     vNM=(-23, 2),
-#     lambdaM=(-3, 7),
-#     kMB=(-15, 2),
-#     muM=(-3, 4),
-#     sBN=(-15, 2),
-#     iBM=(-15, 2),
-#     muB=(0, 12),
-#     sAM=(-10, 30),
-#     muA=(-20, 80)
-#               )
-#
-#
-# # TODO make file name dynamic
-#
-# for tt in range(1,max_population-1):
-#     filename = ROOT_DIR+"/pyABC_study/plot/p500e50t25/"+str(tt)+".png"
-#     df, w = history.get_distribution(t=tt)
-#     pyabc.visualization.plot_kde_matrix(df, w, limits=limits)
-#     plt.savefig(filename)
-
-
-# Resume
-
-# abc_continue = pyabc.ABCSMC(models=solver.ode_model,
-#                    parameter_priors=paraPrior,
-#                    distance_function=euclidean_distance,
-#                    #distance_function=distance_adaptive,
-#                    population_size=1000,
-#                    eps=pyabc.MedianEpsilon(30, median_multiplier=1)
-#                    )
-#
-# abc_continue.load(db_path, 3)
