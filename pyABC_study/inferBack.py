@@ -6,7 +6,7 @@ import pandas as pd
 import pyabc
 
 from pyABC_study.ODE import ODESolver, euclidean_distance, PriorLimits
-from pyABC_study.dataPlot import sim_data_plot, result_plot
+from pyABC_study.dataPlot import sim_data_plot, result_plot, result_data
 
 # Get path
 
@@ -64,7 +64,7 @@ sim_data_plot(solver.timePoint, expData)
 # Define prior distribution of parameters
 # Be careful that RV("uniform", -10, 15) means uniform distribution in [-10, 5], '15' here is the interval length
 
-lim = PriorLimits(0, 50)
+lim = PriorLimits(0, 10)
 
 paraPrior = pyabc.Distribution(
     lambdaN=pyabc.RV("uniform", lim.lb, lim.interval_length),
@@ -87,17 +87,16 @@ paraPrior = pyabc.Distribution(
 
 abc = pyabc.ABCSMC(models=solver.ode_model,
                    parameter_priors=paraPrior,
-                   population_size=1000,
+                   population_size=500,
                    #distance_function=distance_adaptive,
                    distance_function=euclidean_distance,
                    eps=pyabc.MedianEpsilon(100, median_multiplier=1)
                    )
-
 abc.new(db_path, expData)
 
 max_population = 15
-
 history = abc.run(minimum_epsilon=0.1, max_nr_populations=max_population)
 
 result_plot(history, max_population)
+result_data(history, expData, max_population)
 

@@ -8,6 +8,14 @@ from pyABC_study.ODE import ODESolver
 rawData_path = os.path.abspath(os.curdir) + "/data/rawData.csv"
 rawData = pd.read_csv(rawData_path).astype("float32")
 
+def quantile_calculate(all_data, len, q = 0.5):
+    df_quantile = pd.DataFrame(columns=['N', 'M', 'B', 'A'])
+    for jj in range(len):
+        # print(df_all_sim_data.loc[jj].mean())
+        df_quantile = df_quantile.append(all_data.loc[jj].quantile(q), ignore_index=True)
+    # print(df_quantile)
+    return df_quantile
+
 
 def sim_data_plot(timePoints, sim_data):
     """
@@ -46,66 +54,36 @@ def result_plot(history, nr_population=1):
     plt.show()
 
 
-def result_data(history, nr_population=1, sample_size=20):
+def result_data(history, compare_data, nr_population=1, sample_size=50):
     df, w = history.get_distribution(t=nr_population - 1)
     df_sample = df.sample(sample_size, replace=False)
     solver = ODESolver()
     df_all_sim_data = pd.DataFrame(columns=['N', 'M', 'B', 'A'])
+
     for ii in range(sample_size):
         temp_dict = df_sample.iloc[ii].to_dict()
         sim_data = solver.ode_model(temp_dict)
-        print(sim_data)
-        # sim_data = pd.DataFrame.from_dict(sim_data)
-        # df_all_sim_data = pd.concat([df_all_sim_data, sim_data])
-        plt.plot(solver.timePoint, sim_data['N'])
-        plt.ylim(0, 20) # TODO make lim a function parameter
-        plt.show()
-    # df_mean = pd.DataFrame(columns=['N', 'M', 'B', 'A'])
-    # for jj in range(solver.timePoint.__len__()):
-    #     # print(df_all_sim_data.loc[jj].mean())
-    #     df_mean = df_mean.append(df_all_sim_data.loc[jj].mean(), ignore_index=True)
-    #     print(df_mean)
-    #
-    # plt.plot(solver.timePoint, df_mean.iloc[:,0], solver.timePoint, df_mean.iloc[:,1])
+        # print(sim_data)
+        sim_data = pd.DataFrame.from_dict(sim_data)
+        df_all_sim_data = pd.concat([df_all_sim_data, sim_data])
+
+    # plt.ylim(0, 2) # TODO make lim a function parameter
     # plt.show()
 
+    df_mean = pd.DataFrame(columns=['N', 'M', 'B', 'A'])
+    for jj in range(solver.timePoint.__len__()):
+        # print(df_all_sim_data.loc[jj].mean())
+        df_mean = df_mean.append(df_all_sim_data.loc[jj].mean(), ignore_index=True)
 
-
-# Make a gif
-
-# limits = dict(
-#     lambdaN=(-10, 15),
-#     kNB=(-15, 2),
-#     muN=(-15, 2),
-#     vNM=(-23, 2),
-#     lambdaM=(-3, 7),
-#     kMB=(-15, 2),
-#     muM=(-3, 4),
-#     sBN=(-15, 2),
-#     iBM=(-15, 2),
-#     muB=(0, 12),
-#     sAM=(-10, 30),
-#     muA=(-20, 80)
-#               )
-#
-#
-# # TODO make file name dynamic
-#
-# for tt in range(1,max_population-1):
-#     filename = ROOT_DIR+"/pyABC_study/plot/p500e50t25/"+str(tt)+".png"
-#     df, w = history.get_distribution(t=tt)
-#     pyabc.visualization.plot_kde_matrix(df, w, limits=limits)
-#     plt.savefig(filename)
-
-
-# Resume
-
-# abc_continue = pyabc.ABCSMC(models=solver.ode_model,
-#                    parameter_priors=paraPrior,
-#                    distance_function=euclidean_distance,
-#                    #distance_function=distance_adaptive,
-#                    population_size=1000,
-#                    eps=pyabc.MedianEpsilon(30, median_multiplier=1)
-#                    )
-#
-# abc_continue.load(db_path, 3)
+    df_median = quantile_calculate(df_all_sim_data, solver.timePoint.__len__(), 0.5)
+    df_75 = quantile_calculate(df_all_sim_data, solver.timePoint.__len__(), 0.75)
+    df_25 =  quantile_calculate(df_all_sim_data, solver.timePoint.__len__(), 0.25)
+    for kk in range(4):
+        fig, ax = plt.subplots()
+        ax.plot(solver.timePoint, df_mean.iloc[:,kk], 'r', label="Mean")
+        ax.plot(solver.timePoint, df_25.iloc[:,kk], 'b--')
+        ax.plot(solver.timePoint, df_75.iloc[:,kk], 'b--')
+        index_cov = ['N', 'M', 'B', 'A']
+        ax.scatter(solver.timePoint, compare_data[index_cov[kk]])
+        ax.legend(['Mean', '25% quantile', '75 quantile', 'Raw'])
+        plt.show()
