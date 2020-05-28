@@ -1,11 +1,9 @@
 import os
 import tempfile
 
-import matplotlib.pyplot as plt
-import pandas as pd
 import pyabc
 
-from pyABC_study.ODE import ODESolver, euclidean_distance, PriorLimits
+from pyABC_study.ODE import ODESolver, PriorLimits
 from pyABC_study.dataPlot import sim_data_plot, result_plot, result_data
 
 # Get path
@@ -19,43 +17,26 @@ db_path = ("sqlite:///" +
 
 # True parameters
 
-# paraInit = {
-#     'iBM': 6.706790,
-#     'kMB': 37.790301,
-#     'kNB': 13.288773,
-#     'lambdaM': 40.238402,
-#     'lambdaN': 45.633238,
-#     'muA': 39.136272,
-#     'muB': 15.821665,
-#     'muM': 34.883162,
-#     'muN': 77.583389,
-#     'sAM': 40.198178,
-#     'sBN': 32.110228,
-#     'vNM': 12.689222
-# }
-
-paraInit = {'iBM': 2.4041603100488587,
-            'kMB': 0.14239564228380108,
-            'kNB': 2.3405757296708396,
-            'lambdaM': 1.9508302861494105,
-            'lambdaN': 2.5284489000168113,
-            'muA': 2.715326160638292,
-            'muB': 0.35008723255144486,
-            'muM': 0.1603505707251119,
-            'muN': 2.2016772634585147,
-            'sAM': 1.387525971337514,
-            'sBN': 1.202190024316036,
-            'vNM': 0.5119068430635925}
+paraInit = {'iBM': 8.475862809697531,
+            'kMB': 3.7662920313110075,
+            'kNB': 2.2961320437266535,
+            'lambdaM': 8.509867878209329,
+            'lambdaN': 1.5114114729225983,
+            'muA': 5.903807936902964,
+            'muB': 0.38726153092588084,
+            'muM': 3.697974670181216,
+            'muN': 2.6821274451686814,
+            'sAM': 3.62381585701928,
+            'sBN': 3.7176297747866545,
+            'vNM': 0.4248874922862373}
 
 # Using default time points
 solver = ODESolver()
 expData = solver.ode_model(paraInit)
-
-#normalise_data(expData)
 print("Target data")
 print(expData)
 
-
+dict(((j,i), sol[i][j]) for i in range(len(sol)) for j in range(len(sol[0])) if i<j)
 # Plot
 
 sim_data_plot(solver.timePoint, expData)
@@ -84,12 +65,15 @@ paraPrior = pyabc.Distribution(
 # Define ABC-SMC model
 
 #distance_adaptive = pyabc.AdaptivePNormDistance(p=2)
+distanceP2 = pyabc.PNormDistance(p=2)
+
+
 
 abc = pyabc.ABCSMC(models=solver.ode_model,
                    parameter_priors=paraPrior,
-                   population_size=500,
+                   population_size=300,
                    #distance_function=distance_adaptive,
-                   distance_function=euclidean_distance,
+                   distance_function=distanceP2,
                    eps=pyabc.MedianEpsilon(100, median_multiplier=1)
                    )
 abc.new(db_path, expData)

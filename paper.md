@@ -15,9 +15,16 @@
 -   Distance 
     -   Sum of square errors (Euclidean distance)
     -   Adaptive distance function
+    -   Noise model
 -   Kernel 
     -   Uniform
     -   Normal
     -   Multivariate normal
     -   Multivariate normal K neighbour
     -   Multivariate normal OCM
+
+# Optimizing Threshold–Schedules
+
+-   Showed: the current preferred method of choosing thresholds as a pre-determined quantile of the distances between simulated and observed data from the previous population, can lead to the inferred posterior distribution **being very different to the true posterior**.
+-   Thus threshold `eps` selection is an important challenge
+-   Proposed a better eps schedule

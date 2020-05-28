@@ -113,7 +113,88 @@ Plot: not well fitted
 
 # Weekly notes from 20 May
 
--   Studied the ABC-SysBio package again `../paper.md`
-
+-   Studied the ABC-SysBio package again `paper.md`
 -   Make some code separate functions in separate files
 -   Make a visualisation
+    -   Mean, 25 and 75 percentiles
+
+<img src="https://i.imgur.com/hNZ7vD3.png" alt="image-20200526143240608" style="zoom:50%;" />
+
+-   Reset the ODE initial value
+-   Reformat the `dict` data to use the built-in distance function
+    -   Old: `N: data of N, ...`
+    -   New: `0: value of N[0], ..., 111: value  of A[27]`
+
+
+
+-   **Distance function**
+
+    -   Built-in function does not support data with `NaN`
+
+    -   Tried to modify the source code: `sum` and `max` etc to `np.nansum` and `np.nanmax`
+
+    -   `PNormDistance` parameters
+
+        -   p for p-norm
+        -   Weigh: weights specified at each time points that are used to weight the p-norm at different statistics. **Pre-fixed** for all timepoints and statistics to be compared
+
+        $$
+        d(x, y) = \
+                \left [\sum_{i} \left| w_i ( x_i-y_i ) \right|^{p} \right ]^{1/p}
+        $$
+
+        
+
+    -   pyABC adaptive distance: 
+
+        Prangle, Dennis. "Adapting the ABC Distance Function”. Bayesian Analysis, 2017. doi:10.1214/16-BA1002.
+
+>   TypeError: unsupported operand type(s) for ** or pow(): 'generator' and 'float'
+
+-   Read paper related to adaptive function: 
+
+    Optimizing threshold - schedules for approximate Bayesian computation sequential Monte Carlo samplers: applications to molecular systems. Preprint at http://arxiv.org/abs/1210.3296 (2012).
+
+    See `paper.md`
+
+-   Source code modified: `distance.py`, line 97
+    
+    -   Tested with/without NaN
+
+```python
+            d = 0
+            for key in w:
+                if key in x and key in x_0:
+                    if np.isnan(x[key]) or np.isnan(x_0[key]):
+                        continue;
+                    d+=pow(abs((f[key] * w[key]) * (x[key] - x_0[key])), self.p)
+                else:
+                    d+=0
+            d = pow(d, 1 / self.p)
+            # d = pow(
+            #     sum((pow(abs((f[key] * w[key]) * (x[key] - x_0[key])), self.p)
+            #               if key in x and key in x_0 else 0
+            #               for key in w)),
+            #     1 / self.p)
+```
+
+-   Using the modified distance function
+
+    -   Build new ls fitting: `paraGuess = [2]*12` for inferring back
+
+    ```
+    {'iBM': 8.475862809697531,
+     'kMB': 3.7662920313110075,
+     'kNB': 2.2961320437266535,
+     'lambdaM': 8.509867878209329,
+     'lambdaN': 1.5114114729225983,
+     'muA': 5.903807936902964,
+     'muB': 0.38726153092588084,
+     'muM': 3.697974670181216,
+     'muN': 2.6821274451686814,
+     'sAM': 3.62381585701928,
+     'sBN': 3.7176297747866545,
+     'vNM': 0.4248874922862373}
+    ```
+
+-   Adaptive distance:

@@ -64,11 +64,11 @@ def euclidean_distance(dataNormalised, simulation, normalise=False):
 class ODESolver:
     timepoint_default = np.concatenate((np.array([0., 0.25, 0.5, 1]), np.arange(2, 24, 2), np.arange(24, 74, 4)),
                                        axis=0)
-    varInit = np.array([0, 0, 0, 0])
+    varInit = np.array([0, 0, 1, 1])
 
     timePoint = timepoint_default
 
-    def ode_model(self, para):
+    def ode_model(self, para, return_flatten=True):
         sol = scipy.integrate.odeint(
             eqns,
             self.varInit,
@@ -78,14 +78,17 @@ class ODESolver:
                   para["sBN"], para["iBM"], para["muB"],
                   para["sAM"], para["muA"])
         )
-        return {"N": sol[:, 0],
-                "M": sol[:, 1],
-                "B": sol[:, 2],
-                "A": sol[:, 3]}
+        if return_flatten:
+            return {i: sol.flatten()[i] for i in range(sol.flatten().__len__())}
+        else:
+            return {"N": sol[:, 0],
+                    "M": sol[:, 1],
+                    "B": sol[:, 2],
+                    "A": sol[:, 3]}
 
 
 class PriorLimits:
     def __init__(self, lb, ub):
         self.lb = lb
         self.ub = ub
-        self.interval_length = ub-lb
+        self.interval_length = ub - lb
