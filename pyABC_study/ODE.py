@@ -62,13 +62,18 @@ def euclidean_distance(dataNormalised, simulation, normalise=False):
 
 
 class ODESolver:
-    timepoint_default = np.concatenate((np.array([0., 0.25, 0.5, 1]), np.arange(2, 24, 2), np.arange(24, 74, 4)),
+    timePoint_default = np.concatenate((np.array([0., 0.25, 0.5, 1]), np.arange(2, 24, 2), np.arange(24, 74, 4)),
                                        axis=0)
     varInit = np.array([0, 0, 1, 1])
+    timePoint = timePoint_default
 
-    timePoint = timepoint_default
-
-    def ode_model(self, para, return_flatten=True):
+    def ode_model(self, para, flatten=True) -> dict:
+        """
+        Return a list of the ODE results at timePoints
+        :param para: parameter of ODEs
+        :param flatten: return a flatten dict or not
+        :return: result data in dict format
+        """
         sol = scipy.integrate.odeint(
             eqns,
             self.varInit,
@@ -78,7 +83,7 @@ class ODESolver:
                   para["sBN"], para["iBM"], para["muB"],
                   para["sAM"], para["muA"])
         )
-        if return_flatten:
+        if flatten:
             return {i: sol.flatten()[i] for i in range(sol.flatten().__len__())}
         else:
             return {"N": sol[:, 0],

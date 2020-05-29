@@ -160,6 +160,9 @@ Plot: not well fitted
 -   Source code modified: `distance.py`, line 97
     
     -   Tested with/without NaN
+    -   **?** Possible impact to performance? (numpy supports parallel well)
+
+Nan version: **tested**
 
 ```python
             d = 0
@@ -177,6 +180,19 @@ Plot: not well fitted
             #               for key in w)),
             #     1 / self.p)
 ```
+New version: **tested**
+
+```python
+# New version
+
+            d = pow(
+                sum((pow(abs((f[key] * w[key]) * (x[key] - x_0[key])), self.p)
+                          if (key in x) and (key in x_0) and (not np.isnan(x[key])) and (not np.isnan(x_0[key])) else 0
+                          for key in w)),
+                1 / self.p)
+```
+
+
 
 -   Using the modified distance function
 
@@ -197,4 +213,28 @@ Plot: not well fitted
      'vNM': 0.4248874922862373}
     ```
 
--   Adaptive distance:
+-   Adaptive distance: https://pyabc.readthedocs.io/en/latest/examples/adaptive_distances.html
+    
+    -   Trivial Euclidean distance function assign every data point with equal weight
+
+>   In each iteration of the ABCSMC run, after having obtained the desired number of accepted particles (and once at the beginning using a sample from the prior), the method `DistanceFunction.update()` is called. It is given a set of summary statistics which can be used to e.g. compute weights for the distance measure in the next iteration. In order to avoid bias, via `DistanceFunction.configure_sampler()`, the distance function can tell the sampler to not only record accepted particles, but all that were generated during the sampling process. So, when you want to define your own adaptive distance function, you will typically only need to overwrite these two methods. For implementation details and an example of how this can look in practice, please inspect the code of `AdaptivePNormDistance`.
+
+-   `acceptor = pyabc.UniformAcceptor(use_complete_history=True)`
+    -   To get nested acceptance regions. It means that also all previous acceptance criteria are re-applied. This is optional here but may be beneficial sometimes
+    -   **?**
+-   **Adaptive distance is not always better**
+    -   Maker it robust:
+        -   `scale_function=pyabc.distance.root_mean_square_deviation`
+    -   Does not give a better fit than non-adaptive function
+        -   More tweaking?
+
+## Measure/evaluate the goodness of fit
+
+-   The required number of samples
+    -   `pyabc.visualization.plot_sample_numbers(histories, labels)`
+-   Plots:
+    -   Posterior distribution vs true value for each parameter
+
+## Measurement noise assessment
+
+https://pyabc.readthedocs.io/en/latest/examples/noise.html

@@ -5,7 +5,6 @@ import numpy as np
 from copy import deepcopy
 from pyABC_study.ODE import ODESolver, euclidean_distance, normalise_data
 
-
 paraInit = {"lambdaN": 13.753031, "kNB": 1.581684, "muN": 2.155420, "vNM": 0.262360,
             "lambdaM": 2.993589, "kMB": 2041040, "muM": 2.201963,
             "sBN": 1.553020, "iBM": 2046259, "muB": 1.905163,
@@ -16,10 +15,10 @@ expData = solver.ode_model(paraInit)
 tmp = deepcopy(expData)
 normalise_data(tmp)
 
+
 class MyTestCase(unittest.TestCase):
     def test_something(self):
         self.assertEqual(True, True)
-
 
     def test_solver(self):
         # TODO update tests
@@ -30,8 +29,8 @@ class MyTestCase(unittest.TestCase):
 
     def test_normalise(self):
         for key in tmp:
-            self.assertAlmostEqual(tmp[key].mean(),0.)
-            self.assertAlmostEqual(tmp[key].std(),1.)
+            self.assertAlmostEqual(tmp[key].mean(), 0.)
+            self.assertAlmostEqual(tmp[key].std(), 1.)
 
     def test_distance(self):
         tmp_compare = deepcopy(tmp)
