@@ -16,18 +16,32 @@ db_path = ("sqlite:///" +
 
 # True parameters
 
-para_true = {'iBM': 8.475862809697531,
-             'kMB': 3.7662920313110075,
-             'kNB': 2.2961320437266535,
-             'lambdaM': 8.509867878209329,
-             'lambdaN': 1.5114114729225983,
-             'muA': 5.903807936902964,
-             'muB': 0.38726153092588084,
-             'muM': 3.697974670181216,
-             'muN': 2.6821274451686814,
-             'sAM': 3.62381585701928,
-             'sBN': 3.7176297747866545,
-             'vNM': 0.4248874922862373}
+# para_true = {'iBM': 8.475862809697531,
+#              'kMB': 3.7662920313110075,
+#              'kNB': 2.2961320437266535,
+#              'lambdaM': 8.509867878209329,
+#              'lambdaN': 1.5114114729225983,
+#              'muA': 5.903807936902964,
+#              'muB': 0.38726153092588084,
+#              'muM': 3.697974670181216,
+#              'muN': 2.6821274451686814,
+#              'sAM': 3.62381585701928,
+#              'sBN': 3.7176297747866545,
+#              'vNM': 0.4248874922862373}
+
+para_true = {'iBM': 1.0267462374320455,
+             'kMB': 0.07345932286118964,
+             'kNB': 2.359199465995228,
+             'lambdaM': 2.213837884117815,
+             'lambdaN': 7.260925726829641,
+             'muA': 18.94626522780349,
+             'muB': 2.092860392215201,
+             'muM': 0.17722330053184654,
+             'muN': 0.0023917569160019844,
+             'sAM': 10.228522400429998,
+             'sBN': 4.034313992927392,
+             'vNM': 0.3091883041193706}
+
 
 # Using default time points
 solver = ODESolver()
@@ -43,7 +57,9 @@ sim_data_plot(solver.timePoint, expData_no_flatten)
 # %% Define prior distribution of parameters
 # Be careful that RV("uniform", -10, 15) means uniform distribution in [-10, 5], '15' here is the interval length
 
-lim = PriorLimits(0, 10)
+lim = PriorLimits(0, 20)
+lim2 = PriorLimits(0, 1)
+lim3 = PriorLimits(0, 10)
 
 paraPrior = pyabc.Distribution(
     lambdaN=pyabc.RV("uniform", lim.lb, lim.interval_length),
@@ -69,11 +85,11 @@ distanceP2 = pyabc.PNormDistance(p=2)
 
 abc = pyabc.ABCSMC(models=solver.ode_model,
                    parameter_priors=paraPrior,
-                   population_size=500,
+                   population_size=800,
                    # distance_function=distanceP2_adaptive,
                    distance_function=distanceP2,
                    eps=pyabc.MedianEpsilon(100),
-                   acceptor=pyabc.UniformAcceptor(use_complete_history=True)
+                   # acceptor=pyabc.UniformAcceptor(use_complete_history=True)
                    )
 
 
@@ -81,10 +97,11 @@ abc = pyabc.ABCSMC(models=solver.ode_model,
 
 abc.new(db_path, expData)
 max_population = 15
-history = abc.run(minimum_epsilon=0.1, max_nr_populations=max_population)
+history = abc.run(minimum_epsilon=5, max_nr_populations=max_population)
 
 
 # %% Plot results
 
-result_plot(history, para_true, max_population)
-result_data(history, expData_no_flatten, max_population)
+result_plot(history, para_true, lim, max_population)
+# result_plot(history, para_true, PriorLimits(None, None), max_population)
+result_data(history, expData_no_flatten, solver.timePoint, max_population)

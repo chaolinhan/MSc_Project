@@ -96,4 +96,7 @@ class PriorLimits:
     def __init__(self, lb, ub):
         self.lb = lb
         self.ub = ub
-        self.interval_length = ub - lb
+        if ub is not None and lb is not None:
+            self.interval_length = ub - lb
+        else:
+            self.interval_length = np.nan

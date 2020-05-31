@@ -61,6 +61,6 @@ Initialise the prior distribution of parameters according to their real values.
 -   Also adaptive  population
 -   Read some paper to find
     -   How the result is evaluated
-    -   How to do exact inference (assume Gaussian distribution) and compare it to ABC-SMC
+    -   How to do exact inference (assume Gaussian distribution) and compare it to ABC-SMC)
     -   How do they say up the experiments
 -   Try fewer population but with more particles 

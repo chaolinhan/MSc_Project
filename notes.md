@@ -116,7 +116,10 @@ Plot: not well fitted
 -   Studied the ABC-SysBio package again `paper.md`
 -   Make some code separate functions in separate files
 -   Make a visualisation
+    
     -   Mean, 25 and 75 percentiles
+    
+    >   Convergence can be assessed by the difference using the inter-quartile ranges of the values of accepted particles as a measure of goodness of fit between successive intermediate distributions (Toni et al., 2009).
 
 <img src="https://i.imgur.com/hNZ7vD3.png" alt="image-20200526143240608" style="zoom:50%;" />
 
@@ -192,7 +195,7 @@ New version: **tested**
                 1 / self.p)
 ```
 
-
+-   Possible problem: running modified packages on ARCHER
 
 -   Using the modified distance function
 
@@ -211,6 +214,19 @@ New version: **tested**
      'sAM': 3.62381585701928,
      'sBN': 3.7176297747866545,
      'vNM': 0.4248874922862373}
+     and 
+     {'iBM': 1.0267462374320455,
+                 'kMB': 0.07345932286118964,
+                 'kNB': 2.359199465995228,
+                 'lambdaM': 2.213837884117815,
+                 'lambdaN': 7.260925726829641,
+                 'muA': 18.94626522780349,
+                 'muB': 2.092860392215201,
+                 'muM': 0.17722330053184654,
+                 'muN': 0.0023917569160019844,
+                 'sAM': 10.228522400429998,
+                 'sBN': 4.034313992927392,
+                 'vNM': 0.3091883041193706}
     ```
 
 -   Adaptive distance: https://pyabc.readthedocs.io/en/latest/examples/adaptive_distances.html
@@ -231,10 +247,74 @@ New version: **tested**
 ## Measure/evaluate the goodness of fit
 
 -   The required number of samples
+    
     -   `pyabc.visualization.plot_sample_numbers(histories, labels)`
+    
+-   Effective sampling size (**ESS**) of ABC-SMC runs
+
 -   Plots:
-    -   Posterior distribution vs true value for each parameter
+    
+    -   Marginal posterior distribution vs true value for each parameter
+    -   **DONE** in `result_plot`, e.g.
+    
+    ![image-20200530181543558](https://i.imgur.com/45PuamA.png)
+    
+    <img src="https://i.imgur.com/EQgyCrP.png" alt="image-20200530181600211" style="zoom: 50%;" />
+    
+    <img src="https://i.imgur.com/F9sZFJQ.png" alt="image-20200530181707889" style="zoom:50%;" />
+    
+    <img src="https://i.imgur.com/60KIn0w.png" alt="image-20200530181730819" style="zoom:50%;" />
+
+-   Paper read: `Approximate Bayesian Computation for infectious disease modelling`
+    -   Three examples of ABC implementation 
+    -   ESS can be used as threshold for stop condition, e.g. N/2
+
+# Kernels
+
+Listed in ABC-SysBio:
+
+-   Uniform
+-   Normal
+-   Multivariate normal
+-   Multivariate normal K neighbour (**MNN**)
+-   Multivariate normal OCM
+
+Trade-offs:
+
+>   A perturbation kernel with a wide variance will stop the algorithm from being stuck in local modes, but will lead to a large number of particles being rejected, and thus cause the algorithm to be inefficient. 
+>
+>   Minter, A., & Retkute, R. (2019). Approximate Bayesian Computation for infectious disease modelling. *Epidemics*, *29*(February), 100368. https://doi.org/10.1016/j.epidem.2019.100368
+>
+>   Mentioned: **multivariate normal** and **MNN**
+>
+>   -   For MNN, normalised Euclidean distance can be used 
+>
+>   -   Computational trade-offs on kernels
+
+Computational efficiency for different kernels:
+
+-   Filippi, S., Barnes, C. P., Cornebise, J., & Stumpf, M. P. H. (2013). On optimality of kernels for approximate Bayesian computation using sequential Monte Carlo. *Statistical Applications in Genetics and Molecular Biology*, *12*(1), 87–107. https://doi.org/10.1515/sagmb-2012-0069.   
+
+
 
 ## Measurement noise assessment
 
 https://pyabc.readthedocs.io/en/latest/examples/noise.html
+
+### Plan 1: introduce error term in the model simulator
+
+For N, $\Phi$, $\beta$, $\alpha$ data (observed data):
+
+-   Measure their standard deviation $\sigma$ respectively: $\sigma_N$, $\sigma_\Phi$, $\sigma_\beta$ and $\sigma_\alpha$, or
+-   Set $\sigma$ as a constant
+
+1.  Assumes the error term follows Gaussian distribution $N(0, \sigma^2)$
+2.  Sample error from the distribution: `sigma+np.random.randn(nr_sample)+0` for each simulated data point, using corresponding $\sigma$
+
+### Plan 2: use a stochastic acceptor in `pyABC`
+
+```python
+acceptor = pyabc.StochasticAcceptor()
+```
+
+-   Benifit: output the same result, but the computational cost (required samples) is much lower

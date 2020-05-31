@@ -1,9 +1,10 @@
 import matplotlib.pyplot as plt
 import pandas as pd
+import numpy as np
 import pyabc
 import os
 
-from pyABC_study.ODE import ODESolver
+from pyABC_study.ODE import ODESolver, PriorLimits
 
 rawData_path = os.path.abspath(os.curdir) + "/data/rawData.csv"
 rawData = pd.read_csv(rawData_path).astype("float32")
@@ -43,9 +44,10 @@ def sim_data_plot(timePoints, sim_data):
     plt.show()
 
 
-def result_plot(history, true_parameter: dict, nr_population=1):
+def result_plot(history, true_parameter: dict, limits: PriorLimits, nr_population=1):
     """
 Plot the population distribution, eps values and acceptance rate
+    :param limits: Limits of the plot
     :param true_parameter: true parameter
     :param history: pyABC history object
     :param nr_population: the population to be plotted
@@ -61,14 +63,50 @@ Plot the population distribution, eps values and acceptance rate
 
     # Parameters in the first equation
 
+    if not np.isnan(limits.interval_length):
+        limits.lb -= 2
+        limits.ub += 2
+
     fig, ax = plt.subplots(1, 4, figsize=(16, 4))
     idx = 0
     for keys in ['lambdaN', 'kNB', 'muN', 'vNM']:
-        pyabc.visualization.plot_kde_1d(df, w, x=keys, ax=ax[idx])
-        ax[idx].axvline(true_parameter[keys], color='k', linestyle='dashed', label="True value")
+        pyabc.visualization.plot_kde_1d(df, w, x=keys, ax=ax[idx], xmin=limits.lb, xmax=limits.ub)
+        ax[idx].axvline(true_parameter[keys], color='r', linestyle='dashed', label="True value")
+        ax[idx].legend()
         idx += 1
     fig.suptitle('ODE 1: dN/dt')
     plt.show()
+
+    fig, ax = plt.subplots(1, 3, figsize=(12, 4))
+    idx = 0
+    for keys in ['lambdaM', 'kMB', 'muM']:
+        pyabc.visualization.plot_kde_1d(df, w, x=keys, ax=ax[idx], xmin=limits.lb, xmax=limits.ub)
+        ax[idx].axvline(true_parameter[keys], color='r', linestyle='dashed', label="True value")
+        ax[idx].legend()
+        idx += 1
+    fig.suptitle('ODE 2: d(Phi)/dt')
+    plt.show()
+
+    fig, ax = plt.subplots(1, 3, figsize=(12, 4))
+    idx = 0
+    for keys in ['sBN', 'iBM', 'muB']:
+        pyabc.visualization.plot_kde_1d(df, w, x=keys, ax=ax[idx], xmin=limits.lb, xmax=limits.ub)
+        ax[idx].axvline(true_parameter[keys], color='r', linestyle='dashed', label="True value")
+        ax[idx].legend()
+        idx += 1
+    fig.suptitle('ODE 3: d(beta)/dt')
+    plt.show()
+
+    fig, ax = plt.subplots(1, 2, figsize=(8, 4))
+    idx = 0
+    for keys in ['sAM', 'muA']:
+        pyabc.visualization.plot_kde_1d(df, w, x=keys, ax=ax[idx], xmin=limits.lb, xmax=limits.ub)
+        ax[idx].axvline(true_parameter[keys], color='r', linestyle='dashed', label="True value")
+        ax[idx].legend()
+        idx += 1
+    fig.suptitle('ODE 4: d(alpha)/dt')
+    plt.show()
+
 
     # Parameters in the second equation
     #
@@ -87,7 +125,7 @@ Plot the population distribution, eps values and acceptance rate
     # plt.show()
 
 
-def result_data(history, compare_data, nr_population=1, sample_size=50):
+def result_data(history, compare_data, time_points, nr_population=1, sample_size=50):
     """
 Visualise SMC population and compare it with target data
     :param history: abc.history object
@@ -98,6 +136,7 @@ Visualise SMC population and compare it with target data
     df, w = history.get_distribution(t=nr_population - 1)
     df_sample = df.sample(sample_size, replace=False)
     solver = ODESolver()
+    solver.timePoint = time_points
     df_all_sim_data = pd.DataFrame(columns=['N', 'M', 'B', 'A'])
 
     for ii in range(sample_size):
@@ -127,6 +166,6 @@ Visualise SMC population and compare it with target data
         axs[kk].fill_between(solver.timePoint, df_25.iloc[:, kk], df_75.iloc[:, kk], alpha=0.5)
         index_cov = ['N', 'M', 'B', 'A']
         axs[kk].scatter(solver.timePoint, compare_data[index_cov[kk]], alpha=0.7)
-        axs[kk].legend(['Mean', '25% – 75% quantile range', 'Raw'])
+        axs[kk].legend(['Mean', '25% – 75% quantile range', 'Observed'])
         axs[kk].set_title(index_cov[kk])
     plt.show()

@@ -7,7 +7,7 @@ import pandas as pd
 import pyabc
 from scipy import optimize
 
-from pyABC_study.ODE import ODESolver, euclidean_distance
+from pyABC_study.ODE import ODESolver, euclidean_distance, PriorLimits
 
 
 def arr2d_to_dict(arr: np.ndarray):
@@ -41,51 +41,60 @@ timePoints: object = rawData.iloc[:, 0].to_numpy()
 expData = rawData.iloc[:, 1:].to_numpy()
 expData = arr2d_to_dict(expData)
 
+expData_no_f = rawData.iloc[:, 1:].to_dict(orient='list')
+for k in expData_no_f:
+    expData_no_f[k] = np.array(expData_no_f[k])
+
 # normalise_data(expData)
 print("Target data")
 print(expData)
 
-solver = ODESolver()
-# Reload the timepoints to be calculated in ODE solver
-solver.timePoint = timePoints
 
 # Run a rough inference on the raw data
 
-# solver = ODESolver()
-# # Reload the timepoints to be calculated in ODE solver
-# solver.timePoint = timePoints
+solver = ODESolver()
+# Reload the timepoints to be calculated in ODE solver
+solver.timePoint = timePoints
+#
+# lim = PriorLimits(0, 100)
 #
 # paraPrior = pyabc.Distribution(
-#     lambdaN=pyabc.RV("uniform", 0, 100),
-#     kNB=pyabc.RV("uniform", 0, 100),
-#     muN=pyabc.RV("uniform", 0, 100),
-#     vNM=pyabc.RV("uniform", 0, 100),
-#     lambdaM=pyabc.RV("uniform", 0, 100),
-#     kMB=pyabc.RV("uniform", 0, 100),
-#     muM=pyabc.RV("uniform", 0, 100),
-#     sBN=pyabc.RV("uniform", 0, 100),
-#     iBM=pyabc.RV("uniform", 0, 100),
-#     muB=pyabc.RV("uniform", 0, 100),
-#     sAM=pyabc.RV("uniform", 0, 100),
-#     muA=pyabc.RV("uniform", 0, 100)
+#     lambdaN=pyabc.RV("uniform", lim.lb, lim.interval_length),
+#     kNB=pyabc.RV("uniform", lim.lb, lim.interval_length),
+#     muN=pyabc.RV("uniform", lim.lb, lim.interval_length),
+#     vNM=pyabc.RV("uniform", lim.lb, lim.interval_length),
+#     lambdaM=pyabc.RV("uniform", lim.lb, lim.interval_length),
+#     kMB=pyabc.RV("uniform", lim.lb, lim.interval_length),
+#     muM=pyabc.RV("uniform", lim.lb, lim.interval_length),
+#     sBN=pyabc.RV("uniform", lim.lb, lim.interval_length),
+#     iBM=pyabc.RV("uniform", lim.lb, lim.interval_length),
+#     muB=pyabc.RV("uniform", lim.lb, lim.interval_length),
+#     sAM=pyabc.RV("uniform", lim.lb, lim.interval_length),
+#     muA=pyabc.RV("uniform", lim.lb, lim.interval_length)
 # )
+#
+# #
+#
+# distanceP2_adaptive = pyabc.AdaptivePNormDistance(p=2,
+#                                                   scale_function=pyabc.distance.root_mean_square_deviation
+#                                                   )
+# distanceP2 = pyabc.PNormDistance(p=2)
 #
 # abc = pyabc.ABCSMC(models=solver.ode_model,
 #                    parameter_priors=paraPrior,
-#                    distance_function=euclidean_distance,
-#                    # distance_function=distance_adaptive,
-#                    population_size=300,
+#                    distance_function=distanceP2,
+#                    population_size=1200,
 #                    eps=pyabc.MedianEpsilon(100, median_multiplier=1)
 #                    )
-#
+# #
 # db_path = ("sqlite:///" +
 #            os.path.join(tempfile.gettempdir(), "test.db"))
 # abc.new(db_path, expData)
 #
-# max_population = 21
-#
+# max_population = 15
+# #
 # history = abc.run(minimum_epsilon=0.1, max_nr_populations=max_population)
-#
+# #
 # # Plot the results
 #
 # pyabc.visualization.plot_acceptance_rates_trajectory(history)
@@ -113,55 +122,55 @@ solver.timePoint = timePoints
 # # Particle with maximal weight
 # print(df.iloc[w.argmax(), :])
 
-"""
-Output from one run:
-
-
-mean() method: 
-
-iBM         9.737715
-kMB        47.458632
-kNB         9.973562
-lambdaM    39.107247
-lambdaN    25.262527
-muA        47.041885
-muB        15.762823
-muM        39.539603
-muN        79.994190
-sAM        38.563204
-sBN        37.618288
-vNM        13.229111
-
-
-df*w sum() method:
-
-iBM		9.051270
-kMB		40.881926
-kNB		9.618762
-lambdaM		41.405661
-lambdaN		29.360990
-muA		44.426018
-muB		16.450285
-muM		37.356256
-muN		78.150011
-sAM		33.580249
-sBN		41.486109
-vNM		13.005909
-
-maximal weight method:
-iBM         6.706790
-kMB        37.790301
-kNB        13.288773
-lambdaM    40.238402
-lambdaN    45.633238
-muA        39.136272
-muB        15.821665
-muM        34.883162
-muN        77.583389
-sAM        40.198178
-sBN        32.110228
-vNM        12.689222
-"""
+# """
+# Output from one run:
+#
+#
+# mean() method:
+#
+# iBM         9.737715
+# kMB        47.458632
+# kNB         9.973562
+# lambdaM    39.107247
+# lambdaN    25.262527
+# muA        47.041885
+# muB        15.762823
+# muM        39.539603
+# muN        79.994190
+# sAM        38.563204
+# sBN        37.618288
+# vNM        13.229111
+#
+#
+# df*w sum() method:
+#
+# iBM		9.051270
+# kMB		40.881926
+# kNB		9.618762
+# lambdaM		41.405661
+# lambdaN		29.360990
+# muA		44.426018
+# muB		16.450285
+# muM		37.356256
+# muN		78.150011
+# sAM		33.580249
+# sBN		41.486109
+# vNM		13.005909
+#
+# maximal weight method:
+# iBM         6.706790
+# kMB        37.790301
+# kNB        13.288773
+# lambdaM    40.238402
+# lambdaN    45.633238
+# muA        39.136272
+# muB        15.821665
+# muM        34.883162
+# muN        77.583389
+# sAM        40.198178
+# sBN        32.110228
+# vNM        12.689222
+# """
 
 # Least squares
 
@@ -222,14 +231,17 @@ def residual_ls(para: list):
     simulation_data = solver.ode_model(para_dict)
     # print(x)
     # print(simulation_data)
-    return distanceP2(simulation_data, expData)
-    # ans = sum([sum(abs(np.nan_to_num(np.array([(tmpData[i+d*4] - expData[i+d*4]) for i in range(4)])))) for d in range(12)])
-    # return ans
+    # return distanceP2(simulation_data, expData)
+    ans = [abs(np.nan_to_num((simulation_data[i] - expData[i]))) for i in range(48)]
+    return ans
+# TODO BUG spotted: para changed but ans not
 
 
-paraGuess = np.array([2] * 12)
+#%% Run LS fitting
 
-paraEST = optimize.least_squares(residual_ls, paraGuess, bounds=(0,50), method='trf')
+paraGuess = np.array([5] * 12)
+
+paraEST = optimize.least_squares(residual_ls, paraGuess, method='trf', bounds=(1e-3, 20))
 
 print(paraEST.x)
 
@@ -238,11 +250,13 @@ solver.timePoint = solver.timePoint_default
 simulationData = solver.ode_model(paraDict, flatten=False)
 
 plt.plot(solver.timePoint, simulationData['N'], solver.timePoint, simulationData['M'])
-plt.scatter(rawData['time'], rawData['N'])
-plt.scatter(rawData['time'], rawData['M'])
+plt.scatter(rawData['time'][:-1], rawData['N'][:-1], label="N")
+plt.scatter(rawData['time'][:-1], rawData['M'][:-1], label="Phi")
+plt.legend()
 plt.show()
 
 plt.plot(solver.timePoint, simulationData['B'], solver.timePoint, simulationData['A'])
-plt.scatter(rawData['time'], rawData['B'])
-plt.scatter(rawData['time'], rawData['A'])
+plt.scatter(rawData['time'], rawData['B'], label="beta")
+plt.scatter(rawData['time'], rawData['A'], label="alpha")
+plt.legend()
 plt.show()
