@@ -58,3 +58,13 @@ For MNN, normalised Euclidean distance can be used.
 # On optimality of kernels for approximate Bayesian computation using sequential Monte Carlo
 
 Computational efficiency for different kernels
+
+# Toni, Welch, Strelkowa et al, 2009
+
+-   Bayes factor in model selection
+
+## LV model example
+
+-   Gaussian noise N(0, 0.25)
+-   Euclidean distance
+-   Tolerance $\epsilon$ chosen according to the artificially added noise

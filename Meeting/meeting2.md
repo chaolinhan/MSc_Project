@@ -93,13 +93,13 @@ And how to measure
 Start experiments on:
 
 -   Kernel: different kernel and theirs trade-offs
-    -   Uniform
+    -   Un iform
     -   Normal
     -   Multivariate normal
     -   Multivariate normal K neighbour (**MNN**)
     -   Multivariate normal OCM
 -   Using adaptive distance function: apply more tweaking to see if it is worth in this problem
--   $\epsilon$ schedule, adaptive population size, prior range, 
+-   $\epsilon$ schedule, **adaptive population size**, prior range, 
 -   Setup the environment in ARCHER and try some runs
 
 ## 6. Questions
@@ -108,3 +108,12 @@ Start experiments on:
     -   Current runs all result in a steady trend when time t >= 40 hr for all the four variables
     -   In real data, values still changes when  t >= 40
 -   I have changed the source code of `pyABC`, which could be problematic when using ARCHER
+
+# Meeting notes
+
+-   Extend the time point to 120 hrs
+    -   Now data size is 30*4=120 values 
+-   For results: also plot the joint distribution of any two parameters, where we could possibly identify some patterns that some parameters are related and in a way we can reduce the number of parameters.
+    -   We can identify some linear relations up to 2 or 3 orders e.g. x=ay^3+c, or exponential/log relations among two parameters but the joint parameter distribution cannot identify relations among three or more parameters
+-   For question 6.1: one possible model is replace $\lambda_N$ by $\lambda_N e^{-at}$ which is an exponential decay term instead of a constant intercept
+-   Sigma for error could be fixed, i.e. for N and Phi the error have the same sigma_1 and for beta and alpha the error have the same sigma_2. The sigma could be fixed, as is proposed above, according the variance go the raw data

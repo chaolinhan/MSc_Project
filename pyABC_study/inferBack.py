@@ -10,7 +10,7 @@ from pyABC_study.dataPlot import sim_data_plot, result_plot, result_data
 
 ROOT_DIR = os.path.abspath(os.curdir)
 db_path = ("sqlite:///" +
-           os.path.join(tempfile.gettempdir(), "test.db"))
+           os.path.join(tempfile.gettempdir(), "median_test.db"))
 
 # %% Generate synthetic data
 
@@ -85,7 +85,7 @@ distanceP2 = pyabc.PNormDistance(p=2)
 
 abc = pyabc.ABCSMC(models=solver.ode_model,
                    parameter_priors=paraPrior,
-                   population_size=800,
+                   population_size=100,
                    # distance_function=distanceP2_adaptive,
                    distance_function=distanceP2,
                    eps=pyabc.MedianEpsilon(100),

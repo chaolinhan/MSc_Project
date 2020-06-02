@@ -70,8 +70,11 @@ Plot the population distribution, eps values and acceptance rate
     fig, ax = plt.subplots(1, 4, figsize=(16, 4))
     idx = 0
     for keys in ['lambdaN', 'kNB', 'muN', 'vNM']:
+        print("key: %.2f" % true_parameter[keys])
         pyabc.visualization.plot_kde_1d(df, w, x=keys, ax=ax[idx], xmin=limits.lb, xmax=limits.ub)
         ax[idx].axvline(true_parameter[keys], color='r', linestyle='dashed', label="True value")
+        # TODO bug in true value display
+        ax[idx].text(0, 0, "median: %.3f\nTrue value:%.3f\n25 - 75%% quantile\n[%.3f, %.3f]" % (df[keys].quantile(0.5), true_parameter[keys], df[keys].quantile(0.25), df[keys].quantile(0.75)))
         ax[idx].legend()
         idx += 1
     fig.suptitle('ODE 1: dN/dt')

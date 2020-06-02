@@ -1,6 +1,6 @@
-## Weekly notes from 20 May
+# Weekly notes from 20 May
 
-### Try more data points
+## Try more data points
 
 -   Design
     -   Default
@@ -9,7 +9,7 @@
 
 **DONE**
 
-### Reset the initial parameters
+## Reset the initial parameters
 
 -   Fit the data to get a least square parameters?
     -   Some lm fit not support multi variables LS
@@ -111,7 +111,7 @@ Plot: not well fitted
 
 ![image-20200524215304608](https://i.imgur.com/JeOHDhp.png)
 
-# Weekly notes from 20 May
+# Weekly notes from 25 May
 
 -   Studied the ABC-SysBio package again `paper.md`
 -   Make some code separate functions in separate files
@@ -317,4 +317,15 @@ For N, $\Phi$, $\beta$, $\alpha$ data (observed data):
 acceptor = pyabc.StochasticAcceptor()
 ```
 
--   Benifit: output the same result, but the computational cost (required samples) is much lower
+-   Benefit: output the same result, but the computational cost (required samples) is much lower
+
+# Weekly notes from 1 June
+
+-   Paper read
+    -   Toni, T., Welch, D., Strelkowa, N., Ipsen, A., & Stumpf, M. P. H. (2009). Approximate Bayesian computation scheme for parameter inference and model selection in dynamical systems. *Journal of the Royal Society Interface*, *6*(31), 187–202. https://doi.org/10.1098/rsif.2008.0172
+
+-   Noise
+    -   From Toni 2009: 
+        -   Tolerance $\epsilon$ chosen according to the artificially added noise
+-   Code
+    -   Add marginal posterior statistics: median, mean, 25% - 75% range

@@ -1,6 +1,6 @@
+import numpy as np
 import scipy
 from scipy import integrate
-import numpy as np
 
 
 def eqns(var, t0, lambdaN, kNB, muN, vNM, lambdaM, kMB, muM, sBN, iBM, muB, sAM, muA):
@@ -62,8 +62,9 @@ def euclidean_distance(dataNormalised, simulation, normalise=False):
 
 
 class ODESolver:
-    timePoint_default = np.concatenate((np.array([0., 0.25, 0.5, 1]), np.arange(2, 24, 2), np.arange(24, 74, 4)),
-                                       axis=0)
+    timePoint_default = np.concatenate(
+        (np.array([0., 0.25, 0.5, 1]), np.arange(2, 24, 2), np.arange(24, 74, 4), np.array([96, 120])),
+        axis=0)
     varInit = np.array([0, 0, 1, 1])
     timePoint = timePoint_default
 
