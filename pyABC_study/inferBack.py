@@ -41,10 +41,15 @@ para_true = {'iBM': 1.0267462374320455,
              'vNM': 0.3091883041193706}
 
 # Using default time points
+
 solver = ODESolver()
-obs_data_noisy = solver.ode_model(para_true, add_nosie=True)
-obs_data_noisy_s = solver.ode_model(para_true, flatten=False, add_nosie=True)
-obs_data_raw_s = solver.ode_model(para_true, flatten=False, add_nosie=False)
+
+obs_data_noisy = solver.ode_model(para_true, flatten=True, add_noise=True)
+obs_data_raw = solver.ode_model(para_true, flatten=True, add_noise=False)
+
+obs_data_noisy_s = solver.ode_model(para_true, flatten=False, add_noise=True)
+obs_data_raw_s = solver.ode_model(para_true, flatten=False, add_noise=False)
+
 print("Target data")
 print(obs_data_noisy)
 
@@ -59,10 +64,10 @@ obs_data_plot(solver.timePoint, obs_data_noisy_s, obs_data_raw_s)
 # Be careful that RV("uniform", -10, 15) means uniform distribution in [-10, 5], '15' here is the interval length
 
 lim = PriorLimits(0, 20)
-# lim2 = PriorLimits(0, 1)
-# lim3 = PriorLimits(0, 10)
-lim2 = PriorLimits(0, 20)
-lim3 = PriorLimits(0, 20)
+lim2 = PriorLimits(0, 1)
+lim3 = PriorLimits(0, 10)
+# lim2 = PriorLimits(0, 20)
+# lim3 = PriorLimits(0, 20)
 
 paraPrior = pyabc.Distribution(
     lambdaN=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
@@ -88,16 +93,19 @@ distanceP2 = pyabc.PNormDistance(p=2)
 kernel1 = pyabc.IndependentNormalKernel(var=1.0 ** 2)
 
 # Measure distance and set it as minimum epsilon
-min_eps = distanceP2()
+min_eps = distanceP2(obs_data_noisy, obs_data_raw)
 
 acceptor1 = pyabc.StochasticAcceptor()
-
 
 eps0 = pyabc.MedianEpsilon(100)
 eps1 = pyabc.Temperature()
 
 
-abc = pyabc.ABCSMC(models=solver.ode_model,
+def non_noisy_model(para):
+    return solver.ode_model(para, add_noise=False)
+
+
+abc = pyabc.ABCSMC(models=non_noisy_model,
                    parameter_priors=paraPrior,
                    # acceptor=acceptor1,
                    population_size=1000,
@@ -108,9 +116,9 @@ abc = pyabc.ABCSMC(models=solver.ode_model,
 
 # %% Run ABC-SMC
 
-abc.new(db_path, obs_data_noisy)
+abc.new(db_path, obs_data_raw)
 max_population = 15
-history = abc.run(minimum_epsilon=5, max_nr_populations=max_population)
+history = abc.run(minimum_epsilon=min_eps, max_nr_populations=max_population)
 
 # %% Plot results
 

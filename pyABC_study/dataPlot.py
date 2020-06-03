@@ -144,8 +144,8 @@ Plot the population distribution, eps values and acceptance rate
     # fig2.suptitle('ODE 2: d𝛷/dt')
     # plt.show()
     #
-    # pyabc.visualization.plot_kde_matrix(df, w)
-    # plt.show()
+    pyabc.visualization.plot_kde_matrix(df, w)
+    plt.show()
 
 
 def result_data(history, compare_data, time_points, nr_population=1, sample_size=50):

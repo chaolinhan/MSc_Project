@@ -69,14 +69,17 @@ class ODESolver:
     timePoint = timePoint_default
     time_len = len(timePoint)
 
-    def ode_model(self, para, flatten=True, add_nosie=True) -> dict:
+    def ode_model(self, para, flatten=True, add_noise=True) -> dict:
+
         """
         Return a list of the ODE results at timePoints
         :param para: parameter of ODEs
         :param flatten: return a flatten dict or not
         :return: result data in dict format
         """
+
         # Gaussian distribution for error terms
+
         sigma_n = 5.66
         sigma_m = 4.59
         sigma_b = 5.15
@@ -94,11 +97,11 @@ class ODESolver:
                   para["sAM"], para["muA"])
         )
 
-        if add_nosie:
-            sol[1:, 0] += a*sigma_n * np.random.randn(self.time_len - 1) + mu
-            sol[1:, 1] += a*sigma_m * np.random.randn(self.time_len - 1) + mu
-            sol[1:, 2] += a*sigma_b * np.random.randn(self.time_len - 1) + mu
-            sol[1:, 3] += a*sigma_a * np.random.randn(self.time_len - 1) + mu
+        if add_noise:
+            sol[1:, 0] += a * sigma_n * np.random.randn(self.time_len - 1) + mu
+            sol[1:, 1] += a * sigma_m * np.random.randn(self.time_len - 1) + mu
+            sol[1:, 2] += a * sigma_b * np.random.randn(self.time_len - 1) + mu
+            sol[1:, 3] += a * sigma_a * np.random.randn(self.time_len - 1) + mu
 
         if flatten:
             return {i: sol.flatten()[i] for i in range(sol.flatten().__len__())}
