@@ -5,5 +5,5 @@ pyABC_study/__pycache__/
 pyABC_study/.Rhistory
 bokeh
 /.vscode/
-test0603.db
-test_noise.db
+test*.db
+test.db
