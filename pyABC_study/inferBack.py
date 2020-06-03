@@ -9,8 +9,7 @@ from pyABC_study.dataPlot import sim_data_plot, result_plot, result_data
 # %% Get path
 
 ROOT_DIR = os.path.abspath(os.curdir)
-db_path = ("sqlite:///" +
-           os.path.join(tempfile.gettempdir(), "median_test.db"))
+db_path = "sqlite:///test.db"
 
 # %% Generate synthetic data
 
@@ -62,16 +61,16 @@ lim2 = PriorLimits(0, 1)
 lim3 = PriorLimits(0, 10)
 
 paraPrior = pyabc.Distribution(
-    lambdaN=pyabc.RV("uniform", lim.lb, lim.interval_length),
-    kNB=pyabc.RV("uniform", lim.lb, lim.interval_length),
-    muN=pyabc.RV("uniform", lim.lb, lim.interval_length),
-    vNM=pyabc.RV("uniform", lim.lb, lim.interval_length),
-    lambdaM=pyabc.RV("uniform", lim.lb, lim.interval_length),
-    kMB=pyabc.RV("uniform", lim.lb, lim.interval_length),
-    muM=pyabc.RV("uniform", lim.lb, lim.interval_length),
-    sBN=pyabc.RV("uniform", lim.lb, lim.interval_length),
-    iBM=pyabc.RV("uniform", lim.lb, lim.interval_length),
-    muB=pyabc.RV("uniform", lim.lb, lim.interval_length),
+    lambdaN=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
+    kNB=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
+    muN=pyabc.RV("uniform", lim2.lb, lim2.interval_length),
+    vNM=pyabc.RV("uniform", lim2.lb, lim2.interval_length),
+    lambdaM=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
+    kMB=pyabc.RV("uniform", lim2.lb, lim2.interval_length),
+    muM=pyabc.RV("uniform", lim2.lb, lim2.interval_length),
+    sBN=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
+    iBM=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
+    muB=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
     sAM=pyabc.RV("uniform", lim.lb, lim.interval_length),
     muA=pyabc.RV("uniform", lim.lb, lim.interval_length)
 )
@@ -82,13 +81,17 @@ distanceP2_adaptive = pyabc.AdaptivePNormDistance(p=2,
                                                   scale_function=pyabc.distance.root_mean_square_deviation
                                                   )
 distanceP2 = pyabc.PNormDistance(p=2)
+acceptor1 = pyabc.StochasticAcceptor()
+eps0 = pyabc.MedianEpsilon(100)
+eps1 = pyabc.Temperature()
+kernel1 = pyabc.IndependentNormalKernel(var=1.0**2)
 
 abc = pyabc.ABCSMC(models=solver.ode_model,
                    parameter_priors=paraPrior,
+                   # acceptor=acceptor1,
                    population_size=100,
-                   # distance_function=distanceP2_adaptive,
                    distance_function=distanceP2,
-                   eps=pyabc.MedianEpsilon(100),
+                   eps=eps0,
                    # acceptor=pyabc.UniformAcceptor(use_complete_history=True)
                    )
 
@@ -102,6 +105,6 @@ history = abc.run(minimum_epsilon=5, max_nr_populations=max_population)
 
 # %% Plot results
 
-result_plot(history, para_true, lim, max_population)
-# result_plot(history, para_true, PriorLimits(None, None), max_population)
-result_data(history, expData_no_flatten, solver.timePoint, max_population)
+# result_plot(history, para_true, paraPrior, max_population)
+result_plot(history, para_true, paraPrior, history.max_t)
+result_data(history, expData_no_flatten, solver.timePoint, history.max_t)

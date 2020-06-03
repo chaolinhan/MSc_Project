@@ -329,3 +329,27 @@ acceptor = pyabc.StochasticAcceptor()
         -   Tolerance $\epsilon$ chosen according to the artificially added noise
 -   Code
     -   Add marginal posterior statistics: median, mean, 25% - 75% range
+
+-   Evaluation:
+
+    -   **Add code to display the inter-quartile range vs generations plot TBC** 
+
+        -   Meaning: the narrower the interval for a given tolerance et, the more sensitive the model is to the corresponding parameter
+
+    -   **Extend the code to plot posterior distribution across generations TBC** 
+
+    -   Consider PCA of the final population, maybe in the **result analysis phase** (Toni 2009)
+
+        ![image-20200602200204326](https://i.imgur.com/MjdodYN.png)
+
+-   Default kernel in `pyABC`:
+
+    ```
+    Defaults to multivariate normal transitions for every model
+    ```
+
+# TODOs in results analysis
+
+-   Model sensitivity (See Toni 2009)
+
+-   Consider PCA of the final population, maybe in the **result analysis phase** (See Toni 2009)

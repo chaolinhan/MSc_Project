@@ -115,5 +115,6 @@ Start experiments on:
     -   Now data size is 30*4=120 values 
 -   For results: also plot the joint distribution of any two parameters, where we could possibly identify some patterns that some parameters are related and in a way we can reduce the number of parameters.
     -   We can identify some linear relations up to 2 or 3 orders e.g. x=ay^3+c, or exponential/log relations among two parameters but the joint parameter distribution cannot identify relations among three or more parameters
+-   Also we can plot the changes of the posterior distribution for each parameter across generations and it could tell which one is inferred the quickest and has a small posterior variance, and which one is barely inferable with large credible intervals (also said in Toni 2009)
 -   For question 6.1: one possible model is replace $\lambda_N$ by $\lambda_N e^{-at}$ which is an exponential decay term instead of a constant intercept
 -   Sigma for error could be fixed, i.e. for N and Phi the error have the same sigma_1 and for beta and alpha the error have the same sigma_2. The sigma could be fixed, as is proposed above, according the variance go the raw data

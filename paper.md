@@ -68,3 +68,27 @@ Computational efficiency for different kernels
 -   Gaussian noise N(0, 0.25)
 -   Euclidean distance
 -   Tolerance $\epsilon$ chosen according to the artificially added noise
+
+## Repressilator model
+
+Add code to display the inter-quartile range vs generations plot
+
+-   Meaning: the narrower the interval for a given tolerance et, the more sensitive the model is to the corresponding parameter.
+
+**Benefit of ABC SMC:** sencitivity
+
+>   ABC SMC recovers the intricate link between model sensitivity to parameter changes and inferability of parameters. … ABC SMC provides us with a global parameter sensitivity analysis (Sanchez & Blower 1997) on the fly as the intermediate distributions are being constructed
+
+PCA and sensitivity:
+
+>   In contrast to the interest in the first PC in most PCA applications, our main interest lies in **the smallest PC**. The last PC extends across the narrowest region of the posterior parameter distribution, and therefore provides information on parameters to which the model is the most sensitive. In other words, the smaller PCs correspond to stiff parameter combinations, while the larger PCs may correspond to sloppy parameter combinations (Gutenkunst et al. 2007).
+
+Sensitivity:
+
+>   Analysing and comparing the results of the deterministic and stochastic repressilator dynamics shows that parameter sensitivity is intimately linked to inferability. If the system is insensitive to a parameter, then this parameter will be hard (or even impossible) to infer, as varying such a parameter does not vary the output—which here is the approximate posterior probability—very much. In stochastic pro.           blems, we may furthermore have the scenario where the fluctuations due to small variations in one parameter overwhelm the signals from other parameters.
+
+Noise and model selection: 
+
+>   If the data are very noisy (Gaussian noise with standard deviation sZ1 was added to the simulated data points), then the algorithm cannot detect a single best model, which is not surprising given the high similarity of model outputs.
+
+![image-20200602200204326](https://i.imgur.com/MjdodYN.png)
