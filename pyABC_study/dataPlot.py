@@ -1,11 +1,11 @@
-import matplotlib.pyplot as plt
-import pandas as pd
-import numpy as np
-import pyabc
-import pyabc
 import os
 
-from pyABC_study.ODE import ODESolver, PriorLimits
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import pyabc
+
+from pyABC_study.ODE import ODESolver
 
 rawData_path = os.path.abspath(os.curdir) + "/data/rawData.csv"
 rawData = pd.read_csv(rawData_path).astype("float32")
@@ -27,21 +27,27 @@ Calculate quantiles
     return df_quantile
 
 
-def sim_data_plot(timePoints, sim_data):
+def obs_data_plot(time_points: np.array, obs_data_noisy, obs_data_raw):
     """
     Plot the data of dict type
-    :param timePoints: time points to plot
-    :param sim_data: data in duct type
+    :param time_points: time points to plot
+    :param obs_data_noisy: data in duct type
     :return:
     """
-    plt.plot(timePoints, sim_data['N'], timePoints, sim_data['M'])
-    # plt.scatter(rawData['time'], rawData['N'])
-    # plt.scatter(rawData['time'], rawData['M'])
+    plt.plot(time_points, obs_data_noisy['N'], linestyle=':', label='Noisy N')
+    plt.plot(time_points, obs_data_noisy['M'], linestyle=':', label='Noisy Phi')
+    if obs_data_raw is not None:
+        plt.plot(time_points, obs_data_raw['N'], alpha=0.5, label='Raw N')
+        plt.plot(time_points, obs_data_raw['M'], alpha=0.5, label='Raw Phi')
+    plt.legend()
     plt.show()
 
-    plt.plot(timePoints, sim_data['B'], timePoints, sim_data['A'])
-    # plt.scatter(rawData['time'], rawData['B'])
-    # plt.scatter(rawData['time'], rawData['A'])
+    plt.plot(time_points, obs_data_noisy['B'], linestyle=':', label='Noisy beta')
+    plt.plot(time_points, obs_data_noisy['A'], linestyle=':', label='Noisy alpha')
+    if obs_data_raw is not None:
+        plt.plot(time_points, obs_data_raw['B'], alpha=0.5, label='Raw beta')
+        plt.plot(time_points, obs_data_raw['A'], alpha=0.5, label='Raw alpha')
+    plt.legend()
     plt.show()
 
 
@@ -67,11 +73,14 @@ Plot the population distribution, eps values and acceptance rate
     fig, ax = plt.subplots(1, 4, figsize=(16, 4))
     idx = 0
     for keys in ['lambdaN', 'kNB', 'muN', 'vNM']:
-        print(keys+": %.2f" % true_parameter[keys])
-        pyabc.visualization.plot_kde_1d(df, w, x=keys, ax=ax[idx], xmin=limits[keys].args[0], xmax=limits[keys].args[0]+limits[keys].args[1])
-        ax[idx].axvline(true_parameter[keys], color='r', linestyle='dashed', label="True value")
-        ax[idx].axvspan(df[keys].quantile(0.25), df[keys].quantile(0.75), color="b", alpha=0.5, label="Inter-quartile")
-        ax[idx].text(0, 0, "median: %.3f\nTrue value:%.3f\n25 - 75%% quantile\n[%.3f, %.3f]" % (df[keys].quantile(0.5), true_parameter[keys], df[keys].quantile(0.25), df[keys].quantile(0.75)), alpha=0.5)
+        # print(keys+": %.2f" % true_parameter[keys])
+        pyabc.visualization.plot_kde_1d(df, w, x=keys, ax=ax[idx], xmin=limits[keys].args[0],
+                                        xmax=limits[keys].args[0] + limits[keys].args[1])
+        ax[idx].axvline(true_parameter[keys], color='r', linestyle='dashed',
+                        label="True value\n%.3f" % true_parameter[keys])
+        ax[idx].axvspan(df[keys].quantile(0.25), df[keys].quantile(0.75), color="b", alpha=0.5,
+                        label="Inter-quartile\n[%.3f, %.3f]\nMean %.3f" % (
+                            df[keys].quantile(0.25), df[keys].quantile(0.75), df[keys].mean()))
         ax[idx].legend()
         idx += 1
     fig.suptitle('ODE 1: dN/dt')
@@ -80,10 +89,13 @@ Plot the population distribution, eps values and acceptance rate
     fig, ax = plt.subplots(1, 3, figsize=(12, 4))
     idx = 0
     for keys in ['lambdaM', 'kMB', 'muM']:
-        pyabc.visualization.plot_kde_1d(df, w, x=keys, ax=ax[idx], xmin=limits[keys].args[0], xmax=limits[keys].args[0]+limits[keys].args[1])
-        ax[idx].axvline(true_parameter[keys], color='r', linestyle='dashed', label="True value")
-        ax[idx].axvspan(df[keys].quantile(0.25), df[keys].quantile(0.75), color="b", alpha=0.5, label="Inter-quartile")
-        ax[idx].text(0, 0, "median: %.3f\nTrue value:%.3f\n25 - 75%% quantile\n[%.3f, %.3f]" % (df[keys].quantile(0.5), true_parameter[keys], df[keys].quantile(0.25), df[keys].quantile(0.75)), alpha=0.5)
+        pyabc.visualization.plot_kde_1d(df, w, x=keys, ax=ax[idx], xmin=limits[keys].args[0],
+                                        xmax=limits[keys].args[0] + limits[keys].args[1])
+        ax[idx].axvline(true_parameter[keys], color='r', linestyle='dashed',
+                        label="True value\n%.3f" % true_parameter[keys])
+        ax[idx].axvspan(df[keys].quantile(0.25), df[keys].quantile(0.75), color="b", alpha=0.5,
+                        label="Inter-quartile\n[%.3f, %.3f]\nMean %.3f" % (
+                            df[keys].quantile(0.25), df[keys].quantile(0.75), df[keys].mean()))
         ax[idx].legend()
         idx += 1
     fig.suptitle('ODE 2: d(Phi)/dt')
@@ -92,10 +104,13 @@ Plot the population distribution, eps values and acceptance rate
     fig, ax = plt.subplots(1, 3, figsize=(12, 4))
     idx = 0
     for keys in ['sBN', 'iBM', 'muB']:
-        pyabc.visualization.plot_kde_1d(df, w, x=keys, ax=ax[idx], xmin=limits[keys].args[0], xmax=limits[keys].args[0]+limits[keys].args[1])
-        ax[idx].axvline(true_parameter[keys], color='r', linestyle='dashed', label="True value")
-        ax[idx].axvspan(df[keys].quantile(0.25), df[keys].quantile(0.75), color="b", alpha=0.5, label="Inter-quartile")
-        ax[idx].text(0, 0, "median: %.3f\nTrue value:%.3f\n25 - 75%% quantile\n[%.3f, %.3f]" % (df[keys].quantile(0.5), true_parameter[keys], df[keys].quantile(0.25), df[keys].quantile(0.75)), alpha=0.5)
+        pyabc.visualization.plot_kde_1d(df, w, x=keys, ax=ax[idx], xmin=limits[keys].args[0],
+                                        xmax=limits[keys].args[0] + limits[keys].args[1])
+        ax[idx].axvline(true_parameter[keys], color='r', linestyle='dashed',
+                        label="True value\n%.3f" % true_parameter[keys])
+        ax[idx].axvspan(df[keys].quantile(0.25), df[keys].quantile(0.75), color="b", alpha=0.5,
+                        label="Inter-quartile\n[%.3f, %.3f]\nMean %.3f" % (
+                            df[keys].quantile(0.25), df[keys].quantile(0.75), df[keys].mean()))
         ax[idx].legend()
         idx += 1
     fig.suptitle('ODE 3: d(beta)/dt')
@@ -104,15 +119,17 @@ Plot the population distribution, eps values and acceptance rate
     fig, ax = plt.subplots(1, 2, figsize=(8, 4))
     idx = 0
     for keys in ['sAM', 'muA']:
-        pyabc.visualization.plot_kde_1d(df, w, x=keys, ax=ax[idx], xmin=limits[keys].args[0], xmax=limits[keys].args[0]+limits[keys].args[1])
-        ax[idx].axvline(true_parameter[keys], color='r', linestyle='dashed', label="True value")
-        ax[idx].axvspan(df[keys].quantile(0.25), df[keys].quantile(0.75), color="b", alpha=0.5, label="Inter-quartile")
-        ax[idx].text(0, 0, "median: %.3f\nTrue value:%.3f\n25 - 75%% quantile\n[%.3f, %.3f]" % (df[keys].quantile(0.5), true_parameter[keys], df[keys].quantile(0.25), df[keys].quantile(0.75)), alpha=0.5)
+        pyabc.visualization.plot_kde_1d(df, w, x=keys, ax=ax[idx], xmin=limits[keys].args[0],
+                                        xmax=limits[keys].args[0] + limits[keys].args[1])
+        ax[idx].axvline(true_parameter[keys], color='r', linestyle='dashed',
+                        label="True value\n%.3f" % true_parameter[keys])
+        ax[idx].axvspan(df[keys].quantile(0.25), df[keys].quantile(0.75), color="b", alpha=0.5,
+                        label="Inter-quartile\n[%.3f, %.3f]\nMean %.3f" % (
+                            df[keys].quantile(0.25), df[keys].quantile(0.75), df[keys].mean()))
         ax[idx].legend()
         idx += 1
     fig.suptitle('ODE 4: d(alpha)/dt')
     plt.show()
-
 
     # Parameters in the second equation
     #
@@ -126,9 +143,9 @@ Plot the population distribution, eps values and acceptance rate
     #     idx += 1
     # fig2.suptitle('ODE 2: d𝛷/dt')
     # plt.show()
-
-    pyabc.visualization.plot_kde_matrix(df, w)
-    plt.show()
+    #
+    # pyabc.visualization.plot_kde_matrix(df, w)
+    # plt.show()
 
 
 def result_data(history, compare_data, time_points, nr_population=1, sample_size=50):

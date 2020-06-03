@@ -1,15 +1,14 @@
 import os
-import tempfile
 
 import pyabc
 
 from pyABC_study.ODE import ODESolver, PriorLimits
-from pyABC_study.dataPlot import sim_data_plot, result_plot, result_data
+from pyABC_study.dataPlot import obs_data_plot, result_plot, result_data
 
 # %% Get path
 
 ROOT_DIR = os.path.abspath(os.curdir)
-db_path = "sqlite:///test.db"
+db_path = "sqlite:///test0603.db"
 
 # %% Generate synthetic data
 
@@ -41,24 +40,29 @@ para_true = {'iBM': 1.0267462374320455,
              'sBN': 4.034313992927392,
              'vNM': 0.3091883041193706}
 
-
 # Using default time points
 solver = ODESolver()
-expData = solver.ode_model(para_true)
-expData_no_flatten = solver.ode_model(para_true, flatten=False)
+obs_data_noisy = solver.ode_model(para_true, add_nosie=True)
+obs_data_noisy_s = solver.ode_model(para_true, flatten=False, add_nosie=True)
+obs_data_raw_s = solver.ode_model(para_true, flatten=False, add_nosie=False)
 print("Target data")
-print(expData)
+print(obs_data_noisy)
+
+# Measure distance and set it as minimum epsilon
+
 
 # %% Plot
 
-sim_data_plot(solver.timePoint, expData_no_flatten)
+obs_data_plot(solver.timePoint, obs_data_noisy_s, obs_data_raw_s)
 
 # %% Define prior distribution of parameters
 # Be careful that RV("uniform", -10, 15) means uniform distribution in [-10, 5], '15' here is the interval length
 
 lim = PriorLimits(0, 20)
-lim2 = PriorLimits(0, 1)
-lim3 = PriorLimits(0, 10)
+# lim2 = PriorLimits(0, 1)
+# lim3 = PriorLimits(0, 10)
+lim2 = PriorLimits(0, 20)
+lim3 = PriorLimits(0, 20)
 
 paraPrior = pyabc.Distribution(
     lambdaN=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
@@ -81,30 +85,35 @@ distanceP2_adaptive = pyabc.AdaptivePNormDistance(p=2,
                                                   scale_function=pyabc.distance.root_mean_square_deviation
                                                   )
 distanceP2 = pyabc.PNormDistance(p=2)
+kernel1 = pyabc.IndependentNormalKernel(var=1.0 ** 2)
+
+# Measure distance and set it as minimum epsilon
+min_eps = distanceP2()
+
 acceptor1 = pyabc.StochasticAcceptor()
+
+
 eps0 = pyabc.MedianEpsilon(100)
 eps1 = pyabc.Temperature()
-kernel1 = pyabc.IndependentNormalKernel(var=1.0**2)
+
 
 abc = pyabc.ABCSMC(models=solver.ode_model,
                    parameter_priors=paraPrior,
                    # acceptor=acceptor1,
-                   population_size=100,
+                   population_size=1000,
                    distance_function=distanceP2,
                    eps=eps0,
                    # acceptor=pyabc.UniformAcceptor(use_complete_history=True)
                    )
 
-
 # %% Run ABC-SMC
 
-abc.new(db_path, expData)
+abc.new(db_path, obs_data_noisy)
 max_population = 15
 history = abc.run(minimum_epsilon=5, max_nr_populations=max_population)
-
 
 # %% Plot results
 
 # result_plot(history, para_true, paraPrior, max_population)
 result_plot(history, para_true, paraPrior, history.max_t)
-result_data(history, expData_no_flatten, solver.timePoint, history.max_t)
+result_data(history, obs_data_noisy_s, solver.timePoint, history.max_t)

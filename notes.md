@@ -309,7 +309,7 @@ For N, $\Phi$, $\beta$, $\alpha$ data (observed data):
 -   Set $\sigma$ as a constant
 
 1.  Assumes the error term follows Gaussian distribution $N(0, \sigma^2)$
-2.  Sample error from the distribution: `sigma+np.random.randn(nr_sample)+0` for each simulated data point, using corresponding $\sigma$
+2.  Sample error from the distribution: `sigma*np.random.randn(nr_sample)+0` for each simulated data point, using corresponding $\sigma$
 
 ### Plan 2: use a stochastic acceptor in `pyABC`
 
@@ -322,14 +322,16 @@ acceptor = pyabc.StochasticAcceptor()
 # Weekly notes from 1 June
 
 -   Paper read
-    -   Toni, T., Welch, D., Strelkowa, N., Ipsen, A., & Stumpf, M. P. H. (2009). Approximate Bayesian computation scheme for parameter inference and model selection in dynamical systems. *Journal of the Royal Society Interface*, *6*(31), 187–202. https://doi.org/10.1098/rsif.2008.0172
-
+    
+-   Toni, T., Welch, D., Strelkowa, N., Ipsen, A., & Stumpf, M. P. H. (2009). Approximate Bayesian computation scheme for parameter inference and model selection in dynamical systems. *Journal of the Royal Society Interface*, *6*(31), 187–202. https://doi.org/10.1098/rsif.2008.0172
+    
 -   Noise
     -   From Toni 2009: 
         -   Tolerance $\epsilon$ chosen according to the artificially added noise
 -   Code
-    -   Add marginal posterior statistics: median, mean, 25% - 75% range
-
+    
+-   Add marginal posterior statistics: median, mean, 25% - 75% range
+    
 -   Evaluation:
 
     -   **Add code to display the inter-quartile range vs generations plot TBC** 
@@ -347,6 +349,25 @@ acceptor = pyabc.StochasticAcceptor()
     ```
     Defaults to multivariate normal transitions for every model
     ```
+
+-   It can be hard to have a good output if the prior range is too large
+
+## Set error
+
+-   ```
+    expData_no_flatten['N'].std()
+    Out[35]: 5.664865706019151
+    expData_no_flatten['M'].std()
+    Out[36]: 4.5872961732387685
+    expData_no_flatten['B'].std()
+    Out[37]: 5.151814089176449
+    expData_no_flatten['A'].std()
+    Out[38]: 2.4152060363727577
+    ```
+
+-   Sigma of error is set to 5% of the variable standard deviation
+
+-   ![image-20200603172616078](notes.assets/image-20200603172616078.png)
 
 # TODOs in results analysis
 
