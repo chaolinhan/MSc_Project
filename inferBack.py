@@ -8,7 +8,7 @@ from pyABC_study.dataPlot import obs_data_plot, result_plot, result_data
 # %% Get path
 
 ROOT_DIR = os.path.abspath(os.curdir)
-db_path = "sqlite:///test0604.db"
+db_path = "sqlite:///noise_0604.db"
 
 # %% Generate synthetic data
 
@@ -97,7 +97,7 @@ min_eps = distanceP2(obs_data_noisy, obs_data_raw)
 
 acceptor1 = pyabc.StochasticAcceptor()
 
-eps0 = pyabc.MedianEpsilon(100)
+eps0 = pyabc.MedianEpsilon(50)
 eps1 = pyabc.Temperature()
 
 
@@ -108,7 +108,7 @@ def non_noisy_model(para):
 abc = pyabc.ABCSMC(models=non_noisy_model,
                    parameter_priors=paraPrior,
                    # acceptor=acceptor1,
-                   population_size=100,
+                   population_size=2000,
                    distance_function=distanceP2,
                    eps=eps0,
                    # acceptor=pyabc.UniformAcceptor(use_complete_history=True)
