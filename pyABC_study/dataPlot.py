@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 import pyabc
 
-from pyABC_study.ODE import ODESolver
+from ODE import ODESolver
 
 rawData_path = os.path.abspath(os.curdir) + "/data/rawData.csv"
 rawData = pd.read_csv(rawData_path).astype("float32")

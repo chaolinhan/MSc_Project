@@ -58,7 +58,7 @@ print(obs_data_noisy)
 
 # %% Plot
 
-obs_data_plot(solver.timePoint, obs_data_noisy_s, obs_data_raw_s)
+# obs_data_plot(solver.timePoint, obs_data_noisy_s, obs_data_raw_s)
 
 # %% Define prior distribution of parameters
 # Be careful that RV("uniform", -10, 15) means uniform distribution in [-10, 5], '15' here is the interval length
@@ -123,5 +123,5 @@ history = abc.run(minimum_epsilon=min_eps, max_nr_populations=max_population)
 # %% Plot results
 
 # result_plot(history, para_true, paraPrior, max_population)
-result_plot(history, para_true, paraPrior, history.max_t)
-result_data(history, obs_data_noisy_s, solver.timePoint, history.max_t)
+# result_plot(history, para_true, paraPrior, history.max_t)
+# result_data(history, obs_data_noisy_s, solver.timePoint, history.max_t)
