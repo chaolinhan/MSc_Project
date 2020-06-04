@@ -8,7 +8,7 @@ from pyABC_study.dataPlot import obs_data_plot, result_plot, result_data
 # %% Get path
 
 ROOT_DIR = os.path.abspath(os.curdir)
-db_path = "sqlite:///test0603.db"
+db_path = "sqlite:///test0604.db"
 
 # %% Generate synthetic data
 
@@ -108,7 +108,7 @@ def non_noisy_model(para):
 abc = pyabc.ABCSMC(models=non_noisy_model,
                    parameter_priors=paraPrior,
                    # acceptor=acceptor1,
-                   population_size=1000,
+                   population_size=100,
                    distance_function=distanceP2,
                    eps=eps0,
                    # acceptor=pyabc.UniformAcceptor(use_complete_history=True)
