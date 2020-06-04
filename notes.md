@@ -269,7 +269,7 @@ New version: **tested**
     -   Three examples of ABC implementation 
     -   ESS can be used as threshold for stop condition, e.g. N/2
 
-# Kernels
+## Kernels
 
 Listed in ABC-SysBio:
 
@@ -368,6 +368,84 @@ acceptor = pyabc.StochasticAcceptor()
 -   Sigma of error is set to 5% of the variable standard deviation
 
 -   ![image-20200603172616078](notes.assets/image-20200603172616078.png)
+
+### Experiment
+
+Prior set to the same: narrow prior:
+
+```python
+lim = PriorLimits(0, 20)
+lim2 = PriorLimits(0, 1)
+lim3 = PriorLimits(0, 10)
+# lim2 = PriorLimits(0, 20)
+# lim3 = PriorLimits(0, 20)
+
+paraPrior = pyabc.Distribution(
+    lambdaN=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
+    kNB=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
+    muN=pyabc.RV("uniform", lim2.lb, lim2.interval_length),
+    vNM=pyabc.RV("uniform", lim2.lb, lim2.interval_length),
+    lambdaM=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
+    kMB=pyabc.RV("uniform", lim2.lb, lim2.interval_length),
+    muM=pyabc.RV("uniform", lim2.lb, lim2.interval_length),
+    sBN=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
+    iBM=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
+    muB=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
+    sAM=pyabc.RV("uniform", lim.lb, lim.interval_length),
+    muA=pyabc.RV("uniform", lim.lb, lim.interval_length)
+)
+```
+
+Population size: 1000
+
+Generations: 15
+
+Distance function: Euclidean distance
+
+Epsilon schedule: Median, start from 100
+
+Experiment data base: `sqlite:///test_noise.db`
+
+#### More runs are needed to get an average performance
+
+#### Test 1: noisy model with noisy observed data, id=1
+
+```
+INFO:ABC:t: 14, eps: 24.526661250184834.
+INFO:ABC:Acceptance rate: 1000 / 13243 = 7.5512e-02, ESS=7.5703e+01.
+INFO:History:Done <ABCSMC(id=1, start_time=2020-06-03 18:12:37.841139, end_time=2020-06-03 18:29:42.128669)>
+```
+
+From plots: eps is not convergent when t=14.
+
+<img src="https://i.imgur.com/kK4fIxy.png" alt="image-20200603183507193" style="zoom:50%;" />
+
+#### Test 2: non-noisy model with noisy data, id=2
+
+```
+INFO:ABC:t: 14, eps: 25.22821596127943.
+INFO:ABC:Acceptance rate: 1000 / 19632 = 5.0937e-02, ESS=5.1167e+01.
+INFO:History:Done <ABCSMC(id=2, start_time=2020-06-03 18:45:20.419498, end_time=2020-06-03 19:03:06.150475)>
+
+```
+
+From plots: eps is also not convergent when t=14.
+
+<img src="https://i.imgur.com/PyiGTTZ.png" alt="image-20200603190545887" style="zoom:50%;" />
+
+#### Test 3: non-noisy model with non-noisy data, id=3
+
+```
+INFO:ABC:t: 14, eps: 26.47939003953062.
+INFO:ABC:Acceptance rate: 1000 / 12128 = 8.2454e-02, ESS=1.0086e+02.
+INFO:History:Done <ABCSMC(id=3, start_time=2020-06-03 19:07:58.277861, end_time=2020-06-03 19:24:34.149131)>
+```
+
+<img src="https://i.imgur.com/oyhTRy8.png" alt="image-20200603192949960" style="zoom:50%;" />
+
+## Set up ARCHER environment
+
+Replicated runs are needed so switch to archer.
 
 # TODOs in results analysis
 
