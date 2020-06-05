@@ -408,6 +408,8 @@ Experiment data base: `sqlite:///test_noise.db`
 
 #### More runs are needed to get an average performance
 
+
+
 #### Test 1: noisy model with noisy observed data, id=1
 
 ```
@@ -446,6 +448,21 @@ INFO:History:Done <ABCSMC(id=3, start_time=2020-06-03 19:07:58.277861, end_time=
 ## Set up ARCHER environment
 
 Replicated runs are needed so switch to archer.
+
+-   Set up on 4 June, using `miniconda` with default `pyABC` package
+-   New branch created to test archer runs: `archer`
+
+### Noise run result
+
+Only 16 cores involved 
+
+## Kernel experiment
+
+## Adaptive population
+
+## Distance functions
+
+## PCA
 
 # TODOs in results analysis
 

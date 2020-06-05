@@ -116,9 +116,9 @@ abc = pyabc.ABCSMC(models=non_noisy_model,
 
 # %% Run ABC-SMC
 
-abc.new(db_path, obs_data_raw)
-max_population = 15
-history = abc.run(minimum_epsilon=min_eps, max_nr_populations=max_population)
+# abc.new(db_path, obs_data_raw)
+# max_population = 15
+# history = abc.run(minimum_epsilon=min_eps, max_nr_populations=max_population)
 
 # %% Plot results
 
