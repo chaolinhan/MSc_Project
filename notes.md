@@ -466,7 +466,13 @@ Only 16 cores involved: default pyabc cannot properly detect available cores
 
 ## Basic run
 
-
+-   On archer
+    -   2000 particles, 15 generations
+    -   Narrow prior range
+    -   P2 normal distance
+    -   Median eps
+-   Eps is not convergent
+    -   ![image-20200605230600716](https://i.imgur.com/3mD3k8T.png)
 
 ## Kernel experiment
 
