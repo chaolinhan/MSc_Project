@@ -100,7 +100,7 @@ acceptor1 = pyabc.StochasticAcceptor()
 eps0 = pyabc.MedianEpsilon(50)
 eps1 = pyabc.Temperature()
 
-sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=48)
+sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=96)
 
 def non_noisy_model(para):
     return solver.ode_model(para, add_noise=False)

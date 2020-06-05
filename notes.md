@@ -454,7 +454,13 @@ Replicated runs are needed so switch to archer.
 
 ### Noise run result
 
-Only 16 cores involved 
+Only 16 cores involved: default pyabc cannot properly detect available cores
+
+### Test on 48 cores: 24 cores with hyperthreading
+
+[c2acd6373139a1ff3b5e89e31f25f7baa7a28a3a](https://github.com/ChaosRinkHan/MSc_Project/commit/c2acd6373139a1ff3b5e89e31f25f7baa7a28a3a)
+
+## Test on two nodes
 
 ## Kernel experiment
 

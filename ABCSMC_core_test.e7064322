@@ -1,4 +1,0 @@
-INFO:Sampler:Parallelizing the sampling on 48 cores.
-INFO:History:Start <ABCSMC(id=2, start_time=2020-06-05 17:58:09.155953, end_time=None)>
-INFO:ABC:t: 0, eps: 50.
-=>> PBS: job killed: walltime 12 exceeded limit 5
