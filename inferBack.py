@@ -110,7 +110,7 @@ abc = pyabc.ABCSMC(models=non_noisy_model,
                    parameter_priors=paraPrior,
                    # acceptor=acceptor1,
                    population_size=2000,
-                   # sampler=sampler0,
+                   sampler=sampler0,
                    distance_function=distanceP2,
                    eps=eps0,
                    # acceptor=pyabc.UniformAcceptor(use_complete_history=True)
