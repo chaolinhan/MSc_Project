@@ -7,4 +7,6 @@
 
 cd $PBS_O_WORKDIR
 
+lscpu
+
 python3 nr_core.py

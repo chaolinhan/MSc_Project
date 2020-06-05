@@ -1,6 +1,6 @@
 #!/bin/bash --login
 #
-#PBS -N ABCSMC_core_test
+#PBS -N ABCSMC_0_basic
 #PBS -l select=1
 #PBS -l walltime=1:00:00
 #PBS -A d171-s1898201
