@@ -1,0 +1,10 @@
+#!/bin/bash --login
+#
+#PBS -N ABCSMC_0
+#PBS -l select=1
+#PBS -l walltime=0:00:10
+#PBS -A d171-s1898201
+
+cd $PBS_O_WORKDIR
+
+python3 nr_core.py

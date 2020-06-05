@@ -7,3 +7,4 @@ bokeh
 /.vscode/
 test*.db
 test.db*
+noise_0604.db
