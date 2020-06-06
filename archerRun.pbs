@@ -2,7 +2,7 @@
 #
 #PBS -N ABCSMC_0_basic
 #PBS -l select=1
-#PBS -l walltime=0:01:00
+#PBS -l walltime=1:00:00
 #PBS -A d171-s1898201
 
 cd $PBS_O_WORKDIR
@@ -10,4 +10,4 @@ cd $PBS_O_WORKDIR
 module load python-compute/3.6.0_gcc6.1.0
 source /work/d171/d171/s1898201/myEnv/bin/activate
 
-aprun -b -n 24 python3 inferBack.py
+aprun -b -n 1 python3 inferBack.py
