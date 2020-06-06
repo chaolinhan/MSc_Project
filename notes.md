@@ -408,6 +408,8 @@ Experiment data base: `sqlite:///test_noise.db`
 
 #### More runs are needed to get an average performance
 
+
+
 #### Test 1: noisy model with noisy observed data, id=1
 
 ```
@@ -446,6 +448,39 @@ INFO:History:Done <ABCSMC(id=3, start_time=2020-06-03 19:07:58.277861, end_time=
 ## Set up ARCHER environment
 
 Replicated runs are needed so switch to archer.
+
+-   Set up on 4 June, using `miniconda` with default `pyABC` package
+-   New branch created to test archer runs: `archer`
+
+### Noise run result
+
+Only 16 cores involved: default pyabc cannot properly detect available cores
+
+### Test on 48 cores: 24 cores with hyperthreading
+
+[c2acd6373139a1ff3b5e89e31f25f7baa7a28a3a](https://github.com/ChaosRinkHan/MSc_Project/commit/c2acd6373139a1ff3b5e89e31f25f7baa7a28a3a)
+
+## Test on two nodes
+
+-   Do not know if it is really working
+
+## Basic run
+
+-   On archer
+    -   2000 particles, 15 generations
+    -   Narrow prior range
+    -   P2 normal distance
+    -   Median eps
+-   Eps is not convergent
+    -   ![image-20200605230600716](https://i.imgur.com/3mD3k8T.png)
+
+## Kernel experiment
+
+## Adaptive population
+
+## Distance functions
+
+## PCA
 
 # TODOs in results analysis
 

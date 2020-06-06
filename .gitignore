@@ -6,4 +6,5 @@ pyABC_study/.Rhistory
 bokeh
 /.vscode/
 test*.db
-test.db
+test.db*
+*.db

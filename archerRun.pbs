@@ -1,11 +1,12 @@
 #!/bin/bash --login
 #
-#PBS -N ABCSMC_0
-#PBS -l select=1:ncpus=36
-#PBS -l place=scatter:excl
+#PBS -N ABCSMC_0_basic
+#PBS -l select=1
 #PBS -l walltime=1:00:00
 #PBS -A d171-s1898201
 
 cd $PBS_O_WORKDIR
 
-python3 inferBack.py
+module load python-compute/3.6.0_gcc6.1.0
+
+aprun -b -n 1 python3 inferBack.py
