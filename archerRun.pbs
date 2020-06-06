@@ -7,4 +7,6 @@
 
 cd $PBS_O_WORKDIR
 
-python3 inferBack.py
+module load python-compute/3.6.0_gcc6.1.0
+
+aprun -b -n 1 python3 inferBack.py
