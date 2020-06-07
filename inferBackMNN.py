@@ -8,7 +8,7 @@ from pyABC_study.dataPlot import obs_data_plot, result_plot, result_data
 # %% Get path
 
 ROOT_DIR = os.path.abspath(os.curdir)
-db_path = "sqlite:///base.db"
+db_path = "sqlite:///MNN.db"
 
 # %% Generate synthetic data
 
@@ -100,7 +100,7 @@ acceptor1 = pyabc.StochasticAcceptor()
 eps0 = pyabc.MedianEpsilon(50)
 eps1 = pyabc.Temperature()
 
-transition0 = pyabc.transition.LocalTransition(k=500, k_fraction=None)
+transition0 = pyabc.transition.LocalTransition(k=100, k_fraction=None)
 transition0
 
 sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=48)
