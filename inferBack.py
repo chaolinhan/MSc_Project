@@ -8,7 +8,7 @@ from pyABC_study.dataPlot import obs_data_plot, result_plot, result_data
 # %% Get path
 
 ROOT_DIR = os.path.abspath(os.curdir)
-db_path = "sqlite:///noisy_data.db"
+db_path = "sqlite:///base.db"
 
 # %% Generate synthetic data
 
@@ -110,7 +110,7 @@ def non_noisy_model(para):
 abc = pyabc.ABCSMC(models=non_noisy_model,
                    parameter_priors=paraPrior,
                    # acceptor=acceptor1,
-                   population_size=100,
+                   population_size=2000,
                    sampler=sampler0,
                    distance_function=distanceP2,
                    eps=eps0,
@@ -130,10 +130,11 @@ print(abc.transitions)
 # %% Run ABC-SMC
 
 abc.new(db_path, obs_data_raw)
-max_population = 15
+max_population = 20
 
 print(db_path)
 print("Generations: %d" % max_population)
+print("Minimum eps: %d" % min_eps)
 
 history = abc.run(minimum_epsilon=min_eps, max_nr_populations=max_population)
 

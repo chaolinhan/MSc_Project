@@ -93,7 +93,7 @@ And how to measure
 Start experiments on:
 
 -   Kernel: different kernel and theirs trade-offs
-    -   Un iform
+    -   Uniform
     -   Normal
     -   Multivariate normal
     -   Multivariate normal K neighbour (**MNN**)

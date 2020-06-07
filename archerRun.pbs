@@ -1,8 +1,8 @@
 #!/bin/bash --login
 #
-#PBS -N ABCSMC_0
+#PBS -N ABCSMC_base
 #PBS -l select=1
-#PBS -l walltime=0:10:00
+#PBS -l walltime=2:00:00
 #PBS -A d171-s1898201
 
 cd $PBS_O_WORKDIR
