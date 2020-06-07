@@ -100,6 +100,9 @@ acceptor1 = pyabc.StochasticAcceptor()
 eps0 = pyabc.MedianEpsilon(50)
 eps1 = pyabc.Temperature()
 
+transition0 = pyabc.transition.LocalTransition(k=500, k_fraction=None)
+transition0
+
 sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=48)
 
 
@@ -113,6 +116,7 @@ abc = pyabc.ABCSMC(models=non_noisy_model,
                    population_size=2000,
                    sampler=sampler0,
                    distance_function=distanceP2,
+                   transitions=transition0,
                    eps=eps0,
                    # acceptor=pyabc.UniformAcceptor(use_complete_history=True)
                    )
@@ -134,7 +138,7 @@ max_population = 20
 
 print(db_path)
 print("Generations: %d" % max_population)
-print("Minimum eps: %d" % min_eps)
+print("Minimum eps: %.3f" % min_eps)
 
 history = abc.run(minimum_epsilon=min_eps, max_nr_populations=max_population)
 

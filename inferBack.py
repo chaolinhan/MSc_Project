@@ -134,7 +134,7 @@ max_population = 20
 
 print(db_path)
 print("Generations: %d" % max_population)
-print("Minimum eps: %d" % min_eps)
+print("Minimum eps: %.3f" % min_eps)
 
 history = abc.run(minimum_epsilon=min_eps, max_nr_populations=max_population)
 

@@ -466,16 +466,22 @@ Only 16 cores involved: default pyabc cannot properly detect available cores
 
 ## Basic run
 
--   ~~On archer~~
-    -   ~~2000 particles, 15 generations~~
-    -   ~~Narrow prior range~~
-    -   ~~P2 normal distance~~
-    -   ~~Median eps~~
--   ~~Eps is not convergent~~
-    -   ~~![image-20200605230600716](https://i.imgur.com/3mD3k8T.png)~~
+-   On archer
+    -   2000 particles, 20 generations
+    -   Narrow prior range
+    -   P2 normal distance
+    -   Median eps
+-   Eps is not convergent
+    -   ![eps](pyABC_study/result/base/eps.png)
+    -   All plots and data: `pyABC_study/result/base`
 -   New fix: using `aprun -b -n 1 -d 48 -j 2 python3 inferBack.py` and `aprun -b -n 1 -d 24 python3 inferBack.py`, with parallel sampling `n_proc` set to 48 and 24 respectively
 
 ## Kernel experiment
+
+>   These can be passed to [`pyabc.smc.ABCSMC`](https://pyabc.readthedocs.io/en/latest/api_abcsmc.html#pyabc.smc.ABCSMC) via the `transitions` keyword argument.
+
+-   Default kernel: Multivariate Normal (`MultivariateNormalTransition()`)
+-   
 
 ## Adaptive population
 
