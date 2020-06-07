@@ -10,4 +10,4 @@ cd $PBS_O_WORKDIR
 module load python-compute/3.6.0_gcc6.1.0
 source /work/d171/d171/s1898201/myEnv/bin/activate
 
-aprun -b -n 1 python3 inferBack.py
+aprun -b -n 1 -j 2 python3 inferBack.py

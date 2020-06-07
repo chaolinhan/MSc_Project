@@ -100,7 +100,7 @@ acceptor1 = pyabc.StochasticAcceptor()
 eps0 = pyabc.MedianEpsilon(50)
 eps1 = pyabc.Temperature()
 
-sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=24)
+sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=48)
 
 
 def non_noisy_model(para):
@@ -117,10 +117,24 @@ abc = pyabc.ABCSMC(models=non_noisy_model,
                    # acceptor=pyabc.UniformAcceptor(use_complete_history=True)
                    )
 
+# %% Print ABC SMC info
+
+print(abc.acceptor)
+print(abc.distance_function, abc.distance_function.p)
+print(abc.eps, abc.eps._initial_epsilon)
+print(abc.models)
+print(abc.population_size, abc.population_size.nr_particles)
+print(abc.sampler, abc.sampler.n_procs)
+print(abc.transitions)
+
 # %% Run ABC-SMC
 
 abc.new(db_path, obs_data_raw)
 max_population = 15
+
+print(db_path)
+print("Generations: %d" % max_population)
+
 history = abc.run(minimum_epsilon=min_eps, max_nr_populations=max_population)
 
 # %% Plot results
