@@ -8,7 +8,7 @@ from pyABC_study.dataPlot import obs_data_plot, result_plot, result_data
 # %% Get path
 
 ROOT_DIR = os.path.abspath(os.curdir)
-db_path = "sqlite:///MNN.db"
+db_path = "sqlite:///MNN_50.db"
 
 # %% Generate synthetic data
 
