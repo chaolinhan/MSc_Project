@@ -1,0 +1,78 @@
+sampler: 24 cores
+
+aprun -b -n 1 python3 inferBack.py
+
+
+tput: No value for $TERM and no -T specified
+tput: No value for $TERM and no -T specified
+tput: No value for $TERM and no -T specified
+tput: No value for $TERM and no -T specified
+
+Setting environment for Python module...
+module swap PrgEnv-cray PrgEnv-gnu
+module swap gcc gcc/6.1.0
+...done
+
+Note: use 'python3' to launch Python 3.6.0
+
+/fs4/d171/d171/s1898201/myEnv/lib/python3.6/site-packages/pandas/compat/__init__.py:85: UserWarning: Could not import the lzma module. Your installed Python is incomplete. Attempting to use lzma compression will result in a RuntimeError.
+  warnings.warn(msg)
+usage: fc-list [-vV?] [--verbose] [--version] [--help] [pattern] {element ...} 
+List fonts matching [pattern]
+
+  -v, --verbose        display status information while busy
+  -V, --version        display font config version and exit
+  -?, --help           display this help and exit
+/fs4/d171/d171/s1898201/myEnv/lib/python3.6/site-packages/pandas/compat/__init__.py:85: UserWarning: Could not import the lzma module. Your installed Python is incomplete. Attempting to use lzma compression will result in a RuntimeError.
+  warnings.warn(msg)
+INFO:Sampler:Parallelizing the sampling on 24 cores.
+INFO:History:Start <ABCSMC(id=2, start_time=2020-06-07 13:15:57.528274, end_time=None)>
+INFO:ABC:t: 0, eps: 50.
+/fs4/d171/d171/s1898201/myEnv/lib/python3.6/site-packages/scipy/integrate/odepack.py:248: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/fs4/d171/d171/s1898201/myEnv/lib/python3.6/site-packages/scipy/integrate/odepack.py:248: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/fs4/d171/d171/s1898201/myEnv/lib/python3.6/site-packages/scipy/integrate/odepack.py:248: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/fs4/d171/d171/s1898201/myEnv/lib/python3.6/site-packages/scipy/integrate/odepack.py:248: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/fs4/d171/d171/s1898201/myEnv/lib/python3.6/site-packages/scipy/integrate/odepack.py:248: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/fs4/d171/d171/s1898201/myEnv/lib/python3.6/site-packages/scipy/integrate/odepack.py:248: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/fs4/d171/d171/s1898201/myEnv/lib/python3.6/site-packages/scipy/integrate/odepack.py:248: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/fs4/d171/d171/s1898201/myEnv/lib/python3.6/site-packages/scipy/integrate/odepack.py:248: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/fs4/d171/d171/s1898201/myEnv/lib/python3.6/site-packages/scipy/integrate/odepack.py:248: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+INFO:ABC:Acceptance rate: 100 / 5456 = 1.8328e-02, ESS=1.0000e+02.
+INFO:ABC:t: 1, eps: 46.570676396577234.
+INFO:ABC:Acceptance rate: 100 / 586 = 1.7065e-01, ESS=2.3791e+01.
+INFO:ABC:t: 2, eps: 42.57366635321056.
+INFO:ABC:Acceptance rate: 100 / 712 = 1.4045e-01, ESS=1.0576e+01.
+INFO:ABC:t: 3, eps: 39.83629631232992.
+INFO:ABC:Acceptance rate: 100 / 569 = 1.7575e-01, ESS=9.4853e+00.
+INFO:ABC:t: 4, eps: 37.261214437856346.
+INFO:ABC:Acceptance rate: 100 / 538 = 1.8587e-01, ESS=1.1167e+01.
+INFO:ABC:t: 5, eps: 35.30672398723321.
+INFO:ABC:Acceptance rate: 100 / 499 = 2.0040e-01, ESS=1.7680e+01.
+INFO:ABC:t: 6, eps: 33.49579462669898.
+INFO:ABC:Acceptance rate: 100 / 468 = 2.1368e-01, ESS=1.3495e+00.
+INFO:ABC:t: 7, eps: 33.45444455899282.
+INFO:ABC:Acceptance rate: 100 / 258 = 3.8760e-01, ESS=2.6578e+00.
+INFO:ABC:t: 8, eps: 26.379808480503776.
+INFO:ABC:Acceptance rate: 100 / 758 = 1.3193e-01, ESS=5.9199e+00.
+INFO:ABC:t: 9, eps: 23.41028947777068.
+INFO:ABC:Acceptance rate: 100 / 408 = 2.4510e-01, ESS=3.3821e+00.
+INFO:ABC:t: 10, eps: 21.485713026515157.
+INFO:ABC:Acceptance rate: 100 / 193 = 5.1813e-01, ESS=2.0836e+00.
+INFO:ABC:t: 11, eps: 17.55275801133977.
+INFO:ABC:Acceptance rate: 100 / 375 = 2.6667e-01, ESS=6.1199e+00.
+INFO:ABC:t: 12, eps: 16.20112117170931.
+INFO:ABC:Acceptance rate: 100 / 311 = 3.2154e-01, ESS=6.8351e+00.
+INFO:ABC:t: 13, eps: 15.428100749181505.
+INFO:ABC:Acceptance rate: 100 / 262 = 3.8168e-01, ESS=5.6920e+00.
+INFO:ABC:t: 14, eps: 14.216771754245146.
+INFO:ABC:Acceptance rate: 100 / 305 = 3.2787e-01, ESS=1.3937e+00.
+INFO:History:Done <ABCSMC(id=2, start_time=2020-06-07 13:15:57.528274, end_time=2020-06-07 13:19:47.128137)>
