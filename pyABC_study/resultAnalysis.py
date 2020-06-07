@@ -53,7 +53,7 @@ obs_data_noisy_s = solver.ode_model(para_true, flatten=False, add_noise=True)
 
 #%% Load database
 
-db_path = "sqlite:///noisy_data.db"
+db_path = "sqlite:///base.db"
 
 history = pyabc.History(db_path)
 
@@ -61,5 +61,5 @@ print("ID: %d, generations: %d" %(history.id, history.max_t))
 
 #%% Plot
 
-result_plot(history, para_true, paraPrior, history.max_t)
 result_data(history, obs_data_noisy_s, solver.timePoint, history.max_t)
+result_plot(history, para_true, paraPrior, history.max_t)

@@ -60,10 +60,13 @@ Plot the population distribution, eps values and acceptance rate
     :param nr_population: the population to be plotted
     :return:
     """
+
     pyabc.visualization.plot_acceptance_rates_trajectory(history)
+    plt.savefig("acceptanceRates.png", dpi=200)
     plt.show()
 
     pyabc.visualization.plot_epsilons(history)
+    plt.savefig("eps.png", dpi=200)
     plt.show()
 
     df, w = history.get_distribution(t=nr_population - 1)
@@ -84,6 +87,7 @@ Plot the population distribution, eps values and acceptance rate
         ax[idx].legend()
         idx += 1
     fig.suptitle('ODE 1: dN/dt')
+    plt.savefig("para1.png", dpi=fig.dpi)
     plt.show()
 
     fig, ax = plt.subplots(1, 3, figsize=(12, 4))
@@ -99,6 +103,7 @@ Plot the population distribution, eps values and acceptance rate
         ax[idx].legend()
         idx += 1
     fig.suptitle('ODE 2: d(Phi)/dt')
+    plt.savefig("para2.png", dpi=fig.dpi)
     plt.show()
 
     fig, ax = plt.subplots(1, 3, figsize=(12, 4))
@@ -114,6 +119,7 @@ Plot the population distribution, eps values and acceptance rate
         ax[idx].legend()
         idx += 1
     fig.suptitle('ODE 3: d(beta)/dt')
+    plt.savefig("para3.png", dpi=fig.dpi)
     plt.show()
 
     fig, ax = plt.subplots(1, 2, figsize=(8, 4))
@@ -129,22 +135,23 @@ Plot the population distribution, eps values and acceptance rate
         ax[idx].legend()
         idx += 1
     fig.suptitle('ODE 4: d(alpha)/dt')
+    plt.savefig("para4.png", dpi=fig.dpi)
     plt.show()
 
-    # Parameters in the second equation
-    #
-    # fig2 = plt.figure(figsize=(12, 4))
-    # idx = 1
-    # for keys in ['lambdaM', 'kMB', 'muM']:
-    #     ax = fig2.add_subplot(1, 3, idx)
-    #     pyabc.visualization.plot_kde_1d(df, w, x=keys, ax=ax)
-    #     ax.axvline(true_parameter[keys], color='k', linestyle='dashed', label="True value")
-    #     ax.legend()
-    #     idx += 1
-    # fig2.suptitle('ODE 2: d𝛷/dt')
-    # plt.show()
-    #
+    pyabc.visualization.plot_credible_intervals(history, size=(8, 24))
+    plt.savefig("credibleIntervals.png", dpi=200)
+    plt.show()
+
+    pyabc.visualization.plot_sample_numbers(history)
+    plt.savefig("nr_samples.png", dpi=200)
+    plt.show()
+
+    pyabc.visualization.plot_effective_sample_sizes(history)
+    plt.savefig("ESS.png", dpi=200)
+    plt.show()
+
     pyabc.visualization.plot_kde_matrix(df, w)
+    plt.savefig("joint.png", dpi=200)
     plt.show()
 
 
@@ -191,4 +198,5 @@ Visualise SMC population and compare it with target data
         axs[kk].scatter(solver.timePoint, compare_data[index_cov[kk]], alpha=0.7)
         axs[kk].legend(['Mean', '25% – 75% quantile range', 'Observed'])
         axs[kk].set_title(index_cov[kk])
+    plt.savefig("resultCurve.png", dpi=200)
     plt.show()
