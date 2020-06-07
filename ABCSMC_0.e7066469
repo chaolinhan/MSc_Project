@@ -1,0 +1,83 @@
+-j 2 
+48 cores
+
+
+tput: No value for $TERM and no -T specified
+tput: No value for $TERM and no -T specified
+tput: No value for $TERM and no -T specified
+tput: No value for $TERM and no -T specified
+
+Setting environment for Python module...
+module swap PrgEnv-cray PrgEnv-gnu
+module swap gcc gcc/6.1.0
+...done
+
+Note: use 'python3' to launch Python 3.6.0
+
+/fs4/d171/d171/s1898201/myEnv/lib/python3.6/site-packages/pandas/compat/__init__.py:85: UserWarning: Could not import the lzma module. Your installed Python is incomplete. Attempting to use lzma compression will result in a RuntimeError.
+  warnings.warn(msg)
+usage: fc-list [-vV?] [--verbose] [--version] [--help] [pattern] {element ...} 
+List fonts matching [pattern]
+
+  -v, --verbose        display status information while busy
+  -V, --version        display font config version and exit
+  -?, --help           display this help and exit
+/fs4/d171/d171/s1898201/myEnv/lib/python3.6/site-packages/pandas/compat/__init__.py:85: UserWarning: Could not import the lzma module. Your installed Python is incomplete. Attempting to use lzma compression will result in a RuntimeError.
+  warnings.warn(msg)
+INFO:Sampler:Parallelizing the sampling on 48 cores.
+INFO:History:Start <ABCSMC(id=3, start_time=2020-06-07 14:09:58.904433, end_time=None)>
+INFO:ABC:t: 0, eps: 50.
+/fs4/d171/d171/s1898201/myEnv/lib/python3.6/site-packages/scipy/integrate/odepack.py:248: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/fs4/d171/d171/s1898201/myEnv/lib/python3.6/site-packages/pyabc/distance/distance.py:100: RuntimeWarning: overflow encountered in double_scalars
+  for key in w),
+/fs4/d171/d171/s1898201/myEnv/lib/python3.6/site-packages/scipy/integrate/odepack.py:248: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/fs4/d171/d171/s1898201/myEnv/lib/python3.6/site-packages/scipy/integrate/odepack.py:248: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/fs4/d171/d171/s1898201/myEnv/lib/python3.6/site-packages/scipy/integrate/odepack.py:248: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/fs4/d171/d171/s1898201/myEnv/lib/python3.6/site-packages/scipy/integrate/odepack.py:248: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/fs4/d171/d171/s1898201/myEnv/lib/python3.6/site-packages/scipy/integrate/odepack.py:248: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/fs4/d171/d171/s1898201/myEnv/lib/python3.6/site-packages/scipy/integrate/odepack.py:248: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/fs4/d171/d171/s1898201/myEnv/lib/python3.6/site-packages/scipy/integrate/odepack.py:248: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/fs4/d171/d171/s1898201/myEnv/lib/python3.6/site-packages/scipy/integrate/odepack.py:248: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/fs4/d171/d171/s1898201/myEnv/lib/python3.6/site-packages/scipy/integrate/odepack.py:248: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/fs4/d171/d171/s1898201/myEnv/lib/python3.6/site-packages/scipy/integrate/odepack.py:248: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+INFO:ABC:Acceptance rate: 100 / 4915 = 2.0346e-02, ESS=1.0000e+02.
+INFO:ABC:t: 1, eps: 46.51393988255646.
+INFO:ABC:Acceptance rate: 100 / 622 = 1.6077e-01, ESS=1.5238e+01.
+INFO:ABC:t: 2, eps: 44.02439969821373.
+INFO:ABC:Acceptance rate: 100 / 683 = 1.4641e-01, ESS=6.9232e+00.
+INFO:ABC:t: 3, eps: 42.54748301441208.
+INFO:ABC:Acceptance rate: 100 / 717 = 1.3947e-01, ESS=4.9624e+00.
+INFO:ABC:t: 4, eps: 41.986042321805925.
+INFO:ABC:Acceptance rate: 100 / 424 = 2.3585e-01, ESS=2.4071e+00.
+INFO:ABC:t: 5, eps: 40.56221749532433.
+INFO:ABC:Acceptance rate: 100 / 249 = 4.0161e-01, ESS=7.0336e+00.
+INFO:ABC:t: 6, eps: 36.780941772663596.
+INFO:ABC:Acceptance rate: 100 / 608 = 1.6447e-01, ESS=3.0635e+00.
+INFO:ABC:t: 7, eps: 36.081293543135146.
+INFO:ABC:Acceptance rate: 100 / 642 = 1.5576e-01, ESS=1.4391e+00.
+INFO:ABC:t: 8, eps: 32.93282200740572.
+INFO:ABC:Acceptance rate: 100 / 1303 = 7.6746e-02, ESS=1.8858e+00.
+INFO:ABC:t: 9, eps: 32.094939004343246.
+INFO:ABC:Acceptance rate: 100 / 505 = 1.9802e-01, ESS=5.3748e+00.
+INFO:ABC:t: 10, eps: 28.623013794726774.
+INFO:ABC:Acceptance rate: 100 / 489 = 2.0450e-01, ESS=2.3575e+00.
+INFO:ABC:t: 11, eps: 24.873676769058893.
+INFO:ABC:Acceptance rate: 100 / 497 = 2.0121e-01, ESS=4.2478e+00.
+INFO:ABC:t: 12, eps: 22.80174955504219.
+INFO:ABC:Acceptance rate: 100 / 500 = 2.0000e-01, ESS=1.2409e+00.
+INFO:ABC:t: 13, eps: 19.047396627945194.
+INFO:ABC:Acceptance rate: 100 / 439 = 2.2779e-01, ESS=6.9707e+00.
+INFO:ABC:t: 14, eps: 18.07491021350303.
+INFO:ABC:Acceptance rate: 100 / 363 = 2.7548e-01, ESS=7.9872e+00.
+INFO:History:Done <ABCSMC(id=3, start_time=2020-06-07 14:09:58.904433, end_time=2020-06-07 14:14:27.138046)>
