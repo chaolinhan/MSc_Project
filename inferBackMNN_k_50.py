@@ -11,7 +11,7 @@ print("\n\n\n MNN kernel test\n Fixed eps, 2000 particles, 20 generations\n\n\n"
 # %% Get path
 
 ROOT_DIR = os.path.abspath(os.curdir)
-db_path = "sqlite:///MNN_TEST.db"
+db_path = "sqlite:///MNN_50.db"
 
 # %% Generate synthetic data
 
