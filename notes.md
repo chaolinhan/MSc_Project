@@ -481,7 +481,16 @@ Only 16 cores involved: default pyabc cannot properly detect available cores
 >   These can be passed to [`pyabc.smc.ABCSMC`](https://pyabc.readthedocs.io/en/latest/api_abcsmc.html#pyabc.smc.ABCSMC) via the `transitions` keyword argument.
 
 -   Default kernel: Multivariate Normal (`MultivariateNormalTransition()`)
--   
+
+-   Fix the eps schedule to make the result comparable:
+
+    ```
+    eps_fixed = pyabc.epsilon.ListEpsilon([50, 46, 43, 40, 37, 34, 31, 29, 27, 25,
+                                           23, 21, 19, 17, 15, 14, 13, 12, 11, 10])
+    ```
+
+    -   Using raw data, not the noisy data
+    -   
 
 ## Adaptive population
 

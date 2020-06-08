@@ -8,7 +8,7 @@ from pyABC_study.dataPlot import obs_data_plot, result_plot, result_data
 # %% Get path
 
 ROOT_DIR = os.path.abspath(os.curdir)
-db_path = "sqlite:///MNN_50.db"
+db_path = "sqlite:///MNN_TEST.db"
 
 # %% Generate synthetic data
 
@@ -86,38 +86,37 @@ paraPrior = pyabc.Distribution(
 
 # %% Define ABC-SMC model
 
-distanceP2_adaptive = pyabc.AdaptivePNormDistance(p=2,
-                                                  scale_function=pyabc.distance.root_mean_square_deviation
-                                                  )
+# distanceP2_adaptive = pyabc.AdaptivePNormDistance(p=2,
+#                                                   scale_function=pyabc.distance.root_mean_square_deviation
+#                                                   )
 distanceP2 = pyabc.PNormDistance(p=2)
-kernel1 = pyabc.IndependentNormalKernel(var=1.0 ** 2)
+# kernel1 = pyabc.IndependentNormalKernel(var=1.0 ** 2)
 
 # Measure distance and set it as minimum epsilon
 min_eps = distanceP2(obs_data_noisy, obs_data_raw)
 
-acceptor1 = pyabc.StochasticAcceptor()
+# acceptor1 = pyabc.StochasticAcceptor()
 
-eps0 = pyabc.MedianEpsilon(50)
-eps1 = pyabc.Temperature()
+# eps0 = pyabc.MedianEpsilon(50)
+# eps1 = pyabc.Temperature()
+eps_fixed = pyabc.epsilon.ListEpsilon([50, 46, 43, 40, 37, 34, 31, 29, 27, 25,
+                                       23, 21, 19, 17, 15, 14, 13, 12, 11, 10])
 
 transition0 = pyabc.transition.LocalTransition(k=50, k_fraction=None)
-transition0
 
-sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=48)
-
-
-def non_noisy_model(para):
-    return solver.ode_model(para, add_noise=False)
+sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=8)
 
 
-abc = pyabc.ABCSMC(models=non_noisy_model,
+
+
+abc = pyabc.ABCSMC(models=solver.non_noisy_model,
                    parameter_priors=paraPrior,
                    # acceptor=acceptor1,
                    population_size=2000,
                    sampler=sampler0,
                    distance_function=distanceP2,
                    transitions=transition0,
-                   eps=eps0,
+                   eps=eps_fixed,
                    # acceptor=pyabc.UniformAcceptor(use_complete_history=True)
                    )
 
@@ -125,7 +124,7 @@ abc = pyabc.ABCSMC(models=non_noisy_model,
 
 print(abc.acceptor)
 print(abc.distance_function, abc.distance_function.p)
-print(abc.eps, abc.eps._initial_epsilon)
+print(abc.eps)
 print(abc.models)
 print(abc.population_size, abc.population_size.nr_particles)
 print(abc.sampler, abc.sampler.n_procs)
