@@ -53,7 +53,7 @@ obs_data_noisy_s = solver.ode_model(para_true, flatten=False, add_noise=True)
 
 #%% Load database
 
-db_path = "sqlite:///base.db"
+db_path = "sqlite:///MNN_50.db"
 
 history = pyabc.History(db_path)
 
@@ -63,3 +63,26 @@ print("ID: %d, generations: %d" %(history.id, history.max_t))
 
 result_data(history, obs_data_noisy_s, solver.timePoint, history.max_t)
 result_plot(history, para_true, paraPrior, history.max_t)
+
+# %% MNN compare
+
+db_path_base = "sqlite:///base.db"
+db_path_MNN = ["sqlite:///MNN.db", "sqlite:///MNN_50.db"]
+
+history_base = pyabc.History(db_path_base, _id=1)
+history_500 = pyabc.History(db_path_base, _id=2)
+history_100 = pyabc.History(db_path_MNN[0])
+history_50 = pyabc.History(db_path_MNN[1])
+
+import os
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import pyabc
+
+from pyABC_study.ODE import ODESolver
+
+# %% Plot
+pyabc.visualization.plot_sample_numbers([history_base, history_500, history_100, history_50])
+plt.show()
