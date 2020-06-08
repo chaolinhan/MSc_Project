@@ -105,7 +105,7 @@ min_eps = distanceP2(obs_data_noisy, obs_data_raw)
 eps_fixed = pyabc.epsilon.ListEpsilon([50, 46, 43, 40, 37, 34, 31, 29, 27, 25,
                                        23, 21, 19, 17, 15, 14, 13, 12, 11, 10])
 
-transition0 = pyabc.transition.LocalTransition(k=50, k_fraction=None)
+# transition0 = pyabc.transition.LocalTransition(k=50, k_fraction=None)
 
 sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=48)
 
@@ -118,7 +118,7 @@ abc = pyabc.ABCSMC(models=solver.non_noisy_model,
                    population_size=2000,
                    sampler=sampler0,
                    distance_function=distanceP2,
-                   transitions=transition0,
+                #    transitions=transition0,
                    eps=eps_fixed,
                    # acceptor=pyabc.UniformAcceptor(use_complete_history=True)
                    )

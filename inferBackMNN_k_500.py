@@ -5,9 +5,6 @@ import pyabc
 from pyABC_study.ODE import ODESolver, PriorLimits
 from pyABC_study.dataPlot import obs_data_plot, result_plot, result_data
 
-
-print("\n\n\n MNN kernel test\n Fixed eps, 2000 particles, 20 generations\n\n\n")
-
 # %% Get path
 
 ROOT_DIR = os.path.abspath(os.curdir)

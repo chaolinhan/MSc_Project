@@ -130,7 +130,7 @@ print(abc.transitions)
 # %% Run ABC-SMC
 
 abc.new(db_path, obs_data_raw)
-max_population = 20
+max_population = 10
 
 print(db_path)
 print("Generations: %d" % max_population)
