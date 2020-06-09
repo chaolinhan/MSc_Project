@@ -496,6 +496,7 @@ Only 16 cores involved: default pyabc cannot properly detect available cores
         -   Euclidean distance
         -   Non-noisy model
         -   48 core parallel sampling
+    -   **Later analysis requires more duplicated runs** 
 
 ## Adaptive population - efficiency
 
@@ -515,7 +516,17 @@ Paper:
 
 ## Prior range - goodness of fit
 
+-   range
+
+-   Log uniform
+
 ## Data size - goodness of fit
+
+Size of data points
+
+Using summary statistics
+
+
 
 ## Distance functions TBC
 

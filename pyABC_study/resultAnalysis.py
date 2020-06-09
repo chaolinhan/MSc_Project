@@ -66,17 +66,16 @@ result_plot(history, para_true, paraPrior, history.max_t)
 
 # %% MNN compare
 
-db_path_base = "sqlite:///base.db"
-db_path_MNN = ["sqlite:///MNN.db", "sqlite:///MNN_50.db", "sqlite:///MNN_am.db", "sqlite:///MNN_750.db"]
+db_path_MNN = os.listdir('db/')
 
-history_base = pyabc.History(db_path_base, _id=1)
-history_500 = pyabc.History(db_path_base, _id=2)
-history_100 = pyabc.History(db_path_MNN[0])
-history_50 = pyabc.History(db_path_MNN[1])
-history_250 = pyabc.History(db_path_MNN[2])
-history_750 = pyabc.History(db_path_MNN[3])
+history_base = pyabc.History('sqlite:///db/MNN_base.db')
+history_500 = pyabc.History('sqlite:///db/MNN_500.db')
+history_100 = pyabc.History('sqlite:///db/MNN_100.db')
+history_50 = pyabc.History('sqlite:///db/MNN_50.db')
+history_250 = pyabc.History('sqlite:///db/MNN_250.db')
+history_750 = pyabc.History('sqlite:///db/MNN_750.db')
 
-history_list = [history_base, history_750, history_500, history_250, history_100, history_100]
+history_list = [history_base, history_750, history_500, history_250, history_100, history_50]
 history_label = ['base', 'k=750', 'k=500', 'k=250', 'k=100', 'k=50']
 
 
@@ -91,4 +90,7 @@ pyabc.visualization.plot_acceptance_rates_trajectory(history_list, labels=histor
 plt.show()
 
 pyabc.visualization.plot_epsilons(history_list, labels=history_label)
+plt.show()
+
+pyabc.visualization.plot_total_sample_numbers(history_list, labels=history_label)
 plt.show()
