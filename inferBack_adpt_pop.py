@@ -4,12 +4,12 @@ import pyabc
 
 from pyABC_study.ODE import ODESolver, PriorLimits
 
-print("\n\n\n Adaptive population test\n Fixed eps, 2000 particles, 20 generations\n\n\n")
+print("\n\n\n Adaptive population test\n Fixed eps, 2000 initial particles, 20 generations\n\n\n")
 
 # %% Get path
 
 ROOT_DIR = os.path.abspath(os.curdir)
-db_path = "sqlite:///MNN_base.db"
+db_path = "sqlite:///AdptPop.db"
 
 # %% Generate synthetic data
 
