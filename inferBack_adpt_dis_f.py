@@ -3,15 +3,13 @@ import os
 import pyabc
 
 from pyABC_study.ODE import ODESolver, PriorLimits
-from pyABC_study.dataPlot import obs_data_plot, result_plot, result_data
 
-
-print("\n\n\n MNN kernel test\n Fixed eps, 2000 particles, 20 generations\n\n\n")
+print("\n\n\n Adaptive diatance test\n Median eps, 2000 particles, 20 generations\n\n\n")
 
 # %% Get path
 
 ROOT_DIR = os.path.abspath(os.curdir)
-db_path = "sqlite:///MNN_50.db"
+db_path = "sqlite:///adpt_dis_f.db"
 
 # %% Generate synthetic data
 
@@ -56,8 +54,26 @@ obs_data_raw_s = solver.ode_model(para_true, flatten=False, add_noise=False)
 print("Target data")
 print(obs_data_noisy_s)
 
-# Measure distance and set it as minimum epsilon
+# %% Calculate data range as factors:
 
+range_N = obs_data_raw_s['N'].max() - obs_data_raw_s['N'].min()
+range_M = obs_data_raw_s['M'].max() - obs_data_raw_s['M'].min()
+range_B = obs_data_raw_s['B'].max() - obs_data_raw_s['B'].min()
+range_A = obs_data_raw_s['A'].max() - obs_data_raw_s['A'].min()
+
+factors = {}
+
+for i in range(30):
+    factors[str(i)] = 1 / range_N
+
+for i in range(30, 60):
+    factors[str(i)] = 1 / range_M
+
+for i in range(60, 90):
+    factors[str(i)] = 1 / range_B
+
+for i in range(90, 120):
+    factors[str(i)] = 1 / range_A
 
 # %% Plot
 
@@ -89,9 +105,10 @@ paraPrior = pyabc.Distribution(
 
 # %% Define ABC-SMC model
 
-# distanceP2_adaptive = pyabc.AdaptivePNormDistance(p=2,
-#                                                   scale_function=pyabc.distance.root_mean_square_deviation
-#                                                   )
+distanceP2_adpt = pyabc.AdaptivePNormDistance(p=2,
+                                              scale_function=pyabc.distance.root_mean_square_deviation,
+                                              factors=factors
+                                              )
 distanceP2 = pyabc.PNormDistance(p=2)
 # kernel1 = pyabc.IndependentNormalKernel(var=1.0 ** 2)
 
@@ -99,27 +116,26 @@ distanceP2 = pyabc.PNormDistance(p=2)
 min_eps = distanceP2(obs_data_noisy, obs_data_raw)
 
 # acceptor1 = pyabc.StochasticAcceptor()
+acceptor_adpt = pyabc.UniformAcceptor(use_complete_history=True)
 
-# eps0 = pyabc.MedianEpsilon(50)
+eps0 = pyabc.MedianEpsilon(50)
 # eps1 = pyabc.Temperature()
-eps_fixed = pyabc.epsilon.ListEpsilon([50, 46, 43, 40, 37, 34, 31, 29, 27, 25,
-                                       23, 21, 19, 17, 15, 14, 13, 12, 11, 10])
+# eps_fixed = pyabc.epsilon.ListEpsilon([50, 46, 43, 40, 37, 34, 31, 29, 27, 25,
+#                                        23, 21, 19, 17, 15, 14, 13, 12, 11, 10])
 
-transition0 = pyabc.transition.LocalTransition(k=50, k_fraction=None)
+# transition0 = pyabc.transition.LocalTransition(k=50, k_fraction=None)
+# transition1 = pyabc.transition.GridSearchCV()
 
 sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=48)
 
-
-
-
 abc = pyabc.ABCSMC(models=solver.non_noisy_model,
                    parameter_priors=paraPrior,
-                   # acceptor=acceptor1,
+                   acceptor=acceptor_adpt,
                    population_size=2000,
                    sampler=sampler0,
                    distance_function=distanceP2,
-                   transitions=transition0,
-                   eps=eps_fixed,
+                   # transitions=transition1,
+                   eps=eps0,
                    # acceptor=pyabc.UniformAcceptor(use_complete_history=True)
                    )
 
@@ -136,11 +152,13 @@ print(abc.transitions)
 # %% Run ABC-SMC
 
 abc.new(db_path, obs_data_raw)
-max_population = 20
+max_population = 30
 
 print(db_path)
 print("Generations: %d" % max_population)
 print("Minimum eps: %.3f" % min_eps)
+
+min_eps = 10
 
 history = abc.run(minimum_epsilon=min_eps, max_nr_populations=max_population)
 

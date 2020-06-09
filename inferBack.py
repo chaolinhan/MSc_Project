@@ -53,7 +53,6 @@ obs_data_raw_s = solver.ode_model(para_true, flatten=False, add_noise=False)
 print("Target data")
 print(obs_data_noisy_s)
 
-# Measure distance and set it as minimum epsilon
 
 
 # %% Plot

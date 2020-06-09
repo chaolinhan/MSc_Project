@@ -9,3 +9,6 @@ test*.db
 test.db*
 *.db
 archived/
+ref/
+pyABC_study/kernel_study/
+pyABC_study/adpt_pop_study/
