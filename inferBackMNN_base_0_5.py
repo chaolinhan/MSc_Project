@@ -11,7 +11,7 @@ print("\n\n\n MNN kernel test\n Fixed eps, 2000 particles, 30 generations\n\n\n"
 # %% Get path
 
 ROOT_DIR = os.path.abspath(os.curdir)
-db_path = "sqlite:///MNN_base_scale_median.db"
+db_path = "sqlite:///MNN_base_GS_median.db"
 
 # %% Generate synthetic data
 
@@ -106,7 +106,7 @@ eps0 = pyabc.MedianEpsilon(50)
 #                                        23, 21, 19, 17, 15, 14, 13, 12, 11, 10])
 
 # transition0 = pyabc.transition.LocalTransition(k=50, k_fraction=None)
-transition1 = pyabc.transition.MultivariateNormalTransition(scaling=0.5)
+transition1 = pyabc.transition.GridSearchCV()
 
 sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=48)
 

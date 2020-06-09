@@ -46,42 +46,73 @@ solver = ODESolver()
 # obs_data_raw = solver.ode_model(para_true, flatten=True, add_noise=False)
 
 obs_data_noisy_s = solver.ode_model(para_true, flatten=False, add_noise=True)
-# obs_data_raw_s = solver.ode_model(para_true, flatten=False, add_noise=False)
+obs_data_raw_s = solver.ode_model(para_true, flatten=False, add_noise=False)
 #
 # print("Target data")
 # print(obs_data_noisy_s)
 
 # %% Load database
+#
+# db_path = "sqlite:///MNN_50.db"
+#
+# history = pyabc.History(db_path)
+#
+# print("ID: %d, generations: %d" % (history.id, history.max_t))
+#
+# # %% Plot
+#
+# result_data(history, obs_data_noisy_s, solver.timePoint, history.max_t)
+# result_plot(history, para_true, paraPrior, history.max_t)
+#
+# # %% kernel compare
+#
+# db_path_MNN = os.listdir('db/')
+#
+# history_base = pyabc.History('sqlite:///db/MNN_base.db')
+# history_500 = pyabc.History('sqlite:///db/MNN_500.db')
+# history_100 = pyabc.History('sqlite:///db/MNN_100.db')
+# history_50 = pyabc.History('sqlite:///db/MNN_50.db')
+# history_250 = pyabc.History('sqlite:///db/MNN_250.db')
+# history_750 = pyabc.History('sqlite:///db/MNN_750.db')
+#
+# history_list = [history_base, history_750, history_500, history_250, history_100, history_50]
+# history_label = ['base', 'k=750', 'k=500', 'k=250', 'k=100', 'k=50']
+#
+#
+# # %% Plot
+# pyabc.visualization.plot_sample_numbers(history_list, labels=history_label)
+# plt.show()
+#
+# pyabc.visualization.plot_effective_sample_sizes(history_list, labels=history_label)
+# plt.show()
+#
+# pyabc.visualization.plot_acceptance_rates_trajectory(history_list, labels=history_label)
+# plt.show()
+#
+# pyabc.visualization.plot_epsilons(history_list, labels=history_label)
+# plt.show()
+#
+# pyabc.visualization.plot_total_sample_numbers(history_list, labels=history_label)
+# plt.show()
 
-db_path = "sqlite:///MNN_50.db"
+# %% kernel median eps compare
 
-history = pyabc.History(db_path)
+history_base = pyabc.History('sqlite:///db/MNN_base_median.db')
+history_base_scale = pyabc.History('sqlite:///db/MNN_base_scale_median.db')
+history_500 = pyabc.History('sqlite:///db/MNN_500_median.db')
+history_100 = pyabc.History('sqlite:///db/MNN_100_median.db')
+history_50 = pyabc.History('sqlite:///db/MNN_50_median.db')
+history_250 = pyabc.History('sqlite:///db/MNN_250_median.db')
+history_750 = pyabc.History('sqlite:///db/MNN_750_median.db')
 
-print("ID: %d, generations: %d" % (history.id, history.max_t))
+history_list = [history_base, history_base_scale, history_750, history_500, history_250, history_100, history_50]
+history_label = ['Multivariate Normal', 'Multivariate Normal\nscle=0.5', 'NN k=750', 'NN k=500', 'NN k=250', 'NN k=100', 'NN k=50']
+
 
 # %% Plot
 
-result_data(history, obs_data_noisy_s, solver.timePoint, history.max_t)
-result_plot(history, para_true, paraPrior, history.max_t)
-
-# %% MNN compare
-
-db_path_MNN = os.listdir('db/')
-
-history_base = pyabc.History('sqlite:///db/MNN_base.db')
-history_500 = pyabc.History('sqlite:///db/MNN_500.db')
-history_100 = pyabc.History('sqlite:///db/MNN_100.db')
-history_50 = pyabc.History('sqlite:///db/MNN_50.db')
-history_250 = pyabc.History('sqlite:///db/MNN_250.db')
-history_750 = pyabc.History('sqlite:///db/MNN_750.db')
-
-history_list = [history_base, history_750, history_500, history_250, history_100, history_50]
-history_label = ['base', 'k=750', 'k=500', 'k=250', 'k=100', 'k=50']
-
-
-# %% Plot
-pyabc.visualization.plot_sample_numbers(history_list, labels=history_label)
-plt.show()
+pyabc.visualization.plot_sample_numbers(history_list, labels=history_label, size=(12,6))
+plt.show(scale=2)
 
 pyabc.visualization.plot_effective_sample_sizes(history_list, labels=history_label)
 plt.show()
@@ -94,3 +125,7 @@ plt.show()
 
 pyabc.visualization.plot_total_sample_numbers(history_list, labels=history_label)
 plt.show()
+
+for item in history_list:
+    # result_plot(item, para_true, paraPrior, item.max_t)
+    result_data(item, obs_data_raw_s, solver.timePoint, item.max_t)
