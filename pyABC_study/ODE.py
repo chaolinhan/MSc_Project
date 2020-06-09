@@ -111,6 +111,9 @@ class ODESolver:
                     "B": sol[:, 2],
                     "A": sol[:, 3]}
 
+    def non_noisy_model(self, para):
+        return self.ode_model(para, add_noise=False)
+
 
 class PriorLimits:
     def __init__(self, lb, ub):

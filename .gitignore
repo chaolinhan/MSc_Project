@@ -8,3 +8,4 @@ bokeh
 test*.db
 test.db*
 *.db
+archived/

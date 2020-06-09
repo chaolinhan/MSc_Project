@@ -467,18 +467,49 @@ Only 16 cores involved: default pyabc cannot properly detect available cores
 ## Basic run
 
 -   On archer
-    -   2000 particles, 15 generations
+    -   2000 particles, 20 generations
     -   Narrow prior range
     -   P2 normal distance
     -   Median eps
 -   Eps is not convergent
-    -   ![image-20200605230600716](https://i.imgur.com/3mD3k8T.png)
+    -   ![eps](pyABC_study/result/base/eps.png)
+    -   All plots and data: `pyABC_study/result/base`
+-   New fix: using `aprun -b -n 1 -d 48 -j 2 python3 inferBack.py` and `aprun -b -n 1 -d 24 python3 inferBack.py`, with parallel sampling `n_proc` set to 48 and 24 respectively
 
-## Kernel experiment
+## Kernel experiment - efficiency
 
-## Adaptive population
+>   These can be passed to [`pyabc.smc.ABCSMC`](https://pyabc.readthedocs.io/en/latest/api_abcsmc.html#pyabc.smc.ABCSMC) via the `transitions` keyword argument.
 
-## Distance functions
+-   Default kernel: Multivariate Normal (`MultivariateNormalTransition()`)
+
+-   Fix the eps schedule to make the result comparable:
+
+    ```
+    eps_fixed = pyabc.epsilon.ListEpsilon([50, 46, 43, 40, 37, 34, 31, 29, 27, 25,
+                                           23, 21, 19, 17, 15, 14, 13, 12, 11, 10])
+    ```
+
+    -   Using **raw** data, not the noisy data
+    -   Experiments
+        -   Population size 2000
+        -   20 generations
+        -   Euclidean distance
+        -   Non-noisy model
+        -   48 core parallel sampling
+
+## Adaptive population - efficiency
+
+Paper: 
+
+>   Klinger, Emmanuel, and Jan Hasenauer. “A Scheme for Adaptive Selection of Population Sizes in ” Approximate Bayesian Computation - Sequential Monte Carlo.” Computational Methods in Systems Biology, 128-44. Lecture Notes in Computer Science. Springer, Cham, 2017. https://doi.org/10.1007/978-3-319-67471-1_8.
+
+>   This strategy tries to respond to the shape of the current posterior approximation by selecting the population size such that the variation of the density estimates matches the target variation given via the mean_cv argument.
+
+## Prior range - goodness of fit
+
+## Data size - goodness of fit
+
+## Distance functions TBC
 
 ## PCA
 
