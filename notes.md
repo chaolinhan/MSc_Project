@@ -497,6 +497,12 @@ Only 16 cores involved: default pyabc cannot properly detect available cores
         -   Non-noisy model
         -   48 core parallel sampling
     -   **Later analysis requires more duplicated runs** 
+    
+    ![image-20200609035304953](https://i.imgur.com/hFiIOgb.png)
+    
+-   Median eps
+
+    -   
 
 ## Adaptive population - efficiency
 
@@ -514,8 +520,6 @@ Paper:
     -   Fixed eps schedule
     -   Non-noisy model
     -   48 core parallel sampling
-
-    ![image-20200609035304953](https://i.imgur.com/hFiIOgb.png)
 
     -   Median eps to reach eps<10 for 200 particles:
 
