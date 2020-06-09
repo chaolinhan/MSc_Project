@@ -2,7 +2,7 @@
 #
 #PBS -N ABCSMC_MN
 #PBS -l select=1
-#PBS -l walltime=3:00:00
+#PBS -l walltime=3:30:00
 #PBS -A d171-s1898201
 
 cd $PBS_O_WORKDIR

@@ -1,8 +1,8 @@
 #!/bin/bash --login
 #
-#PBS -N ABCSMC_MNN
+#PBS -N ABCSMC_M500
 #PBS -l select=1
-#PBS -l walltime=1:30:00
+#PBS -l walltime=2:00:00
 #PBS -A d171-s1898201
 
 cd $PBS_O_WORKDIR
@@ -10,4 +10,4 @@ cd $PBS_O_WORKDIR
 module load python-compute/3.6.0_gcc6.1.0
 source /work/d171/d171/s1898201/myEnv/bin/activate
 
-aprun -b -n 1 -d 48 -j 2 python3 inferBackMNN_k_500.py > MNN500.out
+aprun -b -n 1 -d 48 -j 2 python3 inferBackMNN_k_500.py
