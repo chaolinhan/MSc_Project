@@ -507,12 +507,17 @@ Paper:
 >   This strategy tries to respond to the shape of the current posterior approximation by selecting the population size such that the variation of the density estimates matches the target variation given via the mean_cv argument.
 
 -   Experiments
+
     -   Initial population size 2000
     -   20 generations
     -   Euclidean distance
     -   Fixed eps schedule
     -   Non-noisy model
     -   48 core parallel sampling
+
+    ![image-20200609035304953](https://i.imgur.com/hFiIOgb.png)
+
+    -   Median eps to reach eps<10 for 200 particles:
 
 ## Prior range - goodness of fit
 

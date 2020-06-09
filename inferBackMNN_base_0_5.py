@@ -6,12 +6,12 @@ from pyABC_study.ODE import ODESolver, PriorLimits
 from pyABC_study.dataPlot import obs_data_plot, result_plot, result_data
 
 
-print("\n\n\n MNN kernel test\n Fixed eps, 2000 particles, 20 generations\n\n\n")
+print("\n\n\n MNN kernel test\n Fixed eps, 2000 particles, 30 generations\n\n\n")
 
 # %% Get path
 
 ROOT_DIR = os.path.abspath(os.curdir)
-db_path = "sqlite:///MNN_base_scale.db"
+db_path = "sqlite:///MNN_base_scale_median.db"
 
 # %% Generate synthetic data
 
@@ -100,10 +100,10 @@ min_eps = distanceP2(obs_data_noisy, obs_data_raw)
 
 # acceptor1 = pyabc.StochasticAcceptor()
 
-# eps0 = pyabc.MedianEpsilon(50)
+eps0 = pyabc.MedianEpsilon(50)
 # eps1 = pyabc.Temperature()
-eps_fixed = pyabc.epsilon.ListEpsilon([50, 46, 43, 40, 37, 34, 31, 29, 27, 25,
-                                       23, 21, 19, 17, 15, 14, 13, 12, 11, 10])
+# eps_fixed = pyabc.epsilon.ListEpsilon([50, 46, 43, 40, 37, 34, 31, 29, 27, 25,
+#                                        23, 21, 19, 17, 15, 14, 13, 12, 11, 10])
 
 # transition0 = pyabc.transition.LocalTransition(k=50, k_fraction=None)
 transition1 = pyabc.transition.MultivariateNormalTransition(scaling=0.5)
@@ -120,7 +120,7 @@ abc = pyabc.ABCSMC(models=solver.non_noisy_model,
                    sampler=sampler0,
                    distance_function=distanceP2,
                    transitions=transition1,
-                   eps=eps_fixed,
+                   eps=eps0,
                    # acceptor=pyabc.UniformAcceptor(use_complete_history=True)
                    )
 
@@ -137,11 +137,13 @@ print(abc.transitions)
 # %% Run ABC-SMC
 
 abc.new(db_path, obs_data_raw)
-max_population = 20
+max_population = 30
 
 print(db_path)
 print("Generations: %d" % max_population)
 print("Minimum eps: %.3f" % min_eps)
+
+min_eps = 10
 
 history = abc.run(minimum_epsilon=min_eps, max_nr_populations=max_population)
 
