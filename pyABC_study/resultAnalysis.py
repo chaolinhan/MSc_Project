@@ -1,5 +1,3 @@
-import os
-
 import matplotlib.pyplot as plt
 import pyabc
 
@@ -103,22 +101,56 @@ obs_data_raw_s = solver.ode_model(para_true, flatten=False, add_noise=False)
 
 # %% kernel median eps compare
 
-history_base = pyabc.History('sqlite:///db/MNN_base_median.db')
-history_base_scale = pyabc.History('sqlite:///db/MNN_base_scale_median.db')
-history_base_GS = pyabc.History('sqlite:///db/MNN_base_GS_median.db')
-history_500 = pyabc.History('sqlite:///db/MNN_500_median.db')
-history_100 = pyabc.History('sqlite:///db/MNN_100_median.db')
-history_50 = pyabc.History('sqlite:///db/MNN_50_median.db')
-history_250 = pyabc.History('sqlite:///db/MNN_250_median.db')
-history_750 = pyabc.History('sqlite:///db/MNN_750_median.db')
-
-history_list = [history_base, history_base_scale, history_base_GS, history_750, history_500, history_250, history_100, history_50]
-history_label = ['Multivariate Normal', 'Multivariate Normal\nscale=0.5', 'Multivariate Normal\nGridSearch', 'NN M=750', 'NN M=500', 'NN M=250', 'NN M=100',
-                 'NN M=50']
+# history_base = pyabc.History('sqlite:///db/MNN_base_median.db')
+# history_base_scale = pyabc.History('sqlite:///db/MNN_base_scale_median.db')
+# history_base_GS = pyabc.History('sqlite:///db/MNN_base_GS_median.db')
+# history_500 = pyabc.History('sqlite:///db/MNN_500_median.db')
+# history_100 = pyabc.History('sqlite:///db/MNN_100_median.db')
+# history_50 = pyabc.History('sqlite:///db/MNN_50_median.db')
+# history_250 = pyabc.History('sqlite:///db/MNN_250_median.db')
+# history_750 = pyabc.History('sqlite:///db/MNN_750_median.db')
+#
+# history_list = [history_base, history_base_scale, history_base_GS, history_750, history_500, history_250, history_100,
+#                 history_50]
+# history_label = ['Multivariate Normal', 'Multivariate Normal\nscale=0.5', 'Multivariate Normal\nGridSearch', 'NN M=750',
+#                  'NN M=500', 'NN M=250', 'NN M=100',
+#                  'NN M=50']
 
 # %% Plot
 
-pyabc.visualization.plot_sample_numbers(history_list, labels=history_label, size=(16, 6))
+# pyabc.visualization.plot_sample_numbers(history_list, labels=history_label, size=(16, 6))
+# plt.show(scale=2)
+#
+# pyabc.visualization.plot_effective_sample_sizes(history_list, labels=history_label)
+# plt.show()
+#
+# pyabc.visualization.plot_acceptance_rates_trajectory(history_list, labels=history_label)
+# plt.show()
+#
+# pyabc.visualization.plot_epsilons(history_list, labels=history_label)
+# plt.show()
+#
+# pyabc.visualization.plot_total_sample_numbers(history_list, labels=history_label)
+# plt.show()
+#
+# for item in history_list:
+#     # result_plot(item, para_true, paraPrior, item.max_t)
+#     result_data(item, obs_data_raw_s, solver.timePoint, item.max_t)
+
+# %% Adaptive distance compare
+
+history_base = pyabc.History('sqlite:///db/MNN_base_median.db', )
+history_f = pyabc.History('sqlite:///db/SMC_f.db')
+history_a = pyabc.History('sqlite:///db/adpt_dis.db')
+history_af = pyabc.History('sqlite:///db/adpt_dis_f.db')
+#
+history_list = [history_base, history_f, history_a, history_af]
+
+history_label = ['Multivariate Normal', '+factor', 'Adaptive distance', 'Adaptive distance\n+factor']
+
+# %% Plot
+
+pyabc.visualization.plot_sample_numbers(history_list, labels=history_label, size=(12, 6))
 plt.show(scale=2)
 
 pyabc.visualization.plot_effective_sample_sizes(history_list, labels=history_label)
