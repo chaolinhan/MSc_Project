@@ -118,6 +118,20 @@ However, they may have the drawbacks:
 
 ## Adaptive distance
 
+Efficiency in compared with 20 generations:
+
+-   Number of required sample to reach eps_t
+-   Acceptance rates and effective sampling size in each generations
+
+Goodness of fit is observed from
+
+-   Inferred parameter vs true parameter
+-   Inferred curves vs observed data
+
+
+
+## Stochastic acceptor
+
 
 
 -   In future “Result Analysis” part, these experiment runs should be repeated for 5 or 10 times for a reliable result

@@ -9,7 +9,7 @@ print("\n\n\n Adaptive distance test\n Median eps, 2000 particles, 20 generation
 # %% Get path
 
 ROOT_DIR = os.path.abspath(os.curdir)
-db_path = "sqlite:///adpt_dis_f.db"
+db_path = "sqlite:///SMC_af.db"
 
 # %% Generate synthetic data
 
@@ -158,7 +158,7 @@ print(abc.transitions)
 
 abc.new(db_path, obs_data_raw)
 max_population = 20
-min_eps = 4
+min_eps = 0.1
 
 print(db_path)
 print("Generations: %d" % max_population)
