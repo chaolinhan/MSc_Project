@@ -1,6 +1,6 @@
 #!/bin/bash --login
 #
-#PBS -N SMC_adpt_d
+#PBS -N SMC_a
 #PBS -l select=1
 #PBS -l walltime=1:30:00
 #PBS -A d171-s1898201

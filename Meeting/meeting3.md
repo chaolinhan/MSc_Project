@@ -21,10 +21,10 @@ There are also papers using synthetic data with noise and model without noise to
 
 Goal: find the most efficient kernels under a given schedule.
 
-The efficiency can be measure by 
+Give a target threshold eps_t, the efficiency can be measure by
 
-1.  Number of required sample
-2.  Acceptance rates and effective sampling size
+1.  Number of required sample to reach eps_t
+2.  Acceptance rates and effective sampling size in each generations
 
 Relayed paper:
 
