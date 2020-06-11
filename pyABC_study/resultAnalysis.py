@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import pyabc
 
 from pyABC_study.ODE import ODESolver, PriorLimits
-from pyABC_study.dataPlot import result_data
+from pyABC_study.dataPlot import result_data, result_plot
 
 # %% Settings
 
@@ -51,17 +51,17 @@ obs_data_raw_s = solver.ode_model(para_true, flatten=False, add_noise=False)
 # print(obs_data_noisy_s)
 
 # %% Load database
-#
-# db_path = "sqlite:///MNN_50.db"
-#
-# history = pyabc.History(db_path)
-#
-# print("ID: %d, generations: %d" % (history.id, history.max_t))
-#
-# # %% Plot
-#
-# result_data(history, obs_data_noisy_s, solver.timePoint, history.max_t)
-# result_plot(history, para_true, paraPrior, history.max_t)
+
+db_path = "sqlite:///db/SMC_base_big.db"
+
+history = pyabc.History(db_path)
+
+print("ID: %d, generations: %d" % (history.id, history.max_t))
+
+# %% Plot
+
+result_data(history, obs_data_raw_s, solver.timePoint, history.max_t)
+result_plot(history, para_true, paraPrior, history.max_t)
 #
 # %% kernel compare
 #

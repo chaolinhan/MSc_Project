@@ -4,12 +4,12 @@ import pyabc
 
 from pyABC_study.ODE import ODESolver, PriorLimits
 
-print("\n\n\n Adaptive distance test\n Median eps, 2000 particles, 20 generations\n\n\n")
+print("\n\n\n Factor test\n Median eps, 2000 particles, 20 generations\n\n\n")
 
 # %% Get path
 
 ROOT_DIR = os.path.abspath(os.curdir)
-db_path = "sqlite:///SMC_f.db"
+db_path = "sqlite:///SMC_f2.db"
 
 # %% Generate synthetic data
 
@@ -56,25 +56,26 @@ print(obs_data_noisy_s)
 
 # %% Calculate data range as factors:
 
-# Use data range as factors
-range_N = obs_data_raw_s['N'].max() - obs_data_raw_s['N'].min()
-range_M = obs_data_raw_s['M'].max() - obs_data_raw_s['M'].min()
-range_B = obs_data_raw_s['B'].max() - obs_data_raw_s['B'].min()
-range_A = obs_data_raw_s['A'].max() - obs_data_raw_s['A'].min()
+# Use data variance as factors
+
+sigma_n = 5.66
+sigma_m = 4.59
+sigma_b = 5.15
+sigma_a = 2.42
 
 factors = {}
 
 for i in range(30):
-    factors[i] = 1 / range_N
+    factors[i] = 1 / sigma_n
 
 for i in range(30, 60):
-    factors[i] = 1 / range_M
+    factors[i] = 1 / sigma_m
 
 for i in range(60, 90):
-    factors[i] = 1 / range_B
+    factors[i] = 1 / sigma_b
 
 for i in range(90, 120):
-    factors[i] = 1 / range_A
+    factors[i] = 1 / sigma_a
 
 scl = 120./sum(factors.values())
 
