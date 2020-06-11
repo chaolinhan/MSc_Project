@@ -13,7 +13,7 @@
 Adding noise makes the inference harder. Later implementations we could consider using 
 
 -   A model with noise, or
--   [Stochastic acceptor](https://pyabc.readthedocs.io/en/latest/examples/noise.html) provided by `pyabc`
+-   [Stochastic acceptor](#Stochastic-acceptor)
 
 There are also papers using synthetic data with noise and model without noise to test the performance of ABC SMC
 
@@ -26,11 +26,11 @@ Give a target threshold eps_t, the efficiency can be measure by
 1.  Number of required sample to reach eps_t
 2.  Acceptance rates and effective sampling size in each generations
 
-Relayed paper:
+Related paper:
 
 >   Filippi, S., Barnes, C. P., Cornebise, J., & Stumpf, M. P. H. (2013). On optimality of kernels for approximate Bayesian computation using sequential Monte Carlo. *Statistical Applications in Genetics and Molecular Biology*, *12*(1), 87–107. https://doi.org/10.1515/sagmb-2012-0069
 
-There is limited options in perturbation provided by `pyabc `. Other packages may provide more kernel options
+There is limited options in perturbation kernels provided by `pyabc `. Other packages may provide more kernel options.
 
 Kernels provided by `pyabc`:
 
@@ -41,6 +41,8 @@ Kernels provided by `pyabc`:
     -   For each particle, M-nearest neighbours are selected, the covariance is calculated using these neighbours 
 
 ## Experiments
+
+In future “Result Analysis” part, these experiment runs should be repeated for 5 or 10 times for a reliable result
 
 ### Fixed threshold schedule
 
@@ -54,20 +56,20 @@ Under a fixed threshold schedule: `[50, 46, 43, 40, 37, 34, 31, 29, 27, 25, 23, 
 
 ​																												Figure 2
 
-(Different colours indicates different generations)
+(Different colours represents different generations)
 
 ![image-20200609181634239](../../../Library/Application Support/typora-user-images/image-20200609181634239.png)
 
 ​																												Figure 3
 
--   Greater M: lower acceptance rates at each generation, the more particles are needed in each generation, thus the more time is needed. 
--   Here, M=750 is the curve with lowest acceptance rates, as suggested by Filippi, S. et al, the maximal M=2000 (whole population) will be expected to have the lowest acceptance rates.
+-   Greater M in Nearest Neighbour (NN): lower acceptance rates at each generation, the more particles are needed in each generation, thus the more time is needed. 
+-   Here, M=750 is the curve with lowest acceptance rates, as suggested by Filippi, S. et al, the maximal M=2000 (whole population) will be expected to have the lowest acceptance rates among all M.
 -   The traditional trivial multivariate normal kernel should have equal performance to M=2000, but here in `pyabc` the multivariate normal kernel is a modified version and thus better
 -   Decrease the `scaling` argument of multivariate normal kernel will make the perturbation kernel more ‘local', as it is sampling under a ‘thinner’ Gaussian distribution, however there could be problems which are discussed in the next section
 
-### Median eps with minimum eps=10
+### Median threshold schedule with minimum eps=10
 
-Using median epsilon schedule, starts from 50. Maximal generation numbers is set to 30, but ABC SMC will stop as long as the eps is smaller than 10
+Using median epsilon schedule starting from 50. Maximal generation numbers is set to 30, but ABC SMC will stop as long as the eps is smaller than 10
 
 #### Result
 
@@ -79,7 +81,7 @@ Using median epsilon schedule, starts from 50. Maximal generation numbers is set
 
 ​																												Figure 5
 
--   New experiment added here: multivariate normal with grid search, provided py `pyabc`. It performs a grid search on the `scaling` argument of multivariate normal at each generation. In this case the `scaling` argument is changing among generations.
+-   New experiment added here: multivariate normal with grid search, provided py `pyabc`. It performs a grid search on the `scaling` argument of multivariate normal at each generation. In this case the `scaling` argument is changing among generations
 -   Similar result to the fixed threshold schedule. Multivariate normal with grid search does not give much improvement
 
 ### Trade-offs
@@ -87,15 +89,15 @@ Using median epsilon schedule, starts from 50. Maximal generation numbers is set
 As above figures suggest, the efficient settings are
 
 -   Multivariate normal with M nearest neighbour, **with a small M**
--   Multivariate normal with a smaller `scaling` argument
+-   Multivariate normal with a **smaller `scaling` argument**
 
-They are considered because they take less sample numbers to reach a target threshold, i.e higher acceptance rates, fewer required samples, less execution time
+They are considered because they take less sample numbers to reach a target threshold, i.e higher acceptance rates, fewer required samples, less execution time.
 
-However, they may have the drawbacks:
+However, they may have drawbacks:
 
--   They may stuck in local optimum because they can hardly explore wider ranges (Figure 6). In this case, epsilon will not convergent to the zero; or they need much more samples to jump away from a local optimal (see ’NN M=50’ in Figure 2, were the last generation requires much more samples to find enough accepted particles). This situation could be worse if the target epsilon is set even smaller, e.g. 5. This agrees with conclusions from Filippi, S. et al 2013
+-   They may stuck in local optimum because they can hardly explore wider ranges (Figure 6). In this case, epsilon will not convergent to zero; or they need much more samples to jump away from a local optimal (see ’NN M=50’ in Figure 2, where the last generation requires much more samples to find enough accepted particles). This situation could be worse if the target epsilon is set even smaller, e.g. 5. This agrees with conclusions from Filippi, S. et al 2013
 
--   Regardless of the above problem, if we only want a final population that targeting a given epsilon value, we could just 
+-   Regardless of the above problem, if we only want a final population that targets a given epsilon value, we could just 
 
     -   Firstly choose the kernels with the highest acceptance rates
     -   If two kernels have similar acceptance rates, choose the one with less computational complexity
@@ -104,21 +106,33 @@ However, they may have the drawbacks:
 
     ​																												Figure 6
 
-## Adaptive functions
+## Conclusion
 
->   Adapt the population size according to the mean coefficient of variation error criterion
+On a given final eps, using small `scaling` in multivariate normal and NN with small M is efficient, but if we are targeting the true posterior we should consider original multivariate normal or NN with M>=100
+
+
+
+
+
+# Adaptive functions
+
+## Adaptive population
+
+>    Adapt the population size according to the mean coefficient of variation error criterion
 
 -   Adaptive population: population at each generation varies from `min_population` to `max_population`
     -   `min_population=10`, `max_population=5000`
-    -   Test result: after start, the population size is always adapted to `max_population=5000` in each of later generations, which results in a much longer execution time compared to constant population size = 2000
+    -   **Test result**: after start, the population size is always adapted to `max_population=5000` in each of later generations, which results in a much longer execution time compared to constant population size = 2000
     -   Possible reasons
         -   Large number of parameters and large parameter space
     -   It might indicate that we should choose larger constant population size
     -   I’ll read the related paper (Klinger, 2017) and re-think about its appliance cases
+    
+    
 
 ## Adaptive distance
 
-Efficiency in compared with 20 generations:
+Efficiency is compared with 20 generations':
 
 -   Number of required sample to reach eps_t
 -   Acceptance rates and effective sampling size in each generations
@@ -128,10 +142,80 @@ Goodness of fit is observed from
 -   Inferred parameter vs true parameter
 -   Inferred curves vs observed data
 
+### Distance function: assume Euclidean distance
+
+$D=(\Sigma_i (w_if_i\Delta x_i)^2)^{1/2}$
+
+$\Delta x=x_{simulated}-x_{observed}$, w is **weight**, f is **factor**
+
+-   Non-adaptive distance: w and f is always 1
+
+-   Adaptive distance: $w_i$ is changing among generations, in order to give informative data points higher weight
+-   Factors could be given as an normalisation. When some data points are equally informative, applying factors could take their scales into account
+    -   In this experiment, factors are set proportional to the data ranges of the four curves
+    -   More factors could be tried later
+
+### Results
+
+#### Efficiency
+
+![image-20200610160513484](../../../Library/Application Support/typora-user-images/image-20200610160513484.png)
+
+​																												Figure 7
+
+![image-20200610160527767](../../../Library/Application Support/typora-user-images/image-20200610160527767.png)
+
+​																												Figure 8
+
+Running 20 generations:
+
+-   Adding factors make the non-adaptive distance more efficient
+-   Adaptive distance with/without factors applied seems to be much more efficient, but they have accuracy problem (below)
+
+### Goodness of fit
+
+-   The distance threshold i.e. eps is not comparable between adaptive ones and non adaptive ones because of different weights
+
+![image-20200610161423332](../../../Library/Application Support/typora-user-images/image-20200610161423332.png)
+
+​																												Figure 9
+
+(From left to right: non-adaptive distance, non-adaptive distance with factors, adaptive distance, adaptive distance with factors)
+
+-   Adaptive distance might just not suitable for this task
+    -   Too many data points, tool large parameter space will probably make the ‘adaptive’ distance function hard to identify which data points are more informative in inferring than others
+
+### Conclusion
+
+-   Factor would help with non-adaptive distance function, adaptive distance function might be not helpful in this case
 
 
-## Stochastic acceptor
+
+# Stochastic acceptor 
+
+In `pyabc`, measurement noise can be consider via 
+
+1.  Manually add a noise term to the model, or
+2.  Using a stochastic acceptor
+
+If we use a stochastic acceptor, then 
+
+-   Distance function should be changed in order to consider the noise term
+-   Epsilon schedule switched to a [temperature schedule](https://pyabc.readthedocs.io/en/develop/examples/noise.html)
+
+Tests on my local laptop shows bad results, Experiments with larger problem size on ARCHER are still **in progress**
 
 
 
--   In future “Result Analysis” part, these experiment runs should be repeated for 5 or 10 times for a reliable result
+# Planned experiments
+
+The above experiments is mostly about the efficiency, the following experiments will study more on the goodness of fit:
+
+-   Prior range
+-   Data size
+-   Population size and number of populations
+
+However these experiments are less important, as for the real data from Tsarouchas et al., we can only start trying with wide prior range, use all the data points available, and run ABC SMC with large population and more generations.
+
+
+

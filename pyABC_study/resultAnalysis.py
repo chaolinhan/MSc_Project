@@ -139,10 +139,10 @@ obs_data_raw_s = solver.ode_model(para_true, flatten=False, add_noise=False)
 
 # %% Adaptive distance compare
 
-history_base = pyabc.History('sqlite:///db/MNN_base_median.db', )
+history_base = pyabc.History('sqlite:///db/SMC_base.db', )
 history_f = pyabc.History('sqlite:///db/SMC_f.db')
-history_a = pyabc.History('sqlite:///db/adpt_dis.db')
-history_af = pyabc.History('sqlite:///db/adpt_dis_f.db')
+history_a = pyabc.History('sqlite:///db/SMC_a.db')
+history_af = pyabc.History('sqlite:///db/SMC_af.db')
 #
 history_list = [history_base, history_f, history_a, history_af]
 
