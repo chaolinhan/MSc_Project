@@ -141,12 +141,13 @@ result_plot(history, para_true, paraPrior, history.max_t)
 
 history_base = pyabc.History('sqlite:///db/SMC_base.db', )
 history_f = pyabc.History('sqlite:///db/SMC_f.db')
-history_a = pyabc.History('sqlite:///db/SMC_a.db')
-history_af = pyabc.History('sqlite:///db/SMC_af.db')
+history_f2 = pyabc.History('sqlite:///db/SMC_f2.db')
+# history_a = pyabc.History('sqlite:///db/SMC_a.db')
+# history_af = pyabc.History('sqlite:///db/SMC_af.db')
 #
-history_list = [history_base, history_f, history_a, history_af]
+history_list = [history_base, history_f, history_f2]
 
-history_label = ['Multivariate Normal', '+factor', 'Adaptive distance', 'Adaptive distance\n+factor']
+history_label = ['No factor', '+ Range factor', '+ Variance factor']
 
 # %% Plot
 

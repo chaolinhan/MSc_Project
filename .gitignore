@@ -5,10 +5,9 @@ pyABC_study/__pycache__/
 pyABC_study/.Rhistory
 bokeh
 /.vscode/
-test*.db
-test.db*
 *.db
 archived/
 ref/
 pyABC_study/kernel_study/
-pyABC_study/adpt_pop_study/
+pyABC_study/adpt_study/
+pyABC_study/archived/
