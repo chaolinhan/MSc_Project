@@ -62,12 +62,14 @@ def euclidean_distance(dataNormalised, simulation, normalise=False):
 
 
 class ODESolver:
+
     timePoint_default = np.concatenate(
         (np.array([0., 0.25, 0.5, 1]), np.arange(2, 24, 2), np.arange(24, 74, 4), np.array([96, 120])),
         axis=0)
+    timePoint_exp = np.array([0., 0.25, 0.5, 1, 2, 4, 6, 12, 24, 48, 72, 120])
     varInit = np.array([0, 0, 1, 1])
+
     timePoint = timePoint_default
-    time_len = len(timePoint)
 
     def ode_model(self, para, flatten=True, add_noise=True) -> dict:
 
@@ -97,11 +99,12 @@ class ODESolver:
                   para["sAM"], para["muA"])
         )
 
+        time_len = len(self.timePoint)
         if add_noise:
-            sol[1:, 0] += a * sigma_n * np.random.randn(self.time_len - 1) + mu
-            sol[1:, 1] += a * sigma_m * np.random.randn(self.time_len - 1) + mu
-            sol[1:, 2] += a * sigma_b * np.random.randn(self.time_len - 1) + mu
-            sol[1:, 3] += a * sigma_a * np.random.randn(self.time_len - 1) + mu
+            sol[1:, 0] += a * sigma_n * np.random.randn(time_len - 1) + mu
+            sol[1:, 1] += a * sigma_m * np.random.randn(time_len - 1) + mu
+            sol[1:, 2] += a * sigma_b * np.random.randn(time_len - 1) + mu
+            sol[1:, 3] += a * sigma_a * np.random.randn(time_len - 1) + mu
 
         if flatten:
             return {i: sol.flatten()[i] for i in range(sol.flatten().__len__())}
