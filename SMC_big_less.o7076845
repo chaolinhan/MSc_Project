@@ -1,0 +1,46 @@
+--------------------------------------------------------------------------------
+*** s1898201   Job: 7076845.sdb   started: 12/06/20 23:38:58   host: mom1 ***
+*** s1898201   Job: 7076845.sdb   started: 12/06/20 23:38:58   host: mom1 ***
+*** s1898201   Job: 7076845.sdb   started: 12/06/20 23:38:58   host: mom1 ***
+*** s1898201   Job: 7076845.sdb   started: 12/06/20 23:38:58   host: mom1 ***
+
+--------------------------------------------------------------------------------
+
+
+
+ Base big, factors applied, less data points
+ Median eps, 5000 particles, 30 generations
+
+
+
+Target data
+{'N': array([ 0.        ,  2.62217251,  4.83218215, 10.65774385, 25.15197635,
+       25.16875191, 10.02380001,  3.33653611,  3.88863635,  3.17167783,
+        3.6609079 ,  4.10683501]), 'M': array([ 0.        ,  1.0913462 ,  1.05355515,  2.25719843,  4.55248557,
+       10.2374153 , 13.39441789, 14.1470991 , 13.96307894, 13.78810783,
+       14.18218678, 13.632254  ]), 'B': array([ 1.        ,  1.25278635,  2.12174169,  6.32281316, 18.04244763,
+       27.16512595, 12.32711284,  3.31546483,  3.25912528,  3.11848258,
+        2.90001684,  3.24697087]), 'A': array([1.        , 0.34627053, 0.56314096, 1.08718366, 2.41215204,
+       5.53399732, 7.18221895, 7.60503978, 7.65626158, 7.49223652,
+       7.41333941, 7.31525921])}
+<pyabc.acceptor.acceptor.UniformAcceptor object at 0x2aaad2e47630>
+<pyabc.distance.distance.PNormDistance object at 0x2aaad2e474e0> 2
+<pyabc.epsilon.epsilon.MedianEpsilon object at 0x2aaad2e47198>
+[<SimpleModel non_noisy_model>]
+<pyabc.populationstrategy.ConstantPopulationSize object at 0x2aaad2e47860> 5000
+<pyabc.sampler.multicore_evaluation_parallel.MulticoreEvalParallelSampler object at 0x2aaad2e47208> 48
+[MultivariateNormalTransition()]
+sqlite:///SMC_base_big_less.db
+Generations: 30
+Minimum eps: 4.000
+Application 40842817 resources: utime ~71797s, stime ~151s, Rss ~1027040, inblocks ~2424136, outblocks ~3292170
+--------------------------------------------------------------------------------
+
+Resources requested: ncpus=24,place=free,walltime=03:30:00
+Resources allocated: cpupercent=32,cput=00:00:01,mem=14792kb,ncpus=24,vmem=157296kb,walltime=01:27:41
+
+*** s1898201   Job: 7076845.sdb   ended: 13/06/20 01:06:38   queue: standard ***
+*** s1898201   Job: 7076845.sdb   ended: 13/06/20 01:06:38   queue: standard ***
+*** s1898201   Job: 7076845.sdb   ended: 13/06/20 01:06:38   queue: standard ***
+*** s1898201   Job: 7076845.sdb   ended: 13/06/20 01:06:38   queue: standard ***
+--------------------------------------------------------------------------------
