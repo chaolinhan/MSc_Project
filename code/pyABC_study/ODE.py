@@ -18,6 +18,15 @@ The ODE of dynamical system
     return dN, dM, dB, dA
 
 
+def arr2d_to_dict(arr: np.ndarray):
+    """
+    Flatten 2-d array into dict
+    :param arr: a 2-d array
+    :return: flat dict
+    """
+    return {i: arr.flatten()[i] for i in range(arr.flatten().__len__())}
+
+
 def normalise_data(data):
     """
     Normalise the data dictionary
@@ -144,6 +153,7 @@ class PriorLimits:
     """
     Limits class for parameters' prior range
     """
+
     def __init__(self, lb, ub):
         self.lb = lb
         self.ub = ub

@@ -1,5 +1,6 @@
 data/
-/.idea/
+code/.idea/
+.idea/
 venv/
 pyABC_study/__pycache__/
 pyABC_study/.Rhistory
