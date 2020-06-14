@@ -105,12 +105,12 @@ eps0 = pyabc.MedianEpsilon(80)
 # transition0 = pyabc.transition.LocalTransition(k=50, k_fraction=None)
 # transition1 = pyabc.transition.GridSearchCV()
 
-sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=8)
+sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=48)
 
 abc = pyabc.ABCSMC(models=solver.non_noisy_model,
                    parameter_priors=paraPrior,
                    # acceptor=acceptor_adpt,
-                   population_size=100,
+                   population_size=5000,
                    sampler=sampler0,
                    distance_function=distanceP2,
                    # transitions=transition1,
@@ -131,7 +131,7 @@ print(abc.transitions)
 # %% Run ABC-SMC
 
 abc.new(db_path, exp_data)
-max_population = 10
+max_population = 30
 min_eps = 4
 
 print(db_path)
