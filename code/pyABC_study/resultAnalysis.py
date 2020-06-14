@@ -1,23 +1,10 @@
 import matplotlib.pyplot as plt
 import pyabc
 
-from pyABC_study.ODE import ODESolver, PriorLimits
+from pyABC_study.ODE import ODESolver, PriorLimits, para_true
 from pyABC_study.dataPlot import result_data, result_plot
 
 # %% Settings
-
-para_true = {'iBM': 1.0267462374320455,
-             'kMB': 0.07345932286118964,
-             'kNB': 2.359199465995228,
-             'lambdaM': 2.213837884117815,
-             'lambdaN': 7.260925726829641,
-             'muA': 18.94626522780349,
-             'muB': 2.092860392215201,
-             'muM': 0.17722330053184654,
-             'muN': 0.0023917569160019844,
-             'sAM': 10.228522400429998,
-             'sBN': 4.034313992927392,
-             'vNM': 0.3091883041193706}
 
 lim = PriorLimits(0, 20)
 lim2 = PriorLimits(0, 1)
@@ -25,7 +12,26 @@ lim3 = PriorLimits(0, 10)
 # lim2 = PriorLimits(0, 20)
 # lim3 = PriorLimits(0, 20)
 
-paraPrior = pyabc.Distribution(
+para_prior = pyabc.Distribution(
+    lambdaN=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
+    kNB=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
+    muN=pyabc.RV("uniform", lim2.lb, lim2.interval_length),
+    vNM=pyabc.RV("uniform", lim2.lb, lim2.interval_length),
+    lambdaM=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
+    kMB=pyabc.RV("uniform", lim2.lb, lim2.interval_length),
+    muM=pyabc.RV("uniform", lim2.lb, lim2.interval_length),
+    sBN=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
+    iBM=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
+    muB=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
+    sAM=pyabc.RV("uniform", lim.lb, lim.interval_length),
+    muA=pyabc.RV("uniform", lim.lb, lim.interval_length)
+)
+
+lim3 = PriorLimits(0, 20)
+lim2 = PriorLimits(0, 20)
+
+
+para_prior_wide = pyabc.Distribution(
     lambdaN=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
     kNB=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
     muN=pyabc.RV("uniform", lim2.lb, lim2.interval_length),
@@ -41,27 +47,28 @@ paraPrior = pyabc.Distribution(
 )
 
 solver = ODESolver()
-# obs_data_noisy = solver.ode_model(para_true, flatten=True, add_noise=True)
-# obs_data_raw = solver.ode_model(para_true, flatten=True, add_noise=False)
 
 obs_data_noisy_s = solver.ode_model(para_true, flatten=False, add_noise=True)
 obs_data_raw_s = solver.ode_model(para_true, flatten=False, add_noise=False)
+
+solver.timePoint = solver.timePoint_exp
+obs_data_raw_s_less = solver.ode_model(para_true, flatten=False, add_noise=False)
 #
 # print("Target data")
 # print(obs_data_noisy_s)
 
 # %% Load database
 
-db_path = "sqlite:///db/SMC_base_big.db"
-
-history = pyabc.History(db_path)
-
-print("ID: %d, generations: %d" % (history.id, history.max_t))
+# db_path = "sqlite:///db/SMC_base_big.db"
+#
+# history = pyabc.History(db_path)
+#
+# print("ID: %d, generations: %d" % (history.id, history.max_t))
 
 # %% Plot
 
-result_data(history, obs_data_raw_s, solver.timePoint, history.max_t)
-result_plot(history, para_true, paraPrior, history.max_t)
+# result_data(history, obs_data_raw_s, solver.timePoint, history.max_t)
+# result_plot(history, para_true, paraPrior, history.max_t)
 #
 # %% kernel compare
 #
@@ -138,16 +145,46 @@ result_plot(history, para_true, paraPrior, history.max_t)
 #     result_data(item, obs_data_raw_s, solver.timePoint, item.max_t)
 
 # %% Adaptive distance compare
-
-history_base = pyabc.History('sqlite:///db/SMC_base.db', )
-history_f = pyabc.History('sqlite:///db/SMC_f.db')
-history_f2 = pyabc.History('sqlite:///db/SMC_f2.db')
-# history_a = pyabc.History('sqlite:///db/SMC_a.db')
-# history_af = pyabc.History('sqlite:///db/SMC_af.db')
 #
-history_list = [history_base, history_f, history_f2]
+# history_base = pyabc.History('sqlite:///db/SMC_base.db', )
+# history_f = pyabc.History('sqlite:///db/SMC_f.db')
+# history_f2 = pyabc.History('sqlite:///db/SMC_f2.db')
+# # history_a = pyabc.History('sqlite:///db/SMC_a.db')
+# # history_af = pyabc.History('sqlite:///db/SMC_af.db')
+# #
+# history_list = [history_base, history_f, history_f2]
+#
+# history_label = ['No factor', '+ Range factor', '+ Variance factor']
 
-history_label = ['No factor', '+ Range factor', '+ Variance factor']
+# %% Plot
+
+# pyabc.visualization.plot_sample_numbers(history_list, labels=history_label, size=(12, 6))
+# plt.show(scale=2)
+#
+# pyabc.visualization.plot_effective_sample_sizes(history_list, labels=history_label)
+# plt.show()
+#
+# pyabc.visualization.plot_acceptance_rates_trajectory(history_list, labels=history_label)
+# plt.show()
+#
+# pyabc.visualization.plot_epsilons(history_list, labels=history_label)
+# plt.show()
+#
+# pyabc.visualization.plot_total_sample_numbers(history_list, labels=history_label)
+# plt.show()
+#
+# for item in history_list:
+#     # result_plot(item, para_true, paraPrior, item.max_t)
+#     result_data(item, obs_data_raw_s, solver.timePoint, item.max_t)
+
+# %% Prior range and data size compare
+
+history_base = pyabc.History('sqlite:///db/SMC_base_big.db', )
+history_less = pyabc.History('sqlite:///db/SMC_base_big_less.db')
+history_wide = pyabc.History('sqlite:///db/SMC_base_big_wide.db')
+history_list = [history_base, history_less, history_wide]
+
+history_label = ['base', 'less data', 'wider prior\nrange']
 
 # %% Plot
 
@@ -166,6 +203,10 @@ plt.show()
 pyabc.visualization.plot_total_sample_numbers(history_list, labels=history_label)
 plt.show()
 
-for item in history_list:
-    # result_plot(item, para_true, paraPrior, item.max_t)
-    result_data(item, obs_data_raw_s, solver.timePoint, item.max_t)
+result_data(history_base, obs_data_raw_s, solver.timePoint_default, history_base.max_t)
+result_data(history_less, obs_data_raw_s_less, solver.timePoint_exp, history_base.max_t)
+result_data(history_wide, obs_data_raw_s, solver.timePoint_default, history_base.max_t)
+
+result_plot(history_base, para_true, para_prior, history_base.max_t)
+result_plot(history_less, para_true, para_prior, history_less.max_t)
+result_plot(history_wide, para_true, para_prior_wide, history_wide.max_t)

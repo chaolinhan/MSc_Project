@@ -95,4 +95,6 @@ Noise and model selection:
 
 # Approximate Bayesian computation applied to the identification of thermal damage of biological tissues due to laser irradiation
 
-Sensitivity visualisation
+-   Sensitivity visualisation
+-   Estimation is far from the true one
+-   Small prior lead to correct true data
