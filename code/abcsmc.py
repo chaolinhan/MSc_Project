@@ -110,7 +110,7 @@ sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=48)
 abc = pyabc.ABCSMC(models=solver.non_noisy_model,
                    parameter_priors=paraPrior,
                    # acceptor=acceptor_adpt,
-                   population_size=5000,
+                   population_size=2000,
                    sampler=sampler0,
                    distance_function=distanceP2,
                    # transitions=transition1,
