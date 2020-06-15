@@ -97,7 +97,7 @@ distanceP2 = pyabc.PNormDistance(p=2)#, factors=factors)
 # acceptor1 = pyabc.StochasticAcceptor()
 # acceptor_adpt = pyabc.UniformAcceptor(use_complete_history=True)
 
-eps0 = pyabc.MedianEpsilon(60, median_multiplier=0.9)
+eps0 = pyabc.MedianEpsilon(60, median_multiplier=0.95)
 # eps1 = pyabc.Temperature()
 # eps_fixed = pyabc.epsilon.ListEpsilon([50, 46, 43, 40, 37, 34, 31, 29, 27, 25,
 #                                        23, 21, 19, 17, 15, 14, 13, 12, 11, 10])
@@ -105,7 +105,7 @@ eps0 = pyabc.MedianEpsilon(60, median_multiplier=0.9)
 # transition0 = pyabc.transition.LocalTransition(k=50, k_fraction=None)
 # transition1 = pyabc.transition.GridSearchCV()
 
-sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=48)
+sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=24)
 
 abc = pyabc.ABCSMC(models=solver.non_noisy_model,
                    parameter_priors=paraPrior,
@@ -131,7 +131,7 @@ print(abc.transitions)
 # %% Run ABC-SMC
 
 abc.new(db_path, exp_data)
-max_population = 30
+max_population = 20
 min_eps = 4
 
 print(db_path)
