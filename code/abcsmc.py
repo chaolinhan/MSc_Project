@@ -97,7 +97,7 @@ distanceP2 = pyabc.PNormDistance(p=2)#, factors=factors)
 # acceptor1 = pyabc.StochasticAcceptor()
 # acceptor_adpt = pyabc.UniformAcceptor(use_complete_history=True)
 
-eps0 = pyabc.MedianEpsilon(80)
+eps0 = pyabc.MedianEpsilon(60, median_multiplier=0.9)
 # eps1 = pyabc.Temperature()
 # eps_fixed = pyabc.epsilon.ListEpsilon([50, 46, 43, 40, 37, 34, 31, 29, 27, 25,
 #                                        23, 21, 19, 17, 15, 14, 13, 12, 11, 10])

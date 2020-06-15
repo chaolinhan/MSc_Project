@@ -85,7 +85,7 @@ PCA and sensitivity:
 
 Sensitivity:
 
->   Analysing and comparing the results of the deterministic and stochastic repressilator dynamics shows that parameter sensitivity is intimately linked to inferability. If the system is insensitive to a parameter, then this parameter will be hard (or even impossible) to infer, as varying such a parameter does not vary the output—which here is the approximate posterior probability—very much. In stochastic pro.           blems, we may furthermore have the scenario where the fluctuations due to small variations in one parameter overwhelm the signals from other parameters.
+>   Analysing and comparing the results of the deterministic and stochastic repressilator dynamics shows that parameter sensitivity is intimately linked to inferability. If the system is insensitive to a parameter, then this parameter will be hard (or even impossible) to infer, as varying such a parameter does not vary the output—which here is the approximate posterior probability—very much. In stochastic problems, we may furthermore have the scenario where the fluctuations due to small variations in one parameter overwhelm the signals from other parameters.
 
 Noise and model selection: 
 

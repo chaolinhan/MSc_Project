@@ -1,7 +1,10 @@
+import os
+import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 import pyabc
 
-from pyABC_study.ODE import ODESolver, PriorLimits, para_true
+from pyABC_study.ODE import ODESolver, PriorLimits, para_true, arr2d_to_dict
 from pyABC_study.dataPlot import result_data, result_plot
 
 # %% Settings
@@ -59,16 +62,45 @@ obs_data_raw_s_less = solver.ode_model(para_true, flatten=False, add_noise=False
 
 # %% Load database
 
-# db_path = "sqlite:///db/SMC_base_big.db"
-#
-# history = pyabc.History(db_path)
-#
-# print("ID: %d, generations: %d" % (history.id, history.max_t))
+db_path = "sqlite:///db/abcsmc.db"
+
+history = pyabc.History(db_path)
+
+print("ID: %d, generations: %d" % (history.id, history.max_t))
 
 # %% Plot
 
-# result_data(history, obs_data_raw_s, solver.timePoint, history.max_t)
-# result_plot(history, para_true, paraPrior, history.max_t)
+raw_data_path = os.path.abspath(os.curdir) + "/data/rawData.csv"
+raw_data = pd.read_csv(raw_data_path).astype("float32")
+
+time_points: object = raw_data.iloc[:, 0].to_numpy()
+exp_data = raw_data.iloc[:, 1:].to_numpy()
+exp_data = arr2d_to_dict(exp_data)
+
+exp_data_s = raw_data.iloc[:, 1:].to_dict(orient='list')
+for k in exp_data_s:
+    exp_data_s[k] = np.array(exp_data_s[k])
+
+result_data(history, exp_data_s, solver.timePoint_exp, history.max_t)
+
+lim = PriorLimits(0, 75)
+
+paraPrior = pyabc.Distribution(
+    lambdaN=pyabc.RV("uniform", lim.lb, lim.interval_length),
+    kNB=pyabc.RV("uniform", lim.lb, lim.interval_length),
+    muN=pyabc.RV("uniform", lim.lb, lim.interval_length),
+    vNM=pyabc.RV("uniform", lim.lb, lim.interval_length),
+    lambdaM=pyabc.RV("uniform", lim.lb, lim.interval_length),
+    kMB=pyabc.RV("uniform", lim.lb, lim.interval_length),
+    muM=pyabc.RV("uniform", lim.lb, lim.interval_length),
+    sBN=pyabc.RV("uniform", lim.lb, lim.interval_length),
+    iBM=pyabc.RV("uniform", lim.lb, lim.interval_length),
+    muB=pyabc.RV("uniform", lim.lb, lim.interval_length),
+    sAM=pyabc.RV("uniform", lim.lb, lim.interval_length),
+    muA=pyabc.RV("uniform", lim.lb, lim.interval_length)
+)
+
+result_plot(history, para_true, paraPrior, history.max_t)
 #
 # %% kernel compare
 #
