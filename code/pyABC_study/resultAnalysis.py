@@ -62,7 +62,7 @@ obs_data_raw_s_less = solver.ode_model(para_true, flatten=False, add_noise=False
 
 # %% Load database
 
-db_path = "sqlite:///db/abcsmc.db"
+db_path = "sqlite:///db/abcsmc_test.db"
 
 history = pyabc.History(db_path)
 

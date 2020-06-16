@@ -87,3 +87,13 @@ Factors make ABC SMC more effective but less accurate in this case
         -   Compare to exact inference, traditional ABC rejection
 2.  In the meantime, write the report and dissertation
 
+
+
+# Meeting notes
+
+-   Write the units of the four time series and try to limit their prior range
+-   Set the covariance according to the real data at each time points
+-   Try log uniform distribution in the prior distribution
+-   New model: remove iBM
+-   Try LS fitting with new models
+-   Timer could be added to help profile

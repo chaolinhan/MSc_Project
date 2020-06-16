@@ -8,7 +8,8 @@ print("\n\n\nABC SMC\nParaneter estimation\n")
 
 # %% Set database path
 
-db_path = "sqlite:///abcsmc.db"
+# TODO Change database name every run
+db_path = "sqlite:///abcsmc_log.db"
 
 # %% Read  and prepare raw data
 
@@ -65,21 +66,25 @@ print("No factors applied")
 # %% Define prior distribution of parameters
 # Be careful that RV("uniform", -10, 15) means uniform distribution in [-10, 5], '15' here is the interval length
 
-lim = PriorLimits(0, 75)
+# TODO Set prior
+
+lim = PriorLimits(1e-4, 75)
+
+print("Log uniform")
 
 paraPrior = pyabc.Distribution(
-    lambdaN=pyabc.RV("uniform", lim.lb, lim.interval_length),
-    kNB=pyabc.RV("uniform", lim.lb, lim.interval_length),
-    muN=pyabc.RV("uniform", lim.lb, lim.interval_length),
-    vNM=pyabc.RV("uniform", lim.lb, lim.interval_length),
-    lambdaM=pyabc.RV("uniform", lim.lb, lim.interval_length),
-    kMB=pyabc.RV("uniform", lim.lb, lim.interval_length),
-    muM=pyabc.RV("uniform", lim.lb, lim.interval_length),
-    sBN=pyabc.RV("uniform", lim.lb, lim.interval_length),
-    iBM=pyabc.RV("uniform", lim.lb, lim.interval_length),
-    muB=pyabc.RV("uniform", lim.lb, lim.interval_length),
-    sAM=pyabc.RV("uniform", lim.lb, lim.interval_length),
-    muA=pyabc.RV("uniform", lim.lb, lim.interval_length)
+    lambdaN=pyabc.RV("loguniform", lim.lb, lim.interval_length),
+    kNB=pyabc.RV("loguniform", lim.lb, lim.interval_length),
+    muN=pyabc.RV("loguniform", lim.lb, lim.interval_length),
+    vNM=pyabc.RV("loguniform", lim.lb, lim.interval_length),
+    lambdaM=pyabc.RV("loguniform", lim.lb, lim.interval_length),
+    kMB=pyabc.RV("loguniform", lim.lb, lim.interval_length),
+    muM=pyabc.RV("loguniform", lim.lb, lim.interval_length),
+    sBN=pyabc.RV("loguniform", lim.lb, lim.interval_length),
+    iBM=pyabc.RV("loguniform", lim.lb, lim.interval_length),
+    muB=pyabc.RV("loguniform", lim.lb, lim.interval_length),
+    sAM=pyabc.RV("loguniform", lim.lb, lim.interval_length),
+    muA=pyabc.RV("loguniform", lim.lb, lim.interval_length)
 )
 
 # %% Define ABC-SMC model
@@ -97,7 +102,7 @@ distanceP2 = pyabc.PNormDistance(p=2)#, factors=factors)
 # acceptor1 = pyabc.StochasticAcceptor()
 # acceptor_adpt = pyabc.UniformAcceptor(use_complete_history=True)
 
-eps0 = pyabc.MedianEpsilon(60, median_multiplier=0.95)
+eps0 = pyabc.MedianEpsilon(60)
 # eps1 = pyabc.Temperature()
 # eps_fixed = pyabc.epsilon.ListEpsilon([50, 46, 43, 40, 37, 34, 31, 29, 27, 25,
 #                                        23, 21, 19, 17, 15, 14, 13, 12, 11, 10])
@@ -105,7 +110,7 @@ eps0 = pyabc.MedianEpsilon(60, median_multiplier=0.95)
 # transition0 = pyabc.transition.LocalTransition(k=50, k_fraction=None)
 # transition1 = pyabc.transition.GridSearchCV()
 
-sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=24)
+sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=48)
 
 abc = pyabc.ABCSMC(models=solver.non_noisy_model,
                    parameter_priors=paraPrior,
@@ -121,11 +126,11 @@ abc = pyabc.ABCSMC(models=solver.non_noisy_model,
 # %% Print ABC SMC info
 
 print(abc.acceptor)
-print(abc.distance_function, abc.distance_function.p)
+print(abc.distance_function.p, abc.distance_function)
 print(abc.eps)
 print(abc.models)
-print(abc.population_size, abc.population_size.nr_particles)
-print(abc.sampler, abc.sampler.n_procs)
+print(abc.population_size.nr_particles, abc.population_size, )
+print(abc.sampler.n_procs, abc.sampler)
 print(abc.transitions)
 
 # %% Run ABC-SMC
