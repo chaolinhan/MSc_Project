@@ -4,12 +4,12 @@ import pyabc
 import pandas as pd
 from pyABC_study.ODE import ODESolver, PriorLimits, arr2d_to_dict
 
-print("\n\n\nABC SMC\nParaneter estimation\n")
+print("\n\n\nABC SMC\nParameter estimation\n")
 
 # %% Set database path
 
 # TODO Change database name every run
-db_path = "sqlite:///abcsmc_log.db"
+db_path = "sqlite:///abcsmc.db"
 
 # %% Read  and prepare raw data
 
@@ -68,23 +68,23 @@ print("No factors applied")
 
 # TODO Set prior
 
-lim = PriorLimits(1e-4, 75)
+lim = PriorLimits(1e-5, 75)
 
 print("Log uniform")
 
-paraPrior = pyabc.Distribution(
-    lambdaN=pyabc.RV("loguniform", lim.lb, lim.interval_length),
-    kNB=pyabc.RV("loguniform", lim.lb, lim.interval_length),
-    muN=pyabc.RV("loguniform", lim.lb, lim.interval_length),
-    vNM=pyabc.RV("loguniform", lim.lb, lim.interval_length),
-    lambdaM=pyabc.RV("loguniform", lim.lb, lim.interval_length),
-    kMB=pyabc.RV("loguniform", lim.lb, lim.interval_length),
-    muM=pyabc.RV("loguniform", lim.lb, lim.interval_length),
-    sBN=pyabc.RV("loguniform", lim.lb, lim.interval_length),
-    iBM=pyabc.RV("loguniform", lim.lb, lim.interval_length),
-    muB=pyabc.RV("loguniform", lim.lb, lim.interval_length),
-    sAM=pyabc.RV("loguniform", lim.lb, lim.interval_length),
-    muA=pyabc.RV("loguniform", lim.lb, lim.interval_length)
+para_prior = pyabc.Distribution(
+    lambdaN=pyabc.RV("uniform", lim.lb, lim.interval_length),
+    kNB=pyabc.RV("uniform", lim.lb, lim.interval_length),
+    muN=pyabc.RV("uniform", lim.lb, lim.interval_length),
+    vNM=pyabc.RV("uniform", lim.lb, lim.interval_length),
+    lambdaM=pyabc.RV("uniform", lim.lb, lim.interval_length),
+    kMB=pyabc.RV("uniform", lim.lb, lim.interval_length),
+    muM=pyabc.RV("uniform", lim.lb, lim.interval_length),
+    sBN=pyabc.RV("uniform", lim.lb, lim.interval_length),
+    iBM=pyabc.RV("uniform", lim.lb, lim.interval_length),
+    muB=pyabc.RV("uniform", lim.lb, lim.interval_length),
+    sAM=pyabc.RV("uniform", lim.lb, lim.interval_length),
+    muA=pyabc.RV("uniform", lim.lb, lim.interval_length)
 )
 
 # %% Define ABC-SMC model
@@ -113,7 +113,7 @@ eps0 = pyabc.MedianEpsilon(60)
 sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=48)
 
 abc = pyabc.ABCSMC(models=solver.non_noisy_model,
-                   parameter_priors=paraPrior,
+                   parameter_priors=para_prior,
                    # acceptor=acceptor_adpt,
                    population_size=2000,
                    sampler=sampler0,
@@ -129,14 +129,14 @@ print(abc.acceptor)
 print(abc.distance_function.p, abc.distance_function)
 print(abc.eps)
 print(abc.models)
-print(abc.population_size.nr_particles, abc.population_size, )
+print(abc.population_size.nr_particles, abc.population_size)
 print(abc.sampler.n_procs, abc.sampler)
 print(abc.transitions)
 
 # %% Run ABC-SMC
 
 abc.new(db_path, exp_data)
-max_population = 20
+max_population = 30
 min_eps = 4
 
 print(db_path)
