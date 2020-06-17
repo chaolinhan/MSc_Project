@@ -98,10 +98,3 @@ Factors make ABC SMC more effective but less accurate in this case
 -   Try LS fitting with new models
 -   Timer could be added to help profile
 
-
-
-
-
-$d\beta/dt = AN-\mu_\beta\beta$
-
-$\frac{s_{\beta N}}{1+i_{\beta\Phi}}=C$

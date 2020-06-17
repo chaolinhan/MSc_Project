@@ -545,6 +545,22 @@ Using summary statistics
 
 See `meeting3.md` and `meeting3more.md`
 
+
+
+# Weekly notes from 15 June
+
+-   Refactor ODE code
+-   Code alternative models
+-   Calculate true variance from real data and calculate min_epsilon
+
+
+
+
+
+
+
+
+
 # TODOs in results analysis
 
 -   Model sensitivity (See Toni 2009)

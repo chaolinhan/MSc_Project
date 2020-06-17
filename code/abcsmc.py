@@ -2,7 +2,8 @@ import os
 import numpy as np
 import pyabc
 import pandas as pd
-from pyABC_study.ODE import ODESolver, PriorLimits, arr2d_to_dict
+from pyABC_study.ODE import ODESolver, PriorLimits, arr2d_to_dict, exp_data, exp_data_s, para_true1
+from pyABC_study.dataPlot import result_plot, result_data
 
 print("\n\n\nABC SMC\nParameter estimation\n")
 
@@ -13,22 +14,11 @@ db_path = "sqlite:///abcsmc.db"
 
 # %% Read  and prepare raw data
 
-raw_data_path = os.path.abspath(os.curdir) + "/data/rawData.csv"
-raw_data = pd.read_csv(raw_data_path).astype("float32")
-
-time_points: object = raw_data.iloc[:, 0].to_numpy()
-exp_data = raw_data.iloc[:, 1:].to_numpy()
-exp_data = arr2d_to_dict(exp_data)
-
-exp_data_s = raw_data.iloc[:, 1:].to_dict(orient='list')
-for k in exp_data_s:
-    exp_data_s[k] = np.array(exp_data_s[k])
-
 print("Target data")
 print(exp_data)
 
 solver = ODESolver()
-solver.timePoint = time_points
+solver.timePoint = solver.timePoint_exp
 
 # %% Calculate data range as factors:
 
@@ -70,21 +60,39 @@ print("No factors applied")
 
 lim = PriorLimits(1e-5, 75)
 
-print("Log uniform")
+prior_distribution = "uniform"
 
-para_prior = pyabc.Distribution(
-    lambdaN=pyabc.RV("uniform", lim.lb, lim.interval_length),
-    kNB=pyabc.RV("uniform", lim.lb, lim.interval_length),
-    muN=pyabc.RV("uniform", lim.lb, lim.interval_length),
-    vNM=pyabc.RV("uniform", lim.lb, lim.interval_length),
-    lambdaM=pyabc.RV("uniform", lim.lb, lim.interval_length),
-    kMB=pyabc.RV("uniform", lim.lb, lim.interval_length),
-    muM=pyabc.RV("uniform", lim.lb, lim.interval_length),
-    sBN=pyabc.RV("uniform", lim.lb, lim.interval_length),
-    iBM=pyabc.RV("uniform", lim.lb, lim.interval_length),
-    muB=pyabc.RV("uniform", lim.lb, lim.interval_length),
-    sAM=pyabc.RV("uniform", lim.lb, lim.interval_length),
-    muA=pyabc.RV("uniform", lim.lb, lim.interval_length)
+print(prior_distribution)
+
+para_prior1 = pyabc.Distribution(
+    lambdaN=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    kNB=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    muN=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    vNM=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    lambdaM=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    kMB=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    muM=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    sBN=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    iBM=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    muB=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    sAM=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    muA=pyabc.RV(prior_distribution, lim.lb, lim.interval_length)
+)
+
+para_prior2 = pyabc.Distribution(
+    lambdaN=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    a=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    kNB=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    muN=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    vNM=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    lambdaM=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    kMB=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    muM=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    sBN=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    iBM=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    muB=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    sAM=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    muA=pyabc.RV(prior_distribution, lim.lb, lim.interval_length)
 )
 
 # %% Define ABC-SMC model
@@ -112,8 +120,9 @@ eps0 = pyabc.MedianEpsilon(60)
 
 sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=48)
 
-abc = pyabc.ABCSMC(models=solver.non_noisy_model,
-                   parameter_priors=para_prior,
+
+abc = pyabc.ABCSMC(models=solver.non_noisy_model1,
+                   parameter_priors=para_prior1,
                    # acceptor=acceptor_adpt,
                    population_size=2000,
                    sampler=sampler0,
@@ -148,6 +157,7 @@ history = abc.run(minimum_epsilon=min_eps, max_nr_populations=max_population)
 
 # %% Plot results
 
-# result_plot(history, para_true, paraPrior, max_population)
-# result_plot(history, para_true, paraPrior, history.max_t)
-# result_data(history, obs_data_noisy_s, solver.timePoint, history.max_t)
+# result_plot(history, None, para_prior1, history.max_t)
+#
+# solver.ode_model = solver.ode_model1
+# result_data(history, exp_data_s, solver, history.max_t)

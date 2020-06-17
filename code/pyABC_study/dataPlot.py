@@ -81,8 +81,9 @@ Plot the population distribution, eps values and acceptance rate
         # print(keys+": %.2f" % true_parameter[keys])
         pyabc.visualization.plot_kde_1d(df, w, x=keys, ax=ax[idx], xmin=limits[keys].args[0],
                                         xmax=limits[keys].args[0] + limits[keys].args[1])
-        ax[idx].axvline(true_parameter[keys], color='r', linestyle='dashed',
-                        label="True value\n%.3f" % true_parameter[keys])
+        if true_parameter is not None:
+            ax[idx].axvline(true_parameter[keys], color='r', linestyle='dashed',
+                            label="True value\n%.3f" % true_parameter[keys])
         ax[idx].axvspan(df[keys].quantile(0.25), df[keys].quantile(0.75), color="b", alpha=0.5,
                         label="Inter-quartile\n[%.3f, %.3f]\nMean %.3f" % (
                             df[keys].quantile(0.25), df[keys].quantile(0.75), df[keys].mean()))
@@ -98,8 +99,9 @@ Plot the population distribution, eps values and acceptance rate
     for keys in ['lambdaM', 'kMB', 'muM']:
         pyabc.visualization.plot_kde_1d(df, w, x=keys, ax=ax[idx], xmin=limits[keys].args[0],
                                         xmax=limits[keys].args[0] + limits[keys].args[1])
-        ax[idx].axvline(true_parameter[keys], color='r', linestyle='dashed',
-                        label="True value\n%.3f" % true_parameter[keys])
+        if true_parameter is not None:
+            ax[idx].axvline(true_parameter[keys], color='r', linestyle='dashed',
+                            label="True value\n%.3f" % true_parameter[keys])
         ax[idx].axvspan(df[keys].quantile(0.25), df[keys].quantile(0.75), color="b", alpha=0.5,
                         label="Inter-quartile\n[%.3f, %.3f]\nMean %.3f" % (
                             df[keys].quantile(0.25), df[keys].quantile(0.75), df[keys].mean()))
@@ -115,8 +117,9 @@ Plot the population distribution, eps values and acceptance rate
     for keys in ['sBN', 'iBM', 'muB']:
         pyabc.visualization.plot_kde_1d(df, w, x=keys, ax=ax[idx], xmin=limits[keys].args[0],
                                         xmax=limits[keys].args[0] + limits[keys].args[1])
-        ax[idx].axvline(true_parameter[keys], color='r', linestyle='dashed',
-                        label="True value\n%.3f" % true_parameter[keys])
+        if true_parameter is not None:
+            ax[idx].axvline(true_parameter[keys], color='r', linestyle='dashed',
+                            label="True value\n%.3f" % true_parameter[keys])
         ax[idx].axvspan(df[keys].quantile(0.25), df[keys].quantile(0.75), color="b", alpha=0.5,
                         label="Inter-quartile\n[%.3f, %.3f]\nMean %.3f" % (
                             df[keys].quantile(0.25), df[keys].quantile(0.75), df[keys].mean()))
@@ -132,8 +135,9 @@ Plot the population distribution, eps values and acceptance rate
     for keys in ['sAM', 'muA']:
         pyabc.visualization.plot_kde_1d(df, w, x=keys, ax=ax[idx], xmin=limits[keys].args[0],
                                         xmax=limits[keys].args[0] + limits[keys].args[1])
-        ax[idx].axvline(true_parameter[keys], color='r', linestyle='dashed',
-                        label="True value\n%.3f" % true_parameter[keys])
+        if true_parameter is not None:
+            ax[idx].axvline(true_parameter[keys], color='r', linestyle='dashed',
+                            label="True value\n%.3f" % true_parameter[keys])
         ax[idx].axvspan(df[keys].quantile(0.25), df[keys].quantile(0.75), color="b", alpha=0.5,
                         label="Inter-quartile\n[%.3f, %.3f]\nMean %.3f" % (
                             df[keys].quantile(0.25), df[keys].quantile(0.75), df[keys].mean()))
@@ -165,7 +169,7 @@ Plot the population distribution, eps values and acceptance rate
     plt.show()
 
 
-def result_data(history, compare_data, time_points, nr_population=1, sample_size=50, savefig=False):
+def result_data(history, compare_data, solver: ODESolver, nr_population=1, sample_size=50, savefig=False):
     """
 Visualise SMC population and compare it with target data
     :param history: abc.history object
@@ -175,8 +179,6 @@ Visualise SMC population and compare it with target data
     """
     df, w = history.get_distribution(t=nr_population - 1)
     df_sample = df.sample(sample_size, replace=False)
-    solver = ODESolver()
-    solver.timePoint = time_points
     df_all_sim_data = pd.DataFrame(columns=['N', 'M', 'B', 'A'])
 
     for ii in range(sample_size):
