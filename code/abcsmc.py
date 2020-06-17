@@ -136,7 +136,7 @@ print(abc.transitions)
 # %% Run ABC-SMC
 
 abc.new(db_path, exp_data)
-max_population = 20
+max_population = 30
 min_eps = 4
 
 print(db_path)
