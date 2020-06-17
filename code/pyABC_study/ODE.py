@@ -3,19 +3,32 @@ import scipy
 from scipy import integrate
 
 
-def eqns(var, t0, lambdaN, kNB, muN, vNM, lambdaM, kMB, muM, sBN, iBM, muB, sAM, muA):
+def eqns1(var, t0, lambda_n, k_n_phi, mu_n, v_n_phi, lambda_phi, k_phi_beta, mu_phi, s_beta_n, i_beta_phi, mu_beta,
+          s_alpha_phi, mu_alpha):
     """
-The ODE of dynamical system
-    :param var: variables to model with
-    :param the rest all are model parameters
-    :return: ODE status
+    Model 1 ODEs, 12 parameters
+    :param var:
+    :param t0:
+    :param lambda_n:
+    :param k_n_phi:
+    :param mu_n:
+    :param v_n_phi:
+    :param lambda_phi:
+    :param k_phi_beta:
+    :param mu_phi:
+    :param s_beta_n:
+    :param i_beta_phi:
+    :param mu_beta:
+    :param s_alpha_phi:
+    :param mu_alpha:
+    :return: tuple of the four differentials
     """
-    N, M, B, A = var
-    dN = lambdaN + kNB * B + muN * N - vNM * N * M
-    dM = lambdaM + kMB * B - muM * M
-    dB = (sBN * N) / (1 + iBM) - muB * B
-    dA = sAM * M - muA * A
-    return dN, dM, dB, dA
+    n, phi, beta, alpha = var
+    d_n = lambda_n + k_n_phi * beta + mu_n * n - v_n_phi * n * phi
+    d_phi = lambda_phi + k_phi_beta * beta - mu_phi * phi
+    d_beta = (s_beta_n * n) / (1 + i_beta_phi) - mu_beta * beta
+    d_alpha = s_alpha_phi * phi - mu_alpha * alpha
+    return d_n, d_phi, d_beta, d_alpha
 
 
 def arr2d_to_dict(arr: np.ndarray):
