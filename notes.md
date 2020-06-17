@@ -551,6 +551,7 @@ See `meeting3.md` and `meeting3more.md`
 
 -   Refactor ODE code
 -   Code alternative models
+    -   Submit model 1 test
 -   Calculate true variance from real data and calculate min_epsilon
 
 
