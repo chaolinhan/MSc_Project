@@ -1,24 +1,18 @@
-import os
-import numpy as np
 import pyabc
-import pandas as pd
-from pyABC_study.ODE import ODESolver, PriorLimits, arr2d_to_dict, exp_data, exp_data_s, para_true1
-from pyABC_study.dataPlot import result_plot, result_data
+
+from pyABC_study.ODE import ODESolver, PriorLimits, exp_data
 
 print("\n\n\nABC SMC\nParameter estimation\n")
 
-# %% Set database path
+# %% Set database path and observed data
 
 # TODO Change database name every run
-db_path = "sqlite:///abcsmc.db"
-
-# %% Read  and prepare raw data
+db_path = "sqlite:///model1.db"
 
 print("Target data")
 print(exp_data)
 
 solver = ODESolver()
-solver.time_point = solver.time_point_exp
 
 # %% Calculate data range as factors:
 
@@ -64,72 +58,82 @@ prior_distribution = "uniform"
 
 print(prior_distribution)
 
+# args = (para["lambda_n"], para["k_n_beta"], para["mu_n"], para["v_n_phi"],
+#         para["lambda_phi"], para["k_phi_beta"], para["mu_phi"],
+#         para["s_beta_n"], para["i_beta_phi"], para["mu_beta"],
+#         para["s_alpha_phi"], para["mu_alpha"])
+
 para_prior1 = pyabc.Distribution(
-    lambdaN=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
-    kNB=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
-    muN=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
-    vNM=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
-    lambdaM=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
-    kMB=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
-    muM=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
-    sBN=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
-    iBM=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
-    muB=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
-    sAM=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
-    muA=pyabc.RV(prior_distribution, lim.lb, lim.interval_length)
+    lambda_n=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    k_n_beta=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    mu_n=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    v_n_phi=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+
+    lambda_phi=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    k_phi_beta=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    mu_phi=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+
+    s_beta_n=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    i_beta_phi=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    mu_beta=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+
+    s_alpha_phi=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    mu_alpha=pyabc.RV(prior_distribution, lim.lb, lim.interval_length)
 )
 
 para_prior2 = pyabc.Distribution(
-    lambdaN=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    lambda_n=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
     a=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
-    kNB=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
-    muN=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
-    vNM=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
-    lambdaM=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
-    kMB=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
-    muM=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
-    sBN=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
-    iBM=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
-    muB=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
-    sAM=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
-    muA=pyabc.RV(prior_distribution, lim.lb, lim.interval_length)
+    k_n_beta=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    mu_n=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    v_n_phi=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+
+    k_phi_beta=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    mu_phi=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+
+    s_beta_n=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    i_beta_phi=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    mu_beta=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+
+    s_alpha_phi=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    mu_alpha=pyabc.RV(prior_distribution, lim.lb, lim.interval_length)
+)
+
+para_prior3 = pyabc.Distribution(
+    lambda_n=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    a=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    k_n_beta=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    mu_n=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    v_n_phi=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+
+    k_phi_beta=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    mu_phi=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+
+    s_beta_n=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    mu_beta=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+
+    s_alpha_phi=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    mu_alpha=pyabc.RV(prior_distribution, lim.lb, lim.interval_length)
 )
 
 # %% Define ABC-SMC model
 
-# distanceP2_adpt = pyabc.AdaptivePNormDistance(p=2,
-#                                               scale_function=pyabc.distance.root_mean_square_deviation,
-#                                               factors=factors
-#                                               )
-distanceP2 = pyabc.PNormDistance(p=2)#, factors=factors)
-# kernel1 = pyabc.IndependentNormalKernel(var=1.0 ** 2)
-
-# Measure distance and set it as minimum epsilon
-# min_eps = distanceP2(obs_data_noisy, obs_data_raw)
-
-# acceptor1 = pyabc.StochasticAcceptor()
-# acceptor_adpt = pyabc.UniformAcceptor(use_complete_history=True)
+distanceP2 = pyabc.PNormDistance(p=2)  # , factors=factors)
 
 eps0 = pyabc.MedianEpsilon(60)
-# eps1 = pyabc.Temperature()
 # eps_fixed = pyabc.epsilon.ListEpsilon([50, 46, 43, 40, 37, 34, 31, 29, 27, 25,
 #                                        23, 21, 19, 17, 15, 14, 13, 12, 11, 10])
 
 # transition0 = pyabc.transition.LocalTransition(k=50, k_fraction=None)
-# transition1 = pyabc.transition.GridSearchCV()
 
 sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=48)
 
-
-abc = pyabc.ABCSMC(models=solver.non_noisy_model1,
+abc = pyabc.ABCSMC(models=solver.ode_model1,
                    parameter_priors=para_prior1,
-                   # acceptor=acceptor_adpt,
                    population_size=2000,
                    sampler=sampler0,
                    distance_function=distanceP2,
-                   # transitions=transition1,
                    eps=eps0,
-                   # acceptor=pyabc.UniformAcceptor(use_complete_history=True)
                    )
 
 # %% Print ABC SMC info
@@ -152,12 +156,9 @@ print(db_path)
 print("Generations: %d" % max_population)
 print("Minimum eps: %.3f" % min_eps)
 
-
 history = abc.run(minimum_epsilon=min_eps, max_nr_populations=max_population)
 
 # %% Plot results
 
 # result_plot(history, None, para_prior1, history.max_t)
-#
-# solver.ode_model = solver.ode_model1
 # result_data(history, exp_data_s, solver, history.max_t)

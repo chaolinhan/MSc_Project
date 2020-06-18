@@ -554,9 +554,53 @@ See `meeting3.md` and `meeting3more.md`
     -   Submit model 1 test
     -   Submit log uniform test
 
--   Refactor the data plot code for multiple models
 
--   Calculate true variance from real data and calculate min_epsilon
+-   Models to be compared:
+
+    -   Model 1: original ODEs
+
+    $$
+    \begin{array}{l}
+    \frac{\mathrm{d} N}{\mathrm{d} t}=\lambda_N+\kappa_{N\beta}\beta-\mu_NN-\nu_{N\Phi}N\Phi\\
+    \frac{\mathrm{d} \Phi}{\mathrm{d} t}=\lambda_\Phi+\kappa_{\Phi\beta}\beta-\mu_\Phi\Phi\\
+    \frac{\mathrm{d} \beta}{\mathrm{d} t}=\frac{s_{\beta N}N}{1+i_{\beta\Phi}\Phi}-\mu_\beta\beta\\
+    \frac{\mathrm{d} \alpha}{\mathrm{d} t}=s_{\alpha\Phi}\Phi-\mu_\alpha\alpha
+    \end{array}
+    $$
+
+    -   Model 2: exponential decay $\lambda_N$
+        $$
+        \begin{array}{l}
+        \frac{\mathrm{d} N}{\mathrm{d} t}=\lambda_Ne^{-at}+\kappa_{N\beta}\beta-\mu_NN-\nu_{N\Phi}N\Phi\\
+        \frac{\mathrm{d} \Phi}{\mathrm{d} t}=\kappa_{\Phi\beta}\beta-\mu_\Phi\Phi\\
+        \frac{\mathrm{d} \beta}{\mathrm{d} t}=\frac{s_{\beta N}N}{1+i_{\beta\Phi}\Phi}-\mu_\beta\beta\\
+        \frac{\mathrm{d} \alpha}{\mathrm{d} t}=s_{\alpha\Phi}\Phi-\mu_\alpha\alpha
+        \end{array}
+        $$
+
+    -   Model 3: exponential decay $\lambda_N$, no $i_{\beta\Phi}$ term:
+        $$
+        \begin{array}{l}
+        \frac{\mathrm{d} N}{\mathrm{d} t}=\lambda_Ne^{-at}+\kappa_{N\beta}\beta-\mu_NN-\nu_{N\Phi}N\Phi\\
+        \frac{\mathrm{d} \Phi}{\mathrm{d} t}=\kappa_{\Phi\beta}\beta-\mu_\Phi\Phi\\
+        \frac{\mathrm{d} \beta}{\mathrm{d} t}=s_{\beta N}N-\mu_\beta\beta\\
+        \frac{\mathrm{d} \alpha}{\mathrm{d} t}=s_{\alpha\Phi}\Phi-\mu_\alpha\alpha
+        \end{array}
+        $$
+        
+
+
+
+-   Refactor the data plot code for multiple models
+-   Calculate true variance from real data
+    -   Calculate min_epsilon
+    -   Use it for stochastic acceptor
+
+
+
+
+
+
 
 
 

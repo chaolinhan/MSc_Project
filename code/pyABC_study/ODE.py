@@ -90,7 +90,7 @@ class ODESolver:
             self.var_init,
             self.time_point,
             args=(para["lambda_n"], para["a"], para["k_n_beta"], para["mu_n"], para["v_n_phi"],
-                  para["lambda_phi"], para["k_phi_beta"], para["mu_phi"],
+                  para["k_phi_beta"], para["mu_phi"],
                   para["s_beta_n"], para["i_beta_phi"], para["mu_beta"],
                   para["s_alpha_phi"], para["mu_alpha"])
         )
@@ -137,8 +137,8 @@ class ODESolver:
             eqns3,
             self.var_init,
             self.time_point,
-            args=(para["lambda_n"], para["k_n_beta"], para["mu_n"], para["v_n_phi"],
-                  para["lambda_phi"], para["k_phi_beta"], para["mu_phi"],
+            args=(para["lambda_n"], para["a"], para["k_n_beta"], para["mu_n"], para["v_n_phi"],
+                  para["k_phi_beta"], para["mu_phi"],
                   para["s_beta_n"], para["mu_beta"],
                   para["s_alpha_phi"], para["mu_alpha"])
         )
@@ -227,27 +227,27 @@ def eqns1(var, t0, lambda_n, k_n_beta, mu_n, v_n_phi, lambda_phi, k_phi_beta, mu
     return d_n, d_phi, d_beta, d_alpha
 
 
-def eqns2(var, t0, lambda_n, a, k_n_beta, mu_n, v_n_phi, lambda_phi, k_phi_beta, mu_phi, s_beta_n, i_beta_phi, mu_beta,
+def eqns2(var, t0, lambda_n, a, k_n_beta, mu_n, v_n_phi, k_phi_beta, mu_phi, s_beta_n, i_beta_phi, mu_beta,
           s_alpha_phi, mu_alpha):
     """
     Exponential decay lambda_n
     """
     n, phi, beta, alpha = var
     d_n = lambda_n * np.exp(-a * t0) + k_n_beta * beta - mu_n * n - v_n_phi * n * phi
-    d_phi = lambda_phi + k_phi_beta * beta - mu_phi * phi
+    d_phi = k_phi_beta * beta - mu_phi * phi
     d_beta = (s_beta_n * n) / (1 + i_beta_phi * phi) - mu_beta * beta
     d_alpha = s_alpha_phi * phi - mu_alpha * alpha
     return d_n, d_phi, d_beta, d_alpha
 
 
-def eqns3(var, t0, lambda_n, k_n_beta, mu_n, v_n_phi, lambda_phi, k_phi_beta, mu_phi, s_beta_n, mu_beta,
+def eqns3(var, t0, lambda_n, a, k_n_beta, mu_n, v_n_phi, k_phi_beta, mu_phi, s_beta_n, mu_beta,
           s_alpha_phi, mu_alpha):
     """
     No (i_beta_phi * phi) term
     """
     n, phi, beta, alpha = var
-    d_n = lambda_n + k_n_beta * beta - mu_n * n - v_n_phi * n * phi
-    d_phi = lambda_phi + k_phi_beta * beta - mu_phi * phi
+    d_n = lambda_n * np.exp(-a * t0) + k_n_beta * beta - mu_n * n - v_n_phi * n * phi
+    d_phi = k_phi_beta * beta - mu_phi * phi
     d_beta = s_beta_n * n - mu_beta * beta
     d_alpha = s_alpha_phi * phi - mu_alpha * alpha
     return d_n, d_phi, d_beta, d_alpha
