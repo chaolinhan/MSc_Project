@@ -18,7 +18,7 @@ print("Target data")
 print(exp_data)
 
 solver = ODESolver()
-solver.timePoint = solver.timePoint_exp
+solver.time_point = solver.time_point_exp
 
 # %% Calculate data range as factors:
 

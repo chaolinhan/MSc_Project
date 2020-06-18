@@ -192,22 +192,22 @@ Visualise SMC population and compare it with target data
     # plt.show()
 
     df_mean = pd.DataFrame(columns=['N', 'M', 'B', 'A'])
-    for jj in range(solver.timePoint.__len__()):
+    for jj in range(solver.time_point.__len__()):
         # print(df_all_sim_data.loc[jj].mean())
         df_mean = df_mean.append(df_all_sim_data.loc[jj].mean(), ignore_index=True)
 
-    df_median = quantile_calculate(df_all_sim_data, solver.timePoint.__len__(), 0.5)
-    df_75 = quantile_calculate(df_all_sim_data, solver.timePoint.__len__(), 0.75)
-    df_25 = quantile_calculate(df_all_sim_data, solver.timePoint.__len__(), 0.25)
+    df_median = quantile_calculate(df_all_sim_data, solver.time_point.__len__(), 0.5)
+    df_75 = quantile_calculate(df_all_sim_data, solver.time_point.__len__(), 0.75)
+    df_25 = quantile_calculate(df_all_sim_data, solver.time_point.__len__(), 0.25)
 
     fig, axs = plt.subplots(4, 1, figsize=(8, 12))
     for kk in range(4):
-        axs[kk].plot(solver.timePoint, df_mean.iloc[:, kk], 'r', label="Mean", alpha=0.6)
+        axs[kk].plot(solver.time_point, df_mean.iloc[:, kk], 'r', label="Mean", alpha=0.6)
         # axs[kk].plot(solver.timePoint, df_25.iloc[:, kk], 'b--')
         # axs[kk].plot(solver.timePoint, df_75.iloc[:, kk], 'b--')
-        axs[kk].fill_between(solver.timePoint, df_25.iloc[:, kk], df_75.iloc[:, kk], alpha=0.5)
+        axs[kk].fill_between(solver.time_point, df_25.iloc[:, kk], df_75.iloc[:, kk], alpha=0.5)
         index_cov = ['N', 'M', 'B', 'A']
-        axs[kk].scatter(solver.timePoint, compare_data[index_cov[kk]], alpha=0.7)
+        axs[kk].scatter(solver.time_point, compare_data[index_cov[kk]], alpha=0.7)
         axs[kk].legend(['Mean', '25% – 75% quantile range', 'Observed'])
         axs[kk].set_title(index_cov[kk])
     if savefig:

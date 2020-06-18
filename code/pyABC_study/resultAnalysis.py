@@ -54,7 +54,7 @@ solver = ODESolver()
 obs_data_noisy_s = solver.ode_model(para_true, flatten=False, add_noise=True)
 obs_data_raw_s = solver.ode_model(para_true, flatten=False, add_noise=False)
 
-solver.timePoint = solver.timePoint_exp
+solver.time_point = solver.time_point_exp
 obs_data_raw_s_less = solver.ode_model(para_true, flatten=False, add_noise=False)
 #
 # print("Target data")
@@ -81,7 +81,7 @@ exp_data_s = raw_data.iloc[:, 1:].to_dict(orient='list')
 for k in exp_data_s:
     exp_data_s[k] = np.array(exp_data_s[k])
 
-result_data(history, exp_data_s, solver.timePoint_exp, history.max_t)
+result_data(history, exp_data_s, solver.time_point_exp, history.max_t)
 
 lim = PriorLimits(0, 75)
 
@@ -235,9 +235,9 @@ plt.show()
 pyabc.visualization.plot_total_sample_numbers(history_list, labels=history_label)
 plt.show()
 
-result_data(history_base, obs_data_raw_s, solver.timePoint_default, history_base.max_t)
-result_data(history_less, obs_data_raw_s_less, solver.timePoint_exp, history_base.max_t)
-result_data(history_wide, obs_data_raw_s, solver.timePoint_default, history_base.max_t)
+result_data(history_base, obs_data_raw_s, solver.time_point_default, history_base.max_t)
+result_data(history_less, obs_data_raw_s_less, solver.time_point_exp, history_base.max_t)
+result_data(history_wide, obs_data_raw_s, solver.time_point_default, history_base.max_t)
 
 result_plot(history_base, para_true, para_prior, history_base.max_t)
 result_plot(history_less, para_true, para_prior, history_less.max_t)

@@ -54,7 +54,7 @@ print(expData)
 
 solver = ODESolver()
 # Reload the timepoints to be calculated in ODE solver
-solver.timePoint = timePoints
+solver.time_point = timePoints
 #
 # lim = PriorLimits(0, 100)
 #
@@ -246,16 +246,16 @@ paraEST = optimize.least_squares(residual_ls, paraGuess, method='trf', bounds=(1
 print(paraEST.x)
 
 paraDict = para_list_to_dict(paraEST.x)
-solver.timePoint = solver.timePoint_default
+solver.time_point = solver.time_point_default
 simulationData = solver.ode_model(paraDict, flatten=False)
 
-plt.plot(solver.timePoint, simulationData['N'], solver.timePoint, simulationData['M'])
+plt.plot(solver.time_point, simulationData['N'], solver.time_point, simulationData['M'])
 plt.scatter(rawData['time'][:-1], rawData['N'][:-1], label="N")
 plt.scatter(rawData['time'][:-1], rawData['M'][:-1], label="Phi")
 plt.legend()
 plt.show()
 
-plt.plot(solver.timePoint, simulationData['B'], solver.timePoint, simulationData['A'])
+plt.plot(solver.time_point, simulationData['B'], solver.time_point, simulationData['A'])
 plt.scatter(rawData['time'], rawData['B'], label="beta")
 plt.scatter(rawData['time'], rawData['A'], label="alpha")
 plt.legend()
