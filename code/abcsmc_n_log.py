@@ -156,7 +156,7 @@ print(db_path)
 print("Generations: %d" % max_population)
 print("Minimum eps: %.3f" % min_eps)
 
-history = abc.run(minimum_epsilon=min_eps, max_nr_populations=max_population, min_acceptance_rate=1e-4)
+history = abc.run(minimum_epsilon=min_eps, max_nr_populations=max_population)
 
 # %% Plot results
 
