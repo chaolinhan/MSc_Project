@@ -7,7 +7,7 @@ print("\n\n\nABC SMC\nParameter estimation\n")
 # %% Set database path and observed data
 
 # TODO Change database name every run
-db_path = "sqlite:///model_compare.db"
+db_path = "sqlite:///model_compare_n.db"
 
 print("Target data")
 print(exp_data)
@@ -52,7 +52,7 @@ print("No factors applied")
 
 # TODO Set prior
 
-lim = PriorLimits(1e-6, 75)
+lim = PriorLimits(1e-6, 25)
 
 prior_distribution = "loguniform"
 
