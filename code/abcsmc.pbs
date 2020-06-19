@@ -1,6 +1,6 @@
 #!/bin/bash --login
 # TODO set job name and wall time
-#PBS -N SMC_3_log
+#PBS -N SMC_cmp
 #PBS -l select=1
 #PBS -l walltime=6:00:00
 #PBS -A d171-s1898201
