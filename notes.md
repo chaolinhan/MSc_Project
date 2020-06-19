@@ -613,5 +613,5 @@ See `meeting3.md` and `meeting3more.md`
 # TODOs in results analysis
 
 -   Model sensitivity (See Toni 2009)
-
 -   Consider PCA of the final population, maybe in the **result analysis phase** (See Toni 2009)
+-   Limitations on the raw data measurement

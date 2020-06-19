@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pyabc
 
-from pyABC_study.ODE import ODESolver, PriorLimits, para_true, arr2d_to_dict
+from pyABC_study.ODE import ODESolver, PriorLimits, arr2d_to_dict
 from pyABC_study.dataPlot import result_data, result_plot
 
 # %% Settings

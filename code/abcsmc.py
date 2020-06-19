@@ -7,7 +7,7 @@ print("\n\n\nABC SMC\nParameter estimation\n")
 # %% Set database path and observed data
 
 # TODO Change database name every run
-db_path = "sqlite:///model1.db"
+db_path = "sqlite:///model1_log.db"
 
 print("Target data")
 print(exp_data)
@@ -52,9 +52,9 @@ print("No factors applied")
 
 # TODO Set prior
 
-lim = PriorLimits(1e-5, 75)
+lim = PriorLimits(1e-6, 75)
 
-prior_distribution = "uniform"
+prior_distribution = "loguniform"
 
 print(prior_distribution)
 
@@ -126,12 +126,12 @@ eps0 = pyabc.MedianEpsilon(60)
 
 # transition0 = pyabc.transition.LocalTransition(k=50, k_fraction=None)
 
-sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=48)
+# sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=48)
 
 abc = pyabc.ABCSMC(models=solver.ode_model1,
                    parameter_priors=para_prior1,
                    population_size=2000,
-                   sampler=sampler0,
+                   # sampler=sampler0,
                    distance_function=distanceP2,
                    eps=eps0,
                    )
@@ -156,7 +156,7 @@ print(db_path)
 print("Generations: %d" % max_population)
 print("Minimum eps: %.3f" % min_eps)
 
-history = abc.run(minimum_epsilon=min_eps, max_nr_populations=max_population)
+history = abc.run(minimum_epsilon=min_eps, max_nr_populations=max_population, min_acceptance_rate=1e-4)
 
 # %% Plot results
 

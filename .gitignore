@@ -8,3 +8,4 @@ code/pyABC_study/archived/
 *.db
 code/archived/
 ref/
+code/__pycache__/

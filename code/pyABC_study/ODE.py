@@ -159,6 +159,8 @@ class ODESolver:
                     "B": sol[:, 2],
                     "A": sol[:, 3]}
 
+    ode_model = ode_model1
+
 
 class PriorLimits:
     """
