@@ -47,7 +47,7 @@ solver = ODESolver()
 
 solver.ode_model = solver.ode_model1
 
-result_data(history, exp_data_s, solver, history.max_t)
+result_data(history, exp_data_s, solver, history.max_t-1)
 
 
-result_plot(history, None, para_prior1, history.max_t)
+result_plot(history, None, para_prior1, history.max_t-1)
