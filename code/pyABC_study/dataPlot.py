@@ -7,8 +7,8 @@ import pyabc
 
 from pyABC_study.ODE import ODESolver
 
-rawData_path = os.path.abspath(os.curdir) + "/data/rawData.csv"
-rawData = pd.read_csv(rawData_path).astype("float32")
+# rawData_path = os.path.abspath(os.curdir) + "/data/rawData.csv"
+# rawData = pd.read_csv(rawData_path).astype("float32")
 
 
 def quantile_calculate(all_data, length, q=0.5):
@@ -73,9 +73,13 @@ Plot the population distribution, eps values and acceptance rate
 
     df, w = history.get_distribution(t=nr_population - 1)
 
+    for key in df.keys():
+        print(key+", Inter-quartile [%.3f, %.3f], Mean %.3f" % (
+                            df[key].quantile(0.25), df[key].quantile(0.75), df[key].mean()))
+
     # Parameters in the first equation
 
-    fig, ax = plt.subplots(1, 4, figsize=(16, 4))
+    fig, ax = plt.subplots(1, 5, figsize=(20, 4))
     idx = 0
     for keys in ['lambda_n', 'k_n_beta', 'mu_n', 'v_n_phi']:
         # print(keys+": %.2f" % true_parameter[keys])
@@ -96,7 +100,7 @@ Plot the population distribution, eps values and acceptance rate
 
     fig, ax = plt.subplots(1, 3, figsize=(12, 4))
     idx = 0
-    for keys in ['lambda_phi', 'k_phi_beta', 'mu_phi']:
+    for keys in ['k_phi_beta', 'mu_phi']:
         pyabc.visualization.plot_kde_1d(df, w, x=keys, ax=ax[idx], xmin=limits[keys].args[0],
                                         xmax=limits[keys].args[0] + limits[keys].args[1])
         if true_parameter is not None:
@@ -114,7 +118,7 @@ Plot the population distribution, eps values and acceptance rate
 
     fig, ax = plt.subplots(1, 3, figsize=(12, 4))
     idx = 0
-    for keys in ['s_beta_n', 'i_beta_phi', 'mu_beta']:
+    for keys in ['s_beta_n', 'mu_beta']:
         pyabc.visualization.plot_kde_1d(df, w, x=keys, ax=ax[idx], xmin=limits[keys].args[0],
                                         xmax=limits[keys].args[0] + limits[keys].args[1])
         if true_parameter is not None:

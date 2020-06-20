@@ -6,8 +6,8 @@ print("\n\n\nABC SMC\nParameter estimation\n")
 
 # %% Set database path and observed data
 
-# TODO Change database name every run
-db_path = "sqlite:///model2_log.db"
+# TODO: Change database name every run
+db_path = "sqlite:///model2.db"
 
 print("Target data")
 print(exp_data)
@@ -24,7 +24,7 @@ print("No factors applied")
 # range_A = obs_data_raw_s['A'].max() - obs_data_raw_s['A'].min()
 # 
 # factors = {}
-#  TODO factor range wrong
+# 
 # for i in range(30):
 #     factors[i] = 1 / range_N
 # 
@@ -50,11 +50,11 @@ print("No factors applied")
 # %% Define prior distribution of parameters
 # Be careful that RV("uniform", -10, 15) means uniform distribution in [-10, 5], '15' here is the interval length
 
-# TODO Set prior
+# TODO: Set prior
 
 lim = PriorLimits(1e-6, 75)
 
-prior_distribution = "loguniform"
+prior_distribution = "uniform"
 
 print(prior_distribution)
 
@@ -120,7 +120,7 @@ para_prior3 = pyabc.Distribution(
 
 distanceP2 = pyabc.PNormDistance(p=2)  # , factors=factors)
 
-eps0 = pyabc.MedianEpsilon(100)
+eps0 = pyabc.MedianEpsilon(60)
 # eps_fixed = pyabc.epsilon.ListEpsilon([50, 46, 43, 40, 37, 34, 31, 29, 27, 25,
 #                                        23, 21, 19, 17, 15, 14, 13, 12, 11, 10])
 
@@ -128,6 +128,7 @@ eps0 = pyabc.MedianEpsilon(100)
 
 # sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=48)
 
+# TODO: set model and prior
 abc = pyabc.ABCSMC(models=solver.ode_model2,
                    parameter_priors=para_prior2,
                    population_size=2000,
