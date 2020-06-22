@@ -9,9 +9,9 @@ from pyABC_study.dataPlot import result_data, result_plot
 
 # %% Settings
 
-lim = PriorLimits(1e-6, 25)
-
-prior_distribution = "loguniform"
+# TODO: change prior
+lim = PriorLimits(1e-6, 75)
+prior_distribution = "uniform"
 
 print(prior_distribution)
 
@@ -75,7 +75,8 @@ para_prior3 = pyabc.Distribution(
 
 # %% Load database
 
-db_path = "sqlite:///db/model1_n_log.db"
+# TODO change database name
+db_path = "sqlite:///db/model3_n.db"
 
 history = pyabc.History(db_path)
 
@@ -86,9 +87,20 @@ print("ID: %d, generations: %d" % (history.id, history.max_t))
 solver = ODESolver()
 
 # TODO change model name
-solver.ode_model = solver.ode_model1
+solver.ode_model = solver.ode_model3
 
 result_data(history, exp_data_s, solver, history.max_t)
 
 # TODO change prior name
-result_plot(history, None, para_prior1, history.max_t)
+result_plot(history, None, para_prior2, history.max_t)
+
+
+# %% Model comapre plot
+pyabc.visualization.plot_epsilons(history)
+plt.show()
+
+pyabc.visualization.plot_acceptance_rates_trajectory(history)
+plt.show()
+
+pyabc.visualization.plot_model_probabilities(history)
+plt.show()

@@ -589,9 +589,10 @@ See `meeting3.md` and `meeting3more.md`
 
 -   Results
 
-    -   See slides
+    -   See slides `abcsmc.pptx`
 
--   Check the correctness of ODEs system
+-   Check the correctness of ODEs system **[V]**
+    
     -   https://apmonitor.com/pdc/index.php/Main/SolveDifferentialEquations
 
 
@@ -599,6 +600,10 @@ See `meeting3.md` and `meeting3more.md`
 -   Calculate true variance from real data
     -   Calculate min_epsilon
     -   Use it for stochastic acceptor
+    -   **DONE** see the xlxs
+
+-   Thoughts
+    -   See the new slides
 
 
 

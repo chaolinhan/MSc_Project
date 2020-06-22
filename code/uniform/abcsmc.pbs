@@ -1,0 +1,14 @@
+#!/bin/bash --login
+# TODO set job name and wall time
+#PBS -N SMC_cmp_n
+#PBS -l select=1
+#PBS -l walltime=6:00:00
+#PBS -A d171-s1898201
+
+cd $PBS_O_WORKDIR
+
+module load python-compute/3.6.0_gcc6.1.0
+source /work/d171/d171/s1898201/myEnv/bin/activate
+
+# TODO change execution file
+aprun -b -n 1 -d 48 -j 2 python3 abcsmc_cmp_n.py
