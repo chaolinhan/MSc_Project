@@ -260,3 +260,19 @@ plt.scatter(rawData['time'], rawData['B'], label="beta")
 plt.scatter(rawData['time'], rawData['A'], label="alpha")
 plt.legend()
 plt.show()
+
+
+rawData_path = os.path.abspath(os.curdir) + "/data/rawData_SEM.csv"
+rawData = pd.read_csv(rawData_path).astype("float32")
+
+timePoints: object = rawData.iloc[:, 0].to_numpy()
+expData = rawData.iloc[:, 1:].to_numpy()
+expData = arr2d_to_dict(expData)
+
+expData_no_f = rawData.iloc[:, 1:].to_dict(orient='list')
+for k in expData_no_f:
+    expData_no_f[k] = np.array(expData_no_f[k])
+
+# normalise_data(expData)
+print("Target data")
+print(expData)

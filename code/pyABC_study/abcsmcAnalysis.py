@@ -10,8 +10,8 @@ from pyABC_study.dataPlot import result_data, result_plot
 # %% Settings
 
 # TODO: change prior
-lim = PriorLimits(1e-6, 75)
-prior_distribution = "uniform"
+lim = PriorLimits(1e-6, 50)
+prior_distribution = "loguniform"
 
 print(prior_distribution)
 
@@ -76,7 +76,7 @@ para_prior3 = pyabc.Distribution(
 # %% Load database
 
 # TODO change database name
-db_path = "sqlite:///db/model3_n.db"
+db_path = "sqlite:///db/model3_m_log.db"
 
 history = pyabc.History(db_path)
 
@@ -89,13 +89,13 @@ solver = ODESolver()
 # TODO change model name
 solver.ode_model = solver.ode_model3
 
-result_data(history, exp_data_s, solver, history.max_t)
+result_data(history, solver, nr_population=history.max_t)
 
 # TODO change prior name
-result_plot(history, None, para_prior2, history.max_t)
+result_plot(history, None, para_prior3, history.max_t)
 
 
-# %% Model comapre plot
+# %% Model compare plot
 pyabc.visualization.plot_epsilons(history)
 plt.show()
 
