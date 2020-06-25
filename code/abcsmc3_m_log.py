@@ -7,7 +7,7 @@ print("\n\n\nABC SMC\nParameter estimation\n")
 # %% Set database path and observed data
 
 # TODO: Change database name every run
-db_path = "sqlite:///model3_m_log.db"
+db_path = "sqlite:///model3_m_log2.db"
 
 print("Target data")
 print(exp_data)

@@ -1,0 +1,23 @@
+INFO:Sampler:Parallelizing the sampling on 72 cores.
+INFO:History:Start <ABCSMC(id=1, start_time=2020-06-25 18:23:47.839880, end_time=None)>
+INFO:ABC:t: 0, eps: 60.
+
+
+
+ABC SMC
+Parameter estimation
+
+Target data
+{0: 0.0, 1: 0.0, 2: 1.0, 3: 1.0, 4: nan, 5: nan, 6: 1.8725, 7: 0.96225, 8: 1.85, 9: 0.33333334, 10: nan, 11: nan, 12: 10.708333, 13: 1.08, 14: 4.01255, 15: 1.0565, 16: 26.52, 17: 3.275862, 18: nan, 19: nan, 20: 22.333334, 21: 4.8333335, 22: 29.17, 23: 13.88, 24: 16.6, 25: 12.652174, 26: 7.365, 27: 8.6005, 28: nan, 29: nan, 30: 5.985, 31: 7.4845, 32: 6.8076925, 33: 18.766666, 34: 8.76, 35: 3.060075, 36: 5.851852, 37: 19.565218, 38: 1.076415, 39: 6.56325, 40: 0.5555556, 41: 14.275862, 42: 0.764, 43: 5.7875, 44: 0.3448276, 45: 8.653846, 46: nan, 47: nan}
+No factors applied
+loguniform
+<pyabc.acceptor.acceptor.UniformAcceptor object at 0x147086f7b790>
+2 <pyabc.distance.distance.PNormDistance object at 0x14708500be10>
+<pyabc.epsilon.epsilon.MedianEpsilon object at 0x14708500be90>
+[<SimpleModel ode_model3>]
+100 <pyabc.populationstrategy.ConstantPopulationSize object at 0x147085014890>
+72 <pyabc.sampler.multicore_evaluation_parallel.MulticoreEvalParallelSampler object at 0x147085014490>
+[MultivariateNormalTransition()]
+sqlite:///model3_m_log.db
+Generations: 10
+Minimum eps: 4.000
