@@ -1,11 +1,10 @@
-import os
-
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import pyabc
 
-from pyABC_study.ODE import ODESolver
+from pyABC_study.ODE import ODESolver, exp_data_s, exp_data_SEM
+
 
 # rawData_path = os.path.abspath(os.curdir) + "/data/rawData.csv"
 # rawData = pd.read_csv(rawData_path).astype("float32")
@@ -74,8 +73,8 @@ Plot the population distribution, eps values and acceptance rate
     df, w = history.get_distribution(t=nr_population - 1)
 
     for key in df.keys():
-        print(key+", Inter-quartile [%.3f, %.3f], Mean %.3f" % (
-                            df[key].quantile(0.25), df[key].quantile(0.75), df[key].mean()))
+        print(key + ", Inter-quartile [%.3f, %.3f], Mean %.3f" % (
+            df[key].quantile(0.25), df[key].quantile(0.75), df[key].mean()))
 
     # Parameters in the first equation
 
@@ -173,18 +172,19 @@ Plot the population distribution, eps values and acceptance rate
     plt.show()
 
 
-def result_data(history, compare_data, solver: ODESolver, nr_population=1, sample_size=50, savefig=False):
+def result_data(history, solver: ODESolver, compare_data=exp_data_s, nr_population=1, sample_size=50, savefig=False):
     """
 Visualise SMC population and compare it with target data
     :param history: abc.history object
     :param compare_data: target data
-    :param nr_population: the id of pupolation to be visualised
+    :param nr_population: the id of population to be visualised
     :param sample_size: sampling size of the selected population
     """
-    df, w = history.get_distribution(t=nr_population - 1)
+    df, w = history.get_distribution(t=nr_population)
     df_sample = df.sample(sample_size, replace=False)
     df_all_sim_data = pd.DataFrame(columns=['N', 'M', 'B', 'A'])
 
+    solver.time_point = solver.time_point_default
     for ii in range(sample_size):
         temp_dict = df_sample.iloc[ii].to_dict()
         sim_data = solver.ode_model(temp_dict, flatten=False)
@@ -205,15 +205,20 @@ Visualise SMC population and compare it with target data
     df_25 = quantile_calculate(df_all_sim_data, solver.time_point.__len__(), 0.25)
 
     fig, axs = plt.subplots(4, 1, figsize=(8, 12))
+    index_cov = ['N', 'M', 'B', 'A']
+    titles = ["N", "Φ", "β", "α"]
     for kk in range(4):
-        axs[kk].plot(solver.time_point, df_mean.iloc[:, kk], 'r', label="Mean", alpha=0.6)
         # axs[kk].plot(solver.timePoint, df_25.iloc[:, kk], 'b--')
         # axs[kk].plot(solver.timePoint, df_75.iloc[:, kk], 'b--')
-        axs[kk].fill_between(solver.time_point, df_25.iloc[:, kk], df_75.iloc[:, kk], alpha=0.5)
-        index_cov = ['N', 'M', 'B', 'A']
-        axs[kk].scatter(solver.time_point, compare_data[index_cov[kk]], alpha=0.7)
+        axs[kk].fill_between(solver.time_point, df_25.iloc[:, kk], df_75.iloc[:, kk], alpha=0.9, color='lightgrey')
+        axs[kk].plot(solver.time_point, df_mean.iloc[:, kk], 'b', label="Mean", alpha=0.6)
+        axs[kk].scatter(solver.time_point_exp, compare_data[index_cov[kk]], alpha=0.7, marker='^', color='orange')
+        axs[kk].errorbar(solver.time_point_exp, compare_data[index_cov[kk]],
+                         yerr=[[0]*12, exp_data_SEM[index_cov[kk]]], fmt='none',
+                         ecolor='orange', elinewidth=2)
         axs[kk].legend(['Mean', '25% – 75% quantile range', 'Observed'])
-        axs[kk].set_title(index_cov[kk])
+        axs[kk].set_title(titles[kk])
+
     if savefig:
         plt.savefig("resultCurve.png", dpi=200)
     plt.show()
