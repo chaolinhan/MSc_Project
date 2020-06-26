@@ -600,7 +600,7 @@ See `meeting3.md` and `meeting3more.md`
 -   Calculate true variance from real data
     -   Calculate min_epsilon
     -   Use it for stochastic acceptor
-    -   **DONE** see the xlxs
+    -   **DONE** see the xlsx
 
 -   Thoughts
     -   See the new slides
@@ -609,12 +609,42 @@ See `meeting3.md` and `meeting3more.md`
 
 # Weekly notes from 22 June
 
--   Switching to cirrus
--   Try to have extra term for alpha
+-   Switching to Cirrus **DONE**
+
+-   Try to have extra term for alpha: **to be tested**
+
+    1.  Original 
+
+    $$
+    \frac{\mathrm{d} \alpha}{\mathrm{d} t}=s_{\alpha\Phi}\Phi-\mu_\alpha\alpha
+    $$
+
+    2.  
+
+    $$
+    \frac{\mathrm{d} \alpha}{\mathrm{d} t}=s_{\alpha\Phi}\Phi-\mu_\alpha\alpha+d_{\beta\alpha}\beta
+    $$
+
+    3.  
+
+    $$
+    \frac{\mathrm{d} \alpha}{\mathrm{d} t}=(s_{\alpha\Phi}+f_{\beta\alpha}\beta)\Phi-\mu_\alpha\alpha
+    $$
 
 
 
+-   Check the measurement datapoint distribution **DONE**
+    -   See the xlsx
+    -   Most abnormal: hpl 120 for macrophages
+        ![image-20200626202126068](../../Library/Application Support/typora-user-images/image-20200626202126068.png)
+    
+-   Plot the error of the observed data **DONE**
 
+    <img src="../../Library/Application Support/typora-user-images/image-20200626202331943.png" alt="image-20200626202331943" style="zoom:50%;" />
+
+    
+
+    
 
 
 

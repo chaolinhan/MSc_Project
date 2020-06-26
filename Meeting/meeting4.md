@@ -42,3 +42,12 @@ The results in `abcsmc1.pdf` shows that our best model so far can fit the curve 
 2.  Try: larger populations, factors, adaptive functions and `LocalTransition()`
 3.  Get prepared for performance experiments
 
+
+
+# Meeting notes
+
+-   Experiments 
+    -   Applying factors s.t. data at the front more important
+    -    Using adaptive distance function, allowed population up to 10,000, allowed variance percent up to 10%
+-   Plot the raw data error, check if the raw data is of Gaussian distribution
+
