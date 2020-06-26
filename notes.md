@@ -607,9 +607,10 @@ See `meeting3.md` and `meeting3more.md`
 
 
 
+# Weekly notes from 22 June
 
-
-
+-   Switching to cirrus
+-   Try to have extra term for alpha
 
 
 
