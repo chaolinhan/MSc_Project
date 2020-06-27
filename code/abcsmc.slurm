@@ -19,4 +19,4 @@
 source ~/miniconda3/bin/activate
 
 # Launch the parallel job
-srun ~/miniconda3/bin/python3 abcsmc3_m_log.py
+srun ~/miniconda3/bin/python3 abcsmc4_m_log.py
