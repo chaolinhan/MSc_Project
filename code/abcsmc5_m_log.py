@@ -80,7 +80,7 @@ eps0 = pyabc.MedianEpsilon(60)
 # TODO: set model and prior
 abc = pyabc.ABCSMC(models=solver.ode_model5,
                    parameter_priors=para_prior5,
-                   population_size=100,
+                   population_size=2000,
                 #    sampler=sampler0,
                    distance_function=distanceP2,
                    eps=eps0,
@@ -99,7 +99,7 @@ print(abc.transitions)
 # %% Run ABC-SMC
 
 abc.new(db_path, exp_data)
-max_population = 10
+max_population = 30
 min_eps = 4
 
 print(db_path)

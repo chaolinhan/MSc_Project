@@ -19,4 +19,4 @@
 source ~/miniconda3/bin/activate
 
 # Launch the parallel job
-srun ~/miniconda3/bin/python3 abcsmc5_m_log.py
+srun --cpu-bind=cores ~/miniconda3/bin/python3 abcsmc5_m_log.py
