@@ -7,7 +7,7 @@ print("\n\n\nABC SMC\nParameter estimation\n")
 # %% Set database path and observed data
 
 # TODO: Change database name every run
-db_path = "sqlite:///model4_m_log.db"
+db_path = "sqlite:///model4_m_log_f.db"
 
 print("Target data")
 print(exp_data)
@@ -16,31 +16,22 @@ solver = ODESolver()
 
 # %% Calculate data range as factors:
 
-print("No factors applied")
+# TODO: Set factors
+print("Factors applied: first 32 data points are more important")
 
-# range_N = obs_data_raw_s['N'].max() - obs_data_raw_s['N'].min()
-# range_M = obs_data_raw_s['M'].max() - obs_data_raw_s['M'].min()
-# range_B = obs_data_raw_s['B'].max() - obs_data_raw_s['B'].min()
-# range_A = obs_data_raw_s['A'].max() - obs_data_raw_s['A'].min()
-# 
-# factors = {}
-# 
-# for i in range(30):
-#     factors[i] = 1 / range_N
-# 
-# for i in range(30, 60):
-#     factors[i] = 1 / range_M
-# 
-# for i in range(60, 90):
-#     factors[i] = 1 / range_B
-# 
-# for i in range(90, 120):
-#     factors[i] = 1 / range_A
-# 
-# scl = 120./sum(factors.values())
-# 
-# for i in range(120):
-#     factors[i] = factors[i] * scl
+factors = {}
+
+for i in range(32):
+    factors[i] = 0.75
+
+for i in range(32, 48):
+    factors[i] = 0.25
+
+
+scl = 48/sum(factors.values())
+
+for i in range(48):
+    factors[i] = factors[i] * scl
 
 
 # %% Plot
@@ -66,7 +57,8 @@ para_prior4 = para_prior(lim, prior_distribution, 4)
 
 # %% Define ABC-SMC model
 
-distanceP2 = pyabc.PNormDistance(p=2)  # , factors=factors)
+# TODO: set factors
+distanceP2 = pyabc.PNormDistance(p=2, factors=factors)
 
 eps0 = pyabc.MedianEpsilon(60)
 # eps_fixed = pyabc.epsilon.ListEpsilon([50, 46, 43, 40, 37, 34, 31, 29, 27, 25,
@@ -76,7 +68,7 @@ eps0 = pyabc.MedianEpsilon(60)
 
 # sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=6)
 
-# TODO: set model and prior
+# TODO: set model, prior and particle size
 abc = pyabc.ABCSMC(models=solver.ode_model4,
                    parameter_priors=para_prior4,
                    population_size=2000,
@@ -97,6 +89,7 @@ print(abc.transitions)
 
 # %% Run ABC-SMC
 
+#TODO: check termination condition
 abc.new(db_path, exp_data)
 max_population = 30
 min_eps = 4
