@@ -212,7 +212,7 @@ Visualise SMC population and compare it with target data
         # axs[kk].plot(solver.timePoint, df_75.iloc[:, kk], 'b--')
         axs[kk].fill_between(solver.time_point, df_25.iloc[:, kk], df_75.iloc[:, kk], alpha=0.9, color='lightgrey')
         axs[kk].plot(solver.time_point, df_mean.iloc[:, kk], 'b', label="Mean", alpha=0.6)
-        axs[kk].scatter(solver.time_point_exp, compare_data[index_cov[kk]], alpha=0.7, marker='^', color='orange')
+        axs[kk].scatter(solver.time_point_exp, compare_data[index_cov[kk]], alpha=0.7, marker='^', color='red')
         axs[kk].errorbar(solver.time_point_exp, compare_data[index_cov[kk]],
                          yerr=[[0]*12, exp_data_SEM[index_cov[kk]]], fmt='none',
                          ecolor='orange', elinewidth=2)

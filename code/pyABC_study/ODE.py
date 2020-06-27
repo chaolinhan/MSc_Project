@@ -208,6 +208,50 @@ class ODESolver:
                     "B": sol[:, 2],
                     "A": sol[:, 3]}
 
+    def ode_model5(self, para, flatten=True, add_noise=False) -> dict:
+        """
+        Return a list of the ODE results at timePoints
+        :param para: parameter of ODEs
+        :param flatten: return a flatten dict or not
+        :param add_noise: add Gaussian noise to simulated data
+        :return: result data in dict format
+        """
+
+        # Gaussian distribution for error terms
+        # TODO fix std
+        # sigma_n = 5.66
+        # sigma_m = 4.59
+        # sigma_b = 5.15
+        # sigma_a = 2.42
+        # mu = 0.
+        # a = 0.05
+
+        sol = scipy.integrate.odeint(
+            eqns5,
+            self.var_init,
+            self.time_point,
+            args=(para["lambda_n"], para["a"], para["k_n_beta"], para["mu_n"], para["v_n_phi"],
+                  para["k_phi_beta"], para["mu_phi"],
+                  para["s_beta_n"], para["mu_beta"],
+                  para["s_alpha_phi"], para["mu_alpha"], para["f_beta_alpha"])
+        )
+
+        # time_len = len(self.time_point)
+
+        # if add_noise:
+        #     sol[1:, 0] += a * sigma_n * np.random.randn(time_len - 1) + mu
+        #     sol[1:, 1] += a * sigma_m * np.random.randn(time_len - 1) + mu
+        #     sol[1:, 2] += a * sigma_b * np.random.randn(time_len - 1) + mu
+        #     sol[1:, 3] += a * sigma_a * np.random.randn(time_len - 1) + mu
+
+        if flatten:
+            return {i: sol.flatten()[i] for i in range(sol.flatten().__len__())}
+        else:
+            return {"N": sol[:, 0],
+                    "M": sol[:, 1],
+                    "B": sol[:, 2],
+                    "A": sol[:, 3]}
+
     ode_model = ode_model1
 
 
@@ -302,6 +346,24 @@ def para_prior(lim: PriorLimits, prior_distribution: str, model: int):
         a_beta_alpha=pyabc.RV(prior_distribution, lim.lb, lim.interval_length)
     )
 
+    para_prior5 = pyabc.Distribution(
+        lambda_n=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+        a=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+        k_n_beta=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+        mu_n=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+        v_n_phi=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+
+        k_phi_beta=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+        mu_phi=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+
+        s_beta_n=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+        mu_beta=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+
+        s_alpha_phi=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+        mu_alpha=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+        f_beta_alpha=pyabc.RV(prior_distribution, lim.lb, lim.interval_length)
+    )
+
     if model == 1:
         return para_prior1
     if model == 2:
@@ -310,6 +372,8 @@ def para_prior(lim: PriorLimits, prior_distribution: str, model: int):
         return para_prior3
     if model == 4:
         return para_prior4
+    if model == 5:
+        return para_prior5
 
 
 def arr2d_to_dict(arr: np.ndarray):
@@ -414,6 +478,19 @@ def eqns4(var, t0, lambda_n, a, k_n_beta, mu_n, v_n_phi, k_phi_beta, mu_phi, s_b
     d_phi = k_phi_beta * beta - mu_phi * phi
     d_beta = s_beta_n * n - mu_beta * beta
     d_alpha = s_alpha_phi * phi - mu_alpha * alpha + a_beta_alpha * beta
+    return d_n, d_phi, d_beta, d_alpha
+
+
+def eqns5(var, t0, lambda_n, a, k_n_beta, mu_n, v_n_phi, k_phi_beta, mu_phi, s_beta_n, mu_beta,
+          s_alpha_phi, mu_alpha, f_beta_alpha):
+    """
+    No (i_beta_phi * phi) term
+    """
+    n, phi, beta, alpha = var
+    d_n = lambda_n * np.exp(-a * t0) + k_n_beta * beta - mu_n * n - v_n_phi * n * phi
+    d_phi = k_phi_beta * beta - mu_phi * phi
+    d_beta = s_beta_n * n - mu_beta * beta
+    d_alpha = (s_alpha_phi + f_beta_alpha * beta) * phi - mu_alpha * alpha
     return d_n, d_phi, d_beta, d_alpha
 
 # def normalise_data(data):

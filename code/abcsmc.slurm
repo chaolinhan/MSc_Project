@@ -2,7 +2,7 @@
 
 # Slurm job options (name, compute nodes, job time)
 #SBATCH --job-name=SMC_cmp_m
-#SBATCH --time=1:40:0
+#SBATCH --time=2:40:0
 #SBATCH --exclusive
 #SBATCH --nodes=1
 #SBATCH --tasks-per-node=1
@@ -19,4 +19,4 @@
 source ~/miniconda3/bin/activate
 
 # Launch the parallel job
-srun ~/miniconda3/bin/python3 abcsmc4_m_log.py
+srun ~/miniconda3/bin/python3 abcsmc5_m_log.py
