@@ -1,5 +1,5 @@
 #!/bin/bash --login
-# TODO set job name and wall time
+# TODO: set job name and wall time
 #PBS -N SMC_m_log_cmp
 #PBS -l select=1
 #PBS -l walltime=6:00:00
