@@ -642,9 +642,9 @@ See `meeting3.md` and `meeting3more.md`
 
     <img src="../../Library/Application Support/typora-user-images/image-20200626202331943.png" alt="image-20200626202331943" style="zoom:50%;" />
 
-    
+-   Adaptive population
 
-    
+    -   Known issue: not working with NaN and Inf
 
 
 

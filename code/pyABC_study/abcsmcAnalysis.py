@@ -19,13 +19,14 @@ para_prior1 = para_prior(lim, prior_distribution, 1)
 para_prior2 = para_prior(lim, prior_distribution, 2)
 para_prior3 = para_prior(lim, prior_distribution, 3)
 para_prior4 = para_prior(lim, prior_distribution, 4)
+para_prior5 = para_prior(lim, prior_distribution, 5)
 
 
 
 # %% Load database
 
 # TODO change database name
-db_path = "sqlite:///db/model4_m_log.db"
+db_path = "sqlite:///db/model5_m_log.db"
 
 history = pyabc.History(db_path)
 
@@ -36,12 +37,12 @@ print("ID: %d, generations: %d" % (history.id, history.max_t))
 solver = ODESolver()
 
 # TODO change model name
-solver.ode_model = solver.ode_model4
+solver.ode_model = solver.ode_model5
 
 result_data(history, solver, nr_population=history.max_t)
 
 # TODO change prior name
-result_plot(history, None, para_prior4, history.max_t)
+result_plot(history, None, para_prior5, history.max_t)
 
 
 # %% Model compare plot
