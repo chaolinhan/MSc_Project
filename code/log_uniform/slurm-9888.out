@@ -1,0 +1,629 @@
+INFO:Sampler:Parallelizing the sampling on 72 cores.
+INFO:History:Start <ABCSMC(id=1, start_time=2020-06-27 22:36:20.939940, end_time=None)>
+INFO:ABC:t: 0, eps: 60.
+
+
+
+ABC SMC
+Parameter estimation
+
+Target data
+{0: 0.0, 1: 0.0, 2: 1.0, 3: 1.0, 4: nan, 5: nan, 6: 1.8725, 7: 0.96225, 8: 1.85, 9: 0.33333334, 10: nan, 11: nan, 12: 10.708333, 13: 1.08, 14: 4.01255, 15: 1.0565, 16: 26.52, 17: 3.275862, 18: nan, 19: nan, 20: 22.333334, 21: 4.8333335, 22: 29.17, 23: 13.88, 24: 16.6, 25: 12.652174, 26: 7.365, 27: 8.6005, 28: nan, 29: nan, 30: 5.985, 31: 7.4845, 32: 6.8076925, 33: 18.766666, 34: 8.76, 35: 3.060075, 36: 5.851852, 37: 19.565218, 38: 1.076415, 39: 6.56325, 40: 0.5555556, 41: 14.275862, 42: 0.764, 43: 5.7875, 44: 0.3448276, 45: 8.653846, 46: nan, 47: nan}
+No factors applied
+loguniform
+<pyabc.acceptor.acceptor.UniformAcceptor object at 0x1541656e2950>
+2 <pyabc.distance.distance.PNormDistance object at 0x15416320ced0>
+<pyabc.epsilon.epsilon.MedianEpsilon object at 0x15416320c750>
+[<SimpleModel ode_model3>]
+5000 <pyabc.populationstrategy.ConstantPopulationSize object at 0x15416318e850>
+72 <pyabc.sampler.multicore_evaluation_parallel.MulticoreEvalParallelSampler object at 0x15416319bc50>
+[MultivariateNormalTransition()]
+sqlite:///model3_m_log_lp.db
+Generations: 30
+Minimum eps: 4.000
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 5000 / 114282 = 4.3751e-02, ESS=5.0000e+03.
+INFO:ABC:t: 1, eps: 57.89579884555874.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 5000 / 47420 = 1.0544e-01, ESS=1.3194e+00.
+INFO:ABC:t: 2, eps: 57.592325016889006.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 5000 / 29593 = 1.6896e-01, ESS=5.1153e+00.
+INFO:ABC:t: 3, eps: 53.988512032081566.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 5000 / 25737 = 1.9427e-01, ESS=1.4855e+00.
+INFO:ABC:t: 4, eps: 52.694323730878715.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 5000 / 16852 = 2.9670e-01, ESS=1.3415e+00.
+INFO:ABC:t: 5, eps: 49.98557193885842.
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 5000 / 16611 = 3.0101e-01, ESS=1.0699e+00.
+INFO:ABC:t: 6, eps: 45.98069893180223.
+
+INFO:ABC:Acceptance rate: 5000 / 13062 = 3.8279e-01, ESS=5.3418e+00.
+INFO:ABC:t: 7, eps: 43.83343482387827.
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 5000 / 63128 = 7.9204e-02, ESS=8.3273e+00.
+INFO:ABC:t: 8, eps: 43.137097417619394.
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 5000 / 19391 = 2.5785e-01, ESS=2.3135e+00.
+INFO:ABC:t: 9, eps: 40.784000557875544.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 5000 / 25231 = 1.9817e-01, ESS=3.3005e+00.
+INFO:ABC:t: 10, eps: 40.31954767017427.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 5000 / 16575 = 3.0166e-01, ESS=1.0545e+00.
+INFO:ABC:t: 11, eps: 39.127119283959736.
+
+
+INFO:ABC:Acceptance rate: 5000 / 13360 = 3.7425e-01, ESS=1.9954e+00.
+INFO:ABC:t: 12, eps: 36.18038422710331.
+
+INFO:ABC:Acceptance rate: 5000 / 12552 = 3.9834e-01, ESS=3.4608e+00.
+INFO:ABC:t: 13, eps: 31.03679076166857.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 5000 / 32490 = 1.5389e-01, ESS=1.8441e+00.
+INFO:ABC:t: 14, eps: 29.94824997708914.
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 5000 / 10513 = 4.7560e-01, ESS=3.0041e+00.
+INFO:ABC:t: 15, eps: 28.045985586871534.
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 5000 / 16885 = 2.9612e-01, ESS=3.0262e+00.
+INFO:ABC:t: 16, eps: 27.58001818229361.
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 5000 / 8677 = 5.7624e-01, ESS=3.8823e+01.
+INFO:ABC:t: 17, eps: 26.71214888881519.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 5000 / 17464 = 2.8630e-01, ESS=2.5254e+01.
+INFO:ABC:t: 18, eps: 25.862111352985117.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 5000 / 16618 = 3.0088e-01, ESS=2.4456e+01.
+INFO:ABC:t: 19, eps: 25.287108728334868.
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 5000 / 17763 = 2.8148e-01, ESS=1.0753e+01.
+INFO:ABC:t: 20, eps: 24.69053005750626.
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 5000 / 12557 = 3.9818e-01, ESS=4.7511e+00.
+INFO:ABC:t: 21, eps: 24.58079593145364.
+
+
+INFO:ABC:Acceptance rate: 5000 / 10499 = 4.7624e-01, ESS=5.4684e+00.
+INFO:ABC:t: 22, eps: 23.87326327397911.
+
+
+
+
+INFO:ABC:Acceptance rate: 5000 / 11947 = 4.1852e-01, ESS=2.5038e+00.
+INFO:ABC:t: 23, eps: 22.49407721072266.
+
+
+INFO:ABC:Acceptance rate: 5000 / 15387 = 3.2495e-01, ESS=2.8370e+01.
+INFO:ABC:t: 24, eps: 21.849747801259685.
+
+
+INFO:ABC:Acceptance rate: 5000 / 19332 = 2.5864e-01, ESS=3.8123e+00.
+INFO:ABC:t: 25, eps: 21.520643510783998.
+INFO:ABC:Acceptance rate: 5000 / 11783 = 4.2434e-01, ESS=8.1609e+00.
+INFO:ABC:t: 26, eps: 21.40534633694684.
+INFO:ABC:Acceptance rate: 5000 / 13277 = 3.7659e-01, ESS=2.1617e+00.
+INFO:ABC:t: 27, eps: 20.475766422928203.
+INFO:ABC:Acceptance rate: 5000 / 9985 = 5.0075e-01, ESS=1.0654e+01.
+INFO:ABC:t: 28, eps: 20.16788418420578.
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 5000 / 18550 = 2.6954e-01, ESS=2.0616e+01.
+INFO:ABC:t: 29, eps: 19.95708622342046.
+
+
+
+
+INFO:ABC:Acceptance rate: 5000 / 22716 = 2.2011e-01, ESS=1.3686e+01.
+INFO:History:Done <ABCSMC(id=1, start_time=2020-06-27 22:36:20.939940, end_time=2020-06-27 23:45:47.546270)>

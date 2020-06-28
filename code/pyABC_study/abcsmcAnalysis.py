@@ -26,7 +26,7 @@ para_prior5 = para_prior(lim, prior_distribution, 5)
 # %% Load database
 
 # TODO change database name
-db_path = "sqlite:///db/model5_m_log.db"
+db_path = "sqlite:///db/model5_m_log_lp.db"
 
 history = pyabc.History(db_path)
 

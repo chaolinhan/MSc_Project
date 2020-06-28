@@ -645,6 +645,19 @@ See `meeting3.md` and `meeting3more.md`
 -   Adaptive population
 
     -   Known issue: not working with NaN and Inf
+    
+    ```python
+    # Modified powerlaw.py
+    def fitpowerlaw(x, y):
+        x = np.array(x)
+        x = x[np.isfinite(x)]
+        y = np.array(y)
+        y = y[np.isfinite(y)]
+        popt, _ = curve_fit(power_law, x, y, p0=[.5, 1 / 5])
+        return popt, lambda x: power_law(x, *popt), lambda y: finverse(y, *popt)
+    ```
+    
+    
 
 
 
