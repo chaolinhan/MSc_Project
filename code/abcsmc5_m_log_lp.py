@@ -7,7 +7,7 @@ print("\n\n\nABC SMC\nParameter estimation\n")
 # %% Set database path and observed data
 
 # TODO: Change database name every run
-db_path = "sqlite:///model3_m_log_ap.db"
+db_path = "sqlite:///model5_m_log_lp.db"
 
 print("Target data")
 print(exp_data)
@@ -50,13 +50,13 @@ eps0 = pyabc.MedianEpsilon(60)
 # sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=6)
 
 population0 = 5000
-population_adpt = pyabc.populationstrategy.AdaptivePopulationSize(start_nr_particles=population0, mean_cv=0.10,
-                                                                  max_population_size=10000)
+# population_adpt = pyabc.populationstrategy.AdaptivePopulationSize(start_nr_particles=population0, mean_cv=0.10,
+#                                                                   max_population_size=10000)
 
 # TODO: set model and prior
-abc = pyabc.ABCSMC(models=solver.ode_model3,
-                   parameter_priors=para_prior3,
-                   population_size=population_adpt,
+abc = pyabc.ABCSMC(models=solver.ode_model5,
+                   parameter_priors=para_prior5,
+                   population_size=population0,
                 #    sampler=sampler0,
                    distance_function=distanceP2,
                    eps=eps0,
