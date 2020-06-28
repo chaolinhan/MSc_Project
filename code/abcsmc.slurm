@@ -2,7 +2,7 @@
 
 # Slurm job options (name, compute nodes, job time)
 # TODO: set job name and wall time
-#SBATCH --job-name=SMC5f
+#SBATCH --job-name=SMC5lp
 #SBATCH --time=12:40:0
 #SBATCH --exclusive
 #SBATCH --nodes=1
@@ -20,4 +20,4 @@
 source ~/miniconda3/bin/activate
 
 # Launch the parallel job
-srun --cpu-bind=cores ~/miniconda3/bin/python3 abcsmc5_m_log_f.py
+srun --cpu-bind=cores ~/miniconda3/bin/python3 abcsmc5_m_log_lp.py
