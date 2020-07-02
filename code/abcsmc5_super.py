@@ -7,7 +7,7 @@ print("\n\n\nABC SMC\nParameter estimation\n")
 # %% Set database path and observed data
 
 # TODO: Change database name every run
-db_path = "sqlite:///model_m_log_cmp_f.db"
+db_path = "sqlite:///model5_m_log_f.db"
 
 print("Target data")
 print(exp_data)
@@ -31,8 +31,11 @@ for i in range(32, 48):
 scl = 48/sum(factors.values())
 
 for i in range(48):
-   factors[i] = factors[i] * scl
+    factors[i] = factors[i] * scl
 
+# %% Plot
+
+# obs_data_plot(solver.timePoint, obs_data_noisy_s, obs_data_raw_s)
 
 # %% Define prior distribution of parameters
 # Be careful that RV("uniform", -10, 15) means uniform distribution in [-10, 5], '15' here is the interval length
@@ -54,9 +57,9 @@ para_prior5 = para_prior(lim, prior_distribution, 5)
 
 # %% Define ABC-SMC model
 
-distanceP2 = pyabc.PNormDistance(p=2, factors=factors)
+distanceP2 = pyabc.PNormDistance(p=2)  # , factors=factors)
 
-eps0 = pyabc.MedianEpsilon(50)
+eps0 = pyabc.MedianEpsilon(60)
 # eps_fixed = pyabc.epsilon.ListEpsilon([50, 46, 43, 40, 37, 34, 31, 29, 27, 25,
 #                                        23, 21, 19, 17, 15, 14, 13, 12, 11, 10])
 
@@ -64,14 +67,10 @@ eps0 = pyabc.MedianEpsilon(50)
 
 # sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=6)
 
-population0 = 5000
-# population_adpt = pyabc.populationstrategy.AdaptivePopulationSize(start_nr_particles=population0, mean_cv=0.10,
-#                                                                   max_population_size=50)
-
 # TODO: set model and prior
-abc = pyabc.ABCSMC(models=[solver.ode_model3, solver.ode_model4, solver.ode_model5],
-                   parameter_priors=[para_prior3, para_prior4, para_prior5],
-                   population_size=population0,
+abc = pyabc.ABCSMC(models=solver.ode_model5,
+                   parameter_priors=para_prior5,
+                   population_size=10000,
                 #    sampler=sampler0,
                    distance_function=distanceP2,
                    eps=eps0,
@@ -90,10 +89,10 @@ print(abc.transitions)
 # %% Run ABC-SMC
 
 abc.new(db_path, exp_data)
-max_population = 40
+max_population = 45
 min_eps = 4
 
-print("\n"+db_path+"\n")
+print(db_path)
 print("Generations: %d" % max_population)
 print("Minimum eps: %.3f" % min_eps)
 
