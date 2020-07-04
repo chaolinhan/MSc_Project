@@ -1,5 +1,5 @@
-INFO:Sampler:Parallelizing the sampling on 8 cores.
-INFO:History:Start <ABCSMC(id=1, start_time=2020-07-04 12:50:42.137576, end_time=None)>
+INFO:Sampler:Parallelizing the sampling on 72 cores.
+INFO:History:Start <ABCSMC(id=4, start_time=2020-07-04 18:41:09.671903, end_time=None)>
 INFO:ABC:t: 0, eps: 60.
 
 
@@ -11,15 +11,15 @@ Target data
 {0: 0.0, 1: 0.0, 2: 1.0, 3: 1.0, 4: nan, 5: nan, 6: 1.8725, 7: 0.96225, 8: 1.85, 9: 0.33333334, 10: nan, 11: nan, 12: 10.708333, 13: 1.08, 14: 4.01255, 15: 1.0565, 16: 26.52, 17: 3.275862, 18: nan, 19: nan, 20: 22.333334, 21: 4.8333335, 22: 29.17, 23: 13.88, 24: 16.6, 25: 12.652174, 26: 7.365, 27: 8.6005, 28: nan, 29: nan, 30: 5.985, 31: 7.4845, 32: 6.8076925, 33: 18.766666, 34: 8.76, 35: 3.060075, 36: 5.851852, 37: 19.565218, 38: 1.076415, 39: 6.56325, 40: 0.5555556, 41: 14.275862, 42: 0.764, 43: 5.7875, 44: 0.3448276, 45: 8.653846, 46: nan, 47: nan}
  NO factors applied
 loguniform
-<pyabc.acceptor.acceptor.UniformAcceptor object at 0x149831117910>
-2 <pyabc.distance.distance.PNormDistance object at 0x14983117ac10>
-<pyabc.epsilon.epsilon.MedianEpsilon object at 0x14983117ac90>
+<pyabc.acceptor.acceptor.UniformAcceptor object at 0x15239144ea50>
+2 <pyabc.distance.distance.PNormDistance object at 0x15238f3fbf90>
+<pyabc.epsilon.epsilon.MedianEpsilon object at 0x15238f3fb590>
 [<SimpleModel ode_model5>]
-5000 <pyabc.populationstrategy.ConstantPopulationSize object at 0x149831117090>
-8 <pyabc.sampler.multicore_evaluation_parallel.MulticoreEvalParallelSampler object at 0x1498311072d0>
+5000 <pyabc.populationstrategy.ConstantPopulationSize object at 0x152391af2510>
+72 <pyabc.sampler.multicore_evaluation_parallel.MulticoreEvalParallelSampler object at 0x15238f384050>
 [MultivariateNormalTransition()]
 
-sqlite:///model5_8.db
+sqlite:///model5_72.db
 
 Generations: 15
 Minimum eps: 20.000
@@ -33,14 +33,14 @@ Minimum eps: 20.000
   warnings.warn(warning_msg, ODEintWarning)
 /lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
   warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/pyabc/distance/distance.py:102: RuntimeWarning: overflow encountered in double_scalars
+  for key in w),
 /lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
   warnings.warn(warning_msg, ODEintWarning)
 /lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
   warnings.warn(warning_msg, ODEintWarning)
 /lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
   warnings.warn(warning_msg, ODEintWarning)
-INFO:ABC:Acceptance rate: 5000 / 127080 = 3.9345e-02, ESS=5.0000e+03.
-INFO:ABC:t: 1, eps: 57.78274992946337.
 /lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
   warnings.warn(warning_msg, ODEintWarning)
 /lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
@@ -57,8 +57,6 @@ INFO:ABC:t: 1, eps: 57.78274992946337.
   warnings.warn(warning_msg, ODEintWarning)
 /lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
   warnings.warn(warning_msg, ODEintWarning)
-INFO:ABC:Acceptance rate: 5000 / 80335 = 6.2239e-02, ESS=1.0911e+01.
-INFO:ABC:t: 2, eps: 55.158060570871626.
 /lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
   warnings.warn(warning_msg, ODEintWarning)
 /lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
@@ -75,8 +73,6 @@ INFO:ABC:t: 2, eps: 55.158060570871626.
   warnings.warn(warning_msg, ODEintWarning)
 /lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
   warnings.warn(warning_msg, ODEintWarning)
-INFO:ABC:Acceptance rate: 5000 / 47977 = 1.0422e-01, ESS=1.0112e+00.
-INFO:ABC:t: 3, eps: 49.51312203489091.
 /lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
   warnings.warn(warning_msg, ODEintWarning)
 /lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
@@ -93,8 +89,6 @@ INFO:ABC:t: 3, eps: 49.51312203489091.
   warnings.warn(warning_msg, ODEintWarning)
 /lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
   warnings.warn(warning_msg, ODEintWarning)
-INFO:ABC:Acceptance rate: 5000 / 115749 = 4.3197e-02, ESS=1.1127e+00.
-INFO:ABC:t: 4, eps: 46.830013852398324.
 /lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
   warnings.warn(warning_msg, ODEintWarning)
 /lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
@@ -103,8 +97,6 @@ INFO:ABC:t: 4, eps: 46.830013852398324.
   warnings.warn(warning_msg, ODEintWarning)
 /lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
   warnings.warn(warning_msg, ODEintWarning)
-INFO:ABC:Acceptance rate: 5000 / 36048 = 1.3870e-01, ESS=1.9531e+00.
-INFO:ABC:t: 5, eps: 43.74531878913248.
 /lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
   warnings.warn(warning_msg, ODEintWarning)
 /lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
@@ -119,8 +111,6 @@ INFO:ABC:t: 5, eps: 43.74531878913248.
   warnings.warn(warning_msg, ODEintWarning)
 /lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
   warnings.warn(warning_msg, ODEintWarning)
-INFO:ABC:Acceptance rate: 5000 / 324785 = 1.5395e-02, ESS=2.6548e+00.
-INFO:ABC:t: 6, eps: 42.025192316426754.
 /lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
   warnings.warn(warning_msg, ODEintWarning)
 /lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
@@ -137,8 +127,6 @@ INFO:ABC:t: 6, eps: 42.025192316426754.
   warnings.warn(warning_msg, ODEintWarning)
 /lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
   warnings.warn(warning_msg, ODEintWarning)
-INFO:ABC:Acceptance rate: 5000 / 111502 = 4.4842e-02, ESS=2.7977e+01.
-INFO:ABC:t: 7, eps: 41.16352669316659.
 /lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
   warnings.warn(warning_msg, ODEintWarning)
 /lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
@@ -155,8 +143,6 @@ INFO:ABC:t: 7, eps: 41.16352669316659.
   warnings.warn(warning_msg, ODEintWarning)
 /lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
   warnings.warn(warning_msg, ODEintWarning)
-INFO:ABC:Acceptance rate: 5000 / 68352 = 7.3151e-02, ESS=3.0536e+00.
-INFO:ABC:t: 8, eps: 38.171789855022986.
 /lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
   warnings.warn(warning_msg, ODEintWarning)
 /lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
@@ -173,8 +159,6 @@ INFO:ABC:t: 8, eps: 38.171789855022986.
   warnings.warn(warning_msg, ODEintWarning)
 /lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
   warnings.warn(warning_msg, ODEintWarning)
-INFO:ABC:Acceptance rate: 5000 / 433113 = 1.1544e-02, ESS=1.4082e+00.
-INFO:ABC:t: 9, eps: 37.291042952166144.
 /lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
   warnings.warn(warning_msg, ODEintWarning)
 /lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
@@ -185,142 +169,3 @@ INFO:ABC:t: 9, eps: 37.291042952166144.
   warnings.warn(warning_msg, ODEintWarning)
 /lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
   warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-INFO:ABC:Acceptance rate: 5000 / 38290 = 1.3058e-01, ESS=4.0783e+00.
-INFO:ABC:t: 10, eps: 35.05868809329412.
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-INFO:ABC:Acceptance rate: 5000 / 35238 = 1.4189e-01, ESS=1.3515e+01.
-INFO:ABC:t: 11, eps: 33.99834184944306.
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-INFO:ABC:Acceptance rate: 5000 / 24378 = 2.0510e-01, ESS=1.0043e+01.
-INFO:ABC:t: 12, eps: 31.71089880594892.
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-INFO:ABC:Acceptance rate: 5000 / 34561 = 1.4467e-01, ESS=1.0672e+01.
-INFO:ABC:t: 13, eps: 30.37075479096428.
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-INFO:ABC:Acceptance rate: 5000 / 42020 = 1.1899e-01, ESS=6.6586e+00.
-INFO:ABC:t: 14, eps: 29.168509252559957.
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-INFO:ABC:Acceptance rate: 5000 / 56817 = 8.8002e-02, ESS=2.1828e+00.
-INFO:History:Done <ABCSMC(id=1, start_time=2020-07-04 12:50:42.137576, end_time=2020-07-04 17:41:02.462174)>
-INFO:Sampler:Parallelizing the sampling on 8 cores.
-INFO:History:Start <ABCSMC(id=2, start_time=2020-07-04 17:41:32.774236, end_time=None)>
-INFO:ABC:t: 0, eps: 60.
-
-
-
-ABC SMC
-Performance study
-
-Target data
-{0: 0.0, 1: 0.0, 2: 1.0, 3: 1.0, 4: nan, 5: nan, 6: 1.8725, 7: 0.96225, 8: 1.85, 9: 0.33333334, 10: nan, 11: nan, 12: 10.708333, 13: 1.08, 14: 4.01255, 15: 1.0565, 16: 26.52, 17: 3.275862, 18: nan, 19: nan, 20: 22.333334, 21: 4.8333335, 22: 29.17, 23: 13.88, 24: 16.6, 25: 12.652174, 26: 7.365, 27: 8.6005, 28: nan, 29: nan, 30: 5.985, 31: 7.4845, 32: 6.8076925, 33: 18.766666, 34: 8.76, 35: 3.060075, 36: 5.851852, 37: 19.565218, 38: 1.076415, 39: 6.56325, 40: 0.5555556, 41: 14.275862, 42: 0.764, 43: 5.7875, 44: 0.3448276, 45: 8.653846, 46: nan, 47: nan}
- NO factors applied
-loguniform
-<pyabc.acceptor.acceptor.UniformAcceptor object at 0x14bc17f22610>
-2 <pyabc.distance.distance.PNormDistance object at 0x14bc17f85450>
-<pyabc.epsilon.epsilon.MedianEpsilon object at 0x14bc1a466090>
-[<SimpleModel ode_model5>]
-5000 <pyabc.populationstrategy.ConstantPopulationSize object at 0x14bc17f22410>
-8 <pyabc.sampler.multicore_evaluation_parallel.MulticoreEvalParallelSampler object at 0x14bc19e5ba50>
-[MultivariateNormalTransition()]
-
-sqlite:///model5_8.db
-
-Generations: 15
-Minimum eps: 20.000
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
-  warnings.warn(warning_msg, ODEintWarning)
-INFO:ABC:Acceptance rate: 5000 / 134612 = 3.7144e-02, ESS=5.0000e+03.
-INFO:ABC:t: 1, eps: 57.876908257726384.

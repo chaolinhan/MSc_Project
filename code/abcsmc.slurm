@@ -2,8 +2,8 @@
 
 # Slurm job options (name, compute nodes, job time)
 # TODO: set job name and wall time
-#SBATCH --job-name=SMC_72
-#SBATCH --time=20:40:0
+#SBATCH --job-name=SMC_24
+#SBATCH --time=4:40:0
 #SBATCH --exclusive
 #SBATCH --nodes=1
 #SBATCH --tasks-per-node=1
@@ -21,6 +21,5 @@ source ~/miniconda3/bin/activate
 
 # Launch the parallel job
 # TODO: set python file
-srun --cpu-bind=cores ~/miniconda3/bin/python3 abcsmc5_72.py
-srun --cpu-bind=cores ~/miniconda3/bin/python3 abcsmc5_72.py
-srun --cpu-bind=cores ~/miniconda3/bin/python3 abcsmc5_72.py
+srun --cpu-bind=cores ~/miniconda3/bin/python3 abcsmc5_24.py
+srun --cpu-bind=cores ~/miniconda3/bin/python3 abcsmc5_24.py
