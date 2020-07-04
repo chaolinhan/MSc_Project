@@ -1,0 +1,1889 @@
+INFO:Sampler:Parallelizing the sampling on 72 cores.
+INFO:History:Start <ABCSMC(id=1, start_time=2020-07-03 21:41:01.218322, end_time=None)>
+INFO:ABC:t: 0, eps: 60.
+
+
+
+ABC SMC
+Performance study
+
+Target data
+{0: 0.0, 1: 0.0, 2: 1.0, 3: 1.0, 4: nan, 5: nan, 6: 1.8725, 7: 0.96225, 8: 1.85, 9: 0.33333334, 10: nan, 11: nan, 12: 10.708333, 13: 1.08, 14: 4.01255, 15: 1.0565, 16: 26.52, 17: 3.275862, 18: nan, 19: nan, 20: 22.333334, 21: 4.8333335, 22: 29.17, 23: 13.88, 24: 16.6, 25: 12.652174, 26: 7.365, 27: 8.6005, 28: nan, 29: nan, 30: 5.985, 31: 7.4845, 32: 6.8076925, 33: 18.766666, 34: 8.76, 35: 3.060075, 36: 5.851852, 37: 19.565218, 38: 1.076415, 39: 6.56325, 40: 0.5555556, 41: 14.275862, 42: 0.764, 43: 5.7875, 44: 0.3448276, 45: 8.653846, 46: nan, 47: nan}
+ NO factors applied
+loguniform
+<pyabc.acceptor.acceptor.UniformAcceptor object at 0x14800d29dad0>
+2 <pyabc.distance.distance.PNormDistance object at 0x14800d30cad0>
+<pyabc.epsilon.epsilon.MedianEpsilon object at 0x14800d297090>
+[<SimpleModel ode_model5>]
+2000 <pyabc.populationstrategy.ConstantPopulationSize object at 0x14800d29da50>
+72 <pyabc.sampler.multicore_evaluation_parallel.MulticoreEvalParallelSampler object at 0x14800d297190>
+[MultivariateNormalTransition()]
+
+sqlite:///model5_72.db
+
+Generations: 25
+Minimum eps: 20.000
+
+
+
+
+
+
+
+
+
+
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/pyabc/distance/distance.py:102: RuntimeWarning: overflow encountered in double_scalars
+  for key in w),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 51967 = 3.8486e-02, ESS=2.0000e+03.
+INFO:ABC:t: 1, eps: 57.88076274114018.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 28358 = 7.0527e-02, ESS=4.5689e+00.
+INFO:ABC:t: 2, eps: 53.08728551984807.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 155568 = 1.2856e-02, ESS=3.1172e+00.
+INFO:ABC:t: 3, eps: 50.60405116805413.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 45688 = 4.3775e-02, ESS=1.1032e+00.
+INFO:ABC:t: 4, eps: 43.84786867656184.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 367795 = 5.4378e-03, ESS=1.9183e+00.
+INFO:ABC:t: 5, eps: 42.0733678767055.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 51978 = 3.8478e-02, ESS=6.9649e+00.
+INFO:ABC:t: 6, eps: 41.65004353822421.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 16400 = 1.2195e-01, ESS=9.0223e+00.
+INFO:ABC:t: 7, eps: 41.059547729170376.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 26687 = 7.4943e-02, ESS=1.0714e+00.
+INFO:ABC:t: 8, eps: 40.63171802917397.
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 15554 = 1.2858e-01, ESS=7.0437e+00.
+INFO:ABC:t: 9, eps: 38.77782918444536.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 14880 = 1.3441e-01, ESS=4.2307e+00.
+INFO:ABC:t: 10, eps: 36.21584281218383.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 67321 = 2.9708e-02, ESS=1.3058e+01.
+INFO:ABC:t: 11, eps: 32.627060458071135.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 79492 = 2.5160e-02, ESS=4.0805e+00.
+INFO:ABC:t: 12, eps: 29.03075977773958.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 4384 = 4.5620e-01, ESS=8.7486e+00.
+INFO:ABC:t: 13, eps: 25.661847789607613.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 6698 = 2.9860e-01, ESS=3.0069e+00.
+INFO:ABC:t: 14, eps: 21.11773126157829.
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 10909 = 1.8333e-01, ESS=3.0328e+00.
+INFO:ABC:t: 15, eps: 19.39295834816835.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 9911 = 2.0180e-01, ESS=1.1055e+00.
+INFO:ABC:Stopping: minimum epsilon.
+INFO:History:Done <ABCSMC(id=1, start_time=2020-07-03 21:41:01.218322, end_time=2020-07-03 22:20:55.808360)>
+INFO:Sampler:Parallelizing the sampling on 72 cores.
+INFO:History:Start <ABCSMC(id=2, start_time=2020-07-03 22:20:58.301461, end_time=None)>
+INFO:ABC:t: 0, eps: 60.
+
+
+
+ABC SMC
+Performance study
+
+Target data
+{0: 0.0, 1: 0.0, 2: 1.0, 3: 1.0, 4: nan, 5: nan, 6: 1.8725, 7: 0.96225, 8: 1.85, 9: 0.33333334, 10: nan, 11: nan, 12: 10.708333, 13: 1.08, 14: 4.01255, 15: 1.0565, 16: 26.52, 17: 3.275862, 18: nan, 19: nan, 20: 22.333334, 21: 4.8333335, 22: 29.17, 23: 13.88, 24: 16.6, 25: 12.652174, 26: 7.365, 27: 8.6005, 28: nan, 29: nan, 30: 5.985, 31: 7.4845, 32: 6.8076925, 33: 18.766666, 34: 8.76, 35: 3.060075, 36: 5.851852, 37: 19.565218, 38: 1.076415, 39: 6.56325, 40: 0.5555556, 41: 14.275862, 42: 0.764, 43: 5.7875, 44: 0.3448276, 45: 8.653846, 46: nan, 47: nan}
+ NO factors applied
+loguniform
+<pyabc.acceptor.acceptor.UniformAcceptor object at 0x1487bbaf16d0>
+2 <pyabc.distance.distance.PNormDistance object at 0x1487b9596210>
+<pyabc.epsilon.epsilon.MedianEpsilon object at 0x1487b9596150>
+[<SimpleModel ode_model5>]
+2000 <pyabc.populationstrategy.ConstantPopulationSize object at 0x1487bbaeced0>
+72 <pyabc.sampler.multicore_evaluation_parallel.MulticoreEvalParallelSampler object at 0x1487b95963d0>
+[MultivariateNormalTransition()]
+
+sqlite:///model5_72.db
+
+Generations: 25
+Minimum eps: 20.000
+
+
+
+
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/pyabc/distance/distance.py:102: RuntimeWarning: overflow encountered in double_scalars
+  for key in w),
+
+
+
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/pyabc/distance/distance.py:102: RuntimeWarning: overflow encountered in double_scalars
+  for key in w),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/pyabc/distance/distance.py:102: RuntimeWarning: overflow encountered in double_scalars
+  for key in w),
+
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/pyabc/distance/distance.py:102: RuntimeWarning: overflow encountered in double_scalars
+  for key in w),
+
+
+
+
+
+
+
+
+
+
+
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/pyabc/distance/distance.py:102: RuntimeWarning: overflow encountered in double_scalars
+  for key in w),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/pyabc/distance/distance.py:102: RuntimeWarning: overflow encountered in double_scalars
+  for key in w),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 53100 = 3.7665e-02, ESS=2.0000e+03.
+INFO:ABC:t: 1, eps: 57.86694200130983.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 29969 = 6.6736e-02, ESS=2.1305e+00.
+INFO:ABC:t: 2, eps: 57.41122259373368.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 17662 = 1.1324e-01, ESS=4.3453e+00.
+INFO:ABC:t: 3, eps: 52.286240936476275.
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 18718 = 1.0685e-01, ESS=3.7567e+00.
+INFO:ABC:t: 4, eps: 51.41844582484681.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/pyabc/distance/distance.py:102: RuntimeWarning: overflow encountered in double_scalars
+  for key in w),
+
+
+
+
+
+
+
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/pyabc/distance/distance.py:102: RuntimeWarning: overflow encountered in double_scalars
+  for key in w),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 12499 = 1.6001e-01, ESS=1.2229e+00.
+INFO:ABC:t: 5, eps: 50.76129401411296.
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 11812 = 1.6932e-01, ESS=5.4372e+00.
+INFO:ABC:t: 6, eps: 49.4233907304366.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 8258 = 2.4219e-01, ESS=1.2246e+01.
+INFO:ABC:t: 7, eps: 48.24897364086506.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/pyabc/distance/distance.py:102: RuntimeWarning: overflow encountered in double_scalars
+  for key in w),
+
+
+INFO:ABC:Acceptance rate: 2000 / 10004 = 1.9992e-01, ESS=2.1225e+00.
+INFO:ABC:t: 8, eps: 46.92765875236844.
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 13344 = 1.4988e-01, ESS=1.2230e+00.
+INFO:ABC:t: 9, eps: 44.47410699888717.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 23295 = 8.5855e-02, ESS=1.1881e+01.
+INFO:ABC:t: 10, eps: 43.404451067224706.
+
+
+INFO:ABC:Acceptance rate: 2000 / 17561 = 1.1389e-01, ESS=6.3933e+00.
+INFO:ABC:t: 11, eps: 42.51026080662103.
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 17449 = 1.1462e-01, ESS=1.0778e+00.
+INFO:ABC:t: 12, eps: 39.67167264374638.
+
+INFO:ABC:Acceptance rate: 2000 / 31911 = 6.2674e-02, ESS=2.0062e+00.
+INFO:ABC:t: 13, eps: 39.56659230044871.
+
+
+INFO:ABC:Acceptance rate: 2000 / 4778 = 4.1859e-01, ESS=2.4886e+00.
+INFO:ABC:t: 14, eps: 37.75864410095248.
+INFO:ABC:Acceptance rate: 2000 / 4180 = 4.7847e-01, ESS=1.2787e+01.
+INFO:ABC:t: 15, eps: 36.6917045428435.
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 9505 = 2.1042e-01, ESS=6.1240e+00.
+INFO:ABC:t: 16, eps: 36.01464611101895.
+INFO:ABC:Acceptance rate: 2000 / 4708 = 4.2481e-01, ESS=4.2339e+00.
+INFO:ABC:t: 17, eps: 35.697547376004856.
+
+INFO:ABC:Acceptance rate: 2000 / 4891 = 4.0891e-01, ESS=1.1661e+00.
+INFO:ABC:t: 18, eps: 33.93343837864212.
+INFO:ABC:Acceptance rate: 2000 / 7371 = 2.7133e-01, ESS=2.8460e+00.
+INFO:ABC:t: 19, eps: 31.277975444409382.
+INFO:ABC:Acceptance rate: 2000 / 20515 = 9.7490e-02, ESS=8.1101e+00.
+INFO:ABC:t: 20, eps: 30.0516936584258.
+INFO:ABC:Acceptance rate: 2000 / 8039 = 2.4879e-01, ESS=1.3434e+00.
+INFO:ABC:t: 21, eps: 26.935586034391132.
+INFO:ABC:Acceptance rate: 2000 / 2504 = 7.9872e-01, ESS=4.2034e+00.
+INFO:ABC:t: 22, eps: 25.57747074351576.
+INFO:ABC:Acceptance rate: 2000 / 3197 = 6.2559e-01, ESS=5.2052e+00.
+INFO:ABC:t: 23, eps: 24.51699644246889.
+INFO:ABC:Acceptance rate: 2000 / 4621 = 4.3281e-01, ESS=5.3690e+00.
+INFO:ABC:t: 24, eps: 23.870466594912358.
+INFO:ABC:Acceptance rate: 2000 / 4496 = 4.4484e-01, ESS=2.0673e+00.
+INFO:History:Done <ABCSMC(id=2, start_time=2020-07-03 22:20:58.301461, end_time=2020-07-03 22:53:55.560632)>
+INFO:Sampler:Parallelizing the sampling on 72 cores.
+INFO:History:Start <ABCSMC(id=3, start_time=2020-07-03 22:53:58.022140, end_time=None)>
+INFO:ABC:t: 0, eps: 60.
+
+
+
+ABC SMC
+Performance study
+
+Target data
+{0: 0.0, 1: 0.0, 2: 1.0, 3: 1.0, 4: nan, 5: nan, 6: 1.8725, 7: 0.96225, 8: 1.85, 9: 0.33333334, 10: nan, 11: nan, 12: 10.708333, 13: 1.08, 14: 4.01255, 15: 1.0565, 16: 26.52, 17: 3.275862, 18: nan, 19: nan, 20: 22.333334, 21: 4.8333335, 22: 29.17, 23: 13.88, 24: 16.6, 25: 12.652174, 26: 7.365, 27: 8.6005, 28: nan, 29: nan, 30: 5.985, 31: 7.4845, 32: 6.8076925, 33: 18.766666, 34: 8.76, 35: 3.060075, 36: 5.851852, 37: 19.565218, 38: 1.076415, 39: 6.56325, 40: 0.5555556, 41: 14.275862, 42: 0.764, 43: 5.7875, 44: 0.3448276, 45: 8.653846, 46: nan, 47: nan}
+ NO factors applied
+loguniform
+<pyabc.acceptor.acceptor.UniformAcceptor object at 0x14e409577390>
+2 <pyabc.distance.distance.PNormDistance object at 0x14e4095ddad0>
+<pyabc.epsilon.epsilon.MedianEpsilon object at 0x14e409569090>
+[<SimpleModel ode_model5>]
+2000 <pyabc.populationstrategy.ConstantPopulationSize object at 0x14e409577fd0>
+72 <pyabc.sampler.multicore_evaluation_parallel.MulticoreEvalParallelSampler object at 0x14e409569190>
+[MultivariateNormalTransition()]
+
+sqlite:///model5_72.db
+
+Generations: 25
+Minimum eps: 20.000
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/pyabc/distance/distance.py:102: RuntimeWarning: overflow encountered in double_scalars
+  for key in w),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/pyabc/distance/distance.py:102: RuntimeWarning: overflow encountered in double_scalars
+  for key in w),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 52552 = 3.8058e-02, ESS=2.0000e+03.
+INFO:ABC:t: 1, eps: 57.91617713279601.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 29506 = 6.7783e-02, ESS=9.1828e+00.
+INFO:ABC:t: 2, eps: 57.42674330577273.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 46760 = 4.2772e-02, ESS=9.8386e+00.
+INFO:ABC:t: 3, eps: 55.80194457573449.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 15887 = 1.2589e-01, ESS=5.0660e+00.
+INFO:ABC:t: 4, eps: 53.39636801062696.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 10453 = 1.9133e-01, ESS=1.2182e+00.
+INFO:ABC:t: 5, eps: 51.11648656663871.
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 8912 = 2.2442e-01, ESS=1.0224e+00.
+INFO:ABC:t: 6, eps: 49.42770234842541.
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 8587 = 2.3291e-01, ESS=9.6429e+00.
+INFO:ABC:t: 7, eps: 47.91495567723222.
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 9403 = 2.1270e-01, ESS=1.3516e+01.
+INFO:ABC:t: 8, eps: 47.46511077517758.
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 6889 = 2.9032e-01, ESS=4.2543e+00.
+INFO:ABC:t: 9, eps: 44.62872441359386.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 27339 = 7.3156e-02, ESS=2.4120e+00.
+INFO:ABC:t: 10, eps: 42.991908392750304.
+
+INFO:ABC:Acceptance rate: 2000 / 12459 = 1.6053e-01, ESS=8.4744e+00.
+INFO:ABC:t: 11, eps: 41.57768451246913.
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 12492 = 1.6010e-01, ESS=3.6085e+00.
+INFO:ABC:t: 12, eps: 40.069193838133714.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 22250 = 8.9888e-02, ESS=2.0376e+01.
+INFO:ABC:t: 13, eps: 39.58295911686608.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 29459 = 6.7891e-02, ESS=1.2440e+01.
+INFO:ABC:t: 14, eps: 38.80180010698858.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 31022 = 6.4470e-02, ESS=1.1977e+00.
+INFO:ABC:t: 15, eps: 37.00597938543232.
+INFO:ABC:Acceptance rate: 2000 / 7740 = 2.5840e-01, ESS=1.0092e+00.
+INFO:ABC:t: 16, eps: 36.571364520480905.
+INFO:ABC:Acceptance rate: 2000 / 3559 = 5.6196e-01, ESS=4.9614e+00.
+INFO:ABC:t: 17, eps: 36.106088046186855.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 4677 = 4.2762e-01, ESS=2.7053e+00.
+INFO:ABC:t: 18, eps: 33.9440797043056.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 11720 = 1.7065e-01, ESS=6.1498e+00.
+INFO:ABC:t: 19, eps: 31.62556848184567.
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 9129 = 2.1908e-01, ESS=1.2024e+01.
+INFO:ABC:t: 20, eps: 29.60402765032033.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 10059 = 1.9883e-01, ESS=5.2901e+00.
+INFO:ABC:t: 21, eps: 27.808534035127543.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 29791 = 6.7134e-02, ESS=3.3928e+01.
+INFO:ABC:t: 22, eps: 26.30433116097241.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 15196 = 1.3161e-01, ESS=5.8020e+00.
+INFO:ABC:t: 23, eps: 25.4111663971278.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 9606 = 2.0820e-01, ESS=3.5636e+00.
+INFO:ABC:t: 24, eps: 23.730548603605786.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:ABC:Acceptance rate: 2000 / 4085 = 4.8960e-01, ESS=1.9770e+01.
+INFO:History:Done <ABCSMC(id=3, start_time=2020-07-03 22:53:58.022140, end_time=2020-07-03 23:29:55.389030)>
