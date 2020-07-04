@@ -73,7 +73,7 @@ sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=36)
 # TODO: set model and prior
 abc = pyabc.ABCSMC(models=solver.ode_model5,
                    parameter_priors=para_prior5,
-                   population_size=5000,
+                   population_size=2000,
                    sampler=sampler0,
                    distance_function=distanceP2,
                    eps=eps0,
@@ -92,7 +92,7 @@ print(abc.transitions)
 # %% Run ABC-SMC
 
 abc.new(db_path, exp_data)
-max_population = 15
+max_population = 20
 min_eps = 20
 
 print("\n"+db_path+"\n")
