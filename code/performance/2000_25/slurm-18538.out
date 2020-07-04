@@ -43,3 +43,6 @@ Minimum eps: 20.000
   warnings.warn(warning_msg, ODEintWarning)
 INFO:ABC:Acceptance rate: 2000 / 52543 = 3.8064e-02, ESS=2.0000e+03.
 INFO:ABC:t: 1, eps: 57.98128871064557.
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** JOB 18538 ON r1i3n0 CANCELLED AT 2020-07-04T12:44:14 ***
+slurmstepd: error: *** STEP 18538.0 ON r1i3n0 CANCELLED AT 2020-07-04T12:44:14 ***
