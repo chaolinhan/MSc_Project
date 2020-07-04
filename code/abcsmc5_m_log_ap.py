@@ -49,9 +49,9 @@ eps0 = pyabc.MedianEpsilon(60)
 
 # sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=6)
 
-population0 = 5000
+population0 = 100
 population_adpt = pyabc.populationstrategy.AdaptivePopulationSize(start_nr_particles=population0, mean_cv=0.10,
-                                                                  max_population_size=10000)
+                                                                  max_population_size=500)
 
 # TODO: set model and prior
 abc = pyabc.ABCSMC(models=solver.ode_model5,
