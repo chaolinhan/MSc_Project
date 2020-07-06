@@ -1,0 +1,16 @@
+model5_72.db
+ID: 1
+Sampling size: 632913
+Execution time: 0 days 00:29:46.368436
+ID: 2
+Sampling size: 354158
+Execution time: 0 days 00:30:45.311417
+ID: 3
+Sampling size: 573972
+Execution time: 0 days 00:37:00.403699
+ID: 4
+Sampling size: 504947
+Execution time: 0 days 00:36:43.257532
+ID: 5
+Sampling size: 801985
+Execution time: 0 days 00:36:56.452226

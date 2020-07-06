@@ -11,7 +11,7 @@ import pyabc
 # %% Load database
 
 # TODO change database name
-db_path = "sqlite:///../model5_12.db"
+db_path = "sqlite:///../model5_72.db"
 
 history = pyabc.History(db_path)
 
@@ -21,9 +21,9 @@ history = pyabc.History(db_path)
 
 print(db_path.split("/")[-1])
 
-for id in [1, 2, 3]:
+for id in range(1, 6):
     history.id = id
     print("ID: {}".format(history.id))
-    print(history.total_nr_simulations)
+    print("Sampling size: {}".format(history.total_nr_simulations))
     x = history.get_all_populations()
-    print(x["population_end_time"][history.max_t]-x["population_end_time"][0])
+    print("Execution time: {}".format(x["population_end_time"][history.max_t]-x["population_end_time"][0]))
