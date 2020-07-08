@@ -3,7 +3,7 @@
 # Slurm job options (name, compute nodes, job time)
 # TODO: set job name and wall time
 #SBATCH --job-name=SMC_36
-#SBATCH --time=10:40:0
+#SBATCH --time=6:40:0
 #SBATCH --exclusive
 #SBATCH --nodes=1
 #SBATCH --tasks-per-node=1

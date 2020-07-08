@@ -1,0 +1,16 @@
+model5_36.db
+ID: 1
+Sampling size: 389972
+Execution time: 0 days 00:39:30.438777
+ID: 2
+Sampling size: 654503
+Execution time: 0 days 00:35:31.265346
+ID: 3
+Sampling size: 426574
+Execution time: 0 days 00:31:23.552048
+ID: 4
+Sampling size: 341421
+Execution time: 0 days 00:35:52.785991
+ID: 5
+Sampling size: 274906
+Execution time: 0 days 00:35:08.307899
