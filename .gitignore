@@ -11,3 +11,4 @@ ref/
 code/__pycache__/
 */.vscode/
 code/db
+*journal

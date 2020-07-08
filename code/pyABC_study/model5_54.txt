@@ -1,0 +1,16 @@
+model5_54.db
+ID: 1
+Sampling size: 540868
+Execution time: 0 days 00:33:32.277035
+ID: 2
+Sampling size: 1591481
+Execution time: 0 days 00:44:03.642503
+ID: 3
+Sampling size: 589408
+Execution time: 0 days 00:31:30.273155
+ID: 4
+Sampling size: 249536
+Execution time: 0 days 00:29:24.444989
+ID: 5
+Sampling size: 770769
+Execution time: 0 days 00:39:17.801457
