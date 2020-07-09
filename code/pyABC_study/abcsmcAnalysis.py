@@ -26,7 +26,7 @@ para_prior5 = para_prior(lim, prior_distribution, 5)
 # %% Load database
 
 # TODO change database name
-db_path = "sqlite:///db/model5_base.db"
+db_path = "sqlite:///db/model5_36_p.db"
 
 history = pyabc.History(db_path)
 
@@ -43,6 +43,11 @@ result_data(history, solver, nr_population=history.max_t)
 
 # TODO change prior name
 result_plot(history, None, para_prior5, history.max_t)
+
+history.id = 3
+pyabc.visualization.plot_epsilons(history)
+pyabc.visualization.plot_total_sample_numbers(history)
+plt.show()
 
 
 # %% Model compare plot
