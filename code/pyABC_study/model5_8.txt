@@ -1,0 +1,16 @@
+model5_8.db
+ID: 1
+Sampling size: 342883
+Execution time: 0 days 01:55:49.164131
+ID: 2
+Sampling size: 299351
+Execution time: 0 days 02:02:41.356272
+ID: 3
+Sampling size: 470040
+Execution time: 0 days 01:37:54.458842
+ID: 4
+Sampling size: 287094
+Execution time: 0 days 01:33:18.185044
+ID: 5
+Sampling size: 290108
+Execution time: 0 days 01:38:25.044279

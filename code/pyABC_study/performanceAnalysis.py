@@ -11,7 +11,7 @@ import pyabc
 # %% Load database
 
 # TODO change database name
-db_path = "sqlite:///../dbfiles/model5_12.db"
+db_path = "sqlite:///../dbfiles/model5_8.db"
 
 history = pyabc.History(db_path)
 
