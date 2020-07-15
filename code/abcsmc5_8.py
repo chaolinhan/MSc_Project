@@ -7,7 +7,7 @@ print("\n\n\nABC SMC\nPerformance study\n")
 # %% Set database path and observed data
 
 # TODO: Change database name every run
-db_path = "sqlite:///dbfiles/model5_8.db"
+db_path = "sqlite:///dbfiles/model5_8_more.db"
 
 print("Target data")
 print(exp_data)

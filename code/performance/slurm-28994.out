@@ -1,0 +1,615 @@
+INFO:Sampler:Parallelizing the sampling on 24 cores.
+INFO:History:Start <ABCSMC(id=1, start_time=2020-07-15 04:26:06.033517, end_time=None)>
+INFO:ABC:t: 0, eps: 60.
+
+
+
+ABC SMC
+Performance study
+
+Target data
+{0: 0.0, 1: 0.0, 2: 1.0, 3: 1.0, 4: nan, 5: nan, 6: 1.8725, 7: 0.96225, 8: 1.85, 9: 0.33333334, 10: nan, 11: nan, 12: 10.708333, 13: 1.08, 14: 4.01255, 15: 1.0565, 16: 26.52, 17: 3.275862, 18: nan, 19: nan, 20: 22.333334, 21: 4.8333335, 22: 29.17, 23: 13.88, 24: 16.6, 25: 12.652174, 26: 7.365, 27: 8.6005, 28: nan, 29: nan, 30: 5.985, 31: 7.4845, 32: 6.8076925, 33: 18.766666, 34: 8.76, 35: 3.060075, 36: 5.851852, 37: 19.565218, 38: 1.076415, 39: 6.56325, 40: 0.5555556, 41: 14.275862, 42: 0.764, 43: 5.7875, 44: 0.3448276, 45: 8.653846, 46: nan, 47: nan}
+ NO factors applied
+loguniform
+<pyabc.acceptor.acceptor.UniformAcceptor object at 0x14fd93fa8d90>
+2 <pyabc.distance.distance.PNormDistance object at 0x14fd93f9d210>
+<pyabc.epsilon.epsilon.MedianEpsilon object at 0x14fd93f9d310>
+[<SimpleModel ode_model5>]
+2000 <pyabc.populationstrategy.ConstantPopulationSize object at 0x14fd93fa8cd0>
+24 <pyabc.sampler.multicore_evaluation_parallel.MulticoreEvalParallelSampler object at 0x14fd93f9d510>
+[MultivariateNormalTransition()]
+
+sqlite:///dbfiles/model5_24_more.db
+
+Generations: 20
+Minimum eps: 20.000
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/pyabc/distance/distance.py:102: RuntimeWarning: overflow encountered in double_scalars
+  for key in w),
+Traceback (most recent call last):
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1284, in _execute_context
+    cursor, statement, parameters, context
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 590, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: disk I/O error
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "abcsmc5_24.py", line 102, in <module>
+    history = abc.run(minimum_epsilon=min_eps, max_nr_populations=max_population)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/pyabc/smc.py", line 905, in run
+    t, current_eps, population, n_sim, model_names)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/pyabc/storage/history.py", line 729, in append_population
+    model_names)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/pyabc/storage/history.py", line 28, in f_wrapper
+    res = f(self, *args, **kwargs)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/pyabc/storage/history.py", line 690, in _save_to_population_db
+    self._session.commit()
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 1042, in commit
+    self.transaction.commit()
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 504, in commit
+    self._prepare_impl()
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 483, in _prepare_impl
+    self.session.flush()
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 2523, in flush
+    self._flush(objects)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 2664, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py", line 69, in __exit__
+    exc_value, with_traceback=exc_tb,
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 178, in raise_
+    raise exception
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 2624, in _flush
+    flush_context.execute()
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/unitofwork.py", line 422, in execute
+    rec.execute(self)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/unitofwork.py", line 589, in execute
+    uow,
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/persistence.py", line 245, in save_obj
+    insert,
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/persistence.py", line 1136, in _emit_insert_statements
+    statement, params
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1020, in execute
+    return meth(self, multiparams, params)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/sql/elements.py", line 298, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1139, in _execute_clauseelement
+    distilled_params,
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1324, in _execute_context
+    e, statement, parameters, cursor, context
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1518, in _handle_dbapi_exception
+    sqlalchemy_exception, with_traceback=exc_info[2], from_=e
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 178, in raise_
+    raise exception
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1284, in _execute_context
+    cursor, statement, parameters, context
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 590, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) disk I/O error
+[SQL: INSERT INTO summary_statistics (sample_id, name, value) VALUES (?, ?, ?)]
+[parameters: (506, 36, <memory at 0x14fd93c80e20>)]
+(Background on this error at: http://sqlalche.me/e/e3q8)
+srun: error: r1i6n30: task 0: Exited with exit code 1
+INFO:Sampler:Parallelizing the sampling on 24 cores.
+INFO:History:Start <ABCSMC(id=2, start_time=2020-07-15 04:26:46.661500, end_time=None)>
+INFO:ABC:t: 0, eps: 60.
+
+
+
+ABC SMC
+Performance study
+
+Target data
+{0: 0.0, 1: 0.0, 2: 1.0, 3: 1.0, 4: nan, 5: nan, 6: 1.8725, 7: 0.96225, 8: 1.85, 9: 0.33333334, 10: nan, 11: nan, 12: 10.708333, 13: 1.08, 14: 4.01255, 15: 1.0565, 16: 26.52, 17: 3.275862, 18: nan, 19: nan, 20: 22.333334, 21: 4.8333335, 22: 29.17, 23: 13.88, 24: 16.6, 25: 12.652174, 26: 7.365, 27: 8.6005, 28: nan, 29: nan, 30: 5.985, 31: 7.4845, 32: 6.8076925, 33: 18.766666, 34: 8.76, 35: 3.060075, 36: 5.851852, 37: 19.565218, 38: 1.076415, 39: 6.56325, 40: 0.5555556, 41: 14.275862, 42: 0.764, 43: 5.7875, 44: 0.3448276, 45: 8.653846, 46: nan, 47: nan}
+ NO factors applied
+loguniform
+<pyabc.acceptor.acceptor.UniformAcceptor object at 0x14eba46e1c90>
+2 <pyabc.distance.distance.PNormDistance object at 0x14eba6c24b50>
+<pyabc.epsilon.epsilon.MedianEpsilon object at 0x14eba46d3890>
+[<SimpleModel ode_model5>]
+2000 <pyabc.populationstrategy.ConstantPopulationSize object at 0x14eba46e1d50>
+24 <pyabc.sampler.multicore_evaluation_parallel.MulticoreEvalParallelSampler object at 0x14eba46d3150>
+[MultivariateNormalTransition()]
+
+sqlite:///dbfiles/model5_24_more.db
+
+Generations: 20
+Minimum eps: 20.000
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/pyabc/distance/distance.py:102: RuntimeWarning: overflow encountered in double_scalars
+  for key in w),
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/pyabc/distance/distance.py:102: RuntimeWarning: overflow encountered in double_scalars
+  for key in w),
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+Traceback (most recent call last):
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1284, in _execute_context
+    cursor, statement, parameters, context
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 590, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: disk I/O error
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "abcsmc5_24.py", line 102, in <module>
+    history = abc.run(minimum_epsilon=min_eps, max_nr_populations=max_population)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/pyabc/smc.py", line 905, in run
+    t, current_eps, population, n_sim, model_names)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/pyabc/storage/history.py", line 729, in append_population
+    model_names)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/pyabc/storage/history.py", line 28, in f_wrapper
+    res = f(self, *args, **kwargs)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/pyabc/storage/history.py", line 690, in _save_to_population_db
+    self._session.commit()
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 1042, in commit
+    self.transaction.commit()
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 504, in commit
+    self._prepare_impl()
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 483, in _prepare_impl
+    self.session.flush()
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 2523, in flush
+    self._flush(objects)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 2664, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py", line 69, in __exit__
+    exc_value, with_traceback=exc_tb,
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 178, in raise_
+    raise exception
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 2624, in _flush
+    flush_context.execute()
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/unitofwork.py", line 422, in execute
+    rec.execute(self)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/unitofwork.py", line 589, in execute
+    uow,
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/persistence.py", line 245, in save_obj
+    insert,
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/persistence.py", line 1136, in _emit_insert_statements
+    statement, params
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1020, in execute
+    return meth(self, multiparams, params)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/sql/elements.py", line 298, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1139, in _execute_clauseelement
+    distilled_params,
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1324, in _execute_context
+    e, statement, parameters, cursor, context
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1518, in _handle_dbapi_exception
+    sqlalchemy_exception, with_traceback=exc_info[2], from_=e
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 178, in raise_
+    raise exception
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1284, in _execute_context
+    cursor, statement, parameters, context
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 590, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) disk I/O error
+[SQL: INSERT INTO summary_statistics (sample_id, name, value) VALUES (?, ?, ?)]
+[parameters: (521, 44, <memory at 0x14eba43a9e20>)]
+(Background on this error at: http://sqlalche.me/e/e3q8)
+srun: error: r1i6n30: task 0: Exited with exit code 1
+INFO:Sampler:Parallelizing the sampling on 24 cores.
+
+
+
+ABC SMC
+Performance study
+
+Target data
+{0: 0.0, 1: 0.0, 2: 1.0, 3: 1.0, 4: nan, 5: nan, 6: 1.8725, 7: 0.96225, 8: 1.85, 9: 0.33333334, 10: nan, 11: nan, 12: 10.708333, 13: 1.08, 14: 4.01255, 15: 1.0565, 16: 26.52, 17: 3.275862, 18: nan, 19: nan, 20: 22.333334, 21: 4.8333335, 22: 29.17, 23: 13.88, 24: 16.6, 25: 12.652174, 26: 7.365, 27: 8.6005, 28: nan, 29: nan, 30: 5.985, 31: 7.4845, 32: 6.8076925, 33: 18.766666, 34: 8.76, 35: 3.060075, 36: 5.851852, 37: 19.565218, 38: 1.076415, 39: 6.56325, 40: 0.5555556, 41: 14.275862, 42: 0.764, 43: 5.7875, 44: 0.3448276, 45: 8.653846, 46: nan, 47: nan}
+ NO factors applied
+loguniform
+<pyabc.acceptor.acceptor.UniformAcceptor object at 0x15202597ee50>
+2 <pyabc.distance.distance.PNormDistance object at 0x1520259e3b50>
+<pyabc.epsilon.epsilon.MedianEpsilon object at 0x152025971550>
+[<SimpleModel ode_model5>]
+2000 <pyabc.populationstrategy.ConstantPopulationSize object at 0x15202597e5d0>
+24 <pyabc.sampler.multicore_evaluation_parallel.MulticoreEvalParallelSampler object at 0x152025971210>
+[MultivariateNormalTransition()]
+Traceback (most recent call last):
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 774, in _commit_impl
+    self.engine.dialect.do_commit(self.connection)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 543, in do_commit
+    dbapi_connection.commit()
+sqlite3.OperationalError: disk I/O error
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "abcsmc5_24.py", line 94, in <module>
+    abc.new(db_path, exp_data)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/pyabc/smc.py", line 343, in new
+    self.population_size.to_json())
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/pyabc/storage/history.py", line 28, in f_wrapper
+    res = f(self, *args, **kwargs)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/pyabc/storage/history.py", line 423, in store_initial_data
+    self._session.commit()
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 1042, in commit
+    self.transaction.commit()
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 508, in commit
+    t[1].commit()
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1771, in commit
+    self._do_commit()
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1802, in _do_commit
+    self.connection._commit_impl()
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 776, in _commit_impl
+    self._handle_dbapi_exception(e, None, None, None, None)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1518, in _handle_dbapi_exception
+    sqlalchemy_exception, with_traceback=exc_info[2], from_=e
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 178, in raise_
+    raise exception
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 774, in _commit_impl
+    self.engine.dialect.do_commit(self.connection)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 543, in do_commit
+    dbapi_connection.commit()
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) disk I/O error
+(Background on this error at: http://sqlalche.me/e/e3q8)
+srun: error: r1i6n30: task 0: Exited with exit code 1
+INFO:Sampler:Parallelizing the sampling on 24 cores.
+INFO:History:Start <ABCSMC(id=3, start_time=2020-07-15 04:27:35.418132, end_time=None)>
+INFO:ABC:t: 0, eps: 60.
+
+
+
+ABC SMC
+Performance study
+
+Target data
+{0: 0.0, 1: 0.0, 2: 1.0, 3: 1.0, 4: nan, 5: nan, 6: 1.8725, 7: 0.96225, 8: 1.85, 9: 0.33333334, 10: nan, 11: nan, 12: 10.708333, 13: 1.08, 14: 4.01255, 15: 1.0565, 16: 26.52, 17: 3.275862, 18: nan, 19: nan, 20: 22.333334, 21: 4.8333335, 22: 29.17, 23: 13.88, 24: 16.6, 25: 12.652174, 26: 7.365, 27: 8.6005, 28: nan, 29: nan, 30: 5.985, 31: 7.4845, 32: 6.8076925, 33: 18.766666, 34: 8.76, 35: 3.060075, 36: 5.851852, 37: 19.565218, 38: 1.076415, 39: 6.56325, 40: 0.5555556, 41: 14.275862, 42: 0.764, 43: 5.7875, 44: 0.3448276, 45: 8.653846, 46: nan, 47: nan}
+ NO factors applied
+loguniform
+<pyabc.acceptor.acceptor.UniformAcceptor object at 0x14f4067dec10>
+2 <pyabc.distance.distance.PNormDistance object at 0x14f4067d52d0>
+<pyabc.epsilon.epsilon.MedianEpsilon object at 0x14f4067d5110>
+[<SimpleModel ode_model5>]
+2000 <pyabc.populationstrategy.ConstantPopulationSize object at 0x14f4067debd0>
+24 <pyabc.sampler.multicore_evaluation_parallel.MulticoreEvalParallelSampler object at 0x14f4067d5390>
+[MultivariateNormalTransition()]
+
+sqlite:///dbfiles/model5_24_more.db
+
+Generations: 20
+Minimum eps: 20.000
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+Traceback (most recent call last):
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1284, in _execute_context
+    cursor, statement, parameters, context
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 590, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: disk I/O error
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "abcsmc5_24.py", line 102, in <module>
+    history = abc.run(minimum_epsilon=min_eps, max_nr_populations=max_population)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/pyabc/smc.py", line 905, in run
+    t, current_eps, population, n_sim, model_names)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/pyabc/storage/history.py", line 729, in append_population
+    model_names)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/pyabc/storage/history.py", line 28, in f_wrapper
+    res = f(self, *args, **kwargs)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/pyabc/storage/history.py", line 690, in _save_to_population_db
+    self._session.commit()
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 1042, in commit
+    self.transaction.commit()
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 504, in commit
+    self._prepare_impl()
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 483, in _prepare_impl
+    self.session.flush()
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 2523, in flush
+    self._flush(objects)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 2664, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py", line 69, in __exit__
+    exc_value, with_traceback=exc_tb,
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 178, in raise_
+    raise exception
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 2624, in _flush
+    flush_context.execute()
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/unitofwork.py", line 422, in execute
+    rec.execute(self)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/unitofwork.py", line 589, in execute
+    uow,
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/persistence.py", line 245, in save_obj
+    insert,
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/persistence.py", line 1136, in _emit_insert_statements
+    statement, params
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1020, in execute
+    return meth(self, multiparams, params)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/sql/elements.py", line 298, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1139, in _execute_clauseelement
+    distilled_params,
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1324, in _execute_context
+    e, statement, parameters, cursor, context
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1518, in _handle_dbapi_exception
+    sqlalchemy_exception, with_traceback=exc_info[2], from_=e
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 178, in raise_
+    raise exception
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1284, in _execute_context
+    cursor, statement, parameters, context
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 590, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) disk I/O error
+[SQL: INSERT INTO summary_statistics (sample_id, name, value) VALUES (?, ?, ?)]
+[parameters: (532, 10, <memory at 0x14f4064a8e20>)]
+(Background on this error at: http://sqlalche.me/e/e3q8)
+srun: error: r1i6n30: task 0: Exited with exit code 1
+INFO:Sampler:Parallelizing the sampling on 24 cores.
+INFO:History:Start <ABCSMC(id=4, start_time=2020-07-15 04:28:16.216751, end_time=None)>
+INFO:ABC:t: 0, eps: 60.
+
+
+
+ABC SMC
+Performance study
+
+Target data
+{0: 0.0, 1: 0.0, 2: 1.0, 3: 1.0, 4: nan, 5: nan, 6: 1.8725, 7: 0.96225, 8: 1.85, 9: 0.33333334, 10: nan, 11: nan, 12: 10.708333, 13: 1.08, 14: 4.01255, 15: 1.0565, 16: 26.52, 17: 3.275862, 18: nan, 19: nan, 20: 22.333334, 21: 4.8333335, 22: 29.17, 23: 13.88, 24: 16.6, 25: 12.652174, 26: 7.365, 27: 8.6005, 28: nan, 29: nan, 30: 5.985, 31: 7.4845, 32: 6.8076925, 33: 18.766666, 34: 8.76, 35: 3.060075, 36: 5.851852, 37: 19.565218, 38: 1.076415, 39: 6.56325, 40: 0.5555556, 41: 14.275862, 42: 0.764, 43: 5.7875, 44: 0.3448276, 45: 8.653846, 46: nan, 47: nan}
+ NO factors applied
+loguniform
+<pyabc.acceptor.acceptor.UniformAcceptor object at 0x15370078ea10>
+2 <pyabc.distance.distance.PNormDistance object at 0x1537007f5e50>
+<pyabc.epsilon.epsilon.MedianEpsilon object at 0x1537007f5610>
+[<SimpleModel ode_model5>]
+2000 <pyabc.populationstrategy.ConstantPopulationSize object at 0x15370078e150>
+24 <pyabc.sampler.multicore_evaluation_parallel.MulticoreEvalParallelSampler object at 0x153702ef5310>
+[MultivariateNormalTransition()]
+
+sqlite:///dbfiles/model5_24_more.db
+
+Generations: 20
+Minimum eps: 20.000
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/scipy/integrate/odepack.py:247: ODEintWarning: Excess work done on this call (perhaps wrong Dfun type). Run with full_output = 1 to get quantitative information.
+  warnings.warn(warning_msg, ODEintWarning)
+Traceback (most recent call last):
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1284, in _execute_context
+    cursor, statement, parameters, context
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 590, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: disk I/O error
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "abcsmc5_24.py", line 102, in <module>
+    history = abc.run(minimum_epsilon=min_eps, max_nr_populations=max_population)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/pyabc/smc.py", line 905, in run
+    t, current_eps, population, n_sim, model_names)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/pyabc/storage/history.py", line 729, in append_population
+    model_names)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/pyabc/storage/history.py", line 28, in f_wrapper
+    res = f(self, *args, **kwargs)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/pyabc/storage/history.py", line 690, in _save_to_population_db
+    self._session.commit()
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 1042, in commit
+    self.transaction.commit()
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 504, in commit
+    self._prepare_impl()
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 483, in _prepare_impl
+    self.session.flush()
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 2523, in flush
+    self._flush(objects)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 2664, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py", line 69, in __exit__
+    exc_value, with_traceback=exc_tb,
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 178, in raise_
+    raise exception
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 2624, in _flush
+    flush_context.execute()
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/unitofwork.py", line 422, in execute
+    rec.execute(self)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/unitofwork.py", line 589, in execute
+    uow,
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/persistence.py", line 245, in save_obj
+    insert,
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/orm/persistence.py", line 1136, in _emit_insert_statements
+    statement, params
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1020, in execute
+    return meth(self, multiparams, params)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/sql/elements.py", line 298, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1139, in _execute_clauseelement
+    distilled_params,
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1324, in _execute_context
+    e, statement, parameters, cursor, context
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1518, in _handle_dbapi_exception
+    sqlalchemy_exception, with_traceback=exc_info[2], from_=e
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 178, in raise_
+    raise exception
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1284, in _execute_context
+    cursor, statement, parameters, context
+  File "/lustre/home/d171/s1898201/miniconda3/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 590, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) disk I/O error
+[SQL: INSERT INTO summary_statistics (sample_id, name, value) VALUES (?, ?, ?)]
+[parameters: (141, 32, <memory at 0x153700454e20>)]
+(Background on this error at: http://sqlalche.me/e/e3q8)
+srun: error: r1i6n30: task 0: Exited with exit code 1
