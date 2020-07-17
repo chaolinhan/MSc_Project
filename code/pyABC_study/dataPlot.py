@@ -26,26 +26,15 @@ Calculate quantiles
     return df_quantile
 
 
-def obs_data_plot(time_points: np.array, obs_data_noisy, obs_data_raw):
+def obs_data_plot(time_points: np.array, obs_data_raw):
     """
     Plot the data of dict type
     :param time_points: time points to plot
     :param obs_data_noisy: data in duct type
     :return:
     """
-    plt.plot(time_points, obs_data_noisy['N'], linestyle=':', label='Noisy N')
-    plt.plot(time_points, obs_data_noisy['M'], linestyle=':', label='Noisy Phi')
-    if obs_data_raw is not None:
-        plt.plot(time_points, obs_data_raw['N'], alpha=0.5, label='Raw N')
-        plt.plot(time_points, obs_data_raw['M'], alpha=0.5, label='Raw Phi')
-    plt.legend()
-    plt.show()
-
-    plt.plot(time_points, obs_data_noisy['B'], linestyle=':', label='Noisy beta')
-    plt.plot(time_points, obs_data_noisy['A'], linestyle=':', label='Noisy alpha')
-    if obs_data_raw is not None:
-        plt.plot(time_points, obs_data_raw['B'], alpha=0.5, label='Raw beta')
-        plt.plot(time_points, obs_data_raw['A'], alpha=0.5, label='Raw alpha')
+    plt.plot(time_points, obs_data_raw['B'], alpha=0.5, label='Raw beta')
+    plt.plot(time_points, obs_data_raw['A'], alpha=0.5, label='Raw alpha')
     plt.legend()
     plt.show()
 
@@ -208,17 +197,18 @@ Visualise SMC population and compare it with target data
     index_cov = ['N', 'M', 'B', 'A']
     titles = ["N", "Φ", "β", "α"]
     for kk in range(4):
+        seq_mask = np.isfinite(compare_data[index_cov[kk]])
         # axs[kk].plot(solver.timePoint, df_25.iloc[:, kk], 'b--')
         # axs[kk].plot(solver.timePoint, df_75.iloc[:, kk], 'b--')
         axs[kk].fill_between(solver.time_point, df_25.iloc[:, kk], df_75.iloc[:, kk], alpha=0.9, color='lightgrey')
         axs[kk].plot(solver.time_point, df_mean.iloc[:, kk], 'b', label="Mean", alpha=0.6)
-        axs[kk].scatter(solver.time_point_exp, compare_data[index_cov[kk]], alpha=0.7, marker='^', color='red')
+        axs[kk].plot(solver.time_point_exp[seq_mask], compare_data[index_cov[kk]][seq_mask], alpha=0.7, marker='^', color='black')
         axs[kk].errorbar(solver.time_point_exp, compare_data[index_cov[kk]],
-                         yerr=[[0]*12, exp_data_SEM[index_cov[kk]]], fmt='none',
-                         ecolor='orange', elinewidth=2)
+                         yerr=[[0.5*x for x in exp_data_SEM[index_cov[kk]]], [0.5*x for x in exp_data_SEM[index_cov[kk]]]], fmt='none',
+                         ecolor='grey', elinewidth=2, alpha=0.6)
         axs[kk].legend(['Mean', '25% – 75% quantile range', 'Observed'])
         axs[kk].set_title(titles[kk])
-
+    fig.tight_layout(pad=5.0)
     if savefig:
         plt.savefig("resultCurve.png", dpi=200)
     plt.show()

@@ -1,7 +1,8 @@
 import os
-import pandas as pd
-import numpy as np
+
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
 import pyabc
 
 from pyABC_study.ODE import ODESolver, PriorLimits, arr2d_to_dict
@@ -10,10 +11,10 @@ from pyABC_study.dataPlot import result_data, result_plot
 # %% Settings
 
 lim = PriorLimits(0, 20)
-lim2 = PriorLimits(0, 1)
-lim3 = PriorLimits(0, 10)
-# lim2 = PriorLimits(0, 20)
-# lim3 = PriorLimits(0, 20)
+# lim2 = PriorLimits(0, 1)
+# lim3 = PriorLimits(0, 10)
+lim2 = PriorLimits(0, 20)
+lim3 = PriorLimits(0, 20)
 
 para_prior = pyabc.Distribution(
     lambdaN=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
@@ -32,7 +33,6 @@ para_prior = pyabc.Distribution(
 
 lim3 = PriorLimits(0, 20)
 lim2 = PriorLimits(0, 20)
-
 
 para_prior_wide = pyabc.Distribution(
     lambdaN=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
@@ -104,56 +104,63 @@ result_plot(history, para_true, paraPrior, history.max_t)
 #
 # %% kernel compare
 #
-# db_path_MNN = os.listdir('db/')
-#
-# history_base = pyabc.History('sqlite:///db/MNN_base.db')
-# history_base_scale = pyabc.History('sqlite:///db/MNN_base_scale.db')
-# history_500 = pyabc.History('sqlite:///db/MNN_500.db')
-# history_100 = pyabc.History('sqlite:///db/MNN_100.db')
-# history_50 = pyabc.History('sqlite:///db/MNN_50.db')
-# history_250 = pyabc.History('sqlite:///db/MNN_250.db')
-# history_750 = pyabc.History('sqlite:///db/MNN_750.db')
-#
-# history_list = [history_base, history_base_scale, history_750, history_500, history_250, history_100, history_50]
-# history_label = ['Multivariate Normal', 'Multivariate Normal\nscale=0.5', 'NN M=750', 'NN M=500', 'NN M=250', 'NN M=100',
-#                  'NN M=50']
-#
-# # %% Plot
-# pyabc.visualization.plot_sample_numbers(history_list, labels=history_label, size=(12, 6))
-# plt.show()
-#
-# pyabc.visualization.plot_effective_sample_sizes(history_list, labels=history_label)
-# plt.show()
-#
-# pyabc.visualization.plot_acceptance_rates_trajectory(history_list, labels=history_label)
-# plt.show()
-#
-# pyabc.visualization.plot_epsilons(history_list, labels=history_label)
-# plt.show()
-#
-# pyabc.visualization.plot_total_sample_numbers(history_list, labels=history_label)
-# plt.show()
-#
-# for item in history_list:
-#     # result_plot(item, para_true, paraPrior, item.max_t)
-#     result_data(item, obs_data_raw_s, solver.timePoint, item.max_t)
+db_path_MNN = os.listdir('db/infer_back/')
+
+history_base = pyabc.History('sqlite:///db/infer_back/MNN_base.db')
+history_base_scale = pyabc.History('sqlite:///db/infer_back/MNN_base_scale.db')
+history_500 = pyabc.History('sqlite:///db/infer_back/MNN_500.db')
+history_100 = pyabc.History('sqlite:///db/infer_back/MNN_100.db')
+history_50 = pyabc.History('sqlite:///db/infer_back/MNN_50.db')
+history_250 = pyabc.History('sqlite:///db/infer_back/MNN_250.db')
+history_750 = pyabc.History('sqlite:///db/infer_back/MNN_750.db')
+
+history_list = [history_base, history_base_scale, history_750, history_500, history_250, history_100, history_50]
+history_label = ['Multivariate Normal', 'Multivariate Normal\nscale=0.5', 'Local NN M=750', 'Local NN M=500',
+                 'Local NN M=250', 'Local NN M=100',
+                 'Local NN M=50']
+
+# %% Plot
+plt.style.use('default')
+pyabc.visualization.plot_sample_numbers(history_list, labels=history_label, size=(15, 6))
+plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0), useMathText=True)
+plt.savefig("kernel2.png", dpi=200)
+plt.show()
+
+pyabc.visualization.plot_effective_sample_sizes(history_list, labels=history_label)
+plt.show()
+
+pyabc.visualization.plot_acceptance_rates_trajectory(history_list, labels=history_label, size=(12, 6))
+# plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0), useMathText=True)
+plt.xticks(range(0, 25, 2))
+plt.savefig("acceptance2.png", dpi=200)
+plt.show()
+
+pyabc.visualization.plot_epsilons(history_list, labels=history_label)
+plt.show()
+
+pyabc.visualization.plot_total_sample_numbers(history_list, labels=history_label)
+plt.show()
+
+for item in history_list:
+    # result_plot(item, para_true, paraPrior, item.max_t)
+    result_data(item, obs_data_raw_s, solver.timePoint, item.max_t)
 
 # %% kernel median eps compare
 
-# history_base = pyabc.History('sqlite:///db/MNN_base_median.db')
-# history_base_scale = pyabc.History('sqlite:///db/MNN_base_scale_median.db')
-# history_base_GS = pyabc.History('sqlite:///db/MNN_base_GS_median.db')
-# history_500 = pyabc.History('sqlite:///db/MNN_500_median.db')
-# history_100 = pyabc.History('sqlite:///db/MNN_100_median.db')
-# history_50 = pyabc.History('sqlite:///db/MNN_50_median.db')
-# history_250 = pyabc.History('sqlite:///db/MNN_250_median.db')
-# history_750 = pyabc.History('sqlite:///db/MNN_750_median.db')
-#
-# history_list = [history_base, history_base_scale, history_base_GS, history_750, history_500, history_250, history_100,
-#                 history_50]
-# history_label = ['Multivariate Normal', 'Multivariate Normal\nscale=0.5', 'Multivariate Normal\nGridSearch', 'NN M=750',
-#                  'NN M=500', 'NN M=250', 'NN M=100',
-#                  'NN M=50']
+history_base = pyabc.History('sqlite:///db/infer_back/MNN_base_median.db')
+history_base_scale = pyabc.History('sqlite:///db/infer_back/MNN_base_scale_median.db')
+history_base_GS = pyabc.History('sqlite:///db/infer_back/MNN_base_GS_median.db')
+history_500 = pyabc.History('sqlite:///db/infer_back/MNN_500_median.db')
+history_100 = pyabc.History('sqlite:///db/infer_back/MNN_100_median.db')
+history_50 = pyabc.History('sqlite:///db/infer_back/MNN_50_median.db')
+history_250 = pyabc.History('sqlite:///db/infer_back/MNN_250_median.db')
+history_750 = pyabc.History('sqlite:///db/infer_back/MNN_750_median.db')
+
+history_list = [history_base, history_base_scale, history_base_GS, history_750, history_500, history_250, history_100,
+                history_50]
+history_label = ['Multivariate Normal', 'Multivariate Normal\nscale=0.5', 'Multivariate Normal\nGridSearch', 'NN M=750',
+                 'NN M=500', 'NN M=250', 'NN M=100',
+                 'NN M=50']
 
 # %% Plot
 

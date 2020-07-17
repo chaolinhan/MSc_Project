@@ -26,7 +26,7 @@ para_prior5 = para_prior(lim, prior_distribution, 5)
 # %% Load database
 
 # TODO change database name
-db_path = "sqlite:///db/model5_36_p.db"
+db_path = "sqlite:///db/model5_m_log_lp.db"
 
 history = pyabc.History(db_path)
 
@@ -44,10 +44,28 @@ result_data(history, solver, nr_population=history.max_t)
 # TODO change prior name
 result_plot(history, None, para_prior5, history.max_t)
 
-history.id = 3
-pyabc.visualization.plot_epsilons(history)
-pyabc.visualization.plot_total_sample_numbers(history)
+
+# %% Some test
+
+df, w = history.get_distribution(t=history.max_t)
+
+pyabc.visualization.plot_kde_2d(df, w, x="mu_beta", y="s_beta_n")
 plt.show()
+
+
+from sklearn.linear_model import LinearRegression
+
+lr_fit = LinearRegression().fit(df["mu_beta"].to_numpy().reshape(-1,1), df["s_beta_n"].to_numpy().reshape(-1,1))
+Y = lr_fit.predict(df["mu_beta"].to_numpy().reshape(-1, 1))
+
+
+plt.scatter(df["mu_beta"], df["s_beta_n"])
+plt.scatter(df["mu_beta"], Y)
+plt.xlabel("μ_β")
+plt.ylabel("s_βN")
+plt.legend(["Samples", "y=0.741x+0.240"])
+plt.show()
+
 
 
 # %% Model compare plot

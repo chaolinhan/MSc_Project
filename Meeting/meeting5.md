@@ -21,8 +21,9 @@ $$
 # Other experiments
 
 -   Factors
-    -   Tested on model 4
-
+    
+-   Tested on model 4
+    
 -   Population size
     -   Adaptive distance in `pyabc` have a bug, for now I cannot apply it on the observed data. I tried to modify the source code but it does not work as the bug involves may other packages
     -   So I turned to fixed population size 5,000 and 10,000
