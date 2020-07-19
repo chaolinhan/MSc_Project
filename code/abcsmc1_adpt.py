@@ -1,21 +1,22 @@
 import pyabc
 
-from pyABC_study.ODE import ODESolver, PriorLimits, para_prior, para_true1
+from pyABC_study.ODE import ODESolver, PriorLimits, para_prior, para_true1, para_true0
 
 print("\n\n\nABC SMC\nAdaptive study\n")
 
 # %% Set database path and observed data
 
 # TODO: Change database name every run
-db_path = "sqlite:///dbfiles/model1_base.db"
+db_path = "sqlite:///model1_base.db"
 
 print("Target data")
 
 solver = ODESolver()
-
 solver.time_point = solver.time_point_default
 
 exp_data = solver.ode_model1(para_true1)
+
+tmp_data = solver.ode_model1(para_true0)
 
 print(exp_data)
 
@@ -50,9 +51,9 @@ print(" NO factors applied")
 
 # TODO: Set prior
 
-lim = PriorLimits(1e-6, 20)
+lim = PriorLimits(1e-6, 10)
 
-prior_distribution = "uniform"
+prior_distribution = "loguniform"
 
 print(prior_distribution)
 
@@ -60,7 +61,7 @@ para_prior1 = para_prior(lim, prior_distribution, 1)
 # para_prior2 = para_prior(lim, prior_distribution, 2)
 # para_prior3 = para_prior(lim, prior_distribution, 3)
 # para_prior4 = para_prior(lim, prior_distribution, 4)
-# para_prior5 = para_prior(lim, prior_distribution, 5)
+para_prior5 = para_prior(lim, prior_distribution, 5)
 
 
 # %% Define ABC-SMC model
@@ -73,12 +74,12 @@ eps0 = pyabc.MedianEpsilon(50)
 
 # transition0 = pyabc.transition.LocalTransition(k=50, k_fraction=None)
 # TODO: set number of cores
-sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=36)
+# sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=36)
 
 # TODO: set model and prior
-abc = pyabc.ABCSMC(models=solver.ode_model1,
-                   parameter_priors=para_prior1,
-                   population_size=2000,
+abc = pyabc.ABCSMC(models=solver.ode_model5,
+                   parameter_priors=para_prior5,
+                   population_size=50,
                    # sampler=sampler0,
                    distance_function=distanceP2,
                    eps=eps0,
@@ -86,19 +87,19 @@ abc = pyabc.ABCSMC(models=solver.ode_model1,
 
 # %% Print ABC SMC info
 
-print(abc.acceptor)
-print(abc.distance_function.p, abc.distance_function)
-print(abc.eps)
-print(abc.models)
-print(abc.population_size.nr_particles, abc.population_size)
-print(abc.sampler.n_procs, abc.sampler)
-print(abc.transitions)
+# print(abc.acceptor)
+# print(abc.distance_function.p, abc.distance_function)
+# print(abc.eps)
+# print(abc.models)
+# print(abc.population_size.nr_particles, abc.population_size)
+# print(abc.sampler.n_procs, abc.sampler)
+# print(abc.transitions)
 
 # %% Run ABC-SMC
 
 abc.new(db_path, exp_data)
 max_population = 20
-min_eps = 0.5
+min_eps = 4
 
 print("\n"+db_path+"\n")
 print("Generations: %d" % max_population)

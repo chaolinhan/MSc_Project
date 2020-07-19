@@ -38,10 +38,6 @@ class ODESolver:
         # mu = 0.
         # a = 0.05
 
-        # def eqns1(var, t0, lambda_n, k_n_beta, mu_n, v_n_phi, lambda_phi, k_phi_beta, mu_phi, s_beta_n, i_beta_phi,
-        #           mu_beta,
-        #           s_alpha_phi, mu_alpha):
-
         sol = scipy.integrate.odeint(
             eqns1,
             self.var_init,
@@ -51,14 +47,6 @@ class ODESolver:
                   para["s_beta_n"], para["i_beta_phi"], para["mu_beta"],
                   para["s_alpha_phi"], para["mu_alpha"])
         )
-
-        time_len = len(self.time_point)
-
-        # if add_noise:
-        #     sol[1:, 0] += a * sigma_n * np.random.randn(time_len - 1) + mu
-        #     sol[1:, 1] += a * sigma_m * np.random.randn(time_len - 1) + mu
-        #     sol[1:, 2] += a * sigma_b * np.random.randn(time_len - 1) + mu
-        #     sol[1:, 3] += a * sigma_a * np.random.randn(time_len - 1) + mu
 
         if flatten:
             return {i: sol.flatten()[i] for i in range(sol.flatten().__len__())}
@@ -270,10 +258,6 @@ class PriorLimits:
 
 
 def para_prior(lim: PriorLimits, prior_distribution: str, model: int):
-    # args = (para["lambda_n"], para["k_n_beta"], para["mu_n"], para["v_n_phi"],
-    #         para["lambda_phi"], para["k_phi_beta"], para["mu_phi"],
-    #         para["s_beta_n"], para["i_beta_phi"], para["mu_beta"],
-    #         para["s_alpha_phi"], para["mu_alpha"])
 
     para_prior1 = pyabc.Distribution(
         lambda_n=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
@@ -410,6 +394,19 @@ para_true1 = {'i_beta_phi': 1.7062457206228092,
               's_alpha_phi': 10.241631079619625,
               's_beta_n': 6.553614835929477,
               'v_n_phi': 0.21949169250522468}
+
+# para_true0 = {'i_beta_phi': 1.7062457206228092,
+#               'k_phi_beta': 0.12351843450795977,
+#               'k_n_beta': 4.962697253452481,
+#               'lambda_phi': 1.314620449006551,
+#               'lambda_n': 2.198916934929738,
+#               'mu_alpha': 19.6642270425759,
+#               'mu_beta': 0.5212435818886882,
+#               'mu_phi': 0.14542950112701297,
+#               'mu_n': 1.7219112772837462,
+#               's_alpha_phi': 10.241631079619625,
+#               's_beta_n': 6.553614835929477,
+#               'v_n_phi': 0.21949169250522468}
 
 exp_data = {0: 0.0, 1: 0.0, 2: 1.0, 3: 1.0, 4: np.nan, 5: np.nan, 6: 1.8725, 7: 0.96225, 8: 1.85, 9: 0.33333334,
             10: np.nan, 11: np.nan, 12: 10.708333, 13: 1.08, 14: 4.01255, 15: 1.0565, 16: 26.52, 17: 3.275862,

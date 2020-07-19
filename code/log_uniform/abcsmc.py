@@ -130,7 +130,7 @@ eps0 = pyabc.MedianEpsilon(60)
 
 abc = pyabc.ABCSMC(models=solver.ode_model1,
                    parameter_priors=para_prior1,
-                   population_size=2000,
+                   population_size=50,
                    # sampler=sampler0,
                    distance_function=distanceP2,
                    eps=eps0,
