@@ -22,11 +22,3 @@ source ~/miniconda3/bin/activate
 # Launch the parallel job
 # TODO: set python file
 srun --cpu-bind=cores ~/miniconda3/bin/python3 abcsmc1_adpt.py
-# sleep 5
-# srun --cpu-bind=cores ~/miniconda3/bin/python3 abcsmc5_36.py
-# sleep 5
-# srun --cpu-bind=cores ~/miniconda3/bin/python3 abcsmc5_36.py
-# sleep 5
-# srun --cpu-bind=cores ~/miniconda3/bin/python3 abcsmc5_36.py
-# sleep 5
-# srun --cpu-bind=cores ~/miniconda3/bin/python3 abcsmc5_36.py
