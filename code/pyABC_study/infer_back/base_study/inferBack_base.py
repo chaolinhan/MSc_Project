@@ -2,7 +2,7 @@ import os
 
 import pyabc
 
-from pyABC_study.ODE import ODESolver, PriorLimits
+from pyABC_study.ODE import ODESolver, PriorLimits, para_true1, para_prior
 
 print("\n\n\n Base\n Median eps, 2000 particles, 20 generations\n\n\n")
 
@@ -28,31 +28,31 @@ db_path = "sqlite:///SMC_base.db"
 #              'sBN': 3.7176297747866545,
 #              'vNM': 0.4248874922862373}
 
-para_true = {'iBM': 1.0267462374320455,
-             'kMB': 0.07345932286118964,
-             'kNB': 2.359199465995228,
-             'lambdaM': 2.213837884117815,
-             'lambdaN': 7.260925726829641,
-             'muA': 18.94626522780349,
-             'muB': 2.092860392215201,
-             'muM': 0.17722330053184654,
-             'muN': 0.0023917569160019844,
-             'sAM': 10.228522400429998,
-             'sBN': 4.034313992927392,
-             'vNM': 0.3091883041193706}
+# para_true = {'iBM': 1.0267462374320455,
+#              'kMB': 0.07345932286118964,
+#              'kNB': 2.359199465995228,
+#              'lambdaM': 2.213837884117815,
+#              'lambdaN': 7.260925726829641,
+#              'muA': 18.94626522780349,
+#              'muB': 2.092860392215201,
+#              'muM': 0.17722330053184654,
+#              'muN': 0.0023917569160019844,
+#              'sAM': 10.228522400429998,
+#              'sBN': 4.034313992927392,
+#              'vNM': 0.3091883041193706}
 
 # Using default time points
 
 solver = ODESolver()
+solver.time_point = solver.time_point_default
+# obs_data_noisy = solver.ode_model(para_true, flatten=True, add_noise=True)
+obs_data_raw = solver.ode_model(para_true1, flatten=True, add_noise=False)
 
-obs_data_noisy = solver.ode_model(para_true, flatten=True, add_noise=True)
-obs_data_raw = solver.ode_model(para_true, flatten=True, add_noise=False)
-
-obs_data_noisy_s = solver.ode_model(para_true, flatten=False, add_noise=True)
-obs_data_raw_s = solver.ode_model(para_true, flatten=False, add_noise=False)
+# obs_data_noisy_s = solver.ode_model(para_true1, flatten=False, add_noise=True)
+# obs_data_raw_s = solver.ode_model(para_true1, flatten=False, add_noise=False)
 
 print("Target data")
-print(obs_data_noisy_s)
+print(obs_data_raw)
 
 # %% Calculate data range as factors:
 
@@ -88,26 +88,35 @@ print(obs_data_noisy_s)
 # %% Define prior distribution of parameters
 # Be careful that RV("uniform", -10, 15) means uniform distribution in [-10, 5], '15' here is the interval length
 
-lim = PriorLimits(0, 20)
+lim = PriorLimits(1e-6, 10)
 lim2 = PriorLimits(0, 1)
 lim3 = PriorLimits(0, 10)
 # lim2 = PriorLimits(0, 20)
 # lim3 = PriorLimits(0, 20)
 
-paraPrior = pyabc.Distribution(
-    lambdaN=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
-    kNB=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
-    muN=pyabc.RV("uniform", lim2.lb, lim2.interval_length),
-    vNM=pyabc.RV("uniform", lim2.lb, lim2.interval_length),
-    lambdaM=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
-    kMB=pyabc.RV("uniform", lim2.lb, lim2.interval_length),
-    muM=pyabc.RV("uniform", lim2.lb, lim2.interval_length),
-    sBN=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
-    iBM=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
-    muB=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
-    sAM=pyabc.RV("uniform", lim.lb, lim.interval_length),
-    muA=pyabc.RV("uniform", lim.lb, lim.interval_length)
+prior_distribution = "uniform"
+
+para_prior1 = pyabc.Distribution(
+    lambda_n=pyabc.RV(prior_distribution, lim3.lb, lim3.interval_length),
+    k_n_beta=pyabc.RV(prior_distribution, lim3.lb, lim3.interval_length),
+    mu_n=pyabc.RV(prior_distribution, lim2.lb, lim2.interval_length),
+    v_n_phi=pyabc.RV(prior_distribution, lim2.lb, lim2.interval_length),
+
+    lambda_phi=pyabc.RV(prior_distribution, lim3.lb, lim3.interval_length),
+    k_phi_beta=pyabc.RV(prior_distribution, lim2.lb, lim2.interval_length),
+    mu_phi=pyabc.RV(prior_distribution, lim2.lb, lim2.interval_length),
+
+    s_beta_n=pyabc.RV(prior_distribution, lim3.lb, lim3.interval_length),
+    i_beta_phi=pyabc.RV(prior_distribution, lim3.lb, lim3.interval_length),
+    mu_beta=pyabc.RV(prior_distribution, lim3.lb, lim3.interval_length),
+
+    s_alpha_phi=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
+    mu_alpha=pyabc.RV(prior_distribution, lim.lb, lim.interval_length)
 )
+
+print(prior_distribution)
+
+# para_prior1 = para_prior(lim, prior_distribution, 1)
 
 # %% Define ABC-SMC model
 
@@ -132,13 +141,13 @@ eps0 = pyabc.MedianEpsilon(50)
 # transition0 = pyabc.transition.LocalTransition(k=50, k_fraction=None)
 # transition1 = pyabc.transition.GridSearchCV()
 
-sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=48)
+# sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=48)
 
-abc = pyabc.ABCSMC(models=solver.non_noisy_model,
-                   parameter_priors=paraPrior,
+abc = pyabc.ABCSMC(models=solver.ode_model1,
+                   parameter_priors=para_prior1,
                    # acceptor=acceptor_adpt,
-                   population_size=2000,
-                   sampler=sampler0,
+                   population_size=20,
+                   # sampler=sampler0,
                    distance_function=distanceP2,
                    # transitions=transition1,
                    eps=eps0,
