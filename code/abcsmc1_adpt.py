@@ -73,7 +73,7 @@ eps0 = pyabc.MedianEpsilon(50)
 
 # transition0 = pyabc.transition.LocalTransition(k=50, k_fraction=None)
 # TODO: set number of cores
-# sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=72)
+sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=36)
 
 # TODO: set model and prior
 abc = pyabc.ABCSMC(models=solver.ode_model1,
