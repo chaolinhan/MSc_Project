@@ -170,6 +170,9 @@ Visualise SMC population and compare it with target data
     :param sample_size: sampling size of the selected population
     """
     df, w = history.get_distribution(t=nr_population)
+    # if is_old:
+    #     df.columns = ['i_beta_phi', 'k_phi_beta', 'k_n_beta', 'lambda_phi', 'lambda_n', 'mu_alpha', 'mu_beta', 'mu_phi',
+    #                   'mu_n', 's_alpha_phi', 's_beta_n', 'v_n_phi']
     df_sample = df.sample(sample_size, replace=False)
     df_all_sim_data = pd.DataFrame(columns=['N', 'M', 'B', 'A'])
 
@@ -202,10 +205,71 @@ Visualise SMC population and compare it with target data
         # axs[kk].plot(solver.timePoint, df_75.iloc[:, kk], 'b--')
         axs[kk].fill_between(solver.time_point, df_25.iloc[:, kk], df_75.iloc[:, kk], alpha=0.9, color='lightgrey')
         axs[kk].plot(solver.time_point, df_mean.iloc[:, kk], 'b', label="Mean", alpha=0.6)
-        axs[kk].plot(solver.time_point_exp[seq_mask], compare_data[index_cov[kk]][seq_mask], alpha=0.7, marker='^', color='black')
+        axs[kk].plot(solver.time_point_exp[seq_mask], compare_data[index_cov[kk]][seq_mask], alpha=0.7, marker='^',
+                     color='black')
         axs[kk].errorbar(solver.time_point_exp, compare_data[index_cov[kk]],
-                         yerr=[[0.5*x for x in exp_data_SEM[index_cov[kk]]], [0.5*x for x in exp_data_SEM[index_cov[kk]]]], fmt='none',
+                         yerr=[[0.5 * x for x in exp_data_SEM[index_cov[kk]]],
+                               [0.5 * x for x in exp_data_SEM[index_cov[kk]]]], fmt='none',
                          ecolor='grey', elinewidth=2, alpha=0.6)
+        axs[kk].legend(['Mean', '25% – 75% quantile range', 'Observed'])
+        axs[kk].set_title(titles[kk])
+    fig.tight_layout(pad=5.0)
+    if savefig:
+        plt.savefig("resultCurve.png", dpi=200)
+    plt.show()
+
+
+def result_data_old(history, solver: ODESolver, compare_data=exp_data_s, nr_population=1, sample_size=50, savefig=False,
+                    is_old=False):
+    """
+Visualise SMC population and compare it with target data
+    :param history: abc.history object
+    :param compare_data: target data
+    :param nr_population: the id of population to be visualised
+    :param sample_size: sampling size of the selected population
+    """
+    df, w = history.get_distribution(t=nr_population)
+    df.columns = ['i_beta_phi', 'k_phi_beta', 'k_n_beta', 'lambda_phi', 'lambda_n', 'mu_alpha', 'mu_beta', 'mu_phi',
+                  'mu_n', 's_alpha_phi', 's_beta_n', 'v_n_phi']
+
+    df_sample = df.sample(sample_size, replace=False)
+    df_all_sim_data = pd.DataFrame(columns=['N', 'M', 'B', 'A'])
+
+    solver.time_point = solver.time_point_default
+    for ii in range(sample_size):
+        temp_dict = df_sample.iloc[ii].to_dict()
+        sim_data = solver.ode_model(temp_dict, flatten=False)
+        # print(sim_data)
+        sim_data = pd.DataFrame.from_dict(sim_data)
+        df_all_sim_data = pd.concat([df_all_sim_data, sim_data])
+
+    # plt.ylim(0, 2) # TODO make lim a function parameter
+    # plt.show()
+
+    df_mean = pd.DataFrame(columns=['N', 'M', 'B', 'A'])
+    for jj in range(solver.time_point.__len__()):
+        # print(df_all_sim_data.loc[jj].mean())
+        df_mean = df_mean.append(df_all_sim_data.loc[jj].mean(), ignore_index=True)
+
+    df_median = quantile_calculate(df_all_sim_data, solver.time_point.__len__(), 0.5)
+    df_75 = quantile_calculate(df_all_sim_data, solver.time_point.__len__(), 0.75)
+    df_25 = quantile_calculate(df_all_sim_data, solver.time_point.__len__(), 0.25)
+
+    fig, axs = plt.subplots(4, 1, figsize=(8, 12))
+    index_cov = ['N', 'M', 'B', 'A']
+    titles = ["N", "Φ", "β", "α"]
+    for kk in range(4):
+        # seq_mask = np.isfinite(compare_data[index_cov[kk]])
+        # axs[kk].plot(solver.timePoint, df_25.iloc[:, kk], 'b--')
+        # axs[kk].plot(solver.timePoint, df_75.iloc[:, kk], 'b--')
+        axs[kk].fill_between(solver.time_point, df_25.iloc[:, kk], df_75.iloc[:, kk], alpha=0.9, color='lightgrey')
+        axs[kk].plot(solver.time_point, df_mean.iloc[:, kk], 'b', label="Mean", alpha=0.6)
+        axs[kk].plot(solver.time_point_default, compare_data[index_cov[kk]], alpha=0.7, marker='^',
+                     color='black')
+        # axs[kk].errorbar(solver.time_point_exp, compare_data[index_cov[kk]],
+        #                  yerr=[[0.5 * x for x in exp_data_SEM[index_cov[kk]]],
+        #                        [0.5 * x for x in exp_data_SEM[index_cov[kk]]]], fmt='none',
+        #                  ecolor='grey', elinewidth=2, alpha=0.6)
         axs[kk].legend(['Mean', '25% – 75% quantile range', 'Observed'])
         axs[kk].set_title(titles[kk])
     fig.tight_layout(pad=5.0)

@@ -47,24 +47,24 @@ result_plot(history, None, para_prior5, history.max_t)
 
 # %% Some test
 
-df, w = history.get_distribution(t=history.max_t)
-
-pyabc.visualization.plot_kde_2d(df, w, x="mu_beta", y="s_beta_n")
-plt.show()
-
-
-from sklearn.linear_model import LinearRegression
-
-lr_fit = LinearRegression().fit(df["mu_beta"].to_numpy().reshape(-1,1), df["s_beta_n"].to_numpy().reshape(-1,1))
-Y = lr_fit.predict(df["mu_beta"].to_numpy().reshape(-1, 1))
-
-
-plt.scatter(df["mu_beta"], df["s_beta_n"])
-plt.scatter(df["mu_beta"], Y)
-plt.xlabel("μ_β")
-plt.ylabel("s_βN")
-plt.legend(["Samples", "y=0.741x+0.240"])
-plt.show()
+# df, w = history.get_distribution(t=history.max_t)
+#
+# pyabc.visualization.plot_kde_2d(df, w, x="mu_beta", y="s_beta_n")
+# plt.show()
+#
+#
+# from sklearn.linear_model import LinearRegression
+#
+# lr_fit = LinearRegression().fit(df["mu_beta"].to_numpy().reshape(-1,1), df["s_beta_n"].to_numpy().reshape(-1,1))
+# Y = lr_fit.predict(df["mu_beta"].to_numpy().reshape(-1, 1))
+#
+#
+# plt.scatter(df["mu_beta"], df["s_beta_n"])
+# plt.scatter(df["mu_beta"], Y)
+# plt.xlabel("μ_β")
+# plt.ylabel("s_βN")
+# plt.legend(["Samples", "y=0.741x+0.240"])
+# plt.show()
 
 
 
