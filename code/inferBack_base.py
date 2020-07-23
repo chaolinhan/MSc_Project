@@ -18,7 +18,8 @@ db_path = "sqlite:///dbfiles/ib_base.db"
 solver = ODESolver()
 solver.time_point = solver.time_point_default
 
-obs_data_raw = solver.ode_model(para_true1)
+obs_data_raw = solver.ode_model1(para_true1)
+
 
 
 print("Target data")
@@ -26,34 +27,10 @@ print(obs_data_raw)
 
 # %% Calculate data range as factors:
 
-# range_N = obs_data_raw_s['N'].max() - obs_data_raw_s['N'].min()
-# range_M = obs_data_raw_s['M'].max() - obs_data_raw_s['M'].min()
-# range_B = obs_data_raw_s['B'].max() - obs_data_raw_s['B'].min()
-# range_A = obs_data_raw_s['A'].max() - obs_data_raw_s['A'].min()
-
-# factors = {}
-
-# for i in range(30):
-#     factors[i] = 1 / range_N
-
-# for i in range(30, 60):
-#     factors[i] = 1 / range_M
-
-# for i in range(60, 90):
-#     factors[i] = 1 / range_B
-
-# for i in range(90, 120):
-#     factors[i] = 1 / range_A
-
-# scl = 120./sum(factors.values())
-
-# for i in range(120):
-#     factors[i] = factors[i] * scl
 
 
 # %% Plot
 
-# obs_data_plot(solver.timePoint, obs_data_noisy_s, obs_data_raw_s)
 
 # %% Define prior distribution of parameters
 # Be careful that RV("uniform", -10, 15) means uniform distribution in [-10, 5], '15' here is the interval length

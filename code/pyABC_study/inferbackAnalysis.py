@@ -6,7 +6,7 @@ import pandas as pd
 import pyabc
 
 from pyABC_study.ODE import ODESolver, PriorLimits, arr2d_to_dict, para_true1, para_prior
-from pyABC_study.dataPlot import result_data_old, result_plot
+from pyABC_study.dataPlot import result_data_old, result_plot, result_data
 
 # %% Settings
 
@@ -61,7 +61,7 @@ para_prior1 = para_prior(lim, prior_distribution, 1)
 solver = ODESolver()
 solver.time_point = solver.time_point_default
 
-obs_data_raw_s = solver.ode_model(para_true1, flatten=False, add_noise=False)
+obs_data_raw_s = solver.ode_model1(para_true1, flatten=False, add_noise=False)
 
 solver.time_point = solver.time_point_exp
 obs_data_raw_s_less = solver.ode_model(para_true1, flatten=False, add_noise=False)
@@ -261,14 +261,20 @@ plt.show()
 
 
 # %% Plot curve
+history_base = pyabc.History('sqlite:///db/infer_back/ib_base.db')
+
 solver.time_point = solver.time_point_default
 result_data_old(history_base, solver, obs_data_raw_s, history_base.max_t)
 
-solver.time_point = solver.time_point_exp
-result_data_old(history_less, solver, obs_data_raw_s_less, history_base.max_t)
+pyabc.visualization.plot_epsilons(history_base)
+# plt.savefig("size2.png", dpi=200)
+plt.show()
 
-solver.time_point = solver.time_point_default
-result_data_old(history_wide, solver, obs_data_raw_s, history_base.max_t)
+# solver.time_point = solver.time_point_exp
+# result_data_old(history_less, solver, obs_data_raw_s_less, history_base.max_t)
+#
+# solver.time_point = solver.time_point_default
+# result_data_old(history_wide, solver, obs_data_raw_s, history_base.max_t)
 
 
 # %% Plot parameters
