@@ -14,3 +14,20 @@ Execution time: 0 days 00:53:19.481154
 ID: 5
 Sampling size: 348688
 Execution time: 0 days 00:42:14.970853
+
+model5_24_more.db
+ID: 1
+Sampling size: 942261
+Execution time: 0 days 00:55:49.990792
+ID: 2
+Sampling size: 214568
+Execution time: 0 days 00:36:38.058239
+ID: 3
+Sampling size: 752114
+Execution time: 0 days 00:57:26.441022
+ID: 4
+Sampling size: 870056
+Execution time: 0 days 00:52:16.333135
+ID: 5
+Sampling size: 416592
+Execution time: 0 days 00:44:22.936645
