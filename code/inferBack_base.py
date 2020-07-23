@@ -9,7 +9,7 @@ print("\n\n\n Base\n Median eps, 2000 particles, 20 generations\n\n\n")
 # %% Get path
 
 ROOT_DIR = os.path.abspath(os.curdir)
-db_path = "sqlite:///dbfiles/ib_wide.db"
+db_path = "sqlite:///dbfiles/ib_base.db"
 
 # %% Generate synthetic data
 
