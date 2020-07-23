@@ -6,9 +6,8 @@ from pyABC_study.ODE import ODESolver, PriorLimits, para_true1, para_prior
 
 print("\n\n\n Base\n Median eps, 2000 particles, 20 generations\n\n\n")
 
-# %% Get path
+# %% Set path
 
-ROOT_DIR = os.path.abspath(os.curdir)
 db_path = "sqlite:///dbfiles/ib_base.db"
 
 # %% Generate synthetic data
@@ -18,11 +17,9 @@ db_path = "sqlite:///dbfiles/ib_base.db"
 
 solver = ODESolver()
 solver.time_point = solver.time_point_default
-# obs_data_noisy = solver.ode_model(para_true, flatten=True, add_noise=True)
-obs_data_raw = solver.ode_model(para_true1, flatten=True, add_noise=False)
 
-# obs_data_noisy_s = solver.ode_model(para_true1, flatten=False, add_noise=True)
-# obs_data_raw_s = solver.ode_model(para_true1, flatten=False, add_noise=False)
+obs_data_raw = solver.ode_model(para_true1)
+
 
 print("Target data")
 print(obs_data_raw)
@@ -61,7 +58,7 @@ print(obs_data_raw)
 # %% Define prior distribution of parameters
 # Be careful that RV("uniform", -10, 15) means uniform distribution in [-10, 5], '15' here is the interval length
 
-lim = PriorLimits(1e-6, 20)
+lim = PriorLimits(1e-6, 25)
 lim2 = PriorLimits(1e-6, 1)
 lim3 = PriorLimits(1e-6, 10)
 # lim2 = PriorLimits(0, 5)
