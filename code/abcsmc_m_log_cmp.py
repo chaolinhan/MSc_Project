@@ -64,7 +64,7 @@ eps0 = pyabc.MedianEpsilon(50)
 
 # sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=6)
 
-population0 = 5000
+population0 = 20000
 # population_adpt = pyabc.populationstrategy.AdaptivePopulationSize(start_nr_particles=population0, mean_cv=0.10,
 #                                                                   max_population_size=50)
 
@@ -90,7 +90,7 @@ print(abc.transitions)
 # %% Run ABC-SMC
 
 abc.new(db_path, exp_data)
-max_population = 40
+max_population = 20
 min_eps = 4
 
 print("\n"+db_path+"\n")

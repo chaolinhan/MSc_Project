@@ -23,8 +23,8 @@ ID: 2
 Sampling size: 316102
 Execution time: 0 days 00:59:54.597234
 ID: 3
-Sampling size: 7398330
-Execution time: 0 days 02:50:55.889456
+Sampling size: 475547
+Execution time: 0 days 00:58:52.135208
 ID: 4
 Sampling size: 426121
 Execution time: 0 days 00:57:47.202104
