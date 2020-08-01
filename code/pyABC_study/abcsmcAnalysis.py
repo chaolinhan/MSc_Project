@@ -11,8 +11,8 @@ from pyABC_study.dataPlot import result_data, result_plot
 # %% Settings
 
 # TODO: change prior
-lim = PriorLimits(1e-6, 50)
-prior_distribution = "loguniform"
+lim = PriorLimits(1e-6, 25)
+prior_distribution = "uniform"
 
 print(prior_distribution)
 
@@ -22,12 +22,10 @@ para_prior3 = para_prior(lim, prior_distribution, 3)
 para_prior4 = para_prior(lim, prior_distribution, 4)
 para_prior5 = para_prior(lim, prior_distribution, 5)
 
-
-
 # %% Load database
 
 # TODO change database name
-db_path = "sqlite:///db/model3_m_log.db"
+db_path = "sqlite:///db/model5_super.db"
 
 history = pyabc.History(db_path)
 
@@ -38,22 +36,21 @@ print("ID: %d, generations: %d" % (history.id, history.max_t))
 solver = ODESolver()
 
 # TODO change model name
-solver.ode_model = solver.ode_model3
+solver.ode_model = solver.ode_model5
 
-result_data(history, solver, nr_population=history.max_t, savefig=True)
+result_data(history, solver, nr_population=20, savefig=True)
 
 # TODO change prior name
 result_plot(history, None, para_prior3, history.max_t, savefig=True)
 
-
 # %% Compare
 
-history_1 = pyabc.History("sqlite:///db/model1_m_log.db")
-history_2 = pyabc.History("sqlite:///db/model2_m_log.db")
-history_3 = pyabc.History("sqlite:///db/model3_m_log.db")
+history_1 = pyabc.History("sqlite:///db/model3_m_log.db")
+history_2 = pyabc.History("sqlite:///db/model4_m_log.db")
+history_3 = pyabc.History("sqlite:///db/model5_m_log.db")
 history_list = [history_1, history_2, history_3]
 
-history_label = ['model 1', 'model 2', 'model 3']
+history_label = ['model 3', 'model 4', 'model 5']
 
 plt.style.use('default')
 pyabc.visualization.plot_sample_numbers(history_list, labels=history_label, size=(4, 4))
@@ -62,11 +59,11 @@ plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0), useMathText=True)
 plt.show()
 
 pyabc.visualization.plot_acceptance_rates_trajectory(history_list, labels=history_label, size=(6, 3))
-plt.savefig("acc123.png", dpi=200)
+# plt.savefig("acc123.png", dpi=200)
 plt.show()
 
-pyabc.visualization.plot_epsilons(history_list, labels=history_label, size=(6, 3))
-plt.savefig("eps123.png", dpi=200)
+pyabc.visualization.plot_epsilons(history_list, history_label, size=(6, 3))
+# plt.savefig("eps123.png", dpi=200)
 plt.show()
 
 pyabc.visualization.plot_effective_sample_sizes(history_list, labels=history_label)
@@ -75,6 +72,8 @@ plt.show()
 w = history_2.get_weighted_distances(t=history_2.max_t)['w']
 ess = effective_sample_size(w)
 
+pyabc.visualization.plot_credible_intervals(history_3, size=(8, 24))
+plt.show()
 
 
 # %% Some test
@@ -99,7 +98,6 @@ ess = effective_sample_size(w)
 # plt.show()
 
 
-
 # %% Model compare plot
 pyabc.visualization.plot_epsilons(history)
 plt.show()
@@ -110,3 +108,18 @@ plt.show()
 pyabc.visualization.plot_model_probabilities(history)
 plt.show()
 
+model_probabilities = history.get_model_probabilities()
+
+t_id = np.array([i for i in range(30)])+1
+
+plt.figure(figsize=(11, 5))
+plt.bar(x=t_id - 0.2, height=model_probabilities[0], width=0.2)
+plt.bar(x=t_id, height=model_probabilities[1], width=0.2)
+plt.bar(x=t_id + 0.2, height=model_probabilities[2], width=0.2)
+plt.xlim(0.2, 30.8, 1)
+locs, labels = plt.xticks()
+plt.xlabel("Population index")
+plt.ylabel("Model probability")
+plt.xticks(np.arange(1, 31, step=1))
+plt.legend(['model 1', 'model 2', 'model 3'], bbox_to_anchor=(1.01, 0.5), ncol=1, frameon=False)
+plt.show()

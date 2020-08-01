@@ -7,7 +7,7 @@ print("\n\n\nABC SMC\nPerformance study\n")
 # %% Set database path and observed data
 
 # TODO: Change database name every run
-db_path = "sqlite:///dbfiles/model5_8_more.db"
+db_path = "sqlite:///model5_8_more.db"
 
 print("Target data")
 print(exp_data)
@@ -68,12 +68,12 @@ eps0 = pyabc.MedianEpsilon(60)
 
 # transition0 = pyabc.transition.LocalTransition(k=50, k_fraction=None)
 # TODO: set number of cores
-sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=8)
+sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=1)
 
 # TODO: set model and prior
 abc = pyabc.ABCSMC(models=solver.ode_model5,
                    parameter_priors=para_prior5,
-                   population_size=2000,
+                   population_size=20,
                    sampler=sampler0,
                    distance_function=distanceP2,
                    eps=eps0,
@@ -92,7 +92,7 @@ print(abc.transitions)
 # %% Run ABC-SMC
 
 abc.new(db_path, exp_data)
-max_population = 20
+max_population = 10
 min_eps = 20
 
 print("\n"+db_path+"\n")

@@ -165,7 +165,7 @@ Plot the population distribution, eps values and acceptance rate
     # plt.show()
 
 
-def result_data(history, solver: ODESolver, compare_data=exp_data_s, nr_population=1, sample_size=50, savefig=False):
+def result_data(history, solver: ODESolver, compare_data=exp_data_s, nr_population=1, sample_size=500, savefig=False):
     """
 Visualise SMC population and compare it with target data
     :param history: abc.history object
@@ -228,7 +228,7 @@ Visualise SMC population and compare it with target data
     plt.show()
 
 
-def result_data_old(history, solver: ODESolver, compare_data=exp_data_s, nr_population=1, sample_size=50, savefig=False,
+def result_data_old(history, solver: ODESolver, compare_data=exp_data_s, nr_population=1, sample_size=500, savefig=False,
                     is_old=False):
     """
 Visualise SMC population and compare it with target data
@@ -238,8 +238,8 @@ Visualise SMC population and compare it with target data
     :param sample_size: sampling size of the selected population
     """
     df, w = history.get_distribution(t=nr_population)
-    df.columns = ['i_beta_phi', 'k_phi_beta', 'k_n_beta', 'lambda_phi', 'lambda_n', 'mu_alpha', 'mu_beta', 'mu_phi',
-                  'mu_n', 's_alpha_phi', 's_beta_n', 'v_n_phi']
+    # df.columns = ['i_beta_phi', 'k_phi_beta', 'k_n_beta', 'lambda_phi', 'lambda_n', 'mu_alpha', 'mu_beta', 'mu_phi',
+    #               'mu_n', 's_alpha_phi', 's_beta_n', 'v_n_phi']
 
     df_sample = df.sample(sample_size, replace=False)
     df_all_sim_data = pd.DataFrame(columns=['N', 'M', 'B', 'A'])

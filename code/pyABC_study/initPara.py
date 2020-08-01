@@ -1,5 +1,4 @@
 import os
-import tempfile
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -7,7 +6,7 @@ import pandas as pd
 import pyabc
 from scipy import optimize
 
-from pyABC_study.ODE import ODESolver, exp_data, exp_data_s
+from pyABC_study.ODE import ODESolver, exp_data, exp_data_s, exp_data_SEM
 
 
 def arr2d_to_dict(arr: np.ndarray):
@@ -31,13 +30,13 @@ def para_list_to_dict(para):
     }
     return para_dict
 
+
 # Read  and prepare raw data
 rawData_path = os.path.abspath(os.curdir) + "/data/rawData.csv"
 rawData = pd.read_csv(rawData_path).astype("float32")
 # normalise_data(expData)
 print("Target data")
 print(exp_data)
-
 
 # Run a rough inference on the raw data
 
@@ -223,10 +222,12 @@ def residual_ls(para: list):
     # return distanceP2(simulation_data, expData)
     ans = [abs(np.nan_to_num((simulation_data[i] - exp_data[i]))) for i in range(48)]
     return ans
+
+
 # TODO BUG spotted: para changed but ans not
 
 
-#%% Run LS fitting
+# %% Run LS fitting
 
 paraGuess = np.array([5] * 12)
 
@@ -242,9 +243,17 @@ simulationData = solver.ode_model(paraDict, flatten=False)
 plt.style.use('default')
 plt.plot(solver.time_point, simulationData['N'], label="$N$ simulated")
 plt.plot(solver.time_point, simulationData['M'], label="$Φ$ simulated")
-plt.scatter(rawData['time'][:-1], rawData['N'][:-1], color='b', linewidths=1.5, label="$N$ observed")
-plt.scatter(rawData['time'][:-1], rawData['M'][:-1], color='r', linewidths=1.5, label="$Φ$ observed")
-plt.xlim(-5,120)
+plt.scatter(rawData['time'][:-1], rawData['N'][:-1], color='b', linewidths=1.2, label="$N$ observed")
+plt.errorbar(solver.time_point_exp, exp_data_s['N'],
+             yerr=[[0.5 * x for x in exp_data_SEM['N']],
+                   [0.5 * x for x in exp_data_SEM['N']]], fmt='none',
+             ecolor='b', elinewidth=2, alpha=0.4)
+plt.errorbar(solver.time_point_exp, exp_data_s['M'],
+             yerr=[[0.5 * x for x in exp_data_SEM['M']],
+                   [0.5 * x for x in exp_data_SEM['M']]], fmt='none',
+             ecolor='r', elinewidth=2, alpha=0.4)
+plt.scatter(rawData['time'][:-1], rawData['M'][:-1], color='r', linewidths=1.2, label="$Φ$ observed")
+plt.xlim(-5, 120)
 plt.ylim(0, None)
 plt.grid(alpha=0.2)
 plt.legend()
@@ -254,9 +263,17 @@ plt.show()
 plt.style.use('default')
 plt.plot(solver.time_point, simulationData['B'], label="$β$ simulated")
 plt.plot(solver.time_point, simulationData['A'], label="$α$ simulated")
-plt.scatter(rawData['time'], rawData['B'], color='b', linewidths=1.5, label="$β$ observed")
-plt.scatter(rawData['time'], rawData['A'], color='r', linewidths=1.5, label="$α$ observed")
-plt.xlim(-5,120)
+plt.scatter(rawData['time'], rawData['B'], color='b', linewidths=1.2, label="$β$ observed")
+plt.scatter(rawData['time'], rawData['A'], color='r', linewidths=1.2, label="$α$ observed")
+plt.errorbar(solver.time_point_exp, exp_data_s['B'],
+             yerr=[[0.5 * x for x in exp_data_SEM['B']],
+                   [0.5 * x for x in exp_data_SEM['B']]], fmt='none',
+             ecolor='b', elinewidth=2, alpha=0.4)
+plt.errorbar(solver.time_point_exp, exp_data_s['A'],
+             yerr=[[0.5 * x for x in exp_data_SEM['A']],
+                   [0.5 * x for x in exp_data_SEM['A']]], fmt='none',
+             ecolor='r', elinewidth=2, alpha=0.4)
+plt.xlim(-5, 120)
 plt.ylim(0, None)
 plt.grid(alpha=0.2)
 plt.legend()
@@ -301,4 +318,3 @@ plt.show()
 #         5.55368556, 5.36103029, 5.27390405, 5.24358671, 5.23964698,
 #         5.24514669, 5.25202702, 5.25733772, 5.26060516, 5.26227734,
 #         5.26296122, 5.26313596, 5.26310036, 5.26282364, 5.26282718])}
-
