@@ -25,7 +25,22 @@ obs_data_raw = solver.ode_model1(para_true1)
 print("Target data")
 print(obs_data_raw)
 
-# %% Calculate data range as factors:
+# TODO: Set factors
+print("Factors applied: first 32 data points are more important")
+
+factors = {}
+
+for i in range(32):
+    factors[i] = 0.75
+
+for i in range(32, 48):
+    factors[i] = 0.25
+
+
+scl = 48/sum(factors.values())
+
+for i in range(48):
+    factors[i] = factors[i] * scl
 
 
 
@@ -71,7 +86,7 @@ print(prior_distribution)
 #                                               scale_function=pyabc.distance.root_mean_square_deviation,
 #                                               factors=factors
 #                                               )
-distanceP2 = pyabc.PNormDistance(p=2) #factors=factors)
+distanceP2 = pyabc.PNormDistance(p=2, factors=factors)
 # kernel1 = pyabc.IndependentNormalKernel(var=1.0 ** 2)
 
 # Measure distance and set it as minimum epsilon
