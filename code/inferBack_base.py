@@ -8,7 +8,7 @@ print("\n\n\n Base\n Median eps, 2000 particles, 20 generations\n\n\n")
 
 # %% Set path
 
-db_path = "sqlite:///dbfiles/ib_base.db"
+db_path = "sqlite:///dbfiles/ib_factor.db"
 
 # %% Generate synthetic data
 
