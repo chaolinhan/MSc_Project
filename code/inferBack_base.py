@@ -8,7 +8,7 @@ print("\n\n\n Base\n Median eps, 2000 particles, 20 generations\n\n\n")
 
 # %% Set path
 
-db_path = "sqlite:///dbfiles/ib_factor.db"
+db_path = "sqlite:///ib_factor.db"
 
 # %% Generate synthetic data
 
@@ -20,29 +20,26 @@ solver.time_point = solver.time_point_default
 
 obs_data_raw = solver.ode_model1(para_true1)
 
-
-
 print("Target data")
 print(obs_data_raw)
 
 # TODO: Set factors
-print("Factors applied: first 32 data points are more important")
+print("Factors applied: first half data points are more important")
 
 factors = {}
 
-for i in range(32):
+time_length: int = len(solver.time_point) * 4
+
+for i in range(int(0.5 * time_length)):
     factors[i] = 0.75
 
-for i in range(32, 48):
+for i in range(int(0.5 * time_length), time_length):
     factors[i] = 0.25
 
+scl = time_length / sum(factors.values())
 
-scl = 48/sum(factors.values())
-
-for i in range(48):
+for i in range(time_length):
     factors[i] = factors[i] * scl
-
-
 
 # %% Plot
 
@@ -103,7 +100,7 @@ eps0 = pyabc.MedianEpsilon(50)
 # transition0 = pyabc.transition.LocalTransition(k=50, k_fraction=None)
 # transition1 = pyabc.transition.GridSearchCV()
 
-# sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=48)
+# sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=1)
 
 abc = pyabc.ABCSMC(models=solver.ode_model1,
                    parameter_priors=para_prior1,
@@ -135,7 +132,6 @@ min_eps = 4
 print(db_path)
 print("Generations: %d" % max_population)
 print("Minimum eps: %.3f" % min_eps)
-
 
 history = abc.run(minimum_epsilon=min_eps, max_nr_populations=max_population)
 
