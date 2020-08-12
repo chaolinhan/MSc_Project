@@ -173,24 +173,26 @@ history_label = ['Multivariate Normal', 'Multivariate Normal\nscale=0.5', 'Multi
 
 # %% Plot
 
-# pyabc.visualization.plot_sample_numbers(history_list, labels=history_label, size=(16, 6))
-# plt.show(scale=2)
-#
-# pyabc.visualization.plot_effective_sample_sizes(history_list, labels=history_label)
-# plt.show()
-#
-# pyabc.visualization.plot_acceptance_rates_trajectory(history_list, labels=history_label)
-# plt.show()
-#
-# pyabc.visualization.plot_epsilons(history_list, labels=history_label)
-# plt.show()
-#
-# pyabc.visualization.plot_total_sample_numbers(history_list, labels=history_label)
-# plt.show()
-#
-# for item in history_list:
-#     # result_plot(item, para_true, paraPrior, item.max_t)
-#     result_data(item, obs_data_raw_s, solver.timePoint, item.max_t)
+pyabc.visualization.plot_sample_numbers(history_list, labels=history_label, size=(16, 6))
+plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0), useMathText=True)
+plt.savefig("kernel2.png", dpi=200)
+plt.show(scale=2)
+
+pyabc.visualization.plot_effective_sample_sizes(history_list, labels=history_label)
+plt.show()
+
+pyabc.visualization.plot_acceptance_rates_trajectory(history_list, labels=history_label)
+plt.show()
+
+pyabc.visualization.plot_epsilons(history_list, labels=history_label)
+plt.show()
+
+pyabc.visualization.plot_total_sample_numbers(history_list, labels=history_label)
+plt.show()
+
+for item in history_list:
+    # result_plot(item, para_true, paraPrior, item.max_t)
+    result_data(item, obs_data_raw_s, solver.timePoint, item.max_t)
 
 # %% Adaptive distance compare
 #

@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import pyabc
+from matplotlib.ticker import FormatStrFormatter
 
 from pyABC_study.ODE import ODESolver, exp_data_s, exp_data_SEM
 
@@ -67,22 +68,25 @@ Plot the population distribution, eps values and acceptance rate
 
     # Parameters in the first equation
 
+    n_bin = 25
     fig, ax = plt.subplots(1, 5, figsize=(20, 4))
     idx = 0
     for keys in ['lambda_n', 'a', 'k_n_beta', 'mu_n', 'v_n_phi']:
         # print(keys+": %.2f" % true_parameter[keys])
-        pyabc.visualization.plot_kde_1d(df, w, x=keys, ax=ax[idx], size=(20, 4))  # xmin=limits[keys].args[0],
-        # xmax=limits[keys].args[0] + limits[keys].args[1])
+        # pyabc.visualization.plot_kde_1d(df, w, x=keys, ax=ax[idx], size=(20, 4), xmin=df[keys].min(),
+        #                                 xmax=df[keys].max())
+        ax[idx].hist(df[keys], bins=n_bin, color='c', label=None)
         if true_parameter is not None:
             ax[idx].axvline(true_parameter[keys], color='r', linestyle='dashed',
                             label="True value\n%.3f" % true_parameter[keys])
-        ax[idx].axvspan(df[keys].quantile(0.25), df[keys].quantile(0.75), color="b", alpha=0.5,
+        ax[idx].axvspan(df[keys].quantile(0.25), df[keys].quantile(0.75), color="r", alpha=0.3,
                         label="Inter-quartile: [%.3f, %.3f]" % (
                             df[keys].quantile(0.25), df[keys].quantile(0.75)))
         ax[idx].legend(loc=8, bbox_to_anchor=(0.5, 1), frameon=False)
+        ax[idx].ticklabel_format(style='sci', axis='x', scilimits=(0, 0), useMathText=True)
         idx += 1
     # fig.suptitle
-    plt.subplots_adjust(wspace=1)
+    # plt.subplots_adjust(wspace=1)
     if savefig:
         plt.savefig("para1.png", dpi=200)
     plt.show()
@@ -90,12 +94,11 @@ Plot the population distribution, eps values and acceptance rate
     fig, ax = plt.subplots(1, 2, figsize=(8, 4))
     idx = 0
     for keys in ['k_phi_beta', 'mu_phi']:
-        pyabc.visualization.plot_kde_1d(df, w, x=keys, ax=ax[idx], size=(8, 4))#, xmin=limits[keys].args[0],
-                                        # xmax=limits[keys].args[0] + limits[keys].args[1])
+        ax[idx].hist(df[keys], bins=n_bin, color='c', label=None)
         if true_parameter is not None:
             ax[idx].axvline(true_parameter[keys], color='r', linestyle='dashed',
                             label="True value\n%.3f" % true_parameter[keys])
-        ax[idx].axvspan(df[keys].quantile(0.25), df[keys].quantile(0.75), color="b", alpha=0.5,
+        ax[idx].axvspan(df[keys].quantile(0.25), df[keys].quantile(0.75), color="r", alpha=0.3,
                         label="Inter-quartile: [%.3f, %.3f]" % (
                             df[keys].quantile(0.25), df[keys].quantile(0.75)))
         ax[idx].legend(loc=8, bbox_to_anchor=(0.5, 1), frameon=False)
@@ -103,24 +106,23 @@ Plot the population distribution, eps values and acceptance rate
     # fig.suptitle('ODE 2: d(Phi)/dt')
     if savefig:
         plt.savefig("para2.png", dpi=200)
-    plt.subplots_adjust(wspace=1)
+    # plt.subplots_adjust(wspace=1)
     plt.show()
 
     fig, ax = plt.subplots(1, 2, figsize=(8, 4))
     idx = 0
     for keys in ['s_beta_n', 'mu_beta']:
-        pyabc.visualization.plot_kde_1d(df, w, x=keys, ax=ax[idx], size=(8, 4)) #,xmin=limits[keys].args[0],
-                                        # xmax=limits[keys].args[0] + limits[keys].args[1])
+        ax[idx].hist(df[keys], bins=n_bin, color='c', label=None)
         if true_parameter is not None:
             ax[idx].axvline(true_parameter[keys], color='r', linestyle='dashed',
                             label="True value\n%.3f" % true_parameter[keys])
-        ax[idx].axvspan(df[keys].quantile(0.25), df[keys].quantile(0.75), color="b", alpha=0.5,
+        ax[idx].axvspan(df[keys].quantile(0.25), df[keys].quantile(0.75), color="r", alpha=0.3,
                         label="Inter-quartile: [%.3f, %.3f]" % (
                             df[keys].quantile(0.25), df[keys].quantile(0.75)))
         ax[idx].legend(loc=8, bbox_to_anchor=(0.5, 1), frameon=False)
         idx += 1
     # fig.suptitle('ODE 3: d(beta)/dt')
-    plt.subplots_adjust(wspace=1)
+    # plt.subplots_adjust(wspace=1)
     if savefig:
         plt.savefig("para3.png", dpi=200)
     plt.show()
@@ -128,18 +130,17 @@ Plot the population distribution, eps values and acceptance rate
     fig, ax = plt.subplots(1, 2, figsize=(8, 4))
     idx = 0
     for keys in ['s_alpha_phi', 'mu_alpha']:
-        pyabc.visualization.plot_kde_1d(df, w, x=keys, ax=ax[idx], size=(8, 4)),# xmin=limits[keys].args[0],
-                                        # xmax=limits[keys].args[0] + limits[keys].args[1])
+        ax[idx].hist(df[keys], bins=n_bin, color='c', label=None)
         if true_parameter is not None:
             ax[idx].axvline(true_parameter[keys], color='r', linestyle='dashed',
                             label="True value\n%.3f" % true_parameter[keys])
-        ax[idx].axvspan(df[keys].quantile(0.25), df[keys].quantile(0.75), color="b", alpha=0.5,
+        ax[idx].axvspan(df[keys].quantile(0.25), df[keys].quantile(0.75), color="r", alpha=0.3,
                         label="Inter-quartile: [%.3f, %.3f]" % (
                             df[keys].quantile(0.25), df[keys].quantile(0.75)))
         ax[idx].legend(loc=8, bbox_to_anchor=(0.5, 1), frameon=False)
         idx += 1
     # fig.suptitle('ODE 4: d(alpha)/dt')
-    plt.subplots_adjust(wspace=1)
+    # plt.subplots_adjust(wspace=1)
     if savefig:
         plt.savefig("para4.png", dpi=200)
     plt.show()
@@ -228,7 +229,8 @@ Visualise SMC population and compare it with target data
     plt.show()
 
 
-def result_data_old(history, solver: ODESolver, compare_data=exp_data_s, nr_population=1, sample_size=500, savefig=False,
+def result_data_old(history, solver: ODESolver, compare_data=exp_data_s, nr_population=1, sample_size=500,
+                    savefig=False,
                     is_old=False):
     """
 Visualise SMC population and compare it with target data

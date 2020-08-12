@@ -25,7 +25,7 @@ para_prior5 = para_prior(lim, prior_distribution, 5)
 # %% Load database
 
 # TODO change database name
-db_path = "sqlite:///db/model5_super.db"
+db_path = "sqlite:///db/model_cmp_m_log.db"
 
 history = pyabc.History(db_path)
 
@@ -36,12 +36,13 @@ print("ID: %d, generations: %d" % (history.id, history.max_t))
 solver = ODESolver()
 
 # TODO change model name
-solver.ode_model = solver.ode_model5
+solver.ode_model = solver.ode_model3
 
 result_data(history, solver, nr_population=20, savefig=True)
 
 # TODO change prior name
 result_plot(history, None, para_prior3, history.max_t, savefig=True)
+
 
 # %% Compare
 
@@ -110,16 +111,16 @@ plt.show()
 
 model_probabilities = history.get_model_probabilities()
 
-t_id = np.array([i for i in range(30)])+1
+t_id = np.array([i for i in range(20)])+1
 
 plt.figure(figsize=(11, 5))
-plt.bar(x=t_id - 0.2, height=model_probabilities[0], width=0.2)
-plt.bar(x=t_id, height=model_probabilities[1], width=0.2)
-plt.bar(x=t_id + 0.2, height=model_probabilities[2], width=0.2)
-plt.xlim(0.2, 30.8, 1)
+plt.bar(x=t_id - 0.2, height=model_probabilities[0][0:20], width=0.2)
+plt.bar(x=t_id, height=model_probabilities[1][0:20], width=0.2)
+plt.bar(x=t_id + 0.2, height=model_probabilities[2][0:20], width=0.2)
+plt.xlim(0.2, 20.8, 1)
 locs, labels = plt.xticks()
 plt.xlabel("Population index")
 plt.ylabel("Model probability")
-plt.xticks(np.arange(1, 31, step=1))
+plt.xticks(np.arange(1, 21, step=1))
 plt.legend(['model 1', 'model 2', 'model 3'], bbox_to_anchor=(1.01, 0.5), ncol=1, frameon=False)
 plt.show()
