@@ -6,9 +6,9 @@ from pyABC_study.ODE import ODESolver, PriorLimits, para_true1, para_prior
 
 print("\n\n\n Base\n Median eps, 2000 particles, 20 generations\n\n\n")
 
-# %% Set path
+# %% TODO: Set path
 
-db_path = "sqlite:///dbfiles/ib_base.db"
+db_path = "sqlite:///dbfiles/ib_factor2.db"
 
 # %% Generate synthetic data
 
@@ -24,22 +24,30 @@ print("Target data")
 print(obs_data_raw)
 
 # TODO: Set factors
-# print("Factors applied: first half data points are more important")
+print("Factors applied: range factor")
 
-# factors = {}
+factors = {}
 
-# time_length: int = len(solver.time_point) * 4
+time_length: int = len(solver.time_point) * 4
 
-# for i in range(int(0.5 * time_length)):
-#     factors[i] = 0.75
+for i in range(0, time_length, 4):
+    factors[i] = 1/26.520
 
-# for i in range(int(0.5 * time_length), time_length):
-#     factors[i] = 0.25
+for i in range(1, time_length, 4):
+    factors[i] = 1/19.565
 
-# scl = time_length / sum(factors.values())
+for i in range(2, time_length, 4):
+    factors[i] = 1/28.406
 
-# for i in range(time_length):
-#     factors[i] = factors[i] * scl
+for i in range(3, time_length, 4):
+    factors[i] = 1/12.918
+
+scl = time_length / sum(factors.values())
+
+for i in range(time_length):
+    factors[i] = factors[i] * scl
+
+print(factors)
 
 # %% Plot
 
@@ -80,10 +88,10 @@ print(prior_distribution)
 # %% Define ABC-SMC model
 
 # distanceP2_adpt = pyabc.AdaptivePNormDistance(p=2,
-#                                               scale_function=pyabc.distance.root_mean_square_deviation,
-#                                               factors=factors
+#                                               scale_function=pyabc.distance.root_mean_square_deviation
+#                                             #   factors=factors
 #                                               )
-distanceP2 = pyabc.PNormDistance(p=2)#, factors=factors)
+distanceP2 = pyabc.PNormDistance(p=2, factors=factors)
 # kernel1 = pyabc.IndependentNormalKernel(var=1.0 ** 2)
 
 # Measure distance and set it as minimum epsilon
