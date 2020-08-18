@@ -196,15 +196,15 @@ for item in history_list:
 
 # %% Adaptive distance compare
 #
-# history_base = pyabc.History('sqlite:///db/SMC_base.db', )
-# history_f = pyabc.History('sqlite:///db/SMC_f.db')
-# history_f2 = pyabc.History('sqlite:///db/SMC_f2.db')
-# # history_a = pyabc.History('sqlite:///db/SMC_a.db')
-# # history_af = pyabc.History('sqlite:///db/SMC_af.db')
+history_base = pyabc.History('sqlite:///db/infer_back/true/ib_base.db', )
+history_f = pyabc.History('sqlite:///db/infer_back/true/ib_factor.db')
+history_f2 = pyabc.History('sqlite:///db/infer_back/true/ib_factor2.db')
+history_a = pyabc.History('sqlite:///db/infer_back/true/ib_adpt.db')
+# history_af = pyabc.History('sqlite:///db/SMC_af.db')
 # #
-# history_list = [history_base, history_f, history_f2]
+history_list = [history_base, history_f, history_f2, history_a]
 #
-# history_label = ['No factor', '+ Range factor', '+ Variance factor']
+history_label = ['No factor', '+ 25:75 factor', '+ Range factor', 'Adaptive distance']
 
 # %% Plot
 
@@ -228,14 +228,11 @@ for item in history_list:
 #     result_data(item, obs_data_raw_s, solver.timePoint, item.max_t)
 
 
-
-
-
 # %% Prior range and data size compare
 
-history_base = pyabc.History('sqlite:///db/infer_back/SMC_base_big.db', )
-history_less = pyabc.History('sqlite:///db/infer_back/SMC_base_big_less.db')
-history_wide = pyabc.History('sqlite:///db/infer_back/SMC_base_big_wide.db')
+history_base = pyabc.History('sqlite:///db/infer_back/ib_base2.db', )
+history_less = pyabc.History('sqlite:///db/infer_back/ib_less.db')
+history_wide = pyabc.History('sqlite:///db/infer_back/ib_wide.db')
 history_list = [history_base, history_less, history_wide]
 
 history_label = ['standard', 'less data', 'wider prior\nrange']
@@ -243,30 +240,32 @@ history_label = ['standard', 'less data', 'wider prior\nrange']
 # %% Plot
 
 plt.style.use('default')
-pyabc.visualization.plot_sample_numbers(history_list, labels=history_label, size=(4, 4))
+pyabc.visualization.plot_sample_numbers(history_list, labels=history_label, size=(7, 4))
 plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0), useMathText=True)
-plt.savefig("size1.png", dpi=200)
+# plt.savefig("size.png", dpi=200)
 plt.show()
 
 pyabc.visualization.plot_effective_sample_sizes(history_list, labels=history_label)
 plt.show()
 
-pyabc.visualization.plot_acceptance_rates_trajectory(history_list, labels=history_label)
+pyabc.visualization.plot_acceptance_rates_trajectory(history_list, labels=history_label, size=(6, 4))
+plt.xticks(range(0, 21, 2))
+plt.savefig("acpt.png", dpi=200)
 plt.show()
 
 pyabc.visualization.plot_epsilons(history_list, labels=history_label, size=(4, 4))
-plt.savefig("size2.png", dpi=200)
+# plt.savefig("size2.png", dpi=200)
 plt.show()
 
 pyabc.visualization.plot_total_sample_numbers(history_list, labels=history_label)
 plt.show()
 
-
 # %% Plot curve
-history_base = pyabc.History('sqlite:///db/infer_back/ib_base.db')
+history_base = pyabc.History('sqlite:///db/infer_back/true/ib_base.db')
 
 solver.time_point = solver.time_point_default
-result_data_old(history_base, solver, obs_data_raw_s, history_base.max_t)
+result_data_old(history_base, solver, obs_data_raw_s, history_base.max_t, savefig='False')
+
 
 pyabc.visualization.plot_epsilons(history_base)
 # plt.savefig("size2.png", dpi=200)

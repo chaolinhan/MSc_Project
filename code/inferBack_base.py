@@ -8,7 +8,7 @@ print("\n\n\n Base\n Median eps, 2000 particles, 20 generations\n\n\n")
 
 # %% TODO: Set path
 
-db_path = "sqlite:///dbfiles/ib_factor2.db"
+db_path = "sqlite:///dbfiles/ib_log.db"
 
 # %% Generate synthetic data
 
@@ -24,30 +24,30 @@ print("Target data")
 print(obs_data_raw)
 
 # TODO: Set factors
-print("Factors applied: range factor")
-
-factors = {}
-
-time_length: int = len(solver.time_point) * 4
-
-for i in range(0, time_length, 4):
-    factors[i] = 1/26.520
-
-for i in range(1, time_length, 4):
-    factors[i] = 1/19.565
-
-for i in range(2, time_length, 4):
-    factors[i] = 1/28.406
-
-for i in range(3, time_length, 4):
-    factors[i] = 1/12.918
-
-scl = time_length / sum(factors.values())
-
-for i in range(time_length):
-    factors[i] = factors[i] * scl
-
-print(factors)
+# print("Factors applied: range factor")
+#
+# factors = {}
+#
+# time_length: int = len(solver.time_point) * 4
+#
+# for i in range(0, time_length, 4):
+#     factors[i] = 1/26.520
+#
+# for i in range(1, time_length, 4):
+#     factors[i] = 1/19.565
+#
+# for i in range(2, time_length, 4):
+#     factors[i] = 1/28.406
+#
+# for i in range(3, time_length, 4):
+#     factors[i] = 1/12.918
+#
+# scl = time_length / sum(factors.values())
+#
+# for i in range(time_length):
+#     factors[i] = factors[i] * scl
+#
+# print(factors)
 
 # %% Plot
 
@@ -61,7 +61,7 @@ lim3 = PriorLimits(1e-6, 10)
 # lim2 = PriorLimits(0, 5)
 # lim3 = PriorLimits(0, 15)
 
-prior_distribution = "uniform"
+prior_distribution = "loguniform"
 
 para_prior1 = pyabc.Distribution(
     lambda_n=pyabc.RV(prior_distribution, lim3.lb, lim3.interval_length),
@@ -91,7 +91,7 @@ print(prior_distribution)
 #                                               scale_function=pyabc.distance.root_mean_square_deviation
 #                                             #   factors=factors
 #                                               )
-distanceP2 = pyabc.PNormDistance(p=2, factors=factors)
+distanceP2 = pyabc.PNormDistance(p=2)#, factors=factors)
 # kernel1 = pyabc.IndependentNormalKernel(var=1.0 ** 2)
 
 # Measure distance and set it as minimum epsilon
