@@ -1,5 +1,10 @@
 # Meeting 2
 
+-   Time: 3pm, 1 June 
+-   Present: all
+
+# Works 
+
 ## 1. Tried to find an initial fit using 
 
 -   AMC-SMC
@@ -51,9 +56,7 @@ And how to measure
 
     2.  I’m comparing the effect of adaptive functions
 
-        (Left: adaptive, right: non-adaptive)
 
-        ![image-20200531232459599](../../Library/Application Support/typora-user-images/image-20200531232459599.png)
 
 2.  Before further experiments on the settings of ABC-SMC: how to measure 
 
@@ -109,7 +112,7 @@ Start experiments on:
     -   In real data, values still changes when  t >= 40
 -   I have changed the source code of `pyABC`, which could be problematic when using ARCHER
 
-# Meeting notes
+# Meeting notes and more actions
 
 -   Extend the time point to 120 hrs
     -   Now data size is 30*4=120 values 

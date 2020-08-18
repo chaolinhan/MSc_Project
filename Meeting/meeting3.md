@@ -1,4 +1,11 @@
-# Measurement noise
+# Meeting 3
+
+-   Time: 3pm, 15 June 
+-   Present: all
+
+# Things to report
+
+## Measurement noise
 
 ![image-20200609170943091](../../../Library/Application Support/typora-user-images/image-20200609170943091.png)
 
@@ -17,7 +24,7 @@ Adding noise makes the inference harder. Later implementations we could consider
 
 There are also papers using synthetic data with noise and model without noise to test the performance of ABC SMC
 
-# Kernels - efficiency of algorithm
+## Kernels - efficiency of algorithm
 
 Goal: find the most efficient kernels under a given schedule.
 
@@ -40,11 +47,11 @@ Kernels provided by `pyabc`:
 -   Multivariate normal kernel with M nearest neighbours 
     -   For each particle, M-nearest neighbours are selected, the covariance is calculated using these neighbours 
 
-## Experiments
+### Experiments
 
 In future “Result Analysis” part, these experiment runs should be repeated for 5 or 10 times for a reliable result
 
-### Fixed threshold schedule
+#### Fixed threshold schedule
 
 Under a fixed threshold schedule: `[50, 46, 43, 40, 37, 34, 31, 29, 27, 25, 23, 21, 19, 17, 15, 14, 13, 12, 11, 10]`
 
@@ -67,7 +74,7 @@ Under a fixed threshold schedule: `[50, 46, 43, 40, 37, 34, 31, 29, 27, 25, 23, 
 -   The traditional trivial multivariate normal kernel should have equal performance to M=2000, but here in `pyabc` the multivariate normal kernel is a modified version and thus better
 -   Decrease the `scaling` argument of multivariate normal kernel will make the perturbation kernel more ‘local', as it is sampling under a ‘thinner’ Gaussian distribution, however there could be problems which are discussed in the next section
 
-### Median threshold schedule with minimum eps=10
+#### Median threshold schedule with minimum eps=10
 
 Using median epsilon schedule starting from 50. Maximal generation numbers is set to 30, but ABC SMC will stop as long as the eps is smaller than 10
 
@@ -106,7 +113,7 @@ However, they may have drawbacks:
 
     ​																												Figure 6
 
-## Conclusion
+### Conclusion
 
 On a given final eps, using small `scaling` in multivariate normal and NN with small M is efficient, but if we are targeting the true posterior we should consider original multivariate normal or NN with M>=100
 
@@ -114,9 +121,9 @@ On a given final eps, using small `scaling` in multivariate normal and NN with s
 
 
 
-# Adaptive functions
+## Adaptive functions
 
-## Adaptive population
+### Adaptive population
 
 >    Adapt the population size according to the mean coefficient of variation error criterion
 
@@ -130,7 +137,7 @@ On a given final eps, using small `scaling` in multivariate normal and NN with s
     
     
 
-## Adaptive distance
+### Adaptive distance
 
 Efficiency is compared with 20 generations':
 
@@ -142,7 +149,7 @@ Goodness of fit is observed from
 -   Inferred parameter vs true parameter
 -   Inferred curves vs observed data
 
-### Distance function: assume Euclidean distance
+#### Distance function: assume Euclidean distance
 
 $D=(\Sigma_i (w_if_i\Delta x_i)^2)^{1/2}$
 
@@ -191,7 +198,7 @@ Running 20 generations:
 
 
 
-# Stochastic acceptor 
+## Stochastic acceptor 
 
 In `pyabc`, measurement noise can be consider via 
 
@@ -207,7 +214,7 @@ Tests on my local laptop shows bad results, Experiments with larger problem size
 
 
 
-# Planned experiments
+## Planned experiments
 
 The above experiments is mostly about the efficiency, the following experiments will study more on the goodness of fit:
 
@@ -218,4 +225,105 @@ The above experiments is mostly about the efficiency, the following experiments 
 However these experiments are less important, as for the real data from Tsarouchas et al., we can only start trying with wide prior range, use all the data points available, and run ABC SMC with large population and more generations.
 
 
+
+## Factor
+
+<img src="../../../Library/Application Support/typora-user-images/image-20200612182157319.png" alt="image-20200612182157319" style="zoom:50%;" />
+
+![image-20200612182215860](../../../Library/Application Support/typora-user-images/image-20200612182215860.png)
+
+![image-20200612182347765](../../../Library/Application Support/typora-user-images/image-20200612182347765.png)
+
+(Left to right: no factors applied, range factor and variance factor)
+
+### Conclusion
+
+Factors make ABC SMC more effective but less accurate in this case
+
+
+
+
+
+## Less data, wider prior range
+
+5000 particles, 30 generations
+
+<img src="../../../Library/Application Support/typora-user-images/image-20200613200725117.png" alt="image-20200613200725117" style="zoom:50%;" />
+
+![image-20200613200744799](../../../Library/Application Support/typora-user-images/image-20200613200744799.png)
+
+![image-20200613200755704](../../../Library/Application Support/typora-user-images/image-20200613200755704.png)
+
+![image-20200613201639735](../../../Library/Application Support/typora-user-images/image-20200613201639735.png)
+
+(Left to right: basic run, less data, wider prior range)
+
+### Conclusion
+
+-   Using less data (40% of the original data size) does not reduce the required samples much
+-   Using wider prior range will largely increase the required samples and takes much more time. After 30 generations the epsilon is still large
+    -   For the real data inference, if we wish to set the prior range as small as possible. To do this, we can 
+        -   Set the prior range of a parameter according to its biological meaning and try to make the range small
+        -   Use a wide prior range (e.g. [0, 100]) for the first fit, set a smaller prior range according to the marginal distribution of the first fit, then do the second refined fit
+            -   Might miss the true parameter
+
+
+
+## Other findings
+
+-   Many joint marginal distributions suggest a linear relationship between
+
+    <img src="../../../Downloads/image-20200613213623271.png" alt="image-20200613213623271" style="zoom:20%;" />
+
+-   $\lambda_\Phi$ and $\mu_\Phi$
+
+    -   $\mu_\alpha$ and $s_{\alpha\Phi}$
+
+    <img src="../../../Desktop/Screenshot 2020-06-14 at 23.28.32.png" alt="Screenshot 2020-06-14 at 23.28.32" style="zoom:50%;" />
+
+    If later runs on the real data also shows these correlations, we might reduce these four parameters into two.
+
+
+
+
+
+# Next steps
+
+<img src="../../../Library/Application Support/typora-user-images/image-20200614235945503.png" alt="image-20200614235945503" style="zoom:50%;" />
+
+## In the following three weeks
+
+1.  Apply ABC SMC on the real data and try to obtain a small epsilon e.g. less than 5 at the end
+2.  Model comparison
+    -   Model 1: default ODEs
+    -   Model 2: exponential decay $\lambda_N$: $\lambda_N\times \exp(-at)$
+    -   Model 3: reduce the number of parameters if some parameters are highly correlated
+3.  Possible: try ABC SMC on other packages if time allows
+    -   Some other packages use different ways of implementations, the performance could be quite different
+
+## After that, use another two weeks to 
+
+1.  Do performance experiments on Cirrus/ARCHER
+
+    Besides, try to profile the program, see if we could improve the performance
+
+2.  If possible, accelerate the algorithm using GPU
+
+## Final stage
+
+1.  Do repeated experiments for more accurate results, and analysis the data
+    -   Some other experiments could be done
+        -   Compare to exact inference, traditional ABC rejection
+2.  In the meantime, write the report and dissertation
+
+
+
+# Meeting notes and actions
+
+-   Write the units of the four time series and try to limit their prior range
+-   Set the covariance according to the real data at each time points
+-   Try log uniform distribution in the prior distribution
+-   New model: remove iBM
+-   Try LS fitting with new models
+-   Timer could be added to help profile
 

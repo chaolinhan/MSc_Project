@@ -1,4 +1,12 @@
-# Measure noise and the raw data
+# Meeting 4
+
+-   Time: 3pm, 22 June 
+
+-   Present: all
+
+# Things to report
+
+## Measure noise and the raw data
 
 1.  The raw observed at each time points shows a high variance, the real trend of these four times series might differ from the current one
 
@@ -8,7 +16,7 @@
 
     The distance between noise data and observed data is 19.21 (average of 10)
 
-# Units of parameters
+## Units of parameters
 
 Suppose in the equation and observed data, $N$ and $\Phi$ are count as ‘cell’ and the levels of il-1β and tnf-α expression are count as ‘unit’ (relative to t=0) and time unit is h (hour), then the units of these parameters is
 
@@ -18,7 +26,7 @@ Suppose in the equation and observed data, $N$ and $\Phi$ are count as ‘cell�
 
 
 
-# Goodness of fit
+## Goodness of fit
 
 The results in `abcsmc1.pdf` shows that our best model so far can fit the curve of $N$ and $\beta$ generally well, but for $\Phi$ and $\alpha$ is less satisfactory
 
