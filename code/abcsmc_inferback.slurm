@@ -2,8 +2,8 @@
 
 # Slurm job options (name, compute nodes, job time)
 # TODO: set job name and wall time
-#SBATCH --job-name=ib1f2
-#SBATCH --time=1:59:0
+#SBATCH --job-name=ibw
+#SBATCH --time=4:59:0
 #SBATCH --exclusive
 #SBATCH --nodes=1
 #SBATCH --tasks-per-node=1
@@ -21,4 +21,4 @@ source ~/miniconda3/bin/activate
 
 # Launch the parallel job
 # TODO: set python file
-srun --cpu-bind=cores ~/miniconda3/bin/python3 inferBack_base.py
+srun --cpu-bind=cores ~/miniconda3/bin/python3 inferBack_wide.py
