@@ -1,3 +1,8 @@
+# Title     : ABC SMC result analysis for infer-back experiments
+# Objective : Visualise and print the result
+# Created by: chaolinhan
+# Created on: 2020/6/9
+
 import os
 
 import matplotlib.pyplot as plt
@@ -10,27 +15,6 @@ from pyABC_study.dataPlot import result_data_old, result_plot, result_data
 
 # %% Settings
 
-# lim = PriorLimits(0, 20)
-# lim2 = PriorLimits(0, 1)
-# lim3 = PriorLimits(0, 10)
-# lim2 = PriorLimits(0, 20)
-# lim3 = PriorLimits(0, 20)
-
-# para_prior = pyabc.Distribution(
-#     lambdaN=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
-#     kNB=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
-#     muN=pyabc.RV("uniform", lim2.lb, lim2.interval_length),
-#     vNM=pyabc.RV("uniform", lim2.lb, lim2.interval_length),
-#     lambdaM=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
-#     kMB=pyabc.RV("uniform", lim2.lb, lim2.interval_length),
-#     muM=pyabc.RV("uniform", lim2.lb, lim2.interval_length),
-#     sBN=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
-#     iBM=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
-#     muB=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
-#     sAM=pyabc.RV("uniform", lim.lb, lim.interval_length),
-#     muA=pyabc.RV("uniform", lim.lb, lim.interval_length)
-# )
-
 lim = PriorLimits(1e-6, 50)
 
 prior_distribution = "uniform"
@@ -39,25 +23,6 @@ print(prior_distribution)
 
 para_prior1 = para_prior(lim, prior_distribution, 1)
 
-#
-# lim3 = PriorLimits(0, 20)
-# lim2 = PriorLimits(0, 20)
-#
-# para_prior_wide = pyabc.Distribution(
-#     lambdaN=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
-#     kNB=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
-#     muN=pyabc.RV("uniform", lim2.lb, lim2.interval_length),
-#     vNM=pyabc.RV("uniform", lim2.lb, lim2.interval_length),
-#     lambdaM=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
-#     kMB=pyabc.RV("uniform", lim2.lb, lim2.interval_length),
-#     muM=pyabc.RV("uniform", lim2.lb, lim2.interval_length),
-#     sBN=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
-#     iBM=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
-#     muB=pyabc.RV("uniform", lim3.lb, lim3.interval_length),
-#     sAM=pyabc.RV("uniform", lim.lb, lim.interval_length),
-#     muA=pyabc.RV("uniform", lim.lb, lim.interval_length)
-# )
-
 solver = ODESolver()
 solver.time_point = solver.time_point_default
 
@@ -65,7 +30,7 @@ obs_data_raw_s = solver.ode_model1(para_true1, flatten=False, add_noise=False)
 
 solver.time_point = solver.time_point_exp
 obs_data_raw_s_less = solver.ode_model(para_true1, flatten=False, add_noise=False)
-#
+
 # print("Target data")
 # print(obs_data_noisy_s)
 
@@ -109,7 +74,7 @@ paraPrior = pyabc.Distribution(
     muA=pyabc.RV("uniform", lim.lb, lim.interval_length)
 )
 
-result_plot(history, para_true, paraPrior, history.max_t)
+result_plot(history, para_true1, paraPrior, history.max_t)
 #
 # %% kernel compare
 #

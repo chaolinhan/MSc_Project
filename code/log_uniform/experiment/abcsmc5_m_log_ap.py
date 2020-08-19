@@ -2,12 +2,12 @@ import pyabc
 
 from pyABC_study.ODE import ODESolver, PriorLimits, exp_data, para_prior
 
-print("\n\n\nABC SMC\nPerformance study\n")
+print("\n\n\nABC SMC\nParameter estimation\n")
 
 # %% Set database path and observed data
 
 # Change database name every run
-db_path = "sqlite:///model5_8_prof.db"
+db_path = "sqlite:///model5_m_log_ap.db"
 
 print("Target data")
 print(exp_data)
@@ -16,36 +16,15 @@ solver = ODESolver()
 
 # %% Calculate data range as factors:
 
-# Set factors
+print("No factors applied")
 
-print(" NO factors applied")
-
-# print("Factors applied: first 32 data points are more important")
-
-# factors = {}
-
-# for i in range(32):
-#     factors[i] = 0.75
-
-# for i in range(32, 48):
-#     factors[i] = 0.25
-
-
-# scl = 48/sum(factors.values())
-
-# for i in range(48):
-#     factors[i] = factors[i] * scl
-
-# %% Plot
-
-# obs_data_plot(solver.timePoint, obs_data_noisy_s, obs_data_raw_s)
 
 # %% Define prior distribution of parameters
 # Be careful that RV("uniform", -10, 15) means uniform distribution in [-10, 5], '15' here is the interval length
 
 # Set prior
 
-lim = PriorLimits(1e-6, 20)
+lim = PriorLimits(1e-6, 50)
 
 prior_distribution = "loguniform"
 
@@ -67,14 +46,18 @@ eps0 = pyabc.MedianEpsilon(60)
 #                                        23, 21, 19, 17, 15, 14, 13, 12, 11, 10])
 
 # transition0 = pyabc.transition.LocalTransition(k=50, k_fraction=None)
-# set number of cores
-sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=8)
+
+# sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=6)
+
+population0 = 100
+population_adpt = pyabc.populationstrategy.AdaptivePopulationSize(start_nr_particles=population0, mean_cv=0.10,
+                                                                  max_population_size=500)
 
 # set model and prior
 abc = pyabc.ABCSMC(models=solver.ode_model5,
                    parameter_priors=para_prior5,
-                   population_size=30,
-                   sampler=sampler0,
+                   population_size=population_adpt,
+                #    sampler=sampler0,
                    distance_function=distanceP2,
                    eps=eps0,
                    )
@@ -92,10 +75,10 @@ print(abc.transitions)
 # %% Run ABC-SMC
 
 abc.new(db_path, exp_data)
-max_population = 10
-min_eps = 20
+max_population = 30
+min_eps = 4
 
-print("\n"+db_path+"\n")
+print(db_path)
 print("Generations: %d" % max_population)
 print("Minimum eps: %.3f" % min_eps)
 

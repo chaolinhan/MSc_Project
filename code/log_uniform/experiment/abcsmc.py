@@ -7,7 +7,7 @@ print("\n\n\nABC SMC\nParameter estimation\n")
 # %% Set database path and observed data
 
 # Change database name every run
-db_path = "sqlite:///model3.db"
+db_path = "sqlite:///model1_log.db"
 
 print("Target data")
 print(exp_data)
@@ -30,14 +30,9 @@ print("No factors applied")
 
 lim = PriorLimits(1e-6, 75)
 
-prior_distribution = "uniform"
+prior_distribution = "loguniform"
 
 print(prior_distribution)
-
-# args = (para["lambda_n"], para["k_n_beta"], para["mu_n"], para["v_n_phi"],
-#         para["lambda_phi"], para["k_phi_beta"], para["mu_phi"],
-#         para["s_beta_n"], para["i_beta_phi"], para["mu_beta"],
-#         para["s_alpha_phi"], para["mu_alpha"])
 
 para_prior1 = pyabc.Distribution(
     lambda_n=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
@@ -104,10 +99,9 @@ eps0 = pyabc.MedianEpsilon(60)
 
 # sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=48)
 
-# set model and prior
-abc = pyabc.ABCSMC(models=solver.ode_model3,
-                   parameter_priors=para_prior3,
-                   population_size=2000,
+abc = pyabc.ABCSMC(models=solver.ode_model1,
+                   parameter_priors=para_prior1,
+                   population_size=50,
                    # sampler=sampler0,
                    distance_function=distanceP2,
                    eps=eps0,
@@ -133,7 +127,7 @@ print(db_path)
 print("Generations: %d" % max_population)
 print("Minimum eps: %.3f" % min_eps)
 
-history = abc.run(minimum_epsilon=min_eps, max_nr_populations=max_population)
+history = abc.run(minimum_epsilon=min_eps, max_nr_populations=max_population, min_acceptance_rate=1e-4)
 
 # %% Plot results
 

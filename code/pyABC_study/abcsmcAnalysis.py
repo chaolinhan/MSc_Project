@@ -1,4 +1,8 @@
-import numpy as np
+# Title     : ABC SMC result analysis
+# Objective : Visualise and print the result
+# Created by: chaolinhan
+# Created on: 2020/6/19
+
 import matplotlib.pyplot as plt
 import numpy as np
 import pyabc
@@ -9,7 +13,7 @@ from pyABC_study.dataPlot import result_data, result_plot, result_plot_sp
 
 # %% Settings
 
-# TODO: change prior
+# change prior
 lim = PriorLimits(1e-6, 25)
 prior_distribution = "loguniform"
 
@@ -23,7 +27,7 @@ para_prior5 = para_prior(lim, prior_distribution, 5)
 
 # %% Load database
 
-# TODO change database name
+# change database name
 db_path = "sqlite:///db/model5_24_more.db"
 
 history = pyabc.History(db_path)
@@ -34,12 +38,12 @@ print("ID: %d, generations: %d" % (history.id, history.max_t))
 
 solver = ODESolver()
 
-# TODO change model name
+# change model name
 solver.ode_model = solver.ode_model5
 
 result_data(history, solver, nr_population=history.max_t, savefig=True)
 
-# TODO change prior name
+# change prior name
 result_plot(history, None, para_prior5, history.max_t - 5, savefig=False)
 
 df, w = history.get_distribution(t=history.max_t - 5)
@@ -104,6 +108,7 @@ plt.show()
 
 
 # %% Model compare plot
+
 pyabc.visualization.plot_epsilons(history)
 plt.show()
 
@@ -153,7 +158,7 @@ duration = np.array(
 for i in range(20):
     duration[i] = duration[i].seconds
 
-pyabc.visualization.plot_sample_numbers(history_list, history_label, title=None, size=(3,4))
+pyabc.visualization.plot_sample_numbers(history_list, history_label, title=None, size=(3, 4))
 plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0), useMathText=True)
 plt.savefig("local_modes_1.png", dpi=200)
 plt.show()
@@ -175,7 +180,7 @@ plt.show()
 
 samples = all_pop['samples'][1:]
 
-cl = ['tomato', 'purple'] + ['b']*8 + ['limegreen'] + ['b']*9
+cl = ['tomato', 'purple'] + ['b'] * 8 + ['limegreen'] + ['b'] * 9
 plt.figure(figsize=(6, 4))
 plt.scatter(x=duration, y=samples, c=cl, alpha=0.7)
 plt.ticklabel_format(style='sci', axis='x', scilimits=(0, 0), useMathText=True)
@@ -201,6 +206,6 @@ print(samples / duration)
 # pyabc.visualization.plot_kde_matrix(df, w)
 # plt.show()
 
-result_plot_sp(history, None, para_prior5, 9, 4, savefig=False)
+result_plot_sp(history, 9, 4, savefig=False)
 
 result_plot(history, None, para_prior5, 8, savefig=False)

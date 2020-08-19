@@ -7,7 +7,7 @@ print("\n\n\nABC SMC\nParameter estimation\n")
 # %% Set database path and observed data
 
 # Change database name every run
-db_path = "sqlite:///model3.db"
+db_path = "sqlite:///model3_n.db"
 
 print("Target data")
 print(exp_data)
@@ -17,6 +17,30 @@ solver = ODESolver()
 # %% Calculate data range as factors:
 
 print("No factors applied")
+
+# range_N = obs_data_raw_s['N'].max() - obs_data_raw_s['N'].min()
+# range_M = obs_data_raw_s['M'].max() - obs_data_raw_s['M'].min()
+# range_B = obs_data_raw_s['B'].max() - obs_data_raw_s['B'].min()
+# range_A = obs_data_raw_s['A'].max() - obs_data_raw_s['A'].min()
+# 
+# factors = {}
+# 
+# for i in range(30):
+#     factors[i] = 1 / range_N
+# 
+# for i in range(30, 60):
+#     factors[i] = 1 / range_M
+# 
+# for i in range(60, 90):
+#     factors[i] = 1 / range_B
+# 
+# for i in range(90, 120):
+#     factors[i] = 1 / range_A
+# 
+# scl = 120./sum(factors.values())
+# 
+# for i in range(120):
+#     factors[i] = factors[i] * scl
 
 
 # %% Plot
@@ -28,7 +52,7 @@ print("No factors applied")
 
 # Set prior
 
-lim = PriorLimits(1e-6, 75)
+lim = PriorLimits(1e-6, 25)
 
 prior_distribution = "uniform"
 

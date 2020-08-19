@@ -55,7 +55,7 @@ To run the Python code and replicate the experiments
 - install required packages in `requirements.txt`
 - ensure Python multi-core processing is enabled
 - change the I/O path and the algorithm settings in the code
-- for implementation code: `python3 <filename.py>`
+- for implementation code: `python3 <filename>.py > output.txt`
 - for analysis code: run cell blocks in Python console
 
 To run the code on machines that support `PBS` or `Slurm`
@@ -65,7 +65,13 @@ To run the code on machines that support `PBS` or `Slurm`
   - `qsub <filename>.pbs`, or
   - `sbatch <filename>.slurm`
 
-### Environment
+## Input and output
+
+The input file is `code/data/rawData.csv`. Some other input data are integrated in `code/pyABC_study/ODE.py`.
+
+The output includes a database file ended with `.db` which contains information about each generation and algorithm setting. To process and analysis the `db` file, see [here](https://pyabc.readthedocs.io/en/latest/api_datastore.html). The analysis code read directly form the `db` file.
+
+## Environment
 
 The implementation run smoothly in the following environment.
 

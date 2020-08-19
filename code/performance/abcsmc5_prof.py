@@ -8,7 +8,7 @@ print("\n\n\nABC SMC\nPerformance study\n")
 
 # %% Set database path and observed data
 
-# TODO: Change database name every run
+# Change database name every run
 db_path = "sqlite:///model5_8_more.db"
 
 print("Target data")
@@ -18,7 +18,7 @@ solver = ODESolver()
 
 # %% Calculate data range as factors:
 
-# TODO: Set factors
+# Set factors
 
 print(" NO factors applied")
 
@@ -45,7 +45,7 @@ print(" NO factors applied")
 # %% Define prior distribution of parameters
 # Be careful that RV("uniform", -10, 15) means uniform distribution in [-10, 5], '15' here is the interval length
 
-# TODO: Set prior
+# Set prior
 
 lim = PriorLimits(1e-6, 20)
 
@@ -69,10 +69,10 @@ eps0 = pyabc.MedianEpsilon(60)
 #                                        23, 21, 19, 17, 15, 14, 13, 12, 11, 10])
 
 # transition0 = pyabc.transition.LocalTransition(k=50, k_fraction=None)
-# TODO: set number of cores
+# set number of cores
 sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=1)
 
-# TODO: set model and prior
+# set model and prior
 abc = pyabc.ABCSMC(models=solver.ode_model5,
                    parameter_priors=para_prior5,
                    population_size=20,

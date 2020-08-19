@@ -7,7 +7,7 @@ print("\n\n\nABC SMC\nParameter estimation\n")
 # %% Set database path and observed data
 
 # Change database name every run
-db_path = "sqlite:///model3.db"
+db_path = "sqlite:///model3_log.db"
 
 print("Target data")
 print(exp_data)
@@ -17,6 +17,30 @@ solver = ODESolver()
 # %% Calculate data range as factors:
 
 print("No factors applied")
+
+# range_N = obs_data_raw_s['N'].max() - obs_data_raw_s['N'].min()
+# range_M = obs_data_raw_s['M'].max() - obs_data_raw_s['M'].min()
+# range_B = obs_data_raw_s['B'].max() - obs_data_raw_s['B'].min()
+# range_A = obs_data_raw_s['A'].max() - obs_data_raw_s['A'].min()
+# 
+# factors = {}
+# 
+# for i in range(30):
+#     factors[i] = 1 / range_N
+# 
+# for i in range(30, 60):
+#     factors[i] = 1 / range_M
+# 
+# for i in range(60, 90):
+#     factors[i] = 1 / range_B
+# 
+# for i in range(90, 120):
+#     factors[i] = 1 / range_A
+# 
+# scl = 120./sum(factors.values())
+# 
+# for i in range(120):
+#     factors[i] = factors[i] * scl
 
 
 # %% Plot
@@ -30,7 +54,7 @@ print("No factors applied")
 
 lim = PriorLimits(1e-6, 75)
 
-prior_distribution = "uniform"
+prior_distribution = "loguniform"
 
 print(prior_distribution)
 
@@ -104,7 +128,6 @@ eps0 = pyabc.MedianEpsilon(60)
 
 # sampler0 = pyabc.sampler.MulticoreEvalParallelSampler(n_procs=48)
 
-# set model and prior
 abc = pyabc.ABCSMC(models=solver.ode_model3,
                    parameter_priors=para_prior3,
                    population_size=2000,

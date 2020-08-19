@@ -1,20 +1,20 @@
+# Title     : Plot functiosn for ABC SMC result
+# Objective : Provide out-of-the-box plot functions
+# Created by: chaolinhan
+# Created on: 2020/6/6
+
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import pyabc
-from matplotlib.ticker import FormatStrFormatter
 
 from pyABC_study.ODE import ODESolver, exp_data_s, exp_data_SEM
-
-
-# rawData_path = os.path.abspath(os.curdir) + "/data/rawData.csv"
-# rawData = pd.read_csv(rawData_path).astype("float32")
 
 
 def quantile_calculate(all_data, length, q=0.5):
     """
 Calculate quantiles
-    :param all_data: all data
+    :param all_data: data to calculate from
     :param length: time length
     :param q: quantile
     :return: data frame of the quantile
@@ -27,22 +27,10 @@ Calculate quantiles
     return df_quantile
 
 
-def obs_data_plot(time_points: np.array, obs_data_raw):
-    """
-    Plot the data of dict type
-    :param time_points: time points to plot
-    :param obs_data_noisy: data in duct type
-    :return:
-    """
-    plt.plot(time_points, obs_data_raw['B'], alpha=0.5, label='Raw beta')
-    plt.plot(time_points, obs_data_raw['A'], alpha=0.5, label='Raw alpha')
-    plt.legend()
-    plt.show()
-
-
 def result_plot(history, true_parameter: dict, limits: pyabc.Distribution, nr_population=1, savefig=False):
     """
-Plot the population distribution, eps values and acceptance rate
+Plot the posterior distribution
+    :param savefig: Decide to save the plot as file or not
     :param limits: Limits of the plot
     :param true_parameter: true parameter
     :param history: pyABC history object
@@ -168,7 +156,9 @@ Plot the population distribution, eps values and acceptance rate
 
 def result_data(history, solver: ODESolver, compare_data=exp_data_s, nr_population=1, sample_size=500, savefig=False):
     """
-Visualise SMC population and compare it with target data
+Visualise the simulated trajectories from the inferred posterior
+    :param solver: ODE solver object
+    :param savefig: Decide to save the plot as file or not
     :param history: abc.history object
     :param compare_data: target data
     :param nr_population: the id of population to be visualised
@@ -189,7 +179,7 @@ Visualise SMC population and compare it with target data
         sim_data = pd.DataFrame.from_dict(sim_data)
         df_all_sim_data = pd.concat([df_all_sim_data, sim_data])
 
-    # plt.ylim(0, 2) # TODO make lim a function parameter
+    # plt.ylim(0, 2) # make lim a function parameter
     # plt.show()
 
     df_mean = pd.DataFrame(columns=['N', 'M', 'B', 'A'])
@@ -209,11 +199,11 @@ Visualise SMC population and compare it with target data
         seq_mask = np.isfinite(compare_data[index_cov[kk]])
         # axs[kk].plot(solver.timePoint, df_25.iloc[:, kk], 'b--')
         # axs[kk].plot(solver.timePoint, df_75.iloc[:, kk], 'b--')
-        # axs[kk].fill_between(solver.time_point, df_25.iloc[:, kk], df_75.iloc[:, kk], alpha=0.9, color='lightgrey',
-        #                      label='25% – 75% quantile range')
-        # axs[kk].plot(solver.time_point, df_mean.iloc[:, kk], 'b', label="Mean", alpha=0.6)
+        axs[kk].fill_between(solver.time_point, df_25.iloc[:, kk], df_75.iloc[:, kk], alpha=0.9, color='lightgrey',
+                             label='25% – 75% quantile range')
+        axs[kk].plot(solver.time_point, df_mean.iloc[:, kk], 'b', label="Mean", alpha=0.6)
         axs[kk].plot(solver.time_point_exp[seq_mask], compare_data[index_cov[kk]][seq_mask], alpha=0.7, marker='^',
-                        color='black', label='Observed')
+                     color='black', label='Observed')
         axs[kk].errorbar(solver.time_point_exp, compare_data[index_cov[kk]],
                          yerr=[[0.5 * x for x in exp_data_SEM[index_cov[kk]]],
                                [0.5 * x for x in exp_data_SEM[index_cov[kk]]]], fmt='none',
@@ -230,10 +220,11 @@ Visualise SMC population and compare it with target data
 
 
 def result_data_old(history, solver: ODESolver, compare_data=exp_data_s, nr_population=1, sample_size=500,
-                    savefig='False',
-                    is_old=False):
+                    savefig='False'):
     """
-Visualise SMC population and compare it with target data
+Visualise SMC population from infer-back populations
+    :param solver: ODE solver object
+    :param savefig: Filename of output figure. If 'False' then no figure will be saved
     :param history: abc.history object
     :param compare_data: target data
     :param nr_population: the id of population to be visualised
@@ -254,7 +245,7 @@ Visualise SMC population and compare it with target data
         sim_data = pd.DataFrame.from_dict(sim_data)
         df_all_sim_data = pd.concat([df_all_sim_data, sim_data])
 
-    # plt.ylim(0, 2) # TODO make lim a function parameter
+    # plt.ylim(0, 2) # make lim a function parameter
     # plt.show()
 
     df_mean = pd.DataFrame(columns=['N', 'M', 'B', 'A'])
@@ -277,7 +268,7 @@ Visualise SMC population and compare it with target data
         axs[kk].fill_between(solver.time_point, df_25.iloc[:, kk], df_75.iloc[:, kk], alpha=0.9, color='lightgrey')
         axs[kk].plot(solver.time_point, df_mean.iloc[:, kk], 'b', label="Mean", alpha=0.6)
         axs[kk].scatter(solver.time_point_default, compare_data[index_cov[kk]], alpha=0.7, marker='^',
-                     color='black')
+                        color='black')
         # axs[kk].errorbar(solver.time_point_exp, compare_data[index_cov[kk]],
         #                  yerr=[[0.5 * x for x in exp_data_SEM[index_cov[kk]]],
         #                        [0.5 * x for x in exp_data_SEM[index_cov[kk]]]], fmt='none',
@@ -290,19 +281,18 @@ Visualise SMC population and compare it with target data
     plt.show()
 
 
-def result_plot_sp(history, true_parameter: dict, limits: pyabc.Distribution, nr_population=1, step=2, savefig=False):
+def result_plot_sp(history, nr_population=1, step=2, savefig=False):
     """
-Plot the population distribution, eps values and acceptance rate
-    :param step: Next generation to show
-    :param limits: Limits of the plot
-    :param true_parameter: true parameter
+Plot the posterior distribution before (nr_population) and after (nr_population+step) the local modes
+    :param savefig: Decide to save the plot as file or not
     :param history: pyABC history object
-    :param nr_population: the population to be plotted
+    :param nr_population: the generation index of which the posteriors are to be plotted
+    :param step: decide how many generations later the, the posteriors are to be plotted for comaprison
     :return:
     """
 
     df, w = history.get_distribution(t=nr_population)
-    df2, w2 = history.get_distribution(t=nr_population+step)
+    df2, w2 = history.get_distribution(t=nr_population + step)
 
     for key in df.keys():
         print(key + ", Inter-quartile [{:.3g}, {:.3g}], Mean {:.3g}".format(
@@ -369,3 +359,16 @@ Plot the population distribution, eps values and acceptance rate
     if savefig:
         plt.savefig("para4.png", dpi=200)
     plt.show()
+
+
+# def obs_data_plot(time_points: np.array, obs_data_raw):
+#     """
+#     Plot the data of dict type
+#     :param time_points: time points to plot
+#     :param obs_data_noisy: data in duct type
+#     :return:
+#     """
+#     plt.plot(time_points, obs_data_raw['B'], alpha=0.5, label='Raw beta')
+#     plt.plot(time_points, obs_data_raw['A'], alpha=0.5, label='Raw alpha')
+#     plt.legend()
+#     plt.show()

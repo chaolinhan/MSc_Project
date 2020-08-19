@@ -1,3 +1,8 @@
+# Title     : ODE related code
+# Objective : Provide out-of-the-box uses of the ODE models and objects
+# Created by: chaolinhan
+# Created on: 2020/6/3
+
 import numpy as np
 import pyabc
 import scipy
@@ -30,7 +35,7 @@ class ODESolver:
         """
 
         # Gaussian distribution for error terms
-        # TODO fix std
+        # fix std
         # sigma_n = 5.66
         # sigma_m = 4.59
         # sigma_b = 5.15
@@ -66,7 +71,7 @@ class ODESolver:
         """
 
         # Gaussian distribution for error terms
-        # TODO fix std
+        # fix std
         # sigma_n = 5.66
         # sigma_m = 4.59
         # sigma_b = 5.15
@@ -110,7 +115,7 @@ class ODESolver:
         """
 
         # Gaussian distribution for error terms
-        # TODO fix std
+        # fix std
         # sigma_n = 5.66
         # sigma_m = 4.59
         # sigma_b = 5.15
@@ -158,7 +163,7 @@ class ODESolver:
         """
 
         # Gaussian distribution for error terms
-        # TODO fix std
+        # fix std
         # sigma_n = 5.66
         # sigma_m = 4.59
         # sigma_b = 5.15
@@ -206,7 +211,7 @@ class ODESolver:
         """
 
         # Gaussian distribution for error terms
-        # TODO fix std
+        # fix std
         # sigma_n = 5.66
         # sigma_m = 4.59
         # sigma_b = 5.15
@@ -258,7 +263,6 @@ class PriorLimits:
 
 
 def para_prior(lim: PriorLimits, prior_distribution: str, model: int):
-
     para_prior1 = pyabc.Distribution(
         lambda_n=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
         k_n_beta=pyabc.RV(prior_distribution, lim.lb, lim.interval_length),
@@ -369,19 +373,6 @@ def arr2d_to_dict(arr: np.ndarray):
     return {i: arr.flatten()[i] for i in range(arr.flatten().__len__())}
 
 
-# para_true1 = {'i_beta_phi': 1.0267462374320455,
-#               'k_phi_beta': 0.07345932286118964,
-#               'k_n_beta': 2.359199465995228,
-#               'lambda_phi': 2.213837884117815,
-#               'lambda_n': 7.260925726829641,
-#               'mu_alpha': 18.94626522780349,
-#               'mu_beta': 2.092860392215201,
-#               'mu_phi': 0.17722330053184654,
-#               'mu_n': 0.0023917569160019844,
-#               's_alpha_phi': 10.228522400429998,
-#               's_beta_n': 4.034313992927392,
-#               'v_n_phi': 0.3091883041193706}
-
 para_true1 = {'i_beta_phi': 1.7062457206228092,
               'k_phi_beta': 0.12351843450795977,
               'k_n_beta': 3.962697253452481,
@@ -394,7 +385,6 @@ para_true1 = {'i_beta_phi': 1.7062457206228092,
               's_alpha_phi': 10.241631079619625,
               's_beta_n': 6.553614835929477,
               'v_n_phi': 0.21949169250522468}
-
 
 exp_data = {0: 0.0, 1: 0.0, 2: 1.0, 3: 1.0, 4: np.nan, 5: np.nan, 6: 1.8725, 7: 0.96225, 8: 1.85, 9: 0.33333334,
             10: np.nan, 11: np.nan, 12: 10.708333, 13: 1.08, 14: 4.01255, 15: 1.0565, 16: 26.52, 17: 3.275862,
