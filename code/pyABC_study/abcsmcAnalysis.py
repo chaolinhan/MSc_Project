@@ -1,11 +1,10 @@
-import os
-import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 import pyabc
 from pyabc.weighted_statistics import effective_sample_size
 
-from pyABC_study.ODE import ODESolver, PriorLimits, arr2d_to_dict, exp_data, exp_data_s, para_prior
+from pyABC_study.ODE import ODESolver, PriorLimits, para_prior
 from pyABC_study.dataPlot import result_data, result_plot, result_plot_sp
 
 # %% Settings
@@ -175,8 +174,6 @@ plt.savefig("local_modes_2.png", dpi=200)
 plt.show()
 
 samples = all_pop['samples'][1:]
-
-import itertools
 
 cl = ['tomato', 'purple'] + ['b']*8 + ['limegreen'] + ['b']*9
 plt.figure(figsize=(6, 4))

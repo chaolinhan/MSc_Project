@@ -22,28 +22,19 @@ The algorithm implementation shows a decent scaling-up performance; however, pro
 
 This git repository contains all source code used in the project, together with outputs and results of the executions, supervisor meeting minutes, input data, etc. The directory structure and descriptions are listed below.
 
-```
+```shell
 .
 ├── README.md
 ├── code
-│   ├── TODO
 │   ├── data/
-│   │   └── TODO
-│   ├── db/ -> TODO
+│   ├── db/
 │   ├── log_uniform/
-│   │   └── TODO
 │   ├── performance/
-│   │   └── TODO
 │   ├── pyABC_study/
-│   │   └── TODO
 │   └── uniform/
-│       └── TODO
 ├── meeting/
-│   └── TODO
 ├── requirements.txt
-│   └── TODO
 └── results/
-    └── TODO
 ```
 
 
