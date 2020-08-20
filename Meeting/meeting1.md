@@ -1,7 +1,9 @@
 # Meeting 1
 
--   Time: 1500 18 May
+-   Time: 3pm, 18 May
 -   Present: all
+
+# Discussed content
 
 ## Prior distribution
 
@@ -47,7 +49,7 @@ Initialise the prior distribution of parameters according to their real values.
 
     **Followed weeks**
 
-## Meeting notes
+## Notes and actions
 
 -   Prior distribution
     -   Under current ODEs, the 12 parameters should be positive

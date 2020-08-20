@@ -1,0 +1,38 @@
+--------------------------------------------------------------------------------
+*** s1898201   Job: 7092951.sdb   started: 19/06/20 20:42:14   host: mom5 ***
+*** s1898201   Job: 7092951.sdb   started: 19/06/20 20:42:14   host: mom5 ***
+*** s1898201   Job: 7092951.sdb   started: 19/06/20 20:42:14   host: mom5 ***
+*** s1898201   Job: 7092951.sdb   started: 19/06/20 20:42:14   host: mom5 ***
+
+--------------------------------------------------------------------------------
+
+
+
+ABC SMC
+Parameter estimation
+
+Target data
+{0: 0.0, 1: 0.0, 2: 1.0, 3: 1.0, 4: nan, 5: nan, 6: 1.8725, 7: 0.96225, 8: 1.85, 9: 0.33333334, 10: nan, 11: nan, 12: 10.708333, 13: 1.08, 14: 4.01255, 15: 1.0565, 16: 26.52, 17: 3.275862, 18: nan, 19: nan, 20: 22.333334, 21: 4.8333335, 22: 29.17, 23: 13.88, 24: 16.6, 25: 12.652174, 26: 7.365, 27: 8.6005, 28: nan, 29: nan, 30: 5.985, 31: 7.4845, 32: 6.8076925, 33: 18.766666, 34: 8.76, 35: 3.060075, 36: 5.851852, 37: 19.565218, 38: 1.076415, 39: 6.56325, 40: 0.5555556, 41: 14.275862, 42: 0.764, 43: 5.7875, 44: 0.3448276, 45: 8.653846, 46: nan, 47: nan}
+No factors applied
+loguniform
+<pyabc.acceptor.acceptor.UniformAcceptor object at 0x2aaad2ea1c18>
+2 <pyabc.distance.distance.PNormDistance object at 0x2aaad2ea1780>
+<pyabc.epsilon.epsilon.MedianEpsilon object at 0x2aaad2ea1b70>
+[<SimpleModel ode_model1>]
+2000 <pyabc.populationstrategy.ConstantPopulationSize object at 0x2aaad2ea1e48>
+48 <pyabc.sampler.multicore_evaluation_parallel.MulticoreEvalParallelSampler object at 0x2aaad2ea1be0>
+[MultivariateNormalTransition()]
+sqlite:///model1_log.db
+Generations: 30
+Minimum eps: 4.000
+Application 40892714 resources: utime ~80426s, stime ~92s, Rss ~492728, inblocks ~1151367, outblocks ~1332626
+--------------------------------------------------------------------------------
+
+Resources requested: ncpus=24,place=free,walltime=06:00:00
+Resources allocated: cpupercent=9,cput=00:00:01,mem=7176kb,ncpus=24,vmem=157296kb,walltime=00:53:09
+
+*** s1898201   Job: 7092951.sdb   ended: 19/06/20 21:35:23   queue: standard ***
+*** s1898201   Job: 7092951.sdb   ended: 19/06/20 21:35:23   queue: standard ***
+*** s1898201   Job: 7092951.sdb   ended: 19/06/20 21:35:23   queue: standard ***
+*** s1898201   Job: 7092951.sdb   ended: 19/06/20 21:35:23   queue: standard ***
+--------------------------------------------------------------------------------

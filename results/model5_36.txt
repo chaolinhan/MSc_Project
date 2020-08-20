@@ -1,0 +1,33 @@
+model5_36.db
+ID: 1
+Sampling size: 389972
+Execution time: 0 days 00:39:30.438777
+ID: 2
+Sampling size: 654503
+Execution time: 0 days 00:35:31.265346
+ID: 3
+Sampling size: 426574
+Execution time: 0 days 00:31:23.552048
+ID: 4
+Sampling size: 341421
+Execution time: 0 days 00:35:52.785991
+ID: 5
+Sampling size: 274906
+Execution time: 0 days 00:35:08.307899
+
+model5_36_more.db
+ID: 1
+Sampling size: 577222
+Execution time: 0 days 00:36:05.277915
+ID: 2
+Sampling size: 503606
+Execution time: 0 days 00:35:31.828144
+ID: 3
+Sampling size: 570530
+Execution time: 0 days 00:34:12.463644
+ID: 4
+Sampling size: 257568
+Execution time: 0 days 00:31:26.833588
+ID: 5
+Sampling size: 473185
+Execution time: 0 days 00:34:35.396090
